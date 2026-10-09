@@ -1,7 +1,12 @@
 import 'dotenv/config';
+import dns from 'dns';
 import mongoose from 'mongoose';
 import app from './app.js';
 import { seedMongo, setMongoReady } from './services/store.js';
+
+try {
+  dns.setServers(['8.8.8.8', '1.1.1.1', ...dns.getServers()]);
+} catch (_) {}
 
 const port = Number(process.env.PORT || 4100);
 if (process.env.NODE_ENV === 'production') {
