@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="900" viewBox="0 0 1000 900" fill="none">
+ <defs><linearGradient id="bg" x1="121" y1="67" x2="925" y2="846" gradientUnits="userSpaceOnUse"><stop stop-color="#F5EFE6"/><stop offset="1" stop-color="#E3D4C5"/></linearGradient><pattern id="p" width="36" height="36" patternUnits="userSpaceOnUse"><path d="M36 0H0v36" stroke="#9F806C" stroke-opacity=".16"/></pattern></defs>
+ <rect width="1000" height="900" rx="8" fill="url(#bg)"/><rect width="1000" height="900" rx="8" fill="url(#p)"/>
+ <circle cx="815" cy="169" r="112" fill="#C9A66D" fill-opacity=".28"/><path d="M135 682h738M188 710h624" stroke="#68473D" stroke-width="4"/>
+ <path d="M224 277h551v400H224z" fill="#FCF8F1" stroke="#624A42" stroke-width="3"/>
+ <path d="M260 319h476v315H260z" fill="#E8DED0" stroke="#997A67" stroke-width="2"/>
+ <path d="M282 343h431v53H282z" fill="#7D2330"/><path d="M296 357h254m-254 17h157" stroke="#F7EEE5" stroke-opacity=".8" stroke-width="4" stroke-linecap="round"/>
+ <path d="M290 426h115v185H290z" fill="#B78355"/><path d="M296 432h103v173H296z" fill="#E6C99E"/><path d="M304 448h86m-86 12h86" stroke="#8A624C" stroke-width="3"/>
+ <path d="M430 426h121v185H430z" fill="#643D39"/><path d="M437 432h107v173H437z" fill="#8E3038"/><path d="M446 448h88m-88 12h88" stroke="#E6C9A5" stroke-width="3"/>
+ <path d="M575 426h121v185H575z" fill="#5E6570"/><path d="M582 432h107v173H582z" fill="#8B9299"/><path d="M591 448h88m-88 12h88" stroke="#F1EAE1" stroke-width="3"/>
+ <path d="M324 540h41" stroke="#A52B38" stroke-width="4"/><path d="M470 540h41" stroke="#E5C091" stroke-width="4"/><path d="M611 540h41" stroke="#EAE1D8" stroke-width="4"/>
+ <path d="m137 536 123-84 89 100-124 87-88-103Z" fill="#F8F4EE" stroke="#5D4941" stroke-width="3"/>
+ <path d="m162 540 79-54 64 70-81 56-62-72Z" fill="#A52B38" fill-opacity=".12"/><path d="m181 538 75-51m-61 72 74-51m-57 71 74-51" stroke="#A52B38" stroke-width="3" stroke-linecap="round"/>
+ <path d="M770 520h98v157h-98z" fill="#CDAA78" stroke="#6B4C37" stroke-width="3"/><path d="M783 539h73m-73 13h73m-73 13h48" stroke="#6B4C37" stroke-width="3" stroke-linecap="round"/>
+ <path d="M112 162h234m-234 17h151" stroke="#A52B38" stroke-width="3" stroke-linecap="round"/><text x="112" y="132" fill="#7D2330" font-family="Arial,sans-serif" font-size="16" font-weight="700" letter-spacing="4">A LIVING RESEARCH ARCHIVE</text>
+ <path d="M480 733v52m-121 0h242" stroke="#68473D" stroke-width="4"/><path d="M420 786h120" stroke="#A52B38" stroke-width="6"/>
+ <circle cx="780" cy="266" r="20" fill="#A52B38"/><circle cx="780" cy="266" r="7" fill="#F8F4EE"/>
+</svg>

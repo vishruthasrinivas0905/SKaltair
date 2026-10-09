@@ -1,0 +1,7 @@
+export const seedContent = [
+  { kind: 'program', slug: 'short-term', title: 'Short-Term Program', description: 'A focused question, specific legal issue or narrowly defined comparative study.', status: 'published', data: { duration: '4–6 months', number: '01' } },
+  { kind: 'program', slug: 'mid-term', title: 'Mid-Term Program', description: 'A broader inquiry involving detailed doctrinal analysis, comparative research or limited stakeholder engagement.', status: 'published', data: { duration: '6–8 months', number: '02' } },
+  { kind: 'program', slug: 'long-term', title: 'Long-Term Program', description: 'A complex investigation requiring extensive analysis, empirical work or substantial legislative or policy recommendations.', status: 'published', data: { duration: '12–18 months', number: '03' } },
+  { kind: 'publication', slug: 'research-output-coming-soon', title: 'Research programme publications are in preparation', description: 'Research outputs will be listed here after completion and editorial review, with author details and access information.', status: 'published', data: { type: 'Institutional update', year: 'Coming soon' } },
+  { kind: 'news', slug: 'research-announcements-coming-soon', title: 'Research programme announcements will appear here', description: 'Application windows, eligibility requirements and submission instructions will be published when confirmed.', status: 'published', data: { type: 'Announcement', date: 'Updates forthcoming' } },
+];
