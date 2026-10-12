@@ -40,6 +40,7 @@ function Header() {
     </div>
     <div className="nav-dropdown committee-nav"><button className={`nav-link nav-trigger ${loc.pathname.startsWith('/research-focus')?'active':''}`} aria-haspopup="true" aria-expanded={focusOpen} aria-controls="research-focus-menu" onClick={()=>{setFocusOpen(value=>!value);setAboutOpen(false);setResearchOpen(false);setCommitteeOpen(false);}}>Research Focus <ChevronDown size={13}/></button>{focusOpen&&<div className="dropdown-panel committee-menu" id="research-focus-menu"><Link to="/research-focus/law-governance">Law &amp; Governance</Link><Link to="/research-focus/ai">AI</Link><Link to="/research-focus/data-protection-cyber">Data Protection &amp; Cyber</Link><Link to="/research-focus/intellectual-property">Intellectual Property</Link><Link to="/research-focus/corporate-commercial">Corporate &amp; Commercial</Link><Link to="/research-focus/litigation">Litigation</Link></div>}</div>
     <div className="nav-dropdown committee-nav"><button className={`nav-link nav-trigger ${loc.pathname.startsWith('/committee')?'active':''}`} aria-haspopup="true" aria-expanded={committeeOpen} aria-controls="committee-menu" onClick={()=>{setCommitteeOpen(value=>!value);setAboutOpen(false);setResearchOpen(false);setFocusOpen(false);}}>Committee <ChevronDown size={13}/></button>{committeeOpen&&<div className="dropdown-panel committee-menu" id="committee-menu"><Link to="/committee">Committee overview</Link><Link to="/committee#founding-committee">Founding Committee</Link><Link to="/committee#research-council">Research Council</Link><Link to="/committee#academic-councils">Academic Councils</Link></div>}</div>
+    <NavLink to="/publications" className="nav-link">Publications</NavLink>
     <NavLink to="/apply" className="nav-link">Apply Now</NavLink>
     <NavLink to="/news" className="nav-link">News</NavLink>
     <NavLink to="/contact" className="nav-link">Contact Us</NavLink>
@@ -55,14 +56,15 @@ function Footer() {
 
 function Photo({ image, widths = [640, 960, 1280, 1920], sizes = '100vw', alt = image.alt, eager = false, ...rest }) { return <img src={photoUrl(image, widths[Math.min(1, widths.length - 1)])} srcSet={photoSrcSet(image, widths)} sizes={sizes} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async" style={image.position ? { objectPosition: image.position } : undefined} {...rest}/>; }
 function SectionHeading({ eyebrow, title, copy, link, to }) { return <div className="section-heading"><div><span className="eyebrow">{eyebrow}</span><h2>{title}</h2>{copy && <p>{copy}</p>}</div>{link && <Link className="text-link" to={to}>{link}<ArrowRight size={16}/></Link>}</div>; }
-function PageIntro({ eyebrow, title, copy, image }) {
+function PageIntro({ eyebrow, title, copy, image, imageBehind = false, className = '' }) {
   const lines = [[]];
   const titleContent = React.isValidElement(title) && title.type === React.Fragment ? title.props.children : title;
   React.Children.forEach(titleContent, child => {
     if (React.isValidElement(child) && child.type === 'br') lines.push([]);
     else lines[lines.length - 1].push(child);
   });
-  return <section className="page-intro"><div className="container"><span className="eyebrow">{eyebrow}</span><h1>{lines.map((line, index)=><span className="page-title-mask" key={index}><span>{line}</span></span>)}</h1><p>{copy}</p>{image && <figure className="intro-media"><Photo image={image} widths={[480, 800, 1200, 1600]} sizes="(max-width: 1140px) 100vw, 40vw" eager/></figure>}</div></section>;
+  const introImage = image && <figure className={`intro-media${imageBehind ? ' intro-media-behind' : ''}`} aria-hidden="true"><Photo image={image} alt="" widths={[480, 800, 1200, 1600]} sizes={imageBehind ? '100vw' : '(max-width: 1140px) 100vw, 40vw'} eager/></figure>;
+  return <section className={`page-intro ${className}${imageBehind ? ' page-intro-image-behind' : ''}`}>{imageBehind && introImage}<div className="container"><span className="eyebrow">{eyebrow}</span><h1>{lines.map((line, index)=><span className="page-title-mask" key={index}><span>{line}</span></span>)}</h1><p>{copy}</p>{!imageBehind && introImage}</div></section>;
 }
 
 function Home() {
@@ -223,15 +225,165 @@ function Committee() {
 
 function Publications() {
   const livePublications = useContent('publication', publications);
-  const [filter,setFilter]=useState('All');
-  const filters=['All','Research papers','Policy briefs','Reports','Articles'];
-  const shown = livePublications.filter(p => filter === 'All' || (p.type || p.data?.type || '').toLowerCase().includes(filter.replace(/s$/, '').toLowerCase()));
-  return <><PageIntro eyebrow="PUBLICATIONS" title={<>Original research for<br/><em>informed debate.</em></>} copy="Research examining contemporary questions in law, technology, governance and public policy." image={pagePhotos.publications}/><section className="section content-section"><div className="container"><div className="publication-intro"><BookOpen size={24}/><p>Each publication will include authorship, date, research context, disclosures and access information. Research outputs will appear following completion and editorial review.</p></div><div className="filter-row" role="tablist" aria-label="Filter publications">{filters.map(f=><button className={filter===f?'active':''} key={f} onClick={()=>transitionUpdate(()=>setFilter(f))}>{f}</button>)}</div><div className="publication-grid">{shown.map((p,i)=><article key={p.slug || p.title} className="publication-card"><div className="publication-cover"><Photo image={publicationPhotos[i%publicationPhotos.length]} alt="" widths={[400, 700, 1000]} sizes="(max-width: 520px) 100vw, 400px"/><span>{p.type || p.data?.type || 'Research'}</span><div className="cover-lines"/><BookOpen size={24}/><small>SKALTAIR RESEARCH</small></div><div className="publication-body"><span className="eyebrow">{p.year || p.data?.year || 'SKALTAIR'}</span><h3>{p.title || p.name}</h3><p>{p.description}</p><span className="coming-label">{p.status === 'published' ? 'VIEW DETAILS ON REQUEST' : 'IN PREPARATION'}</span></div></article>)}</div><div className="empty-editorial"><FileText size={20}/><p>Approved research output will be listed here with author details and access information.</p></div></div></section></>;
+  const [filter, setFilter] = useState('All');
+  const [authorFilter, setAuthorFilter] = useState('All authors');
+  const [yearFilter, setYearFilter] = useState('All years');
+  const [themeFilter, setThemeFilter] = useState('All themes');
+  const [publicationSearch, setPublicationSearch] = useState('');
+  const filters = ['All', 'Research papers', 'Policy briefs', 'Reports', 'Articles', 'Consultation submissions'];
+
+  const categoryFor = (publication) => {
+    const rawType = String(publication.type || publication.data?.type || publication.category || publication.data?.category || '').trim().toLowerCase();
+    const normalised = rawType.replace(/[_-]+/g, ' ').replace(/\s+/g, ' ');
+    if (/consultation|submission|response to consultation/.test(normalised)) return 'Consultation submissions';
+    if (/policy brief|policy note|policy paper/.test(normalised)) return 'Policy briefs';
+    if (/research paper|working paper|research article/.test(normalised)) return 'Research papers';
+    if (/\breport\b/.test(normalised)) return 'Reports';
+    if (/\barticle\b|journal article|opinion|commentary|case analysis/.test(normalised)) return 'Articles';
+    return rawType ? rawType.replace(/\b\w/g, character => character.toUpperCase()) : 'Institutional update';
+  };
+
+  const authors = [...new Set(livePublications.flatMap(publication => {
+    const value = publication.author || publication.authors || publication.data?.author || publication.data?.authors;
+    return (Array.isArray(value) ? value : [value]).filter(Boolean).map(item => typeof item === 'string' ? item : item.name).filter(Boolean);
+  }))].sort((a, b) => a.localeCompare(b));
+  const years = [...new Set(livePublications.map(publication => String(publication.year || publication.data?.year || publication.publicationDate || '').slice(0, 4)).filter(year => /^\d{4}$/.test(year)))].sort((a, b) => b.localeCompare(a));
+  const themesAvailable = [...new Set(livePublications.flatMap(publication => {
+    const value = publication.theme || publication.researchTheme || publication.data?.theme || publication.data?.researchTheme;
+    return (Array.isArray(value) ? value : [value]).filter(Boolean).map(item => typeof item === 'string' ? item : item.title).filter(Boolean);
+  }))].sort((a, b) => a.localeCompare(b));
+  const shown = livePublications.filter(publication => {
+    const authorValue = publication.author || publication.authors || publication.data?.author || publication.data?.authors;
+    const authorNames = (Array.isArray(authorValue) ? authorValue : [authorValue]).filter(Boolean).map(item => typeof item === 'string' ? item : item.name);
+    const year = String(publication.year || publication.data?.year || publication.publicationDate || '').slice(0, 4);
+    const themeValue = publication.theme || publication.researchTheme || publication.data?.theme || publication.data?.researchTheme;
+    const themeNames = (Array.isArray(themeValue) ? themeValue : [themeValue]).filter(Boolean).map(item => typeof item === 'string' ? item : item.title);
+    const searchText = [publication.title, publication.name, publication.description, publication.data?.description, ...authorNames, ...themeNames].filter(Boolean).join(' ').toLowerCase();
+    return (filter === 'All' || categoryFor(publication) === filter)
+      && (authorFilter === 'All authors' || authorNames.includes(authorFilter))
+      && (yearFilter === 'All years' || year === yearFilter)
+      && (themeFilter === 'All themes' || themeNames.includes(themeFilter))
+      && searchText.includes(publicationSearch.trim().toLowerCase());
+  });
+  const publishTypes = [
+    ['Research Papers', 'Detailed studies addressing defined research questions through doctrinal, comparative, interdisciplinary or appropriately approved empirical methods.'],
+    ['Policy Briefs', 'Focused analysis of legislative, regulatory or institutional challenges, with practical options and recommendations for decision-makers.'],
+    ['Research Reports', 'Substantial findings from individual or collaborative projects, including assessments of legal frameworks, implementation challenges and opportunities for reform.'],
+    ['Articles and Case Analyses', 'Critical examination of legal developments, judicial decisions, emerging technologies and questions of contemporary importance.'],
+    ['Consultation Submissions', 'Research-based responses to public consultations and proposals for legislative or regulatory reform, where approved for publication.'],
+  ];
+
+  return <>
+    <PageIntro
+      eyebrow="PUBLICATIONS"
+      title={<>Original research for<br/><em>informed debate.</em></>}
+      copy="SK ALTAIR publishes research examining contemporary questions in law, technology, governance and public policy. We aim to make rigorous scholarship useful to legal professionals, researchers, students, policymakers and public institutions."
+      image={pagePhotos.publications}
+      imageBehind
+      className="page-intro-publications"
+    />
+    <section className="section content-section publications-section">
+      <div className="container">
+        <div className="publication-intro">
+          <BookOpen size={24}/>
+          <p>We encourage work that identifies significant problems, evaluates competing approaches and develops reasoned recommendations. The first publications will appear here following completion and editorial review of the Centre’s research projects.</p>
+        </div>
+
+        <section className="publication-editorial-section" aria-labelledby="what-we-publish-title">
+          <div className="publication-section-heading">
+            <span className="eyebrow">WHAT WE PUBLISH</span>
+            <h2 id="what-we-publish-title">Different formats.<br/><em>One commitment to rigour.</em></h2>
+            <p>Our publication formats are designed to communicate careful analysis to readers working across law, technology, governance and public policy.</p>
+          </div>
+          <div className="publish-types-grid">
+            {publishTypes.map(([title, description], index) => <article className="publish-type-card" key={title}>
+              <span className="publish-type-number">{String(index + 1).padStart(2, '0')}</span>
+              <BookOpen size={20}/>
+              <h3>{title}</h3>
+              <p>{description}</p>
+            </article>)}
+          </div>
+        </section>
+
+        <section className="publication-editorial-section publication-work-section" aria-labelledby="explore-work-title">
+          <div className="publication-section-heading">
+            <span className="eyebrow">EXPLORE OUR WORK</span>
+            <h2 id="explore-work-title">Research made easier<br/><em>to navigate.</em></h2>
+            <p>Publications are intended to be organised by research theme, publication type, author and year. Each item will identify its authors, publication date and research context, together with relevant disclosures and access information.</p>
+          </div>
+          <div className="publication-work-links">
+            <Link to="/programs" className="publication-work-link"><span><b>Explore research themes</b><small>Browse the themes that frame SK ALTAIR’s research.</small></span><ArrowUpRight size={18}/></Link>
+            <Link to="/programs" className="publication-work-link"><span><b>View research programmes</b><small>Learn about research terms and proposal guidance.</small></span><ArrowUpRight size={18}/></Link>
+          </div>
+          <div className="filter-row" role="tablist" aria-label="Filter publications by type">
+            {filters.map(category => <button type="button" role="tab" aria-selected={filter === category} className={filter === category ? 'active' : ''} key={category} onClick={() => transitionUpdate(() => setFilter(category))}>{category}</button>)}
+          </div>
+          <div className="publication-browse-controls">
+            <label className="publication-search"><span className="eyebrow">SEARCH</span><input type="search" value={publicationSearch} onChange={event => setPublicationSearch(event.target.value)} placeholder="Search title, author or keyword" aria-label="Search publications"/></label>
+            <label><span className="eyebrow">AUTHOR</span><select value={authorFilter} onChange={event => setAuthorFilter(event.target.value)}><option>All authors</option>{authors.map(author => <option key={author}>{author}</option>)}</select></label>
+            <label><span className="eyebrow">YEAR</span><select value={yearFilter} onChange={event => setYearFilter(event.target.value)}><option>All years</option>{years.map(year => <option key={year}>{year}</option>)}</select></label>
+            <label><span className="eyebrow">RESEARCH THEME</span><select value={themeFilter} onChange={event => setThemeFilter(event.target.value)}><option>All themes</option>{themesAvailable.map(theme => <option key={theme}>{theme}</option>)}</select></label>
+          </div>
+          {shown.length > 0 ? <div className="publication-grid">
+            {shown.map((publication, index) => {
+              const category = categoryFor(publication);
+              const photo = publicationPhotos[index % publicationPhotos.length];
+              return <article key={publication.slug || publication.id || `${publication.title || publication.name}-${index}`} className="publication-card">
+                <div className="publication-cover">
+                  <Photo image={photo} alt="" widths={[400, 700, 1000]} sizes="(max-width: 520px) 100vw, 400px"/>
+                  <span>{category}</span><div className="cover-lines"/><BookOpen size={24}/><small>SKALTAIR RESEARCH</small>
+                </div>
+                <div className="publication-body">
+                  <span className="eyebrow">{publication.publicationDate || publication.data?.publicationDate || publication.year || publication.data?.year || 'SKALTAIR'}</span>
+                  <h3>{publication.title || publication.name}</h3>
+                  <p>{publication.description || publication.data?.description || 'Publication details will be added when the research output is approved for release.'}</p>
+                  {(publication.author || publication.authors || publication.data?.author || publication.data?.authors) && <p className="publication-metadata"><b>Author(s):</b> {(() => { const value = publication.author || publication.authors || publication.data?.author || publication.data?.authors; return (Array.isArray(value) ? value : [value]).map(item => typeof item === 'string' ? item : item.name).filter(Boolean).join(', '); })()}</p>}
+                  {(publication.theme || publication.researchTheme || publication.data?.theme || publication.data?.researchTheme) && <p className="publication-metadata"><b>Research theme:</b> {(() => { const value = publication.theme || publication.researchTheme || publication.data?.theme || publication.data?.researchTheme; return (Array.isArray(value) ? value : [value]).map(item => typeof item === 'string' ? item : item.title).filter(Boolean).join(', '); })()}</p>}
+                  {(publication.disclosures || publication.data?.disclosures) && <p className="publication-metadata"><b>Disclosures:</b> {publication.disclosures || publication.data?.disclosures}</p>}
+                  {publication.url || publication.data?.url || publication.doi || publication.data?.doi ? <a className="text-link" href={publication.url || publication.data?.url || `https://doi.org/${publication.doi || publication.data?.doi}`} target="_blank" rel="noreferrer">Read publication <ArrowUpRight size={15}/></a> : <span className="coming-label">{publication.status === 'published' ? 'ACCESS DETAILS ON REQUEST' : 'IN PREPARATION'}</span>}
+                </div>
+              </article>;
+            })}
+          </div> : <div className="publication-empty-state" role="status"><FileText size={24}/><div><h3>No matching publications yet</h3><p>Try changing your search or filters. Approved outputs will appear here after completion and editorial review.</p></div></div>}
+          <div className="empty-editorial"><FileText size={20}/><p>Only approved research outputs will be listed with author details and access information.</p></div>
+        </section>
+
+        <section className="publication-policy-grid" aria-label="Publication policies">
+          <article className="publication-policy-card">
+            <span className="eyebrow">EDITORIAL STANDARDS</span>
+            <h2>Careful review.<br/><em>Independent conclusions.</em></h2>
+            <p>Research is assessed for originality, analytical quality, methodological soundness, accuracy and relevance. Review also considers source reliability, appropriate attribution, research ethics, confidentiality, data protection and intellectual property.</p>
+            <p>Authors may be asked to clarify their analysis, verify sources or revise submissions before a decision is made. Participation in a research programme does not guarantee publication.</p>
+            <p>Research conclusions must remain independent of donor or collaborator preferences. Views expressed belong to their authors unless expressly identified as an adopted institutional position.</p>
+          </article>
+          <article className="publication-policy-card">
+            <span className="eyebrow">AUTHORSHIP AND RIGHTS</span>
+            <h2>Credit contributions.<br/><em>Respect permissions.</em></h2>
+            <p>Researchers’ authorship and substantive contributions will receive appropriate acknowledgement. Ownership, publication rights and permitted reuse are governed by applicable agreements and the notice accompanying each publication.</p>
+            <p>Public availability does not by itself authorise unrestricted reproduction, adaptation or commercial use. Requests concerning permissions, licensing or republication should be directed to the Centre.</p>
+            <Link to="/contact?category=Publications%20and%20permissions&subject=Publication%20permission%20request" className="button button-outline">Request publication permission <ArrowUpRight size={15}/></Link>
+          </article>
+          <article className="publication-policy-card">
+            <span className="eyebrow">CORRECTIONS AND RESEARCH CONCERNS</span>
+            <h2>Help maintain<br/><em>research integrity.</em></h2>
+            <p>We welcome reports of factual errors, attribution concerns or potential breaches of research integrity. Please identify the publication, relevant passage and supporting information so that the concern can be reviewed.</p>
+            <p>Where appropriate, the Centre may publish a correction, clarification or retraction following a fair editorial process.</p>
+            <Link to="/contact?category=Grievance%20or%20research%20integrity%20concern&subject=Publication%20concern" className="button button-outline">Report a publication concern <ArrowUpRight size={15}/></Link>
+          </article>
+        </section>
+
+        <section className="publication-contribute-cta">
+          <div><span className="eyebrow light">CONTRIBUTE THROUGH RESEARCH</span><h2>Have a question worth<br/><em>bringing into the conversation?</em></h2><p>Researchers interested in publishing through SK ALTAIR may apply to its research programmes. Separate calls for articles, special issues or invited contributions will be announced with their submission requirements.</p></div>
+          <div className="publication-contribute-actions"><Link to="/apply" className="button button-white">Submit a research proposal <ArrowUpRight size={15}/></Link><Link to="/contact?category=Publications%20and%20permissions&subject=Editorial%20team%20enquiry" className="text-link light">Contact the editorial team <ArrowRight size={16}/></Link></div>
+        </section>
+      </div>
+    </section>
+  </>;
 }
 
 function News() {
   const liveNews = useContent('news', newsItems);
-  return <><PageIntro eyebrow="NEWS & UPDATES" title={<>The work, as it<br/><em>takes shape.</em></>} copy="Research announcements, programme calls, events and institutional updates from SKALTAIR." image={pagePhotos.news}/><section className="section content-section"><div className="container"><div className="news-grid">{liveNews.map((n,i)=>{const photo=newsPhotos[i%newsPhotos.length];return <article key={n.slug || n.title} className="news-card"><div className="news-card-top"><span className="news-tag">{n.type || n.data?.type || 'Update'}</span><span className="news-date">{n.date || n.data?.date || 'SKALTAIR'}</span></div><div className="news-card-art"><Photo image={photo} widths={[480, 800, 1200]} sizes="(max-width: 520px) 100vw, (max-width: 760px) 50vw, 400px"/><b>0{i+1}</b></div><div className="news-card-body"><h3>{n.title || n.name}</h3><p>{n.description}</p><span className="text-link muted">Read the update <ArrowRight size={15}/></span></div></article>})}</div></div></section></>;
+  return <><PageIntro eyebrow="NEWS & UPDATES" title={<>The work, as it<br/><em>takes shape.</em></>} copy="Research announcements, programme calls, events and institutional updates from SKALTAIR." image={pagePhotos.news} imageBehind className="page-intro-news"/><section className="section content-section"><div className="container"><div className="news-grid">{liveNews.map((n,i)=>{const photo=newsPhotos[i%newsPhotos.length];return <article key={n.slug || n.title} className="news-card"><div className="news-card-top"><span className="news-tag">{n.type || n.data?.type || 'Update'}</span><span className="news-date">{n.date || n.data?.date || 'SKALTAIR'}</span></div><div className="news-card-art"><Photo image={photo} widths={[480, 800, 1200]} sizes="(max-width: 520px) 100vw, (max-width: 760px) 50vw, 400px"/><b>0{i+1}</b></div><div className="news-card-body"><h3>{n.title || n.name}</h3><p>{n.description}</p><span className="text-link muted">Read the update <ArrowRight size={15}/></span></div></article>})}</div></div></section></>;
 }
 
 function FormField({ label, children, hint }) { return <label className="form-field"><span>{label}</span>{children}{hint && <small>{hint}</small>}</label>; }
@@ -242,7 +394,7 @@ function Apply() {
   const [state,setState]=useState({busy:false,error:'',success:''});
   const change=(key,value)=>setForm(old=>({...old,[key]:value}));
   async function submit(e){e.preventDefault();setState({busy:true,error:'',success:''});try{const result=await api.submitApplication(form);setState({busy:false,error:'',success:`Your application reference is ${result.reference}. We have recorded your interest.`});setForm({name:'',email:'',phone:'',affiliation:'',program:'',theme:'',title:'',summary:'',duration:'',availability:'',consent:false});}catch(err){setState({busy:false,error:err.message,success:''});}}
-  return <><PageIntro eyebrow="RESEARCH WITH US" title={<>A question can be<br/><em>the beginning.</em></>} copy="Share an initial research proposal. Programme terms, availability and final application requirements will be confirmed before a research call opens." image={pagePhotos.apply}/><section className="section application-section"><div className="container application-layout"><aside className="application-aside"><span className="eyebrow">BEFORE YOU APPLY</span><h2>Start with the<br/><em>question.</em></h2><p>Describe the issue you want to investigate and why it matters. A proposal should identify its scope, likely sources and expected contribution.</p><div className="apply-facts"><div><Clock3 size={17}/><span><b>Research terms</b><small>4–6, 6–8 or 12–18 months</small></span></div><div><Globe2 size={17}/><span><b>Online participation</b><small>Subject to project requirements</small></span></div><div><Check size={17}/><span><b>Reviewed by people</b><small>Relevance, quality and feasibility</small></span></div></div><div className="aside-note"><CircleHelp size={16}/><span>Application windows, fees and final fields are pending institutional confirmation. This form records an expression of interest.</span></div></aside><form className="form-card" onSubmit={submit}><div className="form-card-head"><span className="eyebrow">EXPRESSION OF INTEREST</span><h2>Tell us about your idea.</h2><p>Fields marked with an asterisk are required.</p></div>{state.success && <div className="form-success"><Check size={18}/>{state.success}</div>}{state.error && <div className="form-error">{state.error}</div>}<div className="form-grid"><FormField label="Full name *"><input required value={form.name} onChange={e=>change('name',e.target.value)} autoComplete="name"/></FormField><FormField label="Email address *"><input required type="email" value={form.email} onChange={e=>change('email',e.target.value)} autoComplete="email"/></FormField><FormField label="Telephone"><input type="tel" value={form.phone} onChange={e=>change('phone',e.target.value)} autoComplete="tel"/></FormField><FormField label="Institution / affiliation"><input value={form.affiliation} onChange={e=>change('affiliation',e.target.value)}/></FormField><FormField label="Preferred research term *"><select required value={form.program} onChange={e=>change('program',e.target.value)}><option value="">Choose a programme</option>{programs.map(p=><option key={p.slug} value={p.slug}>{p.name} · {p.duration}</option>)}</select></FormField><FormField label="Primary research theme *"><select required value={form.theme} onChange={e=>change('theme',e.target.value)}><option value="">Choose a theme</option>{themes.map(t=><option key={t.title}>{t.title}</option>)}<option>Other related topic</option></select></FormField><FormField label="Working title *"><input required value={form.title} onChange={e=>change('title',e.target.value)} placeholder="A concise description of your question"/></FormField><FormField label="Proposed duration"><input value={form.duration} onChange={e=>change('duration',e.target.value)} placeholder="For example, 6 months"/></FormField><FormField label="Research question and brief proposal *"><textarea required rows="6" value={form.summary} onChange={e=>change('summary',e.target.value)} placeholder="What do you want to investigate? Why does it matter? What methods or sources might you use?" hint="Please do not include confidential or sensitive personal information."/></FormField><FormField label="Availability and relevant experience"><textarea rows="4" value={form.availability} onChange={e=>change('availability',e.target.value)} placeholder="Tell us about your availability, background or relevant experience."/></FormField></div><label className="consent-check"><input type="checkbox" checked={form.consent} required onChange={e=>change('consent',e.target.checked)}/><span>I agree that SKALTAIR may use these details to review and respond to this expression of interest. <Link to="/privacy">Privacy notice</Link>.</span></label><button disabled={state.busy} className="button button-red submit-button">{state.busy?'Submitting…':'Submit expression of interest'} <Send size={15}/></button><p className="form-disclaimer">Submitting this form does not guarantee selection, a stipend or publication. Any formal engagement will be governed by written terms.</p></form></div></section></>;
+  return <><PageIntro eyebrow="RESEARCH WITH US" title={<>A question can be<br/><em>the beginning.</em></>} copy="Share an initial research proposal. Programme terms, availability and final application requirements will be confirmed before a research call opens." image={pagePhotos.apply} imageBehind className="page-intro-apply"/><section className="section application-section"><div className="container application-layout"><aside className="application-aside"><span className="eyebrow">BEFORE YOU APPLY</span><h2>Start with the<br/><em>question.</em></h2><p>Describe the issue you want to investigate and why it matters. A proposal should identify its scope, likely sources and expected contribution.</p><div className="apply-facts"><div><Clock3 size={17}/><span><b>Research terms</b><small>4–6, 6–8 or 12–18 months</small></span></div><div><Globe2 size={17}/><span><b>Online participation</b><small>Subject to project requirements</small></span></div><div><Check size={17}/><span><b>Reviewed by people</b><small>Relevance, quality and feasibility</small></span></div></div><div className="aside-note"><CircleHelp size={16}/><span>Application windows, fees and final fields are pending institutional confirmation. This form records an expression of interest.</span></div></aside><form className="form-card" onSubmit={submit}><div className="form-card-head"><span className="eyebrow">EXPRESSION OF INTEREST</span><h2>Tell us about your idea.</h2><p>Fields marked with an asterisk are required.</p></div>{state.success && <div className="form-success"><Check size={18}/>{state.success}</div>}{state.error && <div className="form-error">{state.error}</div>}<div className="form-grid"><FormField label="Full name *"><input required value={form.name} onChange={e=>change('name',e.target.value)} autoComplete="name"/></FormField><FormField label="Email address *"><input required type="email" value={form.email} onChange={e=>change('email',e.target.value)} autoComplete="email"/></FormField><FormField label="Telephone"><input type="tel" value={form.phone} onChange={e=>change('phone',e.target.value)} autoComplete="tel"/></FormField><FormField label="Institution / affiliation"><input value={form.affiliation} onChange={e=>change('affiliation',e.target.value)}/></FormField><FormField label="Preferred research term *"><select required value={form.program} onChange={e=>change('program',e.target.value)}><option value="">Choose a programme</option>{programs.map(p=><option key={p.slug} value={p.slug}>{p.name} · {p.duration}</option>)}</select></FormField><FormField label="Primary research theme *"><select required value={form.theme} onChange={e=>change('theme',e.target.value)}><option value="">Choose a theme</option>{themes.map(t=><option key={t.title}>{t.title}</option>)}<option>Other related topic</option></select></FormField><FormField label="Working title *"><input required value={form.title} onChange={e=>change('title',e.target.value)} placeholder="A concise description of your question"/></FormField><FormField label="Proposed duration"><input value={form.duration} onChange={e=>change('duration',e.target.value)} placeholder="For example, 6 months"/></FormField><FormField label="Research question and brief proposal *"><textarea required rows="6" value={form.summary} onChange={e=>change('summary',e.target.value)} placeholder="What do you want to investigate? Why does it matter? What methods or sources might you use?" hint="Please do not include confidential or sensitive personal information."/></FormField><FormField label="Availability and relevant experience"><textarea rows="4" value={form.availability} onChange={e=>change('availability',e.target.value)} placeholder="Tell us about your availability, background or relevant experience."/></FormField></div><label className="consent-check"><input type="checkbox" checked={form.consent} required onChange={e=>change('consent',e.target.checked)}/><span>I agree that SKALTAIR may use these details to review and respond to this expression of interest. <Link to="/privacy">Privacy notice</Link>.</span></label><button disabled={state.busy} className="button button-red submit-button">{state.busy?'Submitting…':'Submit expression of interest'} <Send size={15}/></button><p className="form-disclaimer">Submitting this form does not guarantee selection, a stipend or publication. Any formal engagement will be governed by written terms.</p></form></div></section></>;
 }
 
 function Collaborate() {
@@ -256,11 +408,14 @@ function Governance() {
 }
 
 function Contact() {
-  const [form,setForm]=useState({name:'',email:'',organisation:'',phone:'',category:'General enquiry',subject:'',message:'',consent:false});
+  const contactParams = new URLSearchParams(window.location.search);
+  const allowedCategories = ['General enquiry','Research programmes','Collaboration and support','Publications and permissions','Privacy and data protection','Grievance or research integrity concern'];
+  const initialCategory = allowedCategories.includes(contactParams.get('category')) ? contactParams.get('category') : 'General enquiry';
+  const [form,setForm]=useState({name:'',email:'',organisation:'',phone:'',category:initialCategory,subject:contactParams.get('subject') || '',message:'',consent:false});
   const [state,setState]=useState({busy:false,error:'',success:''});
   const change=(key,value)=>setForm(old=>({...old,[key]:value}));
   async function submit(e){e.preventDefault();setState({busy:true,error:'',success:''});try{await api.submitContact(form);setState({busy:false,error:'',success:'Your enquiry has been recorded. Thank you for contacting SKALTAIR.'});setForm({name:'',email:'',organisation:'',phone:'',category:'General enquiry',subject:'',message:'',consent:false});}catch(err){setState({busy:false,error:err.message,success:''});}}
-  return <><PageIntro eyebrow="CONTACT" title={<>Good work begins<br/>with a <em>conversation.</em></>} copy="Questions about research programmes, publications, collaboration or institutional activity? Send the team a note." image={pagePhotos.contact}/><section className="section contact-section"><div className="container contact-layout"><div className="contact-aside"><span className="eyebrow">GET IN TOUCH</span><h2>We’d like to<br/><em>hear from you.</em></h2><p>Use the form to direct your enquiry to the right team. Official contact details and the Bengaluru address will be added when confirmed.</p><div className="contact-detail"><span className="contact-icon"><Mail size={18}/></span><div><small>EMAIL</small><b>Official address to be confirmed</b></div></div><div className="contact-detail"><span className="contact-icon"><Landmark size={18}/></span><div><small>LOCATION</small><b>Bengaluru, India</b><span>Postal address pending confirmation</span></div></div><div className="contact-detail"><span className="contact-icon"><Clock3 size={18}/></span><div><small>MEETINGS</small><b>By prior appointment</b></div></div><div className="contact-media reveal-media"><Photo image={photos.bengaluruDusk} widths={[480, 800, 1200]} sizes="(max-width: 760px) 100vw, 440px"/></div></div><form className="form-card contact-form" onSubmit={submit}><div className="form-card-head"><span className="eyebrow">SEND AN ENQUIRY</span><h2>How can we help?</h2></div>{state.success&&<div className="form-success"><Check size={18}/>{state.success}</div>}{state.error&&<div className="form-error">{state.error}</div>}<div className="form-grid"><FormField label="Full name *"><input required value={form.name} onChange={e=>change('name',e.target.value)}/></FormField><FormField label="Email address *"><input required type="email" value={form.email} onChange={e=>change('email',e.target.value)}/></FormField><FormField label="Organisation"><input value={form.organisation} onChange={e=>change('organisation',e.target.value)}/></FormField><FormField label="Telephone"><input value={form.phone} onChange={e=>change('phone',e.target.value)}/></FormField><FormField label="Enquiry category *"><select value={form.category} onChange={e=>change('category',e.target.value)}>{['General enquiry','Research programmes','Collaboration and support','Publications and permissions','Privacy and data protection','Grievance or research integrity concern'].map(o=><option key={o}>{o}</option>)}</select></FormField><FormField label="Subject *"><input required value={form.subject} onChange={e=>change('subject',e.target.value)}/></FormField><FormField label="Message *"><textarea required rows="5" value={form.message} onChange={e=>change('message',e.target.value)} hint="Please do not submit passwords, identity documents, client-confidential information, unpublished inventions or sensitive research data."/></FormField></div><label className="consent-check"><input required type="checkbox" checked={form.consent} onChange={e=>change('consent',e.target.checked)}/><span>I have read the <Link to="/privacy">privacy notice</Link>.</span></label><button disabled={state.busy} className="button button-red">{state.busy?'Sending…':'Send enquiry'} <Send size={15}/></button><p className="form-disclaimer">Submitting an enquiry does not constitute admission to a programme or acceptance of a collaboration.</p></form></div></section></>;
+  return <><PageIntro eyebrow="CONTACT" title={<>Good work begins<br/>with a <em>conversation.</em></>} copy="Questions about research programmes, publications, collaboration or institutional activity? Send the team a note." image={pagePhotos.contact} imageBehind className="page-intro-contact"/><section className="section contact-section"><div className="container contact-layout"><div className="contact-aside"><span className="eyebrow">GET IN TOUCH</span><h2>We’d like to<br/><em>hear from you.</em></h2><p>Use the form to direct your enquiry to the right team. Official contact details and the Bengaluru address will be added when confirmed.</p><div className="contact-detail"><span className="contact-icon"><Mail size={18}/></span><div><small>EMAIL</small><b>Official address to be confirmed</b></div></div><div className="contact-detail"><span className="contact-icon"><Landmark size={18}/></span><div><small>LOCATION</small><b>Bengaluru, India</b><span>Postal address pending confirmation</span></div></div><div className="contact-detail"><span className="contact-icon"><Clock3 size={18}/></span><div><small>MEETINGS</small><b>By prior appointment</b></div></div><div className="contact-media reveal-media"><Photo image={photos.bengaluruDusk} widths={[480, 800, 1200]} sizes="(max-width: 760px) 100vw, 440px"/></div></div><form className="form-card contact-form" onSubmit={submit}><div className="form-card-head"><span className="eyebrow">SEND AN ENQUIRY</span><h2>How can we help?</h2></div>{state.success&&<div className="form-success"><Check size={18}/>{state.success}</div>}{state.error&&<div className="form-error">{state.error}</div>}<div className="form-grid"><FormField label="Full name *"><input required value={form.name} onChange={e=>change('name',e.target.value)}/></FormField><FormField label="Email address *"><input required type="email" value={form.email} onChange={e=>change('email',e.target.value)}/></FormField><FormField label="Organisation"><input value={form.organisation} onChange={e=>change('organisation',e.target.value)}/></FormField><FormField label="Telephone"><input value={form.phone} onChange={e=>change('phone',e.target.value)}/></FormField><FormField label="Enquiry category *"><select value={form.category} onChange={e=>change('category',e.target.value)}>{['General enquiry','Research programmes','Collaboration and support','Publications and permissions','Privacy and data protection','Grievance or research integrity concern'].map(o=><option key={o}>{o}</option>)}</select></FormField><FormField label="Subject *"><input required value={form.subject} onChange={e=>change('subject',e.target.value)}/></FormField><FormField label="Message *"><textarea required rows="5" value={form.message} onChange={e=>change('message',e.target.value)} hint="Please do not submit passwords, identity documents, client-confidential information, unpublished inventions or sensitive research data."/></FormField></div><label className="consent-check"><input required type="checkbox" checked={form.consent} onChange={e=>change('consent',e.target.checked)}/><span>I have read the <Link to="/privacy">privacy notice</Link>.</span></label><button disabled={state.busy} className="button button-red">{state.busy?'Sending…':'Send enquiry'} <Send size={15}/></button><p className="form-disclaimer">Submitting an enquiry does not constitute admission to a programme or acceptance of a collaboration.</p></form></div></section></>;
 }
 
 function Privacy() { return <><PageIntro eyebrow="PRIVACY" title={<>Your information deserves<br/><em>careful handling.</em></>} copy="A plain-language overview of information submitted through this website."/><section className="section content-section"><div className="container prose privacy-copy"><p>This website collects information you submit through the expression-of-interest and contact forms so the SKALTAIR team can review your enquiry and respond. Please do not submit passwords, identity documents, confidential client information, unpublished inventions or sensitive research data through these forms.</p><h2>How information is used</h2><p>Submitted details are used to process applications and enquiries, maintain institutional records and communicate with you about the matter you raised. Access should be limited to authorised personnel.</p><h2>Storage and retention</h2><p>When a MongoDB connection is configured, submissions are stored in the configured database. In demo mode they remain in server memory and are lost when the server restarts. Production retention periods, hosting locations, data-subject request channels and the official institutional contact must be confirmed before launch.</p><h2>Questions or requests</h2><p>For privacy-related questions, use the contact form and select “Privacy and data protection.” The final privacy notice should be reviewed and approved by the institution before production use.</p></div></section></>; }
