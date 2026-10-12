@@ -126,7 +126,66 @@ function ProgramsPage() {
 }
 
 function Committee() {
-  return <><PageIntro eyebrow="PEOPLE & GOVERNANCE" title={<>Thoughtful perspectives.<br/><em>Shared responsibility.</em></>} copy="SKALTAIR brings together experience in legal practice, research, innovation and education to guide its institutional and academic work." image={pagePhotos.committee}/><section className="section content-section"><div className="container"><div className="committee-note"><ShieldCheck size={20}/><p>Committee appointments and personal profiles are being finalised. Names, roles, biographies, expertise and photographs will be published after formal confirmation and approval.</p></div><SectionHeading eyebrow="CORE COMMITTEE" title="Guidance for independent research." copy="The Founding Committee, Research Council and Academic Councils support the institution within their approved responsibilities."/><div className="council-grid"><article id="founding-committee"><div className="council-media reveal-media"><Photo image={councilPhotos['founding-committee']} alt="" widths={[480, 800, 1200]} sizes="(max-width: 760px) 100vw, 400px"/></div><span className="council-no">01</span><h3>Founding Committee</h3><p>Provides founding leadership and supports the establishment of SKALTAIR’s purpose, structure and institutional direction.</p><span className="pending-label">Members to be confirmed</span></article><article id="research-council"><div className="council-media reveal-media"><Photo image={councilPhotos['research-council']} alt="" widths={[480, 800, 1200]} sizes="(max-width: 760px) 100vw, 400px"/></div><span className="council-no">02</span><h3>Research Council</h3><p>Supports the research agenda, methodology, supervision, interdisciplinary collaboration and the contribution of research outputs.</p><span className="pending-label">Appointments to be confirmed</span></article><article id="academic-councils"><div className="council-media reveal-media"><Photo image={councilPhotos['academic-councils']} alt="" widths={[480, 800, 1200]} sizes="(max-width: 760px) 100vw, 400px"/></div><span className="council-no">03</span><h3>Academic Councils</h3><p>Support programme design, researcher development, mentorship, assessment and academic quality.</p><span className="pending-label">Appointments to be confirmed</span></article></div><p className="micro-note">The client notes say committee details are pending. Profiles will be added when the final roster and approved photographs are supplied.</p></div></section></>;
+  return (
+    <>
+      <PageIntro
+        eyebrow="PEOPLE & GOVERNANCE"
+        title={<>Experience in practice.<br /><em>Purpose in research.</em></>}
+        copy="SKALTAIR brings together experience in legal practice, research, innovation and education to guide its institutional development and academic work."
+        image={pagePhotos.committee}
+      />
+      <section className="section content-section">
+        <div className="container">
+          <SectionHeading
+            eyebrow="BOARD & COUNCILS"
+            title="Guidance for independent research."
+            copy="The Board and Councils contribute to SKALTAIR’s institutional development and academic work within the responsibilities assigned under the approved governance framework."
+          />
+          <div className="committee-note">
+            <ShieldCheck size={20} />
+            <p>SK ALTAIR is a non-profit unit of Sri Chennakeshava Memorial Education and Welfare Society. Council responsibilities operate within the Centre’s approved governance framework.</p>
+          </div>
+          <div className="people-grid" id="founding-committee">
+            <article className="person-card">
+              <span className="council-no">01</span>
+              <span className="eyebrow">SK ALTAIR BOARD MEMBER</span>
+              <h3>Dr. S. K. Murthy</h3>
+              <p>Dr. S. K. Murthy brings 32 years of experience spanning teaching, research and development, and intellectual property, including 24 years dedicated to building and sustaining innovation and IP cultures within multinational organisations.</p>
+              <p>His expertise covers United States, European and Indian patent practice, data protection and corporate governance. He has chaired a global IP committee, managed more than 6,000 patent assets, developed over 500 claim charts, prepared more than 250 patent applications and handled over 500 responses to patent office actions.</p>
+              <p>He has contributed to IP and standards policy in India and co-founded the In-House IP Professionals (IHIPP) Forum, an Indian IP think tank. He has authored books and articles, including a commissioned paper published by the National Academy of Sciences, USA. He is a member of the Government of Karnataka’s ESDM Vision Group and serves on advisory boards and boards of studies at engineering institutions.</p>
+              <p>His qualifications include a BE, an ME with a gold medal, an LLB, a Postgraduate Diploma in Intellectual Property Rights, a Doctor of Science in Computer Science and a PhD from the National Law School of India University. He is enrolled with the Karnataka State Bar Council, is a registered Indian Patent Agent and holds certification as an Independent Director.</p>
+            </article>
+            <article className="person-card">
+              <span className="council-no">02</span>
+              <span className="eyebrow">SK ALTAIR BOARD MEMBER</span>
+              <h3>Mr. Ananth Sripadarao</h3>
+              <p>Mr. Ananth Sripadarao brings over 23 years of experience in intellectual property law and legal affairs across the Asia-Pacific, Middle East and Africa regions. His practice encompasses patents, trademarks, brand protection, industrial designs, technology licensing, corporate governance, and mergers and acquisitions.</p>
+              <p>He has led significant IP litigation and complex licensing negotiations, with a reported 100% success rate in the internal infringement matters he handled. His experience includes leading the filing of more than 200 patent applications and supporting the commercialisation or licensing of over 400 technologies, alongside developing brand-protection and technology-licensing strategies.</p>
+              <p>He has held key legal and IP roles at Philips India Ltd. and 3M India Ltd. His qualifications include a BSc in Chemistry, an LLM in Intellectual Property and Information Technology from the National University of Singapore, a Postgraduate Diploma in Patent Law from NALSAR University of Law, and an Executive Programme in Advanced Corporate Law covering mergers and acquisitions from the Indian Institute of Management Calcutta.</p>
+              <p>He is enrolled with the Karnataka State Bar Council, is a registered Indian Patent Agent and Trademark Agent, a Registered Independent Director and a Certified Arbitrator. He is also a member of the Licensing Executives Society and the Chartered Institute of Arbitrators, London.</p>
+            </article>
+          </div>
+          <div className="council-grid">
+            <article id="research-council">
+              <div className="council-media reveal-media"><Photo image={councilPhotos['research-council']} alt="" widths={[480, 800, 1200]} sizes="(max-width: 760px) 100vw, 400px" /></div>
+              <span className="council-no">03</span>
+              <h3>Research Council</h3>
+              <p>The Research Council will support development of the Centre’s research agenda, assess proposed themes and encourage rigorous, relevant and feasible projects. Its remit includes recommendations on methodology, supervision, interdisciplinary collaboration and the potential legal or policy contribution of research outputs.</p>
+              <span className="pending-label">Member profiles to be published after appointments are confirmed</span>
+            </article>
+            <article id="academic-councils">
+              <div className="council-media reveal-media"><Photo image={councilPhotos['academic-councils']} alt="" widths={[480, 800, 1200]} sizes="(max-width: 760px) 100vw, 400px" /></div>
+              <span className="council-no">04</span>
+              <h3>Academic Council</h3>
+              <p>The Academic Council will support academic standards across research programmes, including programme design, researcher development, mentorship, assessment criteria and academic quality, together with recommendations for lectures, workshops and scholarly exchanges.</p>
+              <span className="pending-label">Member profiles to be published after appointments are confirmed</span>
+            </article>
+          </div>
+          <p className="micro-note">Council member profiles will be added following confirmation of appointments. The descriptions above reflect the supplied SK ALTAIR webpage content document.</p>
+        </div>
+      </section>
+    </>
+  );
 }
 
 function Publications() {

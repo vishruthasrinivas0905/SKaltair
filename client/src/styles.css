@@ -479,3 +479,14 @@ details[open]::details-content{height:auto}
 .page-committee :is(.committee-note p,.section-heading p,.council-grid p){font-size:16px;line-height:1.75}
 .page-committee .council-no{font-size:13px}
 .page-committee .micro-note{font-size:14px}
+
+/* Committee page board member cards stack their number, label, name and biography,
+   and the two councils share the row evenly. */
+.page-committee .person-card{display:block;min-height:0;padding:30px 33px}
+.page-committee .person-card .council-no{display:block;margin-bottom:10px}
+.page-committee .person-card .eyebrow{display:block;font-size:12px;letter-spacing:1.4px}
+.page-committee .person-card h3{font-size:clamp(21px,1.8vw,24px);line-height:1.3;margin:10px 0 14px}
+.page-committee .person-card p{font-size:16px;line-height:1.75;color:var(--muted);margin:0 0 14px}
+.page-committee .person-card p:last-child{margin-bottom:0}
+@media(min-width:761px){.page-committee .council-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:500px){.page-committee .person-card{padding:22px 20px}}
