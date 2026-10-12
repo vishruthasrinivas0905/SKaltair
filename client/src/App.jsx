@@ -57,66 +57,52 @@ function Mark({ inverse = false }) { return <Link className={`brand ${inverse ? 
 
 function Header() {
   const [open, setOpen] = useState(false);
+  const [researchOpen, setResearchOpen] = useState(false);
   const [committeeOpen, setCommitteeOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
   const loc = useLocation();
-
-  useEffect(() => { setOpen(false); setResearchOpen(false); setCommitteeOpen(false); }, [loc.pathname, loc.search, loc.hash]);
-  useEffect(() => { let frame = 0; const update = () => { cancelAnimationFrame(frame); frame = requestAnimationFrame(() => { const max = document.documentElement.scrollHeight - window.innerHeight; document.documentElement.style.setProperty('--scroll-progress', max > 0 ? String(window.scrollY / max) : '0'); setScrolled(window.scrollY > 80); }); }; update(); window.addEventListener('scroll', update, { passive: true }); window.addEventListener('resize', update); return () => { cancelAnimationFrame(frame); window.removeEventListener('scroll', update); window.removeEventListener('resize', update); }; }, []);
-
-
-  useEffect(() => {
-    setOpen(false);
-    setCommitteeOpen(false);
-    if (loc.hash) {
-      window.requestAnimationFrame(() =>
-        document.querySelector(loc.hash)?.scrollIntoView({ behavior: 'smooth', block: 'start' }),
-      );
-    } else {
-      window.scrollTo(0, 0);
-    }
-  }, [loc.pathname, loc.search, loc.hash]);
-
-  const aboutActive =
-    loc.pathname === '/about' ||
-    loc.pathname === '/committee' ||
-    loc.pathname === '/governance';
-
-  const researchActive = loc.pathname === '/programs';
-
+  useEffect(() => { setOpen(false); setResearchOpen(false); setCommitteeOpen(false); if(loc.hash){window.requestAnimationFrame(()=>document.querySelector(loc.hash)?.scrollIntoView({behavior:'smooth',block:'start'}));}else window.scrollTo(0, 0); }, [loc.pathname, loc.search, loc.hash]);
   const nav = <>
     <NavLink to="/" end className="nav-link">
       Home
     </NavLink>
 
-    {/* ABOUT US: Vision/Mission/Objectives, Governance, Board & Councils */}
     <div className="nav-dropdown">
       <button
-        className={`nav-link nav-trigger ${aboutActive ? 'active' : ''}`}
+        className={`nav-link nav-trigger ${
+          loc.pathname === '/about' || loc.pathname === '/committee'
+            ? 'active'
+            : ''
+        }`}
         aria-haspopup="true"
         aria-expanded={committeeOpen}
         aria-controls="about-menu"
-        onClick={() => {
-          setCommitteeOpen(value => !value);
-              }}
+        onClick={() => setCommitteeOpen(value => !value)}
       >
         About Us <ChevronDown size={13} />
       </button>
 
       {committeeOpen && (
         <div className="dropdown-panel" id="about-menu">
-          <Link to="/about">About Us</Link>
-          <Link to="/about#vision">Vision, Mission &amp; Objectives</Link>
-          <Link to="/governance">Governance &amp; Institutional Policies</Link>
-          <Link to="/committee">Board &amp; Councils</Link>
+          <Link to="/about">
+            About Us
+          </Link>
+
+          <Link to="/about#vision">
+            Vision, Mission and Objectives
+          </Link>
+
+          <Link to="/governance">
+            Governance and Institutional Policies
+          </Link>
+
+          <Link to="/committee">
+            Board & Councils
+          </Link>
         </div>
       )}
     </div>
 
-    <NavLink
-      to="/programs"
-      className={`nav-link ${researchActive ? 'active' : ''}`}
-    >
+    <NavLink to="/programs" className="nav-link">
       Research Programmes
     </NavLink>
 
@@ -132,29 +118,7 @@ function Header() {
       Contact
     </NavLink>
   </>;
-
-  return <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}><div className="header-inner"><Mark/><nav className={`nav ${open ? 'nav-open' : ''}`} aria-label="Main navigation">{nav}</nav><button className="menu-toggle" aria-expanded={open} onClick={() => setOpen(!open)} aria-label={open ? 'Close navigation' : 'Open navigation'}>{open ? <X/> : <Menu/>}</button></div><span className="scroll-progress" aria-hidden="true"/></header>;
-
-
-  return (
-    <header className="site-header">
-      <div className="header-inner">
-        <Mark />
-        <nav className={`nav ${open ? 'nav-open' : ''}`} aria-label="Main navigation">
-          {nav}
-        </nav>
-        <button
-          className="menu-toggle"
-          aria-expanded={open}
-          onClick={() => setOpen(!open)}
-          aria-label={open ? 'Close navigation' : 'Open navigation'}
-        >
-          {open ? <X /> : <Menu />}
-        </button>
-      </div>
-    </header>
-  );
-
+  return <header className="site-header"><div className="header-inner"><Mark/><nav className={`nav ${open ? 'nav-open' : ''}`} aria-label="Main navigation">{nav}</nav><button className="menu-toggle" aria-expanded={open} onClick={() => setOpen(!open)} aria-label={open ? 'Close navigation' : 'Open navigation'}>{open ? <X/> : <Menu/>}</button></div></header>;
 }
 
 function Footer() {
@@ -178,19 +142,8 @@ function PageIntro({ eyebrow, title, copy, image }) {
 function Home() {
   const [active, setActive] = useState(0);
 
-  const [slide, setSlide] = useState(0);
-  const [heroPaused, setHeroPaused] = useState(false);
   const livePrograms = useContent('program', programs);
   const livePublications = useContent('publication', publications);
-  const liveNews = useContent('news', newsItems);
-  useEffect(() => { if (heroPaused || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return; const timer = window.setInterval(() => setSlide(value => (value + 1) % heroSlides.length), 6500); return () => window.clearInterval(timer); }, [heroPaused]);
-  return <>
-    <section className="hero"><div className="hero-content container"><div className="hero-copy"><span className="eyebrow"><span className="eyebrow-dot"/> AN INDEPENDENT RESEARCH INITIATIVE</span><h1 className="hero-title"><span className="hero-title-mask"><span>Law shapes the future.</span></span><span className="hero-title-mask"><em>Research helps us see it.</em></span></h1><p>We bring legal scholarship into conversation with technology, public policy and the institutions that shape everyday life.</p><div className="hero-actions"><Link to="/programs" className="button button-red">Explore our research <ArrowRight size={16}/></Link><Link to="/about" className="text-link">Discover SKALTAIR <ArrowUpRight size={15}/></Link></div><div className="hero-proof"><span>LAW</span><i/> <span>TECHNOLOGY</span><i/> <span>PUBLIC POLICY</span></div></div><div className="hero-art-wrap"><div className="hero-art-frame" onMouseEnter={() => setHeroPaused(true)} onMouseLeave={() => setHeroPaused(false)}>{heroSlides.map((image, index) => <Photo key={image.id} image={image} className="hero-art" data-active={slide === index} widths={[640, 960, 1280, 1800]} sizes="(max-width: 760px) 100vw, 600px" eager={index === 0} fetchpriority={index === 0 ? 'high' : undefined} aria-hidden={slide !== index}/>)}<div className="hero-art-label"><span>{String(slide + 1).padStart(2, '0')} / {String(heroSlides.length).padStart(2, '0')}</span><b>Ideas into public value</b></div></div><div className="hero-seal"><img src="/skaltair-emblem.png" alt="SK ALTAIR emblem"/><span>Independent thought.<br/>Practical insight.</span></div></div></div><div className="hero-bottom container"><span>RESEARCH WITH PUBLIC PURPOSE</span><a href="#research">SCROLL TO EXPLORE <ArrowDownRight size={14}/></a></div></section>
-
-
-  const livePrograms = useContent('program', programs);
-  const livePublications = useContent('publication', publications);
-
 
   const researchFocus = [
     {
@@ -237,13 +190,6 @@ function Home() {
     },
   ];
 
-
-    <section className="section section-about"><div className="container two-col"><div className="section-art"><Photo image={photos.stateCentralLibrary} widths={[640, 960, 1280, 1600]} sizes="(max-width: 760px) 100vw, 560px"/><div className="art-stamp"><Landmark size={22}/><span>Ideas into<br/>institutions</span></div></div><div className="about-copy"><span className="eyebrow">A PURPOSEFUL PLATFORM</span><h2>Independent ideas.<br/><em>Public value.</em></h2><p className="lead">SKALTAIR is a research initiative bringing legal professionals, students and interdisciplinary researchers together to examine complex questions in law, technology and governance.</p><p>We look beyond the text of a rule to ask how it is designed, how it works in practice and how it can better serve the public. Our work is guided by intellectual independence, rigorous analysis and responsible scholarship.</p><Link className="text-link" to="/about">Our purpose and principles <ArrowRight size={16}/></Link><div className="about-signature"><span className="signature-mark">S</span><span><b>Research with independence</b><small>Informed by evidence. Open to debate.</small></span></div></div></div></section>
-
-    <section className="section section-themes"><div className="container"><SectionHeading eyebrow="QUESTIONS THAT MATTER" title={<>Research at the<br/><em>edges of change.</em></>} copy="Our work follows questions across law, technology, institutions and public life." link="Explore research themes" to="/programs"/><div className="theme-grid">{themes.slice(0, 6).map((t, i) => <Link className="theme-card" to="/programs" key={t.title}>{themePhotos[t.title] && <span className="theme-media"><Photo image={themePhotos[t.title]} alt="" widths={[480, 800, 1200]} sizes="(max-width: 520px) 100vw, (max-width: 760px) 50vw, 400px"/></span>}<span className="theme-number">0{i + 1}</span><span className="theme-symbol">{t.icon}</span><h3>{t.title}</h3><p>{t.desc}</p><span className="card-arrow"><ArrowUpRight size={17}/></span></Link>)}</div></div></section>
-
-    <section className="section section-programs"><div className="container"><div className="program-top"><div><span className="eyebrow light">A PATH FOR SUSTAINED INQUIRY</span><h2>Make space for<br/><em>deep research.</em></h2></div><p>Structured programmes pair focused questions with mentorship, clear milestones and independent review. Choose a term that fits the work your question requires.</p></div><div className="program-slider" aria-label="Research programmes">{livePrograms.map((p, i) => <Link key={p.slug} to={`/apply?program=${p.slug}`} className={`program-slide ${active === i ? 'selected' : ''}`} onMouseEnter={() => setActive(i)}>{programPhotos[p.slug] && <span className="program-media" aria-hidden="true"><Photo image={programPhotos[p.slug]} alt="" widths={[480, 800, 1200]} sizes="(max-width: 760px) 100vw, 400px"/></span>}<span className="program-count">{p.number}</span><div><span className="program-duration"><Clock3 size={14}/>{p.duration}</span><h3>{p.name}</h3><p>{p.description}</p></div><span className="program-slide-arrow"><ArrowUpRight size={18}/></span></Link>)}</div><div className="program-controls"><div className="program-dots">{livePrograms.map((p, i) => <button key={p.slug} className={active === i ? 'active' : ''} aria-label={`Highlight ${p.name}`} aria-pressed={active===i} onClick={() => setActive(i)}/>)}</div><Link className="text-link light" to="/programs">Explore programmes <ArrowRight size={16}/></Link></div></div></section>
-
   return (
     <>
       {/* =========================================================
@@ -270,17 +216,11 @@ function Home() {
               recommendations for public benefit.
             </p>
 
-
             <div className="hero-actions">
               <Link to="/programs" className="button button-red">
                 Explore Research Programmes
                 <ArrowRight size={16} />
               </Link>
-
-
-    <section className="section section-pub"><div className="container"><SectionHeading eyebrow="FROM THE RESEARCH DESK" title={<>Ideas worth<br/><em>sharing.</em></>} copy="Our research output will be published here following completion and editorial review." link="View publications" to="/publications"/><div className="pub-feature"><div className="pub-art has-photo"><Photo image={photos.researchTypewriter} alt="" className="pub-art-photo" widths={[400, 700, 1000]} sizes="(max-width: 500px) 100vw, 270px"/><BookOpen size={36}/><span>SKALTAIR<br/>RESEARCH</span><i className="pub-art-rule"/></div><div className="pub-feature-copy"><span className="eyebrow">{livePublications[0]?.type || 'PUBLICATIONS'} · {livePublications[0]?.year || 'COMING SOON'}</span><h3>{livePublications[0]?.title || 'Rigorous research, made accessible.'}</h3><p>{livePublications[0]?.description || 'Research papers, policy briefs and reports will examine contemporary questions in law, technology, governance and public policy.'}</p><Link className="text-link" to="/publications">Visit the publication desk <ArrowRight size={16}/></Link></div><div className="pub-feature-index">01 <span>/</span> 01</div></div></div></section>
-
-    <section className="section section-home-news"><div className="container"><SectionHeading eyebrow="LATEST FROM SKALTAIR" title={<>Updates from<br/><em>the research desk.</em></>} copy="Announcements, programme calls, events and institutional news." link="All news & updates" to="/news"/><div className="home-news-grid">{liveNews.slice(0,3).map((item,index)=><article className="home-news-card" key={item.slug||item.title}><div className="home-news-media"><Photo image={newsPhotos[index%newsPhotos.length]} alt="" widths={[480, 800, 1200]} sizes="(max-width: 760px) 100vw, 400px"/></div><span className="eyebrow">{item.type||item.data?.type||'UPDATE'} · {item.date||item.data?.date||'SKALTAIR'}</span><h3>{item.title||item.name}</h3><p>{item.description}</p><Link to="/news" className="text-link">Read updates <ArrowRight size={15}/></Link><span className="home-news-index">0{index+1}</span></article>)}</div></div></section>
 
               <Link to="/about" className="text-link">
                 About SK ALTAIR
@@ -293,7 +233,6 @@ function Home() {
                 <strong>LAW</strong>
                 <span>Research</span>
               </div>
-
 
               <i />
 
@@ -784,7 +723,6 @@ function Home() {
   );
 }
 
-
 function About() {
   return <><PageIntro eyebrow="ABOUT US" title={<>Scholarship in service<br/>of the <em>public good.</em></>} copy="Satatham Kritam Advanced Legal Technology and Imperative Research (SKALTAIR) is an independent legal and educational research institution working across law, technology, policy and academics." image={pagePhotos.about}/><section className="section content-section"><div className="container about-page-grid"><aside className="contents-rail"><span className="eyebrow">ABOUT SKALTAIR</span><a href="#vision">Vision</a><a href="#mission">Mission</a><a href="#constitution">Constitution</a><a href="#objectives">Objectives</a></aside><div className="prose"><section id="vision" className="quote-panel"><Photo image={photos.corinthianColumns} alt="" className="quote-panel-photo" widths={[640, 960, 1400]} sizes="(max-width: 760px) 100vw, 800px"/><span className="eyebrow light">01 · VISION</span><blockquote>To be a respected centre of independent legal, technological and public-policy research that strengthens the rule of law, informs public institutions and enables society to respond fairly and effectively to emerging challenges.</blockquote></section><section id="mission"><span className="eyebrow">02 · MISSION</span><h2>Create room for rigorous inquiry.</h2><p>We provide legal professionals, students and interdisciplinary researchers with an inclusive platform for sustained research and informed debate on challenges confronting the legislature, executive and judiciary.</p><p>Through structured, mentored programmes, credible publications, stakeholder consultation and institutional collaboration, we seek to support the development and reform of laws and policies, effective implementation and evidence-based evaluation.</p><p>Our work connects legal scholarship with legislation, policymaking, governance, adjudication and dispute resolution. It examines how rules work in practice and how they can better serve the public, including as technology reshapes rights, institutions and social life.</p></section><section id="constitution"><span className="eyebrow">03 · CONSTITUTION</span><h2>The framework for the institution.</h2><p>The Constitution is intended to set out SKALTAIR’s institutional purpose, governance, delegated authority and research framework.</p><div className="committee-note"><ShieldCheck size={20}/><p>The approved Constitution has not yet been supplied. This section will present the institution’s adopted text after it is received and confirmed; no draft provisions are represented here as legally operative.</p></div></section><section id="objectives"><span className="eyebrow">04 · OBJECTIVES</span><h2>What guides the work.</h2><div className="objective-list">{['Advance original and independent research','Support legislative and policy development','Examine technology and its legal implications','Strengthen research skills through mentorship','Encourage informed debate and consultation','Publish accessible and carefully reviewed research','Build academic and institutional collaboration','Promote public understanding and access to justice','Uphold integrity and institutional accountability'].map((x,i)=><div key={x}><span>{String(i+1).padStart(2,'0')}</span><b>{x}</b><ArrowUpRight size={15}/></div>)}</div></section><Link to="/governance" className="text-link">Governance & policies <ArrowRight size={16}/></Link></div></div></section></>;
 }
@@ -802,7 +740,66 @@ function ProgramsPage() {
 }
 
 function Committee() {
-  return <><PageIntro eyebrow="PEOPLE & GOVERNANCE" title={<>Thoughtful perspectives.<br/><em>Shared responsibility.</em></>} copy="SKALTAIR brings together experience in legal practice, research, innovation and education to guide its institutional and academic work." image={pagePhotos.committee}/><section className="section content-section"><div className="container"><div className="committee-note"><ShieldCheck size={20}/><p>Committee appointments and personal profiles are being finalised. Names, roles, biographies, expertise and photographs will be published after formal confirmation and approval.</p></div><SectionHeading eyebrow="CORE COMMITTEE" title="Guidance for independent research." copy="The Founding Committee, Research Council and Academic Councils support the institution within their approved responsibilities."/><div className="council-grid"><article id="founding-committee"><div className="council-media reveal-media"><Photo image={councilPhotos['founding-committee']} alt="" widths={[480, 800, 1200]} sizes="(max-width: 760px) 100vw, 400px"/></div><span className="council-no">01</span><h3>Founding Committee</h3><p>Provides founding leadership and supports the establishment of SKALTAIR’s purpose, structure and institutional direction.</p><span className="pending-label">Members to be confirmed</span></article><article id="research-council"><div className="council-media reveal-media"><Photo image={councilPhotos['research-council']} alt="" widths={[480, 800, 1200]} sizes="(max-width: 760px) 100vw, 400px"/></div><span className="council-no">02</span><h3>Research Council</h3><p>Supports the research agenda, methodology, supervision, interdisciplinary collaboration and the contribution of research outputs.</p><span className="pending-label">Appointments to be confirmed</span></article><article id="academic-councils"><div className="council-media reveal-media"><Photo image={councilPhotos['academic-councils']} alt="" widths={[480, 800, 1200]} sizes="(max-width: 760px) 100vw, 400px"/></div><span className="council-no">03</span><h3>Academic Councils</h3><p>Support programme design, researcher development, mentorship, assessment and academic quality.</p><span className="pending-label">Appointments to be confirmed</span></article></div><p className="micro-note">The client notes say committee details are pending. Profiles will be added when the final roster and approved photographs are supplied.</p></div></section></>;
+  return (
+    <>
+      <PageIntro
+        eyebrow="PEOPLE & GOVERNANCE"
+        title={<>Experience in practice.<br /><em>Purpose in research.</em></>}
+        copy="SKALTAIR brings together experience in legal practice, research, innovation and education to guide its institutional development and academic work."
+        image={pagePhotos.committee}
+      />
+      <section className="section content-section">
+        <div className="container">
+          <SectionHeading
+            eyebrow="BOARD & COUNCILS"
+            title="Guidance for independent research."
+            copy="The Board and Councils contribute to SKALTAIR’s institutional development and academic work within the responsibilities assigned under the approved governance framework."
+          />
+          <div className="committee-note">
+            <ShieldCheck size={20} />
+            <p>SK ALTAIR is a non-profit unit of Sri Chennakeshava Memorial Education and Welfare Society. Council responsibilities operate within the Centre’s approved governance framework.</p>
+          </div>
+          <div className="people-grid">
+            <article className="person-card">
+              <span className="council-no">01</span>
+              <span className="eyebrow">SK ALTAIR BOARD MEMBER</span>
+              <h3>Dr. S. K. Murthy</h3>
+              <p>Dr. S. K. Murthy brings 32 years of experience spanning teaching, research and development, and intellectual property, including 24 years dedicated to building and sustaining innovation and IP cultures within multinational organisations.</p>
+              <p>His expertise covers United States, European and Indian patent practice, data protection and corporate governance. He has chaired a global IP committee, managed more than 6,000 patent assets, developed over 500 claim charts, prepared more than 250 patent applications and handled over 500 responses to patent office actions.</p>
+              <p>He has contributed to IP and standards policy in India and co-founded the In-House IP Professionals (IHIPP) Forum, an Indian IP think tank. He has authored books and articles, including a commissioned paper published by the National Academy of Sciences, USA. He is a member of the Government of Karnataka’s ESDM Vision Group and serves on advisory boards and boards of studies at engineering institutions.</p>
+              <p>His qualifications include a BE, an ME with a gold medal, an LLB, a Postgraduate Diploma in Intellectual Property Rights, a Doctor of Science in Computer Science and a PhD from the National Law School of India University. He is enrolled with the Karnataka State Bar Council, is a registered Indian Patent Agent and holds certification as an Independent Director.</p>
+            </article>
+            <article className="person-card">
+              <span className="council-no">02</span>
+              <span className="eyebrow">SK ALTAIR BOARD MEMBER</span>
+              <h3>Mr. Ananth Sripadarao</h3>
+              <p>Mr. Ananth Sripadarao brings over 23 years of experience in intellectual property law and legal affairs across the Asia-Pacific, Middle East and Africa regions. His practice encompasses patents, trademarks, brand protection, industrial designs, technology licensing, corporate governance, and mergers and acquisitions.</p>
+              <p>He has led significant IP litigation and complex licensing negotiations, with a reported 100% success rate in the internal infringement matters he handled. His experience includes leading the filing of more than 200 patent applications and supporting the commercialisation or licensing of over 400 technologies, alongside developing brand-protection and technology-licensing strategies.</p>
+              <p>He has held key legal and IP roles at Philips India Ltd. and 3M India Ltd. His qualifications include a BSc in Chemistry, an LLM in Intellectual Property and Information Technology from the National University of Singapore, a Postgraduate Diploma in Patent Law from NALSAR University of Law, and an Executive Programme in Advanced Corporate Law covering mergers and acquisitions from the Indian Institute of Management Calcutta.</p>
+              <p>He is enrolled with the Karnataka State Bar Council, is a registered Indian Patent Agent and Trademark Agent, a Registered Independent Director and a Certified Arbitrator. He is also a member of the Licensing Executives Society and the Chartered Institute of Arbitrators, London.</p>
+            </article>
+          </div>
+          <div className="council-grid">
+            <article id="research-council">
+              <div className="council-media reveal-media"><Photo image={councilPhotos['research-council']} alt="" widths={[480, 800, 1200]} sizes="(max-width: 760px) 100vw, 400px" /></div>
+              <span className="council-no">03</span>
+              <h3>Research Council</h3>
+              <p>The Research Council will support development of the Centre’s research agenda, assess proposed themes and encourage rigorous, relevant and feasible projects. Its remit includes recommendations on methodology, supervision, interdisciplinary collaboration and the potential legal or policy contribution of research outputs.</p>
+              <span className="pending-label">Member profiles to be published after appointments are confirmed</span>
+            </article>
+            <article id="academic-council">
+              <div className="council-media reveal-media"><Photo image={councilPhotos['academic-councils']} alt="" widths={[480, 800, 1200]} sizes="(max-width: 760px) 100vw, 400px" /></div>
+              <span className="council-no">04</span>
+              <h3>Academic Council</h3>
+              <p>The Academic Council will support academic standards across research programmes, including programme design, researcher development, mentorship, assessment criteria and academic quality, together with recommendations for lectures, workshops and scholarly exchanges.</p>
+              <span className="pending-label">Member profiles to be published after appointments are confirmed</span>
+            </article>
+          </div>
+          <p className="micro-note">Council member profiles will be added following confirmation of appointments. The descriptions above reflect the supplied SK ALTAIR webpage content document.</p>
+        </div>
+      </section>
+    </>
+  );
 }
 
 function Publications() {
