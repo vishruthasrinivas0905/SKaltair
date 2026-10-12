@@ -8,7 +8,8 @@ import { councilPhotos, heroSlides, newsPhotos, pagePhotos, photoSrcSet, photoUr
 
 function transitionUpdate(update) {
   if (typeof document.startViewTransition === 'function' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    document.startViewTransition(() => flushSync(update));
+    // A transition is skipped when a newer one starts or the tab is hidden; the update still runs.
+    document.startViewTransition(() => flushSync(update)).ready.catch(() => {});
   } else update();
 }
 
