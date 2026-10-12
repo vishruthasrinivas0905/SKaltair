@@ -408,3 +408,9 @@ details[open]::details-content{height:auto}
 @media(max-width:520px){.research-row:has(.research-thumb){grid-template-columns:32px 1fr 25px}.research-thumb{display:none}.intro-media{margin-top:28px}}
 @media(prefers-reduced-motion:reduce){.reveal-media{opacity:1;transform:none}.reveal-media img,.theme-media img{scale:1}}
 
+/* Phone widths: long select options, sideways reveals and the publication filters must not widen the page */
+.application-layout>*,.contact-layout>*,.form-grid>*{min-width:0}
+.form-field select{width:100%;min-width:0}
+@media(max-width:760px){.motion-left,.motion-right{transform:translate3d(0,18px,0)}}
+@media(max-width:520px){.filter-row{overflow-x:auto;scrollbar-width:none}.filter-row button{flex:none;padding-inline:9px}}
+
