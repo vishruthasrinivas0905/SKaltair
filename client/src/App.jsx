@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { flushSync } from 'react-dom';
 import { Link, NavLink, Route, Routes, useLocation } from 'react-router-dom';
 import { ArrowDownRight, ArrowRight, ArrowUpRight, BookOpen, Check, ChevronDown, ChevronLeft, ChevronRight, CircleHelp, Clock3, FileText, Globe2, Landmark, Mail, Menu, MoveUpRight, Send, ShieldCheck, Sparkles, X } from 'lucide-react';
 import { api } from './api.js';
