@@ -2,18 +2,21 @@ import express from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { applicationSchema, contactSchema } from './validators/schemas.js';
 import { createApplication, createContact, isMongoReady, listContent } from './services/store.js';
 import { notifySubmission } from './services/notifications.js';
 
 const app = express();
+const clientBuildDirectory = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '../../client/dist');
 app.disable('x-powered-by');
 app.set('trust proxy', 1);
 const allowedOrigins = new Set([process.env.CLIENT_ORIGIN || 'http://localhost:5173', 'http://localhost:4173', 'http://127.0.0.1:5173']);
 if (process.env.CLIENT_ORIGIN) allowedOrigins.add(process.env.CLIENT_ORIGIN);
 app.use(helmet({ contentSecurityPolicy: { directives: {
   defaultSrc: ["'self'"], baseUri: ["'self'"], objectSrc: ["'none'"], frameAncestors: ["'none'"],
-  imgSrc: ["'self'", 'data:'], styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
+  imgSrc: ["'self'", 'data:', 'https://images.unsplash.com'], styleSrc: ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
   fontSrc: ["'self'", 'https://fonts.gstatic.com', 'data:'], scriptSrc: ["'self'"], connectSrc: ["'self'", ...(process.env.API_ORIGIN ? [process.env.API_ORIGIN] : [])],
 } } }));
 app.use(cors({ origin(origin, callback) { if (!origin || allowedOrigins.has(origin)) return callback(null, true); return callback(new Error('Origin is not allowed by CORS.')); } }));
@@ -50,6 +53,11 @@ app.post('/api/v1/contact', submissionLimiter, validate(contactSchema), async (r
 });
 
 app.use('/api', (_req, res) => res.status(404).json({ message: 'API route not found.' }));
+app.use(express.static(clientBuildDirectory, { index: false, maxAge: process.env.NODE_ENV === 'production' ? '1h' : 0 }));
+app.get('*', (req, res, next) => {
+  if (req.method !== 'GET') return next();
+  return res.sendFile(path.join(clientBuildDirectory, 'index.html'), error => { if (error) next(error); });
+});
 app.use((error, _req, res, _next) => {
   if (error?.code === 11000) return res.status(409).json({ message: 'An item with that identifier already exists.' });
   if (error?.name === 'ValidationError') return res.status(400).json({ message: 'The submitted information is not valid.' });

@@ -1,12 +1,7 @@
 import 'dotenv/config';
-import dns from 'dns';
 import mongoose from 'mongoose';
 import app from './app.js';
 import { seedMongo, setMongoReady } from './services/store.js';
-
-try {
-  dns.setServers(['8.8.8.8', '1.1.1.1', ...dns.getServers()]);
-} catch (_) {}
 
 const port = Number(process.env.PORT || 4100);
 if (process.env.NODE_ENV === 'production') {
@@ -27,6 +22,6 @@ if (process.env.MONGODB_URI) {
   console.warn('MONGODB_URI is not set. Running in demo-memory mode; submissions will not persist after restart.');
 }
 
-const server = app.listen(port, () => console.info(`SKALTAIR API listening on http://localhost:${port}`));
+const server = app.listen(port, '0.0.0.0', () => console.info(`SKALTAIR application listening on http://0.0.0.0:${port}`));
 async function shutdown() { server.close(); if (mongoose.connection.readyState) await mongoose.disconnect(); process.exit(0); }
 process.on('SIGINT', shutdown); process.on('SIGTERM', shutdown);

@@ -9,7 +9,7 @@ The site uses CLPR as a structural reference for an institutional research websi
 - **Frontend:** React 18, Vite 5, React Router 6, plain CSS with shared design tokens.
 - **Backend:** Node.js 20 or later, Express 4 and Zod validation.
 - **Database:** MongoDB with Mongoose. Local demo mode uses memory storage when `MONGODB_URI` is unset.
-- **Hosting:** Cloudflare Pages for the static client; a Node-capable host for the Express API; MongoDB Atlas for persistent data. Cloudflare can provide DNS, CDN and TLS in front of both.
+- **Hosting:** Render can serve the built React client and Express API from one Node web service; MongoDB Atlas stores submissions. Cloudflare Pages remains an alternative frontend host.
 - **Forms:** Research application and contact enquiry submissions are validated and saved by the API. Optional SMTP forwards submissions to a confirmed institutional inbox.
 - **Tests:** Node's built-in test runner and Supertest exercise API health, validation, application submission, the absence of admin portal endpoints and seeded programme content.
 
@@ -19,6 +19,7 @@ The site uses CLPR as a structural reference for an institutional research websi
 skaltair-platform/
 ├── README.md
 ├── package.json                 # setup, development, test and build commands
+├── render.yaml                  # Render Blueprint: combined website and API service
 ├── wrangler.toml                # Cloudflare Pages build output configuration
 ├── client/
 │   ├── index.html                # document metadata and web-font setup
@@ -41,11 +42,12 @@ skaltair-platform/
     ├── src/
     │   ├── app.js                 # Express middleware and API routes
     │   ├── index.js               # configuration, database connection and server start
-    │   ├── data/seeds.js          # initial public programme/publication/news content
-    │   ├──     │   ├── models/                # Mongoose content, application and contact schemas
-    │   ├── services/              # persistence and optional email notifications
-    │   └── validators/schemas.js  # Zod request schemas
-    └── test/api.test.js           # API integration tests
+│   │   ├── data/
+│   │   │   └── seeds.js          # starter public programme/publication/news records
+│   │   ├── models/                # Mongoose content, application and contact schemas
+│   │   ├── services/              # persistence and optional email notifications
+│   │   └── validators/schemas.js  # Zod request schemas
+    └── test/api.test.js          # API integration tests
 ```
 
 ## Run locally
@@ -100,6 +102,18 @@ All API routes use `/api/v1` and JSON.
 | `POST` | `/contact` | Public, rate limited | Validate and save a contact enquiry. |
 
 The Express application is separated from the process startup in `server/src/app.js` so API tests can run without opening a network port or connecting to MongoDB.
+
+## Deploy to Render
+
+`render.yaml` defines a single Node web service. The production Express app serves the Vite build and the `/api/v1` endpoints from the same Render origin, so the frontend does not need a separate API URL or an admin portal.
+
+1. Put this `skaltair-platform` directory at the root of a Git repository and connect the repository to Render. Render Blueprints deploy from a connected Git provider; the current local project folder is not linked to a Git repository yet.
+2. In Render, create a Blueprint from that repository and select `render.yaml`.
+3. Enter the MongoDB Atlas connection string for `MONGODB_URI` when prompted. Atlas must permit connections from Render. The production API intentionally refuses to start without a working database connection.
+4. Set `SMTP_HOST`, `SMTP_USER`, `SMTP_PASSWORD`, `SMTP_FROM`, and `SUBMISSION_NOTIFICATION_EMAIL` with the approved institutional sender and recipient. Forms save to MongoDB; SMTP notifications provide the staff intake workflow because the client does not want an admin portal.
+5. Deploy, then check the public site and `/api/v1/health`.
+
+The Blueprint currently selects Render's **Free** web-service plan to avoid incurring a charge. Render free web services spin down after inactivity and are intended for previews rather than production. Upgrade to an appropriate paid plan before a public production launch.
 
 ## Website and interaction notes
 
