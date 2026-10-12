@@ -414,6 +414,83 @@ details[open]::details-content{height:auto}
 @media(max-width:760px){.motion-left,.motion-right{transform:translate3d(0,18px,0)}}
 @media(max-width:520px){.filter-row{overflow-x:auto;scrollbar-width:none}.filter-row button{flex:none;padding-inline:9px}}
 
+/* Requested home and About page typography, alignment and section rhythm. */
+.brand-type .brand-k{color:#b21f32}
+.page-home,.page-about{--serif:'Newsreader',Georgia,serif}
+.page-home :is(.hero h1,.section h2,.section-heading h2,.theme-card h3,.program-slide h3,.method-step h3,.pub-feature-copy h3,.home-news-card h3,.join-inner h2,.gita-title,.gita-quote p,.footer-cta h3),
+.page-about :is(.page-intro h1,.prose h2,.prose blockquote,.quote-panel blockquote){font-family:'Newsreader',Georgia,serif}
+.page-home :is(.hero h1,.section h2,.section-heading h2,.theme-card h3,.program-slide h3,.method-step h3,.pub-feature-copy h3,.home-news-card h3,.join-inner h2,.gita-title,.gita-quote p,.footer-cta h3),
+.page-about :is(.page-intro h1,.prose h2,.prose blockquote,.quote-panel blockquote){font-style:normal;font-weight:400}
+.page-home :is(h1 em,h2 em,h3 em),.page-about :is(h1 em,h2 em,h3 em){font-family:'Newsreader',Georgia,serif;font-style:italic;font-weight:400}
+.page-home .section{padding-block:76px}
+.page-home .section-join{padding-block:56px}
+.page-about .page-intro{padding-block:62px 54px}
+.page-about .content-section{padding-block:42px 64px}
+.page-about .prose>section{margin-bottom:48px}
+.page-home :is(.hero-copy>p,.about-copy>p,.section-heading p,.theme-card p,.program-slide p,.method-step p,.pub-feature-copy p,.home-news-card p,.join-inner p,.gita-quote span){font-family:'DM Sans',sans-serif;font-style:normal}
+.page-home .method-step p{font-size:16px;line-height:1.7}
+.page-home .theme-card p,.page-home .section-method .lead,.page-home .program-top>p,.page-home .section-join p,.page-home .pub-feature-copy p{font-size:16px;line-height:1.75}
+.page-home .gita-quote p{font-size:22px;line-height:1.4}
+.page-home .home-news-card p{font-size:16px;line-height:1.7}
+.page-home .about-copy .purpose-principles p{font-size:16px;line-height:1.7}
+.page-about .contents-rail .eyebrow{font-size:14px;letter-spacing:1.5px}
+.page-about .contents-rail a{font-size:18px;line-height:1.5}
+.page-governance .governance-aside>p{font-size:17px;line-height:1.75}
+.page-home :is(.section-heading,.about-copy,.program-top,.method-layout,.pub-feature-copy,.home-news-card,.join-inner),
+.page-about :is(.page-intro .container,.about-page-grid,.prose,.prose>section){text-align:left}
+.page-home .gita-strip{position:relative}
+.page-home .gita-inner.motion-ready,.page-home .gita-inner.motion-ready.is-visible{opacity:1;transform:none;transition:none}
+.page-home .gita-inner{opacity:1;visibility:visible;transform:none;transition:none}
+.page-home .gita-strip{overflow:hidden;background-color:#f5f0e9;transition:background-color var(--gita-duration,.3s) ease}
+.page-home .gita-geometry{position:absolute;z-index:0;right:max(4vw,calc((100vw - 1180px)/2));top:50%;width:clamp(190px,24vw,300px);height:auto;color:#c8b5a9;opacity:var(--gita-opacity,.2);transform:translate3d(0,calc(-50% + var(--gita-drift,0px)),0) scale(var(--gita-scale,.94));transform-origin:center;transition:transform var(--gita-duration,.3s) ease,opacity var(--gita-duration,.3s) ease,color var(--gita-duration,.3s) ease;pointer-events:none}
+.page-home .gita-inner{position:relative;z-index:1}
+.page-home .gita-label .eyebrow,.page-home .gita-title,.page-home .gita-quote p,.page-home .gita-quote span,.page-home .gita-action .listen-button{color:var(--gita-ink,#473e38);transition:color var(--gita-duration,.3s) ease}
+.page-home .gita-symbol{color:#a93b49;transition:color var(--gita-duration,.3s) ease}
+.page-home .gita-quote{border-color:color-mix(in srgb,var(--gita-ink,#473e38) 30%,transparent)}
+.page-home .gita-label .eyebrow{opacity:0;transition:opacity 420ms ease 80ms,color var(--gita-duration,.3s) ease}
+.page-home .gita-label.is-visible .eyebrow{opacity:.4}
+.page-home .gita-label .gita-title{opacity:0;transition:opacity 500ms ease 280ms,color var(--gita-duration,.3s) ease}
+.page-home .gita-label.is-visible .gita-title{opacity:1}
+.page-home .gita-quote p,.page-home .gita-quote>span{opacity:0;transform:translateY(10px);transition:opacity 550ms ease 420ms,transform 550ms cubic-bezier(.2,.65,.25,1) 420ms,color var(--gita-duration,.3s) ease}
+.page-home .gita-quote.is-visible p,.page-home .gita-quote.is-visible>span{opacity:1;transform:translateY(0)}
+.page-home .listen-button{position:relative;overflow:hidden;min-height:44px;padding:7px 12px;border-radius:24px;background:transparent;transition:background-color 280ms ease,color 280ms ease,box-shadow 280ms ease}
+.page-home .listen-icon{position:relative;z-index:1;flex:none}
+.page-home .listen-icon:after{content:'';position:absolute;inset:-5px;border:1px solid currentColor;border-radius:50%;opacity:.55;animation:listen-pulse 2.2s ease-out infinite;pointer-events:none}
+.page-home .listen-label,.page-home .listen-tooltip{position:relative;z-index:1;white-space:nowrap;transition:transform 300ms ease,opacity 300ms ease}
+.page-home .listen-tooltip{position:absolute;left:47px;opacity:0;transform:translateY(10px)}
+.page-home .listen-button:hover,.page-home .listen-button:focus-visible{background:#e5b758;color:#342519;box-shadow:0 0 22px #e5b75845}
+.page-home .listen-button:hover .listen-label,.page-home .listen-button:focus-visible .listen-label{opacity:0;transform:translateY(-10px)}
+.page-home .listen-button:hover .listen-tooltip,.page-home .listen-button:focus-visible .listen-tooltip{opacity:1;transform:translateY(0)}
+@keyframes listen-pulse{0%{transform:scale(.75);opacity:.6}100%{transform:scale(1.75);opacity:0}}
+.page-home .gita-strip:before{content:'';position:absolute;z-index:0;inset:0;pointer-events:none;opacity:0;background:radial-gradient(ellipse 260px 170px at var(--gita-pointer-x,50%) var(--gita-pointer-y,50%),#e7b95638 0%,#e7b95618 42%,transparent 78%);transition:opacity 380ms ease}
+.page-home .gita-strip:hover:before{opacity:1}
+.page-home .gita-inner :is(.eyebrow,.gita-title){transition:letter-spacing 300ms ease,opacity 550ms ease 420ms,transform 550ms cubic-bezier(.2,.65,.25,1) 420ms,color var(--gita-duration,.3s) ease}
+.page-home .gita-inner :is(.gita-quote p,.gita-quote>span){transition:opacity 550ms ease 420ms,transform 550ms cubic-bezier(.2,.65,.25,1) 420ms,color var(--gita-duration,.3s) ease}
+.page-home .gita-strip:hover .gita-inner :is(.eyebrow,.gita-title){letter-spacing:.2px}
+.page-home .gita-label .eyebrow{background:linear-gradient(100deg,#a67c36 0%,#a67c36 35%,#fff0b4 48%,#a67c36 60%,#a67c36 100%);background-size:240% 100%;background-position:100% 0;color:transparent;background-clip:text;-webkit-background-clip:text;animation:reflection-shimmer 5s ease-in-out infinite}
+@keyframes reflection-shimmer{0%,20%{background-position:100% 0}80%,100%{background-position:0 0}}
+.page-home .gita-label .gita-title{position:relative;display:inline-block;width:max-content}
+.page-home .gita-label .gita-title:after{content:'';position:absolute;left:50%;bottom:-4px;width:0;height:1px;background:#b18a45;transform:translateX(-50%);transition:width .6s cubic-bezier(.25,1,.5,1)}
+.page-home .gita-strip:hover .gita-title:after{width:100%}
+.page-home .gita-quote.is-visible{filter:blur(2px);opacity:.7;transition:filter 400ms ease,opacity 400ms ease,mask-position 1.35s cubic-bezier(.18,.68,.22,1)}
+.page-home .gita-strip:hover .gita-quote.is-visible{filter:blur(0);opacity:1}
+.page-home .soundwave{display:flex;align-items:center;gap:2px;width:0;height:16px;overflow:hidden;opacity:0;transition:width 220ms ease,opacity 220ms ease}
+.page-home .soundwave i{display:block;width:2px;height:4px;border-radius:2px;background:currentColor;transform-origin:center}
+.page-home .listen-button:hover .soundwave,.page-home .listen-button:focus-visible .soundwave{width:10px;opacity:1}
+.page-home .listen-button:hover .soundwave i,.page-home .listen-button:focus-visible .soundwave i{animation:soundwave-bounce 520ms ease-in-out infinite alternate}
+.page-home .listen-button:hover .soundwave i:nth-child(2),.page-home .listen-button:focus-visible .soundwave i:nth-child(2){animation-delay:110ms}
+.page-home .listen-button:hover .soundwave i:nth-child(3),.page-home .listen-button:focus-visible .soundwave i:nth-child(3){animation-delay:220ms}
+.page-home .listen-button:hover .listen-label,.page-home .listen-button:focus-visible .listen-label{opacity:1;transform:translateX(5px)}
+.page-home .listen-button:hover .listen-tooltip,.page-home .listen-button:focus-visible .listen-tooltip{opacity:1;transform:translateY(0)}
+@keyframes soundwave-bounce{to{transform:scaleY(3.4)}}
+.page-home .ink-reveal{opacity:0;filter:blur(5px);mask-image:linear-gradient(90deg,#000 0%,#000 42%,transparent 100%);mask-size:240% 100%;mask-position:100% 0;transition:mask-position 1.35s cubic-bezier(.18,.68,.22,1),opacity 1.1s ease,filter 1.1s ease}
+.page-home .ink-reveal.is-visible{opacity:1;filter:blur(0);mask-position:0 0}
+.page-home .gita-label.ink-reveal{transition-delay:80ms}
+.page-home .gita-quote.ink-reveal{transition-delay:210ms}
+.page-home .gita-action.ink-reveal{transition-delay:340ms}
+@media(max-width:760px){.page-home .section{padding-block:54px}.page-home .section-join{padding-block:42px}.page-home .home-news-card p{font-size:15px}.page-about .page-intro{padding-block:55px 44px}.page-about .content-section{padding-block:30px 48px}.page-about .contents-rail a{font-size:17px}.page-about .prose>section{margin-bottom:38px}}
+@media(prefers-reduced-motion:reduce){.page-home .ink-reveal,.page-home .ink-reveal.is-visible{opacity:1;filter:none;mask-image:none;transition:none}}
+
 /* Home content blocks added with the content update, styled with the existing components. */
 .hero-title-mask:nth-child(3)>span{animation-delay:360ms}
 .purpose-principles{margin-top:30px}
@@ -491,6 +568,202 @@ details[open]::details-content{height:auto}
 .page-committee .person-card p:last-child{margin-bottom:0}
 @media(min-width:761px){.page-committee .council-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:500px){.page-committee .person-card{padding:22px 20px}}
+
+/* Gita reflection button fit and high-contrast hover label. */
+.page-home .gita-label .eyebrow{background-image:linear-gradient(100deg,#633b0d 0%,#633b0d 35%,#e4a923 48%,#633b0d 60%,#633b0d 100%)}
+.page-home .listen-button{width:190px;min-width:190px;flex:none;gap:8px}
+.page-home .listen-tooltip{left:62px}
+.page-home .listen-button:hover .listen-label,.page-home .listen-button:focus-visible .listen-label{opacity:0;transform:translateX(5px)}
+.page-home .listen-button:hover .listen-tooltip,.page-home .listen-button:focus-visible .listen-tooltip{opacity:1;transform:translateY(0)}
+.page-home .gita-label .eyebrow{font-size:11px;letter-spacing:1.15px;white-space:nowrap}
+.page-home .gita-inner{grid-template-columns:230px minmax(0,1fr) 190px}
+.page-home .listen-button{width:190px;min-width:190px}
+.page-home .listen-tooltip{left:55px;right:5px;font-size:10px;letter-spacing:0;text-align:center}
+@media(min-width:1141px){.page-home .gita-quote p{font-size:18px;white-space:nowrap;letter-spacing:normal}}
+@media(max-width:760px){.page-home .gita-inner{grid-template-columns:1fr}}
+@media(max-width:520px){.page-home .gita-label .eyebrow{font-size:10px;letter-spacing:.9px}.page-home .gita-inner{grid-template-columns:1fr}.page-home .listen-button{width:190px;min-width:190px}.page-home .listen-tooltip{left:53px;right:7px;font-size:10px}}
+
+/* Requested site-wide brand lockup and targeted home/About layouts. */
+.site-header .brand-seal{width:66px;height:66px}
+.site-header .brand-type b{font-size:17px}
+.site-header .brand-type small{font-size:8px;letter-spacing:1.25px}
+.footer .brand-seal{width:70px;height:70px}
+.footer .brand-type b{font-size:18px}
+.footer .brand-type small{font-size:9px;letter-spacing:1.25px}
+.footer-main{padding-top:34px;padding-bottom:46px}
+.footer-contact{display:grid;gap:7px;margin-top:14px}
+.footer-mail{display:flex;align-items:center;gap:9px;overflow-wrap:anywhere;color:#e4d9d3}
+.footer-mail svg{flex:none;color:#d8898d}
+.page-home .section-institution{background:#fbf2f2}
+.page-home .section-home-news{background:#f8eeee}
+.page-home .section-join{background:#8f2333;color:#fff}
+.page-home .section-join .eyebrow{color:#f0c5c2}
+.page-home .section-join h2,.page-home .section-join p{color:#fff}
+.page-home .section-join h2 em{color:#f2c2bd}
+.page-home .section-join p{opacity:.88}
+.page-home .section-join .text-link{color:#f8dfd9}
+.page-about .intro-media,.page-governance .intro-media{width:min(62vw,900px)}
+.page-about .page-intro .container> :not(.intro-media),.page-governance .page-intro .container> :not(.intro-media){max-width:58%;}
+.page-about .intro-media:after,.page-governance .intro-media:after{background:linear-gradient(90deg,#f7f4ef 0%,#f7f4efed 19%,#f7f4efb5 43%,#f7f4ef25 72%,transparent 100%),linear-gradient(0deg,#1d17142e,#1d171400 45%)}
+@media(max-width:1140px){.site-header .brand-seal{width:60px;height:60px}.page-about .intro-media,.page-governance .intro-media{width:60vw}}
+@media(max-width:760px){.site-header .brand-seal{width:54px;height:54px}.page-about .page-intro .container> :not(.intro-media),.page-governance .page-intro .container> :not(.intro-media){max-width:100%}.page-about .intro-media,.page-governance .intro-media{width:100%}.footer-main{padding-top:30px}}
+.brand-type small{display:block;max-width:260px;font-size:8px;line-height:1.25;letter-spacing:.7px}
+.footer .brand-type small{max-width:280px;font-size:9px;letter-spacing:.55px}
+.site-header .brand-type .brand-tagline{font-family:'DM Sans',sans-serif;font-size:9px;font-weight:500;line-height:1.25;letter-spacing:.15px;color:#817773}
+.footer .brand-type .brand-tagline{font-family:'DM Sans',sans-serif;font-size:9.5px;font-weight:500;line-height:1.3;letter-spacing:.15px}
+.brand-inverse .brand-tagline{color:#d7babb}
+.join-icon{color:#f2c260!important;border-color:#f2c260!important;background:#ffffff12}
+.join-actions{width:100%;align-items:stretch!important;gap:9px!important}
+.join-actions a{width:100%;min-height:48px;margin:0;padding:0 17px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.page-home .join-actions .button-red{color:#fff;background:transparent;border-color:#f2c9c6}
+.page-home .join-actions .button-red:hover,.page-home .join-actions .button-red:focus-visible{color:#421a22;background:#f2c260;border-color:#f2c260;box-shadow:0 10px 28px #2c0d173d;transform:translateY(-2px)}
+.page-home .join-actions .text-link{color:#fff;border:1px solid #ffffff45}
+.page-home .join-actions .text-link:hover,.page-home .join-actions .text-link:focus-visible{background:#ffffff16;border-color:#f2c260;color:#fff}
+@media(max-width:760px){.brand-type small{max-width:205px;font-size:7.5px}.footer .brand-type small{max-width:240px;font-size:8.5px}.site-header .brand-type .brand-tagline{font-size:8px;letter-spacing:.1px}.footer .brand-type .brand-tagline{font-size:8.5px}.join-actions{grid-column:1/-1}}
+.page-home .join-actions .button-red:hover,.page-home .join-actions .button-red:focus-visible{color:#fff;background:#ffffff16;border-color:#f2c260;box-shadow:0 10px 28px #2c0d173d;transform:translateY(-2px)}
+
+/* Editorial legal palette inspired by the supplied references. */
+:root{--red:#8f2333;--red-dark:#641722;--ink:#2b211e;--muted:#71645d;--cream:#f3ecdc;--line:#e6dac7;--accent-gold:#c7a86b}
+.site-header{background:#fbf8f0;border-bottom-color:#e5dac8}
+.brand-type .brand-k{color:#a51f31}
+.page-home .hero{background:#78202c}
+.page-home .hero-image{filter:saturate(.74) sepia(.13)}
+.page-home .hero-scrim{background:linear-gradient(90deg,#591720ed 0%,#78202cc9 48%,#78202c40 100%),linear-gradient(0deg,#49131bb3,transparent 32%)}
+.page-home .hero h1{color:#fff9ef}
+.page-home .hero-copy>p{color:#fff3e8}
+.page-home .hero .eyebrow{color:#f3d58f}
+.page-home .hero .eyebrow-dot{background:#f3d58f}
+.page-home .hero-proof{color:#fff5e7}
+.page-home .hero-proof i{background:#e7c98b}
+.page-home .hero-bottom{color:#fff1df}
+.page-home .hero-bottom a{color:#f3d58f}
+.page-home .hero-bottom a:hover{color:#fff8eb}
+.page-home .hero h1 em,.page-home .hero .text-link{color:#ffe2a1}
+.page-home .hero .button-red{background:#922638;border-color:#b87569}
+.page-home .gita-strip{background:#f3ecdc;border-color:#dfd0b8}
+.page-home .gita-symbol{color:#912636}
+.page-home .gita-quote{border-left-color:#bca77f}
+.page-home .gita-quote p{color:#332522}
+.page-home .gita-label .eyebrow{color:#8f2333}
+.page-home .section-institution{background:#f4eddf}
+.page-home .section-institution .theme-card{border-color:#dfd1bd;background-color:#f9f4e9;background-image:linear-gradient(135deg,#ffffff40,transparent 58%)}
+.page-home .section-institution .theme-card:nth-child(odd){background-color:#812230;background-image:linear-gradient(135deg,#ffffff0a,transparent 58%);color:#fff8ec;border-color:#9f4c52}
+.page-home .section-institution .theme-card:nth-child(odd) :is(.theme-number,.theme-symbol,.card-arrow){color:#e7c98b}
+.page-home .section-institution .theme-card:nth-child(odd) p{color:#f0dfd0}
+.page-home .section-institution .theme-card:nth-child(even) :is(.theme-number,.theme-symbol,.card-arrow){color:#8f2333}
+.page-home .section-institution .theme-card:hover{box-shadow:0 14px 32px #4a211c20}
+.page-home .section-programs{background-color:#651923;background-image:radial-gradient(ellipse at 90% 15%,#a542413d,transparent 45%),linear-gradient(135deg,#57151e,#812431 68%,#591a22)}
+.page-home .section-programs:after{color:#f3dfc20d}
+.page-home .section-method{background:#f8f3e8}
+.page-home .section-method .method-step{border-color:#dfd1bd}
+.page-home .section-method .method-step>span,.page-home .section-method .method-step>svg{color:#8f2333}
+.page-home .section-pub{background:#f1e8d8}
+.page-home .section-pub .pub-feature{border-color:#dac8ad;background:#fbf7ee}
+.page-home .section-pub .pub-art{background:#7f202e;color:#f2dba9}
+.page-home .section-home-news{background:#f8f2e7}
+.page-home .home-news-card{border-color:#e0d2bd;background:#fffaf0}
+.page-home .home-news-card:nth-child(2){background:#842432;border-color:#9f4b50;color:#fff8ec}
+.page-home .home-news-card:nth-child(2) :is(.eyebrow,.text-link){color:#edcf91}
+.page-home .home-news-card:nth-child(2) p{color:#f0ddd2}
+.page-home .home-news-index{color:#8f233310}
+.page-home .home-news-card:nth-child(2) .home-news-index{color:#ffffff0b}
+.page-home .section-join{background:#76202c}
+.page-about .page-intro,.page-governance .page-intro{background:#3b2522;color:#fff8ec;border-bottom-color:#5d3934}
+.page-about .page-intro h1,.page-governance .page-intro h1{color:#fff8ec}
+.page-about .page-intro h1 em,.page-governance .page-intro h1 em{color:#e7c98b}
+.page-about .page-intro .eyebrow,.page-governance .page-intro .eyebrow{color:#e7c98b}
+.page-about .page-intro p,.page-governance .page-intro p{color:#f0e4d7}
+.page-about .intro-media:after,.page-governance .intro-media:after{background:linear-gradient(90deg,#3b2522 0%,#3b2522e8 19%,#3b2522a8 45%,#3b25222e 75%,transparent 100%),linear-gradient(0deg,#1d17144d,transparent 45%)}
+.page-about .content-section{background:#fbf8f0}
+.page-about .contents-rail{padding:25px 22px;background:#812230;border:1px solid #9d4c51;box-shadow:0 14px 32px #4a211c14}
+.page-about .contents-rail .eyebrow{color:#e7c98b}
+.page-about .contents-rail a{color:#fff4e5}
+.page-about .contents-rail a:hover,.page-about .contents-rail a.active{color:#edcf91}
+.page-about .contents-rail a.active:before{background:#edcf91}
+.page-about .quote-panel{border-color:#b9975c}
+.page-about .quote-panel .eyebrow{color:#e7c98b}
+.page-about .prose>section:not(.quote-panel){border-bottom:1px solid #e4d7c2;padding-bottom:25px}
+.page-about .prose h2{color:#3b2522}
+.page-about .objective-list>div{border-color:#e2d4c0}
+.page-about .objective-list>div>span,.page-about .objective-list>div>svg{color:#8f2333}
+.page-about .committee-note{background:#f4eddf;border-color:#d9c5a5}
+.page-governance .content-section{background:#fbf8f0}
+.page-governance .governance-aside{background:#f1e7d6;border-color:#dfcba9}
+.page-governance .policy-item{background:#fffaf0;border-color:#e2d3bd}
+.page-governance .policy-item summary{color:#76202c}
+.page-about .text-link,.page-governance .text-link{color:#8f2333}
+@media(max-width:760px){
+  .page-about .contents-rail{padding:18px;background:#812230}
+  .page-about .intro-media:after,.page-governance .intro-media:after{background:linear-gradient(0deg,#3b2522e8 0%,#3b252218 65%),linear-gradient(90deg,#3b252235,transparent)}
+  .page-home .section-institution .theme-card:nth-child(odd){background-color:#812230}
+}
+
+/* About page: Vision, Mission and Constitution triptych. */
+.page-about .prose{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch;gap:18px}
+.page-about .prose>section#vision,.page-about .prose>section#mission,.page-about .prose>section#constitution{min-width:0;min-height:100%;margin:0;padding:28px 24px;border:1px solid #dfd1bd;background:#f7f1e5;display:flex;flex-direction:column;gap:13px}
+.page-about .prose>section#vision{background:#812230;border-color:#a4595d;color:#fff7e9}
+.page-about .prose>section#vision .eyebrow{color:#e7c98b}
+.page-about .prose>section#vision blockquote{margin:0;color:#fff7e9;font-size:clamp(19px,1.6vw,24px);line-height:1.48}
+.page-about .prose>section#mission h2,.page-about .prose>section#constitution h2{margin:0;color:#3b2522;font-size:clamp(23px,2vw,29px);line-height:1.2}
+.page-about .prose>section#mission p,.page-about .prose>section#constitution p{margin:0;font-size:15px;line-height:1.7}
+.page-about .prose>section#mission p{position:relative;padding-left:18px}
+.page-about .prose>section#mission p:before{content:'•';position:absolute;left:1px;top:.02em;color:#8f2333;font-size:19px;line-height:1.5}
+.page-about .prose>section#mission .eyebrow,.page-about .prose>section#constitution .eyebrow{color:#8f2333}
+.page-about .prose>section#constitution .committee-note{margin-top:auto}
+.page-about .prose>section#objectives{grid-column:1/-1;margin:12px 0 0;padding-top:26px}
+.page-about .prose>.text-link{grid-column:1/-1;justify-self:start}
+@media(max-width:1050px){.page-about .prose{grid-template-columns:repeat(2,minmax(0,1fr))}.page-about .prose>section#constitution{grid-column:1/-1}}
+@media(max-width:760px){.page-about .prose{grid-template-columns:1fr;gap:14px}.page-about .prose>section#constitution{grid-column:auto}.page-about .prose>section#vision,.page-about .prose>section#mission,.page-about .prose>section#constitution{min-height:0;padding:23px 20px}.page-about .prose>section#objectives{grid-column:auto}}
+
+/* Triptych entrance, reading alignment, card interactions and Constitution overlay. */
+.page-about .prose{padding:20px;background-color:#f8f4ea;background-image:linear-gradient(to right,#e6ddce 1px,transparent 1px),linear-gradient(to bottom,#e6ddce 1px,transparent 1px);background-size:48px 48px}
+.page-about .prose>section#vision,.page-about .prose>section#mission,.page-about .prose>section#constitution{opacity:0;transform:translateY(20px);transition:opacity .72s cubic-bezier(.2,.65,.25,1),transform .72s cubic-bezier(.2,.65,.25,1),border-color .3s ease-in-out,box-shadow .25s ease,background-color .3s ease}
+.page-about .prose>section#vision.is-visible,.page-about .prose>section#mission.is-visible,.page-about .prose>section#constitution.is-visible{opacity:1;transform:translateY(0)}
+.page-about .prose>section#vision.motion-ready{transition-delay:0ms}
+.page-about .prose>section#mission.motion-ready{transition-delay:150ms}
+.page-about .prose>section#constitution.motion-ready{transition-delay:300ms}
+.page-about .prose>section#vision:hover,.page-about .prose>section#mission:hover,.page-about .prose>section#constitution:hover{border-color:#342522;box-shadow:0 18px 36px #33201725;transition-delay:0ms}
+.page-about .prose>section#vision.is-visible:hover,.page-about .prose>section#mission.is-visible:hover,.page-about .prose>section#constitution.is-visible:hover{transform:translateY(-2px) scale(1.02)}
+.page-about .prose:has(>section#vision:hover)>section#mission,.page-about .prose:has(>section#vision:hover)>section#constitution,.page-about .prose:has(>section#mission:hover)>section#vision,.page-about .prose:has(>section#mission:hover)>section#constitution,.page-about .prose:has(>section#constitution:hover)>section#vision,.page-about .prose:has(>section#constitution:hover)>section#mission{opacity:.85}
+.page-about .prose>section#mission p{text-align:justify;text-justify:inter-word}
+.constitution-read-button{align-self:flex-start;display:inline-flex;align-items:center;gap:9px;margin-top:auto;padding:10px 13px;border:1px solid #b9975c;background:transparent;color:#812230;font-size:13px;font-weight:600;transition:background-color .2s,color .2s,border-color .2s}
+.constitution-read-button:hover,.constitution-read-button:focus-visible{background:#812230;border-color:#812230;color:#fff7e9}
+.constitution-modal-backdrop{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:24px;background:#211714b8;backdrop-filter:blur(4px);animation:constitution-fade-in .25s ease both}
+.constitution-modal{position:relative;width:min(760px,100%);max-height:min(82vh,760px);overflow:auto;padding:clamp(28px,5vw,56px);border:1px solid #c7a86b;background:#fbf7ee;color:#332522;box-shadow:0 28px 80px #100b0a66;animation:constitution-rise-in .45s cubic-bezier(.2,.75,.25,1) both}
+.constitution-modal h2{margin:12px 0 20px;font:400 clamp(28px,4vw,42px)/1.15 'Newsreader',Georgia,serif;color:#3b2522}
+.constitution-modal>p{font-size:16px;line-height:1.8;text-align:justify}
+.constitution-modal .eyebrow{color:#8f2333}
+.constitution-modal-close{position:absolute;right:18px;top:14px;width:38px;height:38px;border:1px solid #dfd1bd;background:transparent;color:#3b2522;font-size:26px;line-height:1}
+.constitution-modal-close:hover,.constitution-modal-close:focus-visible{background:#812230;color:#fff;border-color:#812230}
+@keyframes constitution-fade-in{from{opacity:0}to{opacity:1}}
+@keyframes constitution-rise-in{from{opacity:0;transform:translateY(14px) scale(.985)}to{opacity:1;transform:translateY(0) scale(1)}}
+@media(max-width:760px){.page-about .prose{padding:12px;background-size:34px 34px}.page-about .prose>section#vision.motion-ready,.page-about .prose>section#mission.motion-ready,.page-about .prose>section#constitution.motion-ready{transition-delay:0ms}.page-about .prose:has(>section:hover)>section{opacity:1}}
+@media(prefers-reduced-motion:reduce){.page-about .prose>section#vision,.page-about .prose>section#mission,.page-about .prose>section#constitution,.constitution-modal-backdrop,.constitution-modal{animation:none;transition:none;transform:none;opacity:1}}
+
+/* Source Serif 4 display type with Manrope supporting text on Home/About routes. */
+body:has(.route-view:is(.page-home,.page-about,.page-governance,.page-committee)){font-family:'Manrope',sans-serif;--serif:'Source Serif 4',Georgia,serif}
+:is(.page-home,.page-about,.page-governance,.page-committee){font-family:'Manrope',sans-serif;--serif:'Source Serif 4',Georgia,serif}
+body:has(.route-view:is(.page-home,.page-about,.page-governance,.page-committee)) :is(.site-header,.footer){font-family:'Manrope',sans-serif;--serif:'Source Serif 4',Georgia,serif}
+body:has(.route-view:is(.page-home,.page-about,.page-governance,.page-committee)) .brand-tagline{font-family:'Manrope',sans-serif}
+.page-home :is(.hero h1,.section h2,.section-heading h2,.theme-card h3,.program-slide h3,.method-step h3,.pub-feature-copy h3,.home-news-card h3,.join-inner h2,.gita-title,.gita-quote p,.footer-cta h3),.page-about :is(.page-intro h1,.prose h2,.prose blockquote,.quote-panel blockquote){font-family:'Source Serif 4',Georgia,serif}
+.page-about .prose>section#vision{background:#f7f1e5;border-color:#dfd1bd;color:#332522}
+.page-about .prose>section#vision .eyebrow{color:#8f2333}
+.page-about .prose>section#vision blockquote{color:#332522}
+.page-about .prose>section#mission{background:#812230;border-color:#a4595d;color:#fff7e9}
+.page-about .prose>section#mission .eyebrow{color:#e7c98b}
+.page-about .prose>section#mission h2{color:#fff7e9}
+.page-about .prose>section#mission p{color:#f4e8dc}
+.page-about .prose>section#mission p:before{color:#e7c98b}
+.page-about .prose{padding:0;background-color:transparent;background-image:none}
+.constitution-modal h2{font-family:'Source Serif 4',Georgia,serif}
+@media(min-width:981px){.page-about .about-page-grid{grid-template-columns:150px minmax(0,1fr);gap:clamp(30px,3vw,42px)}}
+@media(min-width:1141px){.page-about .content-section>.container{width:calc(100vw - 64px);max-width:none}}
+@media(min-width:1141px){.page-about .prose{margin-left:clamp(18px,1.5vw,28px);margin-right:calc(-1 * clamp(18px,1.5vw,28px))}}
+@media(min-width:761px){.page-about .about-page-grid{grid-template-columns:minmax(0,1fr);gap:28px}.page-about .contents-rail{position:static;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:12px clamp(16px,2.2vw,30px);width:100%;padding:17px 20px}.page-about .contents-rail .eyebrow{margin:0}.page-about .contents-rail a{white-space:nowrap}.page-about .prose{width:100%;margin:0}}
+@media(min-width:1201px){.page-about .about-page-grid{display:grid;grid-template-columns:190px minmax(0,1fr);gap:0;position:relative}.page-about .contents-rail{position:sticky;top:120px;grid-column:1;grid-row:1;align-self:start;z-index:2;display:grid;align-content:start;justify-content:stretch;gap:16px;width:190px;padding:25px 22px}.page-about .contents-rail .eyebrow{margin-bottom:5px}.page-about .prose{grid-column:1/-1;grid-row:1;justify-self:center;width:min(1280px,calc(100vw - 460px));max-width:none;margin:0 auto}}
+@media(max-width:1200px) and (min-width:761px){.page-about .about-page-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}.page-about .contents-rail{position:static;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:12px clamp(16px,2.2vw,30px);width:100%;padding:17px 20px}.page-about .contents-rail .eyebrow{margin:0}.page-about .contents-rail a{white-space:nowrap}.page-about .prose{width:100%;max-width:none;margin:0}}
+.page-about #mission{position:relative;isolation:isolate;overflow:hidden}
+.page-about #mission>.quote-panel-photo{position:absolute;inset:0;z-index:-1;width:100%;height:100%;object-fit:cover;opacity:.2;filter:grayscale(1);pointer-events:none}
 
 /* Research Programmes page: Newsreader display headings with italic accents over DM Sans text,
    a balanced image-and-copy term panel, a card grid for the research themes and a contrasting
