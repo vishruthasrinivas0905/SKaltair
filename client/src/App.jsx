@@ -5,7 +5,7 @@ import { Link, NavLink, Route, Routes, useLocation } from 'react-router-dom';
 import { ArrowDownRight, ArrowRight, ArrowUpRight, BookOpen, Check, ChevronDown, ChevronLeft, ChevronRight, CircleHelp, Clock3, FileText, Globe2, Landmark, Mail, Menu, MoveUpRight, Send, ShieldCheck, Sparkles, X } from 'lucide-react';
 import { api } from './api.js';
 import { newsItems, programs, publications, themes } from './data.js';
-<<<<<<< HEAD
+
 import { councilPhotos, heroSlides, newsPhotos, pagePhotos, photoSrcSet, photoUrl, photos, programPhotos, publicationPhotos, themePhotos } from './images.js';
 
 function transitionUpdate(update) {
@@ -14,9 +14,9 @@ function transitionUpdate(update) {
     document.startViewTransition(() => flushSync(update)).ready.catch(() => {});
   } else update();
 }
-=======
+
 import './styles.css';
->>>>>>> origin/sahana/frontend
+
 
 function useContent(kind, fallback) {
   const [items, setItems] = useState(fallback);
@@ -60,10 +60,10 @@ function Header() {
   const [committeeOpen, setCommitteeOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const loc = useLocation();
-<<<<<<< HEAD
+
   useEffect(() => { setOpen(false); setResearchOpen(false); setCommitteeOpen(false); }, [loc.pathname, loc.search, loc.hash]);
   useEffect(() => { let frame = 0; const update = () => { cancelAnimationFrame(frame); frame = requestAnimationFrame(() => { const max = document.documentElement.scrollHeight - window.innerHeight; document.documentElement.style.setProperty('--scroll-progress', max > 0 ? String(window.scrollY / max) : '0'); setScrolled(window.scrollY > 80); }); }; update(); window.addEventListener('scroll', update, { passive: true }); window.addEventListener('resize', update); return () => { cancelAnimationFrame(frame); window.removeEventListener('scroll', update); window.removeEventListener('resize', update); }; }, []);
-=======
+
 
   useEffect(() => {
     setOpen(false);
@@ -84,7 +84,6 @@ function Header() {
 
   const researchActive = loc.pathname === '/programs';
 
->>>>>>> origin/sahana/frontend
   const nav = <>
     <NavLink to="/" end className="nav-link">
       Home
@@ -133,9 +132,9 @@ function Header() {
       Contact
     </NavLink>
   </>;
-<<<<<<< HEAD
+
   return <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}><div className="header-inner"><Mark/><nav className={`nav ${open ? 'nav-open' : ''}`} aria-label="Main navigation">{nav}</nav><button className="menu-toggle" aria-expanded={open} onClick={() => setOpen(!open)} aria-label={open ? 'Close navigation' : 'Open navigation'}>{open ? <X/> : <Menu/>}</button></div><span className="scroll-progress" aria-hidden="true"/></header>;
-=======
+
 
   return (
     <header className="site-header">
@@ -155,7 +154,7 @@ function Header() {
       </div>
     </header>
   );
->>>>>>> origin/sahana/frontend
+
 }
 
 function Footer() {
@@ -178,7 +177,7 @@ function PageIntro({ eyebrow, title, copy, image }) {
 
 function Home() {
   const [active, setActive] = useState(0);
-<<<<<<< HEAD
+
   const [slide, setSlide] = useState(0);
   const [heroPaused, setHeroPaused] = useState(false);
   const livePrograms = useContent('program', programs);
@@ -187,11 +186,11 @@ function Home() {
   useEffect(() => { if (heroPaused || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return; const timer = window.setInterval(() => setSlide(value => (value + 1) % heroSlides.length), 6500); return () => window.clearInterval(timer); }, [heroPaused]);
   return <>
     <section className="hero"><div className="hero-content container"><div className="hero-copy"><span className="eyebrow"><span className="eyebrow-dot"/> AN INDEPENDENT RESEARCH INITIATIVE</span><h1 className="hero-title"><span className="hero-title-mask"><span>Law shapes the future.</span></span><span className="hero-title-mask"><em>Research helps us see it.</em></span></h1><p>We bring legal scholarship into conversation with technology, public policy and the institutions that shape everyday life.</p><div className="hero-actions"><Link to="/programs" className="button button-red">Explore our research <ArrowRight size={16}/></Link><Link to="/about" className="text-link">Discover SKALTAIR <ArrowUpRight size={15}/></Link></div><div className="hero-proof"><span>LAW</span><i/> <span>TECHNOLOGY</span><i/> <span>PUBLIC POLICY</span></div></div><div className="hero-art-wrap"><div className="hero-art-frame" onMouseEnter={() => setHeroPaused(true)} onMouseLeave={() => setHeroPaused(false)}>{heroSlides.map((image, index) => <Photo key={image.id} image={image} className="hero-art" data-active={slide === index} widths={[640, 960, 1280, 1800]} sizes="(max-width: 760px) 100vw, 600px" eager={index === 0} fetchpriority={index === 0 ? 'high' : undefined} aria-hidden={slide !== index}/>)}<div className="hero-art-label"><span>{String(slide + 1).padStart(2, '0')} / {String(heroSlides.length).padStart(2, '0')}</span><b>Ideas into public value</b></div></div><div className="hero-seal"><img src="/skaltair-emblem.png" alt="SK ALTAIR emblem"/><span>Independent thought.<br/>Practical insight.</span></div></div></div><div className="hero-bottom container"><span>RESEARCH WITH PUBLIC PURPOSE</span><a href="#research">SCROLL TO EXPLORE <ArrowDownRight size={14}/></a></div></section>
-=======
+
 
   const livePrograms = useContent('program', programs);
   const livePublications = useContent('publication', publications);
->>>>>>> origin/sahana/frontend
+
 
   const researchFocus = [
     {
@@ -238,13 +237,13 @@ function Home() {
     },
   ];
 
-<<<<<<< HEAD
+
     <section className="section section-about"><div className="container two-col"><div className="section-art"><Photo image={photos.stateCentralLibrary} widths={[640, 960, 1280, 1600]} sizes="(max-width: 760px) 100vw, 560px"/><div className="art-stamp"><Landmark size={22}/><span>Ideas into<br/>institutions</span></div></div><div className="about-copy"><span className="eyebrow">A PURPOSEFUL PLATFORM</span><h2>Independent ideas.<br/><em>Public value.</em></h2><p className="lead">SKALTAIR is a research initiative bringing legal professionals, students and interdisciplinary researchers together to examine complex questions in law, technology and governance.</p><p>We look beyond the text of a rule to ask how it is designed, how it works in practice and how it can better serve the public. Our work is guided by intellectual independence, rigorous analysis and responsible scholarship.</p><Link className="text-link" to="/about">Our purpose and principles <ArrowRight size={16}/></Link><div className="about-signature"><span className="signature-mark">S</span><span><b>Research with independence</b><small>Informed by evidence. Open to debate.</small></span></div></div></div></section>
 
     <section className="section section-themes"><div className="container"><SectionHeading eyebrow="QUESTIONS THAT MATTER" title={<>Research at the<br/><em>edges of change.</em></>} copy="Our work follows questions across law, technology, institutions and public life." link="Explore research themes" to="/programs"/><div className="theme-grid">{themes.slice(0, 6).map((t, i) => <Link className="theme-card" to="/programs" key={t.title}>{themePhotos[t.title] && <span className="theme-media"><Photo image={themePhotos[t.title]} alt="" widths={[480, 800, 1200]} sizes="(max-width: 520px) 100vw, (max-width: 760px) 50vw, 400px"/></span>}<span className="theme-number">0{i + 1}</span><span className="theme-symbol">{t.icon}</span><h3>{t.title}</h3><p>{t.desc}</p><span className="card-arrow"><ArrowUpRight size={17}/></span></Link>)}</div></div></section>
 
     <section className="section section-programs"><div className="container"><div className="program-top"><div><span className="eyebrow light">A PATH FOR SUSTAINED INQUIRY</span><h2>Make space for<br/><em>deep research.</em></h2></div><p>Structured programmes pair focused questions with mentorship, clear milestones and independent review. Choose a term that fits the work your question requires.</p></div><div className="program-slider" aria-label="Research programmes">{livePrograms.map((p, i) => <Link key={p.slug} to={`/apply?program=${p.slug}`} className={`program-slide ${active === i ? 'selected' : ''}`} onMouseEnter={() => setActive(i)}>{programPhotos[p.slug] && <span className="program-media" aria-hidden="true"><Photo image={programPhotos[p.slug]} alt="" widths={[480, 800, 1200]} sizes="(max-width: 760px) 100vw, 400px"/></span>}<span className="program-count">{p.number}</span><div><span className="program-duration"><Clock3 size={14}/>{p.duration}</span><h3>{p.name}</h3><p>{p.description}</p></div><span className="program-slide-arrow"><ArrowUpRight size={18}/></span></Link>)}</div><div className="program-controls"><div className="program-dots">{livePrograms.map((p, i) => <button key={p.slug} className={active === i ? 'active' : ''} aria-label={`Highlight ${p.name}`} aria-pressed={active===i} onClick={() => setActive(i)}/>)}</div><Link className="text-link light" to="/programs">Explore programmes <ArrowRight size={16}/></Link></div></div></section>
-=======
+
   return (
     <>
       {/* =========================================================
@@ -270,7 +269,7 @@ function Home() {
               challenges in law, technology and governance—and develop practical
               recommendations for public benefit.
             </p>
->>>>>>> origin/sahana/frontend
+
 
             <div className="hero-actions">
               <Link to="/programs" className="button button-red">
@@ -278,11 +277,11 @@ function Home() {
                 <ArrowRight size={16} />
               </Link>
 
-<<<<<<< HEAD
+
     <section className="section section-pub"><div className="container"><SectionHeading eyebrow="FROM THE RESEARCH DESK" title={<>Ideas worth<br/><em>sharing.</em></>} copy="Our research output will be published here following completion and editorial review." link="View publications" to="/publications"/><div className="pub-feature"><div className="pub-art has-photo"><Photo image={photos.researchTypewriter} alt="" className="pub-art-photo" widths={[400, 700, 1000]} sizes="(max-width: 500px) 100vw, 270px"/><BookOpen size={36}/><span>SKALTAIR<br/>RESEARCH</span><i className="pub-art-rule"/></div><div className="pub-feature-copy"><span className="eyebrow">{livePublications[0]?.type || 'PUBLICATIONS'} · {livePublications[0]?.year || 'COMING SOON'}</span><h3>{livePublications[0]?.title || 'Rigorous research, made accessible.'}</h3><p>{livePublications[0]?.description || 'Research papers, policy briefs and reports will examine contemporary questions in law, technology, governance and public policy.'}</p><Link className="text-link" to="/publications">Visit the publication desk <ArrowRight size={16}/></Link></div><div className="pub-feature-index">01 <span>/</span> 01</div></div></div></section>
 
     <section className="section section-home-news"><div className="container"><SectionHeading eyebrow="LATEST FROM SKALTAIR" title={<>Updates from<br/><em>the research desk.</em></>} copy="Announcements, programme calls, events and institutional news." link="All news & updates" to="/news"/><div className="home-news-grid">{liveNews.slice(0,3).map((item,index)=><article className="home-news-card" key={item.slug||item.title}><div className="home-news-media"><Photo image={newsPhotos[index%newsPhotos.length]} alt="" widths={[480, 800, 1200]} sizes="(max-width: 760px) 100vw, 400px"/></div><span className="eyebrow">{item.type||item.data?.type||'UPDATE'} · {item.date||item.data?.date||'SKALTAIR'}</span><h3>{item.title||item.name}</h3><p>{item.description}</p><Link to="/news" className="text-link">Read updates <ArrowRight size={15}/></Link><span className="home-news-index">0{index+1}</span></article>)}</div></div></section>
-=======
+
               <Link to="/about" className="text-link">
                 About SK ALTAIR
                 <ArrowUpRight size={15} />
@@ -294,7 +293,7 @@ function Home() {
                 <strong>LAW</strong>
                 <span>Research</span>
               </div>
->>>>>>> origin/sahana/frontend
+
 
               <i />
 
