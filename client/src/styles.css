@@ -925,14 +925,162 @@ body:has(.route-view:is(.page-programs,.page-apply)) .brand-tagline{font-family:
 /* Core Committee headings in the same regular-weight serif as the Home and About headings. */
 .page-committee :is(h2,h3){font-family:var(--serif);font-style:normal;font-weight:400}
 
-/* Research Programmes intro: the wide photograph, dark ground and gradient of the About Us and Governance intros.
+/* Research Programmes and Core Committee intros: the wide photograph, dark ground and gradient of the About Us and Governance intros.
    The gradient clears a little sooner so the reader in the photograph stays visible beside the text. */
-.page-programs .page-intro{background:#3b2522;color:#fff8ec;border-bottom-color:#5d3934}
-.page-programs .page-intro h1{color:#fff8ec}
-.page-programs .page-intro h1 em,.page-programs .page-intro .eyebrow{color:#e7c98b}
-.page-programs .page-intro p{color:#f0e4d7}
-.page-programs .page-intro .container> :not(.intro-media){max-width:58%}
-.page-programs .intro-media{width:min(62vw,900px)}
-.page-programs .intro-media:after{background:linear-gradient(90deg,#3b2522 0%,#3b2522e8 20%,#3b2522a8 32%,#3b25222e 48%,transparent 64%),linear-gradient(0deg,#1d17144d,transparent 45%)}
-@media(max-width:1140px){.page-programs .intro-media{width:60vw}}
-@media(max-width:760px){.page-programs .page-intro .container> :not(.intro-media){max-width:100%}.page-programs .intro-media{width:100%}.page-programs .intro-media:after{background:linear-gradient(0deg,#3b2522e8 0%,#3b252218 65%),linear-gradient(90deg,#3b252235,transparent)}}
+:is(.page-programs,.page-committee) .page-intro{background:#3b2522;color:#fff8ec;border-bottom-color:#5d3934}
+:is(.page-programs,.page-committee) .page-intro h1{color:#fff8ec}
+:is(.page-programs,.page-committee) .page-intro h1 em,:is(.page-programs,.page-committee) .page-intro .eyebrow{color:#e7c98b}
+:is(.page-programs,.page-committee) .page-intro p{color:#f0e4d7}
+:is(.page-programs,.page-committee) .page-intro .container> :not(.intro-media){max-width:58%}
+:is(.page-programs,.page-committee) .intro-media{width:min(62vw,900px)}
+:is(.page-programs,.page-committee) .intro-media:after{background:linear-gradient(90deg,#3b2522 0%,#3b2522e8 20%,#3b2522a8 32%,#3b25222e 48%,transparent 64%),linear-gradient(0deg,#1d17144d,transparent 45%)}
+@media(max-width:1140px){:is(.page-programs,.page-committee) .intro-media{width:60vw}}
+@media(max-width:760px){:is(.page-programs,.page-committee) .page-intro .container> :not(.intro-media){max-width:100%}:is(.page-programs,.page-committee) .intro-media{width:100%}:is(.page-programs,.page-committee) .intro-media:after{background:linear-gradient(0deg,#3b2522e8 0%,#3b252218 65%),linear-gradient(90deg,#3b252235,transparent)}}
+
+/* Core Committee: an overview and a page for each body, sharing a page switcher, the dark intro and the member cards. */
+@media(min-width:761px){.page-committee .page-intro h1{font-size:clamp(46px,5.3vw,76px)}}
+.committee-tabs{position:relative;z-index:2;background:#fbf7ee;border-bottom:1px solid #e6d9c4}
+.committee-tabs .container{display:flex;justify-content:center;gap:10px;padding-block:18px}
+.committee-tabs a{display:inline-flex;align-items:center;min-height:46px;padding:0 24px;border:1px solid #d9c6a6;border-radius:999px;color:#5a3a33;font-size:15px;font-weight:600;white-space:nowrap;transition:background-color .25s ease,border-color .25s ease,color .25s ease}
+.committee-tabs a:hover,.committee-tabs a:focus-visible{border-color:#812230;color:#812230}
+.committee-tabs a.active{background:#812230;border-color:#812230;color:#fff7e9}
+
+.page-committee .committee-overview{background:#fffdf8}
+.page-committee .committee-lead{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(40px,6vw,96px);align-items:end;margin-bottom:84px}
+.page-committee :is(.committee-lead,.committee-facts,.showcase-heading) .eyebrow{font-size:13px;letter-spacing:2.4px;color:#8f2333}
+.page-committee .committee-lead h2{margin:16px 0 0;font-size:clamp(38px,3.6vw,52px);line-height:1.1;letter-spacing:-.5px;color:#3b2522}
+.page-committee .committee-lead h2 em{color:#8f2333}
+.page-committee .committee-lead p{margin:0 0 24px;font-size:18px;line-height:1.75;color:#5f5450}
+.page-committee .committee-lead .committee-note{margin:0;padding:18px 22px;background:#f7f1e5;border-left:3px solid #c7a86b;border-radius:0 4px 4px 0;color:#8f2333}
+.page-committee .committee-lead .committee-note p{margin:0;font-size:15px;line-height:1.7;color:#6e5f58}
+
+.page-committee .committee-roles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;align-items:stretch}
+.page-committee .committee-role{position:relative;display:flex;flex-direction:column;min-width:0;padding:46px 34px 32px;background:#fbf7ee;border:1px solid #e3d3bb;border-radius:6px;transition:opacity .72s var(--motion-ease),transform .72s var(--motion-ease),box-shadow .4s ease,border-color .4s ease}
+.page-committee .committee-role:before{content:'';position:absolute;left:34px;right:34px;top:-1px;height:2px;background:#c7a86b;transform:scaleX(0);transform-origin:left;transition:transform .5s var(--motion-ease)}
+.page-committee .committee-role:is(:hover,:focus-within){border-color:#d6bf98;box-shadow:0 24px 52px #3b25221a}
+.page-committee .committee-role:is(:hover,:focus-within):before{transform:scaleX(1)}
+.page-committee .role-tab{position:absolute;top:-15px;left:30px;padding:6px 15px;background:#fbf7ee;border:1px solid #c7a86b;border-radius:999px;color:#8f2333;font-size:12px;font-weight:700;letter-spacing:1.8px;line-height:1.2}
+.page-committee .role-icon{display:grid;place-items:center;width:54px;height:54px;margin-bottom:24px;border:1px solid #d9c6a6;border-radius:50%;color:#8f2333;transition:background-color .35s ease,border-color .35s ease,color .35s ease}
+.page-committee .committee-role:is(:hover,:focus-within) .role-icon{background:#8f2333;border-color:#8f2333;color:#fff7e9}
+.page-committee .committee-role h3{margin:0;font-size:clamp(27px,2.2vw,32px);line-height:1.15;color:#3b2522}
+.page-committee .role-line{margin:8px 0 18px;font:italic 400 19px/1.4 var(--serif);color:#8f2333}
+.page-committee .committee-role>p:not(.role-line){margin:0 0 26px;font-size:16px;line-height:1.75;color:#5f5450}
+.page-committee .role-remit{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 30px;padding:0;list-style:none}
+.page-committee .role-remit li{padding:6px 13px;background:#fffdf8;border:1px solid #dcc8a8;border-radius:999px;font-size:14px;line-height:1.3;color:#5a3a33}
+.page-committee .role-link{display:flex;align-items:center;gap:9px;margin-top:auto;padding-top:20px;border-top:1px solid #e3d3bb;color:#8f2333;font-size:15px;font-weight:700}
+.page-committee .role-link svg{transition:transform .3s var(--motion-ease)}
+.page-committee .role-link:hover svg{transform:translateX(5px)}
+.page-committee .committee-role:nth-child(2){background:#812230;border-color:#812230}
+.page-committee .committee-role:nth-child(2):before{background:#e7c98b}
+.page-committee .committee-role:nth-child(2) .role-tab{background:#812230;border-color:#e7c98b;color:#e7c98b}
+.page-committee .committee-role:nth-child(2) .role-icon{border-color:#e7c98b80;color:#e7c98b}
+.page-committee .committee-role:nth-child(2):is(:hover,:focus-within) .role-icon{background:#e7c98b;border-color:#e7c98b;color:#812230}
+.page-committee .committee-role:nth-child(2) h3{color:#fff7e9}
+.page-committee .committee-role:nth-child(2) .role-line{color:#e7c98b}
+.page-committee .committee-role:nth-child(2)>p:not(.role-line){color:#f4e3dc}
+.page-committee .committee-role:nth-child(2) .role-remit li{background:transparent;border-color:#e7c98b73;color:#fff1e3}
+.page-committee .committee-role:nth-child(2) .role-link{border-top-color:#ffffff2e;color:#e7c98b}
+
+.page-committee .committee-facts{padding:88px 0;background:radial-gradient(circle at 88% 0%,#5e322e 0%,transparent 55%),#3b2522;color:#fff8ec}
+.page-committee .committee-facts .container{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.5fr);gap:clamp(40px,5vw,80px);align-items:center}
+.page-committee .committee-facts .eyebrow,.page-committee .showcase-heading .eyebrow{color:#e7c98b}
+.page-committee .committee-facts h2{margin:14px 0 0;font-size:clamp(32px,3vw,44px);line-height:1.12;color:#fff8ec}
+.page-committee .committee-facts h2 em,.page-committee .showcase-heading h2 em{color:#e7c98b}
+.page-committee .facts-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin:0;padding:0;list-style:none}
+.page-committee .facts-row li{display:grid;justify-items:center;align-content:start;gap:16px;text-align:center}
+.page-committee .facts-row b{display:inline-flex;justify-content:center;min-width:136px;padding:12px 28px;border:1px solid #e7c98b8c;border-radius:999px;font:400 46px/1 var(--serif);color:#e7c98b}
+.page-committee .facts-row span{max-width:210px;font-size:16px;line-height:1.5;color:#ead9cc}
+
+.page-committee .member-showcase{background:radial-gradient(ellipse at 50% 0%,#5e322e 0%,transparent 60%),#3b2522;color:#fff8ec}
+.page-committee .showcase-heading{max-width:800px;margin:0 auto 60px;text-align:center}
+.page-committee .showcase-heading h2{display:flex;align-items:center;justify-content:center;gap:24px;margin:16px 0 20px;font-size:clamp(42px,4.2vw,60px);line-height:1.05;color:#fff8ec}
+.page-committee .ornament{position:relative;flex:0 0 clamp(36px,7vw,110px);height:1px;background:linear-gradient(90deg,transparent,#e7c98b)}
+.page-committee .ornament:last-child{background:linear-gradient(90deg,#e7c98b,transparent)}
+.page-committee .ornament:after{content:'';position:absolute;top:50%;right:-5px;width:9px;height:9px;border:1px solid #e7c98b;transform:translateY(-50%) rotate(45deg)}
+.page-committee .ornament:last-child:after{right:auto;left:-5px}
+.page-committee .showcase-heading p{margin:0;font-size:18px;line-height:1.75;color:#ead9cc}
+.page-committee .council-remit{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;max-width:920px;margin:-28px auto 34px;padding:0;list-style:none}
+.page-committee .council-remit li{padding:8px 17px;border:1px solid #e7c98b59;border-radius:999px;font-size:14px;color:#f3e2c4}
+
+.page-committee .member-grid{display:grid;gap:32px;align-items:stretch}
+.page-committee .member-grid.is-board{grid-template-columns:repeat(2,minmax(0,1fr));max-width:1100px;margin:0 auto}
+.page-committee .member-grid.is-council{grid-template-columns:repeat(4,minmax(0,1fr));gap:26px}
+.page-committee .member-card{position:relative;display:flex;flex-direction:column;align-items:center;min-width:0;margin-top:78px;padding:0 36px 36px;text-align:center;background:linear-gradient(180deg,#ffffff12,#ffffff05 60%);border:1px solid #e7c98b47;border-radius:50% 50% 10px 10px/96px 96px 10px 10px;transition:opacity .72s var(--motion-ease),transform .72s var(--motion-ease),border-color .4s ease}
+.page-committee .member-card:is(:hover,:focus-within){border-color:#e7c98ba6}
+.page-committee .member-portrait{position:relative;display:grid;place-items:center;flex:none;width:190px;height:232px;margin:-78px 0 28px;overflow:hidden;background:radial-gradient(circle at 50% 30%,#74413a 0%,#2f1d1b 75%);border:1px solid #e7c98b99;border-radius:999px 999px 10px 10px;box-shadow:0 20px 44px #120a0973}
+.page-committee .member-portrait:after{content:'';position:absolute;inset:8px;border:1px solid #e7c98b38;border-radius:inherit;pointer-events:none}
+.page-committee .member-portrait span{font:italic 400 54px/1 var(--serif);color:#e7c98b}
+.page-committee .member-portrait img{width:100%;height:100%;object-fit:cover}
+.page-committee .member-card h3{margin:0;font-size:clamp(26px,2.3vw,33px);line-height:1.18;color:#fff8ec}
+.page-committee .member-title{display:block;margin:8px 0 24px;font:italic 400 18px/1.4 var(--serif);color:#e7c98b}
+.page-committee .member-highlights{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;width:100%;margin:0 0 24px;padding:18px 0;border-block:1px solid #e7c98b33;list-style:none}
+.page-committee .member-highlights li{display:grid;align-content:start;gap:6px}
+.page-committee .member-highlights b{font:400 28px/1.05 var(--serif);color:#fff8ec}
+.page-committee .member-highlights span{font-size:13.5px;line-height:1.4;color:#d9c5b7}
+.page-committee .member-card p{margin:0 0 28px;font-size:16px;line-height:1.75;color:#ead9cc}
+.page-committee .member-more{display:inline-flex;align-items:center;gap:10px;min-height:50px;margin-top:auto;padding:0 24px;background:transparent;border:1px solid #e7c98b;border-radius:2px;color:#e7c98b;font-size:15px;font-weight:600;transition:background-color .25s ease,color .25s ease}
+.page-committee .member-more:hover,.page-committee .member-more:focus-visible{background:#e7c98b;color:#3b2522}
+.page-committee .member-focus{display:inline-block;margin:0 0 18px;padding:7px 15px;border:1px solid #e7c98b66;border-radius:999px;font-size:14px;line-height:1.35;color:#f3e2c4}
+.page-committee .member-pending{margin-top:auto;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#c9ad8e}
+.page-committee .member-grid.is-council .member-card{margin-top:64px;padding:0 22px 28px;border-radius:50% 50% 10px 10px/72px 72px 10px 10px}
+.page-committee .member-grid.is-council .member-portrait{width:140px;height:172px;margin:-64px 0 22px}
+.page-committee .member-grid.is-council .member-portrait span{font-size:40px}
+.page-committee .member-grid.is-council .member-card h3{font-size:24px}
+.page-committee .member-grid.is-council .member-title{margin-bottom:16px;font-size:16px}
+.page-committee .member-grid.is-council .member-card p{margin-bottom:22px;font-size:15px}
+.page-committee .member-grid.is-council .member-focus{display:flex;align-items:center;justify-content:center;width:100%;min-height:56px;padding:6px 16px;border-radius:28px}
+.page-committee .member-note{display:flex;align-items:center;justify-content:center;gap:10px;margin:56px 0 0;font-size:15px;color:#d9c5b7}
+.page-committee .member-note svg{flex:none;color:#e7c98b}
+
+.profile-dialog{width:min(1000px,calc(100vw - 32px));max-width:none;max-height:min(88vh,880px);padding:0;overflow:hidden;background:#fbf7ee;border:1px solid #c7a86b;border-radius:6px;color:#332522;box-shadow:0 30px 90px #100b0a73}
+.profile-dialog[open]{animation:profile-rise .45s cubic-bezier(.2,.75,.25,1) both}
+.profile-dialog::backdrop{background:#211714b8;backdrop-filter:blur(4px);animation:profile-fade .25s ease both}
+.profile-dialog-body{display:grid;grid-template-columns:280px minmax(0,1fr);max-height:min(88vh,880px);overflow:auto}
+.profile-dialog aside{display:grid;align-content:start;justify-items:center;gap:28px;padding:52px 30px 40px;background:radial-gradient(ellipse at 50% 0%,#5e322e 0%,transparent 60%),#3b2522}
+.page-committee .profile-dialog .member-portrait{margin:0}
+.page-committee .profile-dialog .member-highlights{grid-template-columns:1fr;gap:18px;margin:0;padding:22px 0 0;border-bottom:0;text-align:center}
+.profile-dialog-copy{padding:52px clamp(28px,4.5vw,56px) 46px}
+.profile-dialog-copy .eyebrow{font-size:13px;letter-spacing:2.2px;color:#8f2333}
+.page-committee .profile-dialog-copy h2{margin:12px 0 24px;font-size:clamp(32px,3.2vw,42px);line-height:1.12;color:#3b2522}
+.profile-dialog-copy p{margin:0 0 16px;font-size:16px;line-height:1.8;color:#4f4440}
+.profile-dialog .member-tags{display:flex;flex-wrap:wrap;gap:8px;margin:28px 0 0;padding:24px 0 0;border-top:1px solid #e3d3bb;list-style:none}
+.profile-dialog .member-tags li{padding:6px 14px;background:#fff;border:1px solid #dcc8a8;border-radius:999px;font-size:14px;color:#5a3a33}
+.profile-dialog-close{position:absolute;top:16px;right:16px;z-index:1;display:grid;place-items:center;width:42px;height:42px;padding:0;background:#fbf7eef0;border:1px solid #dfd1bd;border-radius:50%;color:#3b2522;transition:background-color .2s ease,border-color .2s ease,color .2s ease}
+.profile-dialog-close:hover,.profile-dialog-close:focus-visible{background:#812230;border-color:#812230;color:#fff}
+html:has(.profile-dialog[open]){overflow:hidden}
+@keyframes profile-rise{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes profile-fade{from{opacity:0}to{opacity:1}}
+
+.page-committee :is(.committee-role,.facts-row li,.member-card).is-visible:nth-child(2){transition-delay:90ms}
+.page-committee :is(.committee-role,.facts-row li,.member-card).is-visible:nth-child(3){transition-delay:180ms}
+.page-committee .member-card.is-visible:nth-child(4){transition-delay:270ms}
+.page-committee :is(.committee-role,.member-card).is-visible:is(:hover,:focus-within){transition-delay:0s}
+
+@media(max-width:1140px){
+  .page-committee .committee-roles{grid-template-columns:1fr;max-width:760px;margin-inline:auto;row-gap:44px}
+  .page-committee .committee-facts .container{grid-template-columns:1fr}
+  .page-committee .member-grid.is-council{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:40px;max-width:760px;margin-inline:auto}
+}
+@media(max-width:900px){.page-committee .member-grid.is-board{grid-template-columns:1fr;max-width:560px}}
+@media(max-width:760px){
+  .committee-tabs .container{justify-content:flex-start;gap:8px;padding-block:14px;overflow-x:auto;scrollbar-width:none}
+  .committee-tabs .container::-webkit-scrollbar{display:none}
+  .committee-tabs a{flex:none;min-height:42px;padding:0 18px;font-size:14px}
+  .page-committee .committee-lead{grid-template-columns:1fr;gap:26px;margin-bottom:64px}
+  .page-committee .committee-lead p{font-size:17px}
+  .page-committee .committee-role{padding:42px 24px 28px}
+  .page-committee .committee-facts{padding:68px 0}
+  .page-committee .facts-row{grid-template-columns:1fr;gap:30px}
+  .page-committee .showcase-heading{margin-bottom:44px}
+  .page-committee .showcase-heading h2{gap:14px}
+  .page-committee .ornament{flex-basis:28px}
+  .page-committee .showcase-heading p{font-size:16px}
+  .page-committee .member-grid.is-council{grid-template-columns:1fr;max-width:420px}
+  .page-committee .member-card{padding:0 24px 30px}
+  .page-committee .member-highlights b{font-size:24px}
+  .profile-dialog-body{grid-template-columns:1fr}
+  .profile-dialog aside{padding:40px 24px 30px}
+  .page-committee .profile-dialog .member-highlights{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+  .profile-dialog-copy{padding:32px 22px 34px}
+}
+@media(prefers-reduced-motion:reduce){.profile-dialog[open],.profile-dialog::backdrop{animation:none}}

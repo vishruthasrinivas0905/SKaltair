@@ -50,6 +50,7 @@ export const photos = {
   magnifierPage: photo('1682624400764-d2c9eaeae972', 'A magnifying glass resting on a page of an open book', 'Charly Álvarez', 'a-magnifying-glass-sitting-on-top-of-an-open-book-E9h7MUcSGEE'),
   bookAndNotes: photo('1456513080510-7bf3a84b82f8', 'An open book and a notebook of handwritten notes side by side', 'Aaron Burden', 'opened-book-QJDzYT_K8Xg'),
   openBooks: photo('1513185041617-8ab03f83d6c5', 'Many open books overlapping in warm light', 'Rey Seven', 'brown-books-closeup-photography-_nm_mZ4Cs2I'),
+  councilChamber: photo('1780396269429-e20eaa1a1cd2', 'An ornate council chamber with wood panelling, chandeliers and curved rows of seats', 'Michael D Beckwith', 'ornate-council-chamber-with-wood-paneling-chandeliers-and-many-seats-t4I2VeWm8t8'),
 };
 
 export function photoUrl(image, width) { return `https://images.unsplash.com/photo-${image.id}?auto=format&fit=crop&w=${width}&q=80`; }
@@ -60,7 +61,7 @@ export const heroSlides = [photos.ladyJusticeBronze, photos.admontLibrary, photo
 export const pagePhotos = {
   about: photos.statuteVolumes,
   programs: photos.scholarReading,
-  committee: photos.seminarRoom,
+  committee: photos.councilChamber,
   publications: photos.printedPages,
   news: photos.newsTypewriter,
   apply: photos.fountainPen,
