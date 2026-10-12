@@ -991,7 +991,7 @@ body:has(.route-view:is(.page-programs,.page-apply)) .brand-tagline{font-family:
 .page-committee .facts-row b{display:inline-flex;justify-content:center;min-width:136px;padding:12px 28px;border:1px solid #e7c98b8c;border-radius:999px;font:400 46px/1 var(--serif);color:#e7c98b}
 .page-committee .facts-row span{max-width:210px;font-size:16px;line-height:1.5;color:#ead9cc}
 
-.page-committee .member-showcase{background:radial-gradient(ellipse at 50% 0%,#5e322e 0%,transparent 60%),#3b2522;color:#fff8ec}
+.page-committee .member-showcase{background:radial-gradient(ellipse at 50% 0%,#a542413d 0%,transparent 60%),linear-gradient(135deg,#57151e,#812431 68%,#591a22),#651923;color:#fff8ec}
 .page-committee .showcase-heading{max-width:800px;margin:0 auto 60px;text-align:center}
 .page-committee .showcase-heading h2{display:flex;align-items:center;justify-content:center;gap:24px;margin:16px 0 20px;font-size:clamp(42px,4.2vw,60px);line-height:1.05;color:#fff8ec}
 .page-committee .ornament{position:relative;flex:0 0 clamp(36px,7vw,110px);height:1px;background:linear-gradient(90deg,transparent,#e7c98b)}
@@ -1007,7 +1007,7 @@ body:has(.route-view:is(.page-programs,.page-apply)) .brand-tagline{font-family:
 .page-committee .member-grid.is-council{grid-template-columns:repeat(4,minmax(0,1fr));gap:26px}
 .page-committee .member-card{position:relative;display:flex;flex-direction:column;align-items:center;min-width:0;margin-top:78px;padding:0 36px 36px;text-align:center;background:linear-gradient(180deg,#ffffff12,#ffffff05 60%);border:1px solid #e7c98b47;border-radius:50% 50% 10px 10px/96px 96px 10px 10px;transition:opacity .72s var(--motion-ease),transform .72s var(--motion-ease),border-color .4s ease}
 .page-committee .member-card:is(:hover,:focus-within){border-color:#e7c98ba6}
-.page-committee .member-portrait{position:relative;display:grid;place-items:center;flex:none;width:190px;height:232px;margin:-78px 0 28px;overflow:hidden;background:radial-gradient(circle at 50% 30%,#74413a 0%,#2f1d1b 75%);border:1px solid #e7c98b99;border-radius:999px 999px 10px 10px;box-shadow:0 20px 44px #120a0973}
+.page-committee .member-portrait{position:relative;display:grid;place-items:center;flex:none;width:190px;height:232px;margin:-78px 0 28px;overflow:hidden;background:radial-gradient(circle at 50% 30%,#922638 0%,#49131b 75%);border:1px solid #e7c98b99;border-radius:999px 999px 10px 10px;box-shadow:0 20px 44px #120a0973}
 .page-committee .member-portrait:after{content:'';position:absolute;inset:8px;border:1px solid #e7c98b38;border-radius:inherit;pointer-events:none}
 .page-committee .member-portrait span{font:italic 400 54px/1 var(--serif);color:#e7c98b}
 .page-committee .member-portrait img{width:100%;height:100%;object-fit:cover}
@@ -1019,7 +1019,7 @@ body:has(.route-view:is(.page-programs,.page-apply)) .brand-tagline{font-family:
 .page-committee .member-highlights span{font-size:13.5px;line-height:1.4;color:#d9c5b7}
 .page-committee .member-card p{margin:0 0 28px;font-size:16px;line-height:1.75;color:#ead9cc}
 .page-committee .member-more{display:inline-flex;align-items:center;gap:10px;min-height:50px;margin-top:auto;padding:0 24px;background:transparent;border:1px solid #e7c98b;border-radius:2px;color:#e7c98b;font-size:15px;font-weight:600;transition:background-color .25s ease,color .25s ease}
-.page-committee .member-more:hover,.page-committee .member-more:focus-visible{background:#e7c98b;color:#3b2522}
+.page-committee .member-more:hover,.page-committee .member-more:focus-visible{background:#e7c98b;color:#812230}
 .page-committee .member-focus{display:inline-block;margin:0 0 18px;padding:7px 15px;border:1px solid #e7c98b66;border-radius:999px;font-size:14px;line-height:1.35;color:#f3e2c4}
 .page-committee .member-pending{margin-top:auto;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#c9ad8e}
 .page-committee .member-grid.is-council .member-card{margin-top:64px;padding:0 22px 28px;border-radius:50% 50% 10px 10px/72px 72px 10px 10px}
@@ -1036,7 +1036,7 @@ body:has(.route-view:is(.page-programs,.page-apply)) .brand-tagline{font-family:
 .profile-dialog[open]{animation:profile-rise .45s cubic-bezier(.2,.75,.25,1) both}
 .profile-dialog::backdrop{background:#211714b8;backdrop-filter:blur(4px);animation:profile-fade .25s ease both}
 .profile-dialog-body{display:grid;grid-template-columns:280px minmax(0,1fr);max-height:min(88vh,880px);overflow:auto}
-.profile-dialog aside{display:grid;align-content:start;justify-items:center;gap:28px;padding:52px 30px 40px;background:radial-gradient(ellipse at 50% 0%,#5e322e 0%,transparent 60%),#3b2522}
+.profile-dialog aside{display:grid;align-content:start;justify-items:center;gap:28px;padding:52px 30px 40px;background:radial-gradient(ellipse at 50% 0%,#a542413d 0%,transparent 60%),linear-gradient(135deg,#57151e,#812431 68%,#591a22),#651923}
 .page-committee .profile-dialog .member-portrait{margin:0}
 .page-committee .profile-dialog .member-highlights{grid-template-columns:1fr;gap:18px;margin:0;padding:22px 0 0;border-bottom:0;text-align:center}
 .profile-dialog-copy{padding:52px clamp(28px,4.5vw,56px) 46px}
@@ -1085,11 +1085,11 @@ html:has(.profile-dialog[open]){overflow:hidden}
 }
 @media(prefers-reduced-motion:reduce){.profile-dialog[open],.profile-dialog::backdrop{animation:none}}
 
-/* Apply Now: a dark guidance panel in the Committee colours beside a calm, roomy expression-of-interest form. */
+/* Apply Now: a maroon guidance panel beside a calm, roomy expression-of-interest form. */
 .page-apply .page-intro .eyebrow{font-size:14px;letter-spacing:1.8px}
 .page-apply .application-section{padding:96px 0 112px;background:linear-gradient(180deg,#f7f1e5 0%,#fbf7ee 260px,#fffdf8 100%)}
 .page-apply .application-layout{grid-template-columns:minmax(0,.9fr) minmax(0,1.28fr);gap:clamp(40px,4.5vw,72px)}
-.page-apply .application-aside{position:relative;top:auto;padding:30px 34px 26px;background:radial-gradient(ellipse at 0% 0%,#5e322e 0%,transparent 62%),#3b2522;border-radius:6px;color:#fff8ec;box-shadow:0 28px 60px #3b252229}
+.page-apply .application-aside{position:relative;top:auto;padding:30px 34px 26px;background:radial-gradient(ellipse at 0% 0%,#a542413d 0%,transparent 62%),#812230;border-radius:6px;color:#fff8ec;box-shadow:0 28px 60px #57151e29}
 .page-apply .application-aside .eyebrow,.page-apply .form-card-head .eyebrow{font-size:13px;letter-spacing:2.4px}
 .page-apply .application-aside .eyebrow{color:#e7c98b}
 .page-apply .application-aside h2{margin:10px 0 12px;font-size:clamp(34px,2.9vw,42px);line-height:1.1;color:#fff8ec}
