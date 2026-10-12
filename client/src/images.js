@@ -46,6 +46,10 @@ export const photos = {
   goldenJustice: photo('1607179885507-45521268659c', 'A gilded statue of Lady Justice holding scales and a sword', 'Paul Chard', 'gold-statue-of-man-holding-sword-xeXWGPRPP1g', { position: 'center 20%' }),
   letterAndPen: photo('1634562876572-5abe57afcceb', 'A pen resting on a handwritten letter and envelope', 'Towfiqu barbhuiya', 'a-pen-sitting-on-top-of-a-piece-of-paper-6FpGIdn45_A'),
   bengaluruDusk: photo('1596176530529-78163a4f7af2', 'Bengaluru at dusk, seen from above', 'satyaprakash kumawat', 'aerial-view-of-city-buildings-during-night-time-ky1d-IWCBis'),
+  scholarReading: photo('1624254009481-94fb3b9cf16e', 'A researcher reading at a desk in front of shelves of bound volumes', 'Abbat', 'woman-in-black-and-white-floral-long-sleeve-shirt-sitting-at-the-table-iS4v-fNG0Lg'),
+  magnifierPage: photo('1682624400764-d2c9eaeae972', 'A magnifying glass resting on a page of an open book', 'Charly Álvarez', 'a-magnifying-glass-sitting-on-top-of-an-open-book-E9h7MUcSGEE'),
+  bookAndNotes: photo('1456513080510-7bf3a84b82f8', 'An open book and a notebook of handwritten notes side by side', 'Aaron Burden', 'opened-book-QJDzYT_K8Xg'),
+  openBooks: photo('1513185041617-8ab03f83d6c5', 'Many open books overlapping in warm light', 'Rey Seven', 'brown-books-closeup-photography-_nm_mZ4Cs2I'),
 };
 
 export function photoUrl(image, width) { return `https://images.unsplash.com/photo-${image.id}?auto=format&fit=crop&w=${width}&q=80`; }
@@ -55,7 +59,7 @@ export const heroSlides = [photos.ladyJusticeBronze, photos.admontLibrary, photo
 
 export const pagePhotos = {
   about: photos.statuteVolumes,
-  programs: photos.vaultedLibrary,
+  programs: photos.scholarReading,
   committee: photos.seminarRoom,
   publications: photos.printedPages,
   news: photos.newsTypewriter,
@@ -81,6 +85,8 @@ export const themePhotos = {
 };
 
 export const programPhotos = { 'short-term': photos.magnifierBook, 'mid-term': photos.readingRoomLamp, 'long-term': photos.archiveShelves };
+// Research Programmes page: one page under the glass, two texts compared, many sources at once.
+export const programTermPhotos = { 'short-term': photos.magnifierPage, 'mid-term': photos.bookAndNotes, 'long-term': photos.openBooks };
 export const councilPhotos = { 'founding-committee': photos.councilRoom, 'research-council': photos.historicLibrary, 'academic-councils': photos.lectureHall };
 export const newsPhotos = [photos.newspapers, photos.auditorium, photos.lawReports];
 export const publicationPhotos = [photos.oldBooks, photos.leatherBooks, photos.bookcase];
