@@ -924,3 +924,15 @@ body:has(.route-view:is(.page-programs,.page-apply)) :is(.site-header,.footer){f
 body:has(.route-view:is(.page-programs,.page-apply)) .brand-tagline{font-family:'Manrope',sans-serif}
 /* Core Committee headings in the same regular-weight serif as the Home and About headings. */
 .page-committee :is(h2,h3){font-family:var(--serif);font-style:normal;font-weight:400}
+
+/* Research Programmes intro: the wide photograph, dark ground and gradient of the About Us and Governance intros.
+   The gradient clears a little sooner so the reader in the photograph stays visible beside the text. */
+.page-programs .page-intro{background:#3b2522;color:#fff8ec;border-bottom-color:#5d3934}
+.page-programs .page-intro h1{color:#fff8ec}
+.page-programs .page-intro h1 em,.page-programs .page-intro .eyebrow{color:#e7c98b}
+.page-programs .page-intro p{color:#f0e4d7}
+.page-programs .page-intro .container> :not(.intro-media){max-width:58%}
+.page-programs .intro-media{width:min(62vw,900px)}
+.page-programs .intro-media:after{background:linear-gradient(90deg,#3b2522 0%,#3b2522e8 20%,#3b2522a8 32%,#3b25222e 48%,transparent 64%),linear-gradient(0deg,#1d17144d,transparent 45%)}
+@media(max-width:1140px){.page-programs .intro-media{width:60vw}}
+@media(max-width:760px){.page-programs .page-intro .container> :not(.intro-media){max-width:100%}.page-programs .intro-media{width:100%}.page-programs .intro-media:after{background:linear-gradient(0deg,#3b2522e8 0%,#3b252218 65%),linear-gradient(90deg,#3b252235,transparent)}}
