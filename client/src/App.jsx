@@ -1,11 +1,9 @@
-// @ts-nocheck
 import React, { useEffect, useMemo, useState } from 'react';
 import { flushSync } from 'react-dom';
 import { Link, NavLink, Route, Routes, useLocation } from 'react-router-dom';
 import { ArrowDownRight, ArrowRight, ArrowUpRight, BookOpen, Check, ChevronDown, ChevronLeft, ChevronRight, CircleHelp, Clock3, FileText, Globe2, Landmark, Mail, Menu, MoveUpRight, Send, ShieldCheck, Sparkles, X } from 'lucide-react';
 import { api } from './api.js';
 import { newsItems, programs, publications, themes } from './data.js';
-
 import { councilPhotos, heroSlides, newsPhotos, pagePhotos, photoSrcSet, photoUrl, photos, programPhotos, publicationPhotos, themePhotos } from './images.js';
 
 function transitionUpdate(update) {
@@ -15,41 +13,9 @@ function transitionUpdate(update) {
   } else update();
 }
 
-import './styles.css';
-
-
 function useContent(kind, fallback) {
   const [items, setItems] = useState(fallback);
-
-  useEffect(() => {
-    let active = true;
-
-    api.publicContent(kind)
-      .then(rows => {
-        if (!active || !Array.isArray(rows)) return;
-
-        setItems(
-          rows.map(row => {
-            const data = row?.data || {};
-            const title = row?.title || data.title || row?.name || data.name || '';
-
-            return {
-              ...row,
-              ...data,
-              name: title,
-              title,
-              description: row?.description || data.description || '',
-            };
-          }),
-        );
-      })
-      .catch(() => {});
-
-    return () => {
-      active = false;
-    };
-  }, [kind]);
-
+  useEffect(() => { let active = true; api.publicContent(kind).then(rows => { if (active && Array.isArray(rows)) setItems(rows.map(row => ({ ...row, ...row.data, name: row.title, title: row.title, description: row.description || '' }))); }).catch(() => {}); return () => { active = false; }; }, [kind]);
   return items;
 }
 
@@ -57,68 +23,26 @@ function Mark({ inverse = false }) { return <Link className={`brand ${inverse ? 
 
 function Header() {
   const [open, setOpen] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
   const [researchOpen, setResearchOpen] = useState(false);
   const [committeeOpen, setCommitteeOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const loc = useLocation();
-  useEffect(() => { setOpen(false); setResearchOpen(false); setCommitteeOpen(false); if(loc.hash){window.requestAnimationFrame(()=>document.querySelector(loc.hash)?.scrollIntoView({behavior:'smooth',block:'start'}));}else window.scrollTo(0, 0); }, [loc.pathname, loc.search, loc.hash]);
+  useEffect(() => { setOpen(false); setAboutOpen(false); setResearchOpen(false); setCommitteeOpen(false); }, [loc.pathname, loc.search, loc.hash]);
+  useEffect(() => { let frame = 0; const update = () => { cancelAnimationFrame(frame); frame = requestAnimationFrame(() => { const max = document.documentElement.scrollHeight - window.innerHeight; document.documentElement.style.setProperty('--scroll-progress', max > 0 ? String(window.scrollY / max) : '0'); setScrolled(window.scrollY > 80); }); }; update(); window.addEventListener('scroll', update, { passive: true }); window.addEventListener('resize', update); return () => { cancelAnimationFrame(frame); window.removeEventListener('scroll', update); window.removeEventListener('resize', update); }; }, []);
   const nav = <>
-    <NavLink to="/" end className="nav-link">
-      Home
-    </NavLink>
-
-    <div className="nav-dropdown">
-      <button
-        className={`nav-link nav-trigger ${
-          loc.pathname === '/about' || loc.pathname === '/committee'
-            ? 'active'
-            : ''
-        }`}
-        aria-haspopup="true"
-        aria-expanded={committeeOpen}
-        aria-controls="about-menu"
-        onClick={() => setCommitteeOpen(value => !value)}
-      >
-        About Us <ChevronDown size={13} />
-      </button>
-
-      {committeeOpen && (
-        <div className="dropdown-panel" id="about-menu">
-          <Link to="/about">
-            About Us
-          </Link>
-
-          <Link to="/about#vision">
-            Vision, Mission and Objectives
-          </Link>
-
-          <Link to="/governance">
-            Governance and Institutional Policies
-          </Link>
-
-          <Link to="/committee">
-            Board & Councils
-          </Link>
-        </div>
-      )}
+    <NavLink to="/" end className="nav-link">Home</NavLink>
+    <div className="nav-dropdown committee-nav"><button className={`nav-link nav-trigger ${['/about','/governance'].includes(loc.pathname)?'active':''}`} aria-haspopup="true" aria-expanded={aboutOpen} aria-controls="about-menu" onClick={()=>{setAboutOpen(value=>!value);setResearchOpen(false);setCommitteeOpen(false);}}>About Us <ChevronDown size={13}/></button>{aboutOpen&&<div className="dropdown-panel committee-menu" id="about-menu"><Link to="/about">About Us</Link><Link to="/about#vision">Vision, Mission &amp; Objectives</Link><Link to="/governance">Governance &amp; Institutional Policies</Link><Link to="/committee">Board &amp; Councils</Link></div>}</div>
+    <div className="nav-dropdown research-nav">
+      <button className={`nav-link nav-trigger ${loc.pathname.startsWith('/programs')?'active':''}`} aria-haspopup="true" aria-expanded={researchOpen} aria-controls="research-menu" onClick={() => { setResearchOpen(value => !value); setAboutOpen(false); setCommitteeOpen(false); }}>Research Programmes <ChevronDown size={13}/></button>
+      {researchOpen && <div className="dropdown-panel research-menu" id="research-menu"><p>Choose a program and explore its available research themes. The same themes are open across program durations; the proposed scope guides term selection.</p><div className="research-menu-grid">{programs.map(program=><details className="research-menu-term" key={program.slug}><summary>{program.name}<ChevronDown size={13}/></summary><Link className="program-overview-link" to={`/programs?term=${program.slug}`}>Program overview · {program.duration}</Link><div className="research-menu-topics">{themes.map((theme,index)=><Link key={theme.title} to={`/programs?term=${program.slug}&theme=${index}`}>{theme.title}</Link>)}</div></details>)}</div></div>}
     </div>
-
-    <NavLink to="/programs" className="nav-link">
-      Research Programmes
-    </NavLink>
-
-    <NavLink to="/publications" className="nav-link">
-      Publications
-    </NavLink>
-
-    <NavLink to="/collaborate" className="nav-link">
-      Collaborate
-    </NavLink>
-
-    <NavLink to="/contact" className="nav-link">
-      Contact
-    </NavLink>
+    <NavLink to="/publications" className="nav-link">Publications</NavLink>
+    <div className="nav-dropdown committee-nav"><button className={`nav-link nav-trigger ${loc.pathname.startsWith('/committee')?'active':''}`} aria-haspopup="true" aria-expanded={committeeOpen} aria-controls="committee-menu" onClick={()=>{setCommitteeOpen(value=>!value);setAboutOpen(false);setResearchOpen(false);}}>Core Committee <ChevronDown size={13}/></button>{committeeOpen&&<div className="dropdown-panel committee-menu" id="committee-menu"><Link to="/committee">Committee overview</Link><Link to="/committee#founding-committee">Founding Committee</Link><Link to="/committee#research-council">Research Council</Link><Link to="/committee#academic-councils">Academic Councils</Link></div>}</div>
+    <NavLink to="/collaborate" className="nav-link">Collaborate</NavLink>
+    <NavLink to="/contact" className="nav-link">Contact</NavLink>
   </>;
-  return <header className="site-header"><div className="header-inner"><Mark/><nav className={`nav ${open ? 'nav-open' : ''}`} aria-label="Main navigation">{nav}</nav><button className="menu-toggle" aria-expanded={open} onClick={() => setOpen(!open)} aria-label={open ? 'Close navigation' : 'Open navigation'}>{open ? <X/> : <Menu/>}</button></div></header>;
+  return <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}><div className="header-inner"><Mark/><nav className={`nav ${open ? 'nav-open' : ''}`} aria-label="Main navigation">{nav}</nav><button className="menu-toggle" aria-expanded={open} onClick={() => setOpen(!open)} aria-label={open ? 'Close navigation' : 'Open navigation'}>{open ? <X/> : <Menu/>}</button></div><span className="scroll-progress" aria-hidden="true"/></header>;
 }
 
 function Footer() {
@@ -141,586 +65,48 @@ function PageIntro({ eyebrow, title, copy, image }) {
 
 function Home() {
   const [active, setActive] = useState(0);
-
+  const [slide, setSlide] = useState(0);
+  const [heroPaused, setHeroPaused] = useState(false);
   const livePrograms = useContent('program', programs);
   const livePublications = useContent('publication', publications);
-
-  const researchFocus = [
-    {
-      number: '01',
-      title: 'Law, Governance and Public Policy',
-      description:
-        'Legislative reform, constitutional and administrative law, institutional accountability, access to justice and policy implementation.',
-      icon: '§',
-    },
-    {
-      number: '02',
-      title: 'Artificial Intelligence and Emerging Technologies',
-      description:
-        'Legal, ethical and governance challenges arising from artificial intelligence, automated decision-making and technological change.',
-      icon: 'AI',
-    },
-    {
-      number: '03',
-      title: 'Data Protection and Cybersecurity',
-      description:
-        'Privacy, data governance, digital rights, cybersecurity and accountability in the digital environment.',
-      icon: '01',
-    },
-    {
-      number: '04',
-      title: 'Intellectual Property and Innovation',
-      description:
-        'Intellectual property, technology transfer, licensing and the relationship between innovation and public interest.',
-      icon: '©',
-    },
-    {
-      number: '05',
-      title: 'Corporate and Commercial Law',
-      description:
-        'Corporate governance, mergers and acquisitions, competition law and emerging commercial and regulatory questions.',
-      icon: '↗',
-    },
-    {
-      number: '06',
-      title: 'Litigation and Dispute Resolution',
-      description:
-        'Judicial processes, procedural reform, arbitration, mediation and other forms of alternative dispute resolution.',
-      icon: '⚖',
-    },
+  const liveNews = useContent('news', newsItems);
+  useEffect(() => { if (heroPaused || window.matchMedia?.('(prefers-reduced-motion: reduce)').matches) return; const timer = window.setInterval(() => setSlide(value => (value + 1) % heroSlides.length), 6500); return () => window.clearInterval(timer); }, [heroPaused]);
+  const principles = [['Intellectual independence', 'Research guided by evidence and reason.'], ['Rigorous analysis', 'Questions examined with care and discipline.'], ['Responsible scholarship', 'Research connected to public benefit.']];
+  const institution = [
+    { title: 'About SK ALTAIR', copy: 'Understand our purpose, research orientation and institutional identity.', to: '/about', Icon: Landmark },
+    { title: 'Vision, Mission and Objectives', copy: 'Explore the principles and goals that guide our work.', to: '/about#vision', Icon: Sparkles },
+    { title: 'Governance and Institutional Policies', copy: 'Learn about our governance structure, academic independence and standards for responsible research.', to: '/governance', Icon: ShieldCheck },
   ];
+  // Each research area reuses the photo of its matching research theme.
+  const researchFocus = [
+    { title: 'Law, Governance and Public Policy', desc: 'Legislative reform, constitutional and administrative law, institutional accountability, access to justice and policy implementation.', icon: '§', photo: photos.raisinaHill },
+    { title: 'Artificial Intelligence and Emerging Technologies', desc: 'Legal, ethical and governance challenges arising from artificial intelligence, automated decision-making and technological change.', icon: 'AI', photo: photos.aiHands },
+    { title: 'Data Protection and Cybersecurity', desc: 'Privacy, data governance, digital rights, cybersecurity and accountability in the digital environment.', icon: '01', photo: photos.phoneLock },
+    { title: 'Intellectual Property and Innovation', desc: 'Intellectual property, technology transfer, licensing and the relationship between innovation and public interest.', icon: '©', photo: photos.lightBulb },
+    { title: 'Corporate and Commercial Law', desc: 'Corporate governance, mergers and acquisitions, competition law and emerging commercial and regulatory questions.', icon: '↗', photo: photos.boardroom },
+    { title: 'Litigation and Dispute Resolution', desc: 'Judicial processes, procedural reform, arbitration, mediation and other forms of alternative dispute resolution.', icon: '⚖', photo: photos.ladyJustice },
+  ];
+  return <>
+    <section className="hero"><div className="hero-content container"><div className="hero-copy"><span className="eyebrow"><span className="eyebrow-dot"/> AN INDEPENDENT RESEARCH INITIATIVE</span><h1 className="hero-title"><span className="hero-title-mask"><span>Advancing Legal Research.</span></span><span className="hero-title-mask"><em>Informing Public Policy.</em></span><span className="hero-title-mask"><span>Supporting Responsible Innovation.</span></span></h1><p>A non-profit research platform bringing together legal professionals, students and interdisciplinary researchers to examine contemporary challenges in law, technology and governance—and develop practical recommendations for public benefit.</p><div className="hero-actions"><Link to="/programs" className="button button-red">Explore Research Programmes <ArrowRight size={16}/></Link><Link to="/about" className="text-link">About SK ALTAIR <ArrowUpRight size={15}/></Link></div><div className="hero-proof"><span>LAW</span><i/> <span>TECHNOLOGY</span><i/> <span>PUBLIC POLICY</span></div></div><div className="hero-art-wrap"><div className="hero-art-frame" onMouseEnter={() => setHeroPaused(true)} onMouseLeave={() => setHeroPaused(false)}>{heroSlides.map((image, index) => <Photo key={image.id} image={image} className="hero-art" data-active={slide === index} widths={[640, 960, 1280, 1800]} sizes="(max-width: 760px) 100vw, 600px" eager={index === 0} fetchpriority={index === 0 ? 'high' : undefined} aria-hidden={slide !== index}/>)}<div className="hero-art-label"><span>{String(slide + 1).padStart(2, '0')} / {String(heroSlides.length).padStart(2, '0')}</span><b>Law · Technology · Public Policy</b></div></div><div className="hero-seal"><img src="/skaltair-emblem.png" alt="SK ALTAIR emblem"/><span>Independent thought.<br/>Practical insight.</span></div></div></div><div className="hero-bottom container"><span>RESEARCH WITH PUBLIC PURPOSE</span><a href="#purpose">SCROLL TO EXPLORE <ArrowDownRight size={14}/></a></div></section>
 
-  return (
-    <>
-      {/* =========================================================
-          HERO — DOCUMENT / LANDING PAGE
-      ========================================================= */}
-      <section className="hero hero-home">
-        <div className="container hero-inner">
-          <div className="hero-copy">
-            <span className="eyebrow hero-kicker">
-              AN INDEPENDENT RESEARCH INITIATIVE
-            </span>
+    <section className="gita-strip"><div className="container gita-inner"><div className="gita-label"><span className="gita-symbol">॥</span><div><span className="eyebrow">A MOMENT FOR REFLECTION</span><span className="gita-title">Bhagavad Gita</span></div></div><div className="gita-quote"><p>“A verse on inquiry, action and the pursuit of knowledge will be featured here.”</p><span>Selected shloka, translation and interpretation to be confirmed by SKALTAIR.</span></div><div className="gita-action"><button className="listen-button" disabled title="Audio will be added when an approved recording is provided"><span className="listen-icon">▶</span> Listen soon</button></div></div></section>
 
-            <h1 className="hero-title">
-              <span>Advancing Legal</span>
-              <span>Research.</span>
-              <span><em>Informing Public Policy.</em></span>
-              <span>Supporting Responsible Innovation.</span>
-            </h1>
+    <section className="section section-about" id="purpose"><div className="container two-col"><div className="section-art"><Photo image={photos.stateCentralLibrary} widths={[640, 960, 1280, 1600]} sizes="(max-width: 760px) 100vw, 560px"/><div className="art-stamp"><Landmark size={22}/><span>Research<br/>for public good</span></div></div><div className="about-copy"><span className="eyebrow">OUR PURPOSE</span><h2>Law, policy and research<br/><em>in service of the public.</em></h2><p className="lead">We connect legal and policy scholarship with the practical needs of legislation, policymaking, governance, adjudication and dispute resolution.</p><p>Through original research, informed debate and collaboration, we seek to identify gaps, evaluate possible solutions and support the development and effective implementation of laws and public policies.</p><p>Our work is guided by intellectual independence, rigorous analysis and a commitment to the rule of law, accountable governance and responsible innovation.</p><Link className="text-link" to="/about">About SK ALTAIR <ArrowRight size={16}/></Link><div className="method-steps purpose-principles">{principles.map(([title, copy], i) => <div className="method-step" key={title}><span>0{i + 1}</span><div><h3>{title}</h3><p>{copy}</p></div></div>)}</div></div></div></section>
 
-            <p className="hero-description">
-              A non-profit research platform bringing together legal professionals,
-              students and interdisciplinary researchers to examine contemporary
-              challenges in law, technology and governance—and develop practical
-              recommendations for public benefit.
-            </p>
+    <section className="section section-institution"><div className="container"><SectionHeading eyebrow="THE INSTITUTION" title={<>Research grounded in<br/><em>purpose and principles.</em></>} copy="Explore the institutional framework that guides SK ALTAIR's research and public-facing work."/><div className="theme-grid">{institution.map(({ title, copy, to, Icon }, i) => <Link className="theme-card" to={to} key={title}><span className="theme-number">0{i + 1}</span><span className="theme-symbol"><Icon size={21}/></span><h3>{title}</h3><p>{copy}</p><span className="card-arrow"><ArrowUpRight size={17}/></span></Link>)}</div></div></section>
 
-            <div className="hero-actions">
-              <Link to="/programs" className="button button-red">
-                Explore Research Programmes
-                <ArrowRight size={16} />
-              </Link>
+    <section className="section section-themes" id="research"><div className="container"><SectionHeading eyebrow="OUR RESEARCH FOCUS" title={<>Six areas.<br/><em>Many questions.</em></>} copy="Our research spans contemporary challenges at the intersection of law, technology, governance and public policy." link="Explore all research themes" to="/programs"/><div className="theme-grid">{researchFocus.map((t, i) => <Link className="theme-card" to="/programs" key={t.title}><span className="theme-media"><Photo image={t.photo} alt="" widths={[480, 800, 1200]} sizes="(max-width: 520px) 100vw, (max-width: 760px) 50vw, 400px"/></span><span className="theme-number">0{i + 1}</span><span className="theme-symbol">{t.icon}</span><h3>{t.title}</h3><p>{t.desc}</p><span className="card-arrow"><ArrowUpRight size={17}/></span></Link>)}</div></div></section>
 
-              <Link to="/about" className="text-link">
-                About SK ALTAIR
-                <ArrowUpRight size={15} />
-              </Link>
-            </div>
+    <section className="section section-programs"><div className="container"><div className="program-top"><div><span className="eyebrow light">RESEARCH WITH US</span><h2>Structured programmes<br/>for <em>sustained inquiry.</em></h2></div><p>Our structured research programmes support sustained inquiry through mentorship, defined milestones and independent review.</p></div><div className="program-slider" aria-label="Research programmes">{livePrograms.map((p, i) => <Link key={p.slug} to={`/apply?program=${p.slug}`} className={`program-slide ${active === i ? 'selected' : ''}`} onMouseEnter={() => setActive(i)}>{programPhotos[p.slug] && <span className="program-media" aria-hidden="true"><Photo image={programPhotos[p.slug]} alt="" widths={[480, 800, 1200]} sizes="(max-width: 760px) 100vw, 400px"/></span>}<span className="program-count">{p.number}</span><div><span className="program-duration"><Clock3 size={14}/>{p.duration}</span><h3>{p.name}</h3><p>{p.description}</p></div><span className="program-slide-arrow"><ArrowUpRight size={18}/></span></Link>)}</div><div className="program-controls"><div className="program-dots">{livePrograms.map((p, i) => <button key={p.slug} className={active === i ? 'active' : ''} aria-label={`Highlight ${p.name}`} aria-pressed={active===i} onClick={() => setActive(i)}/>)}</div><Link className="text-link light" to="/programs">Explore Research Programmes <ArrowRight size={16}/></Link></div><div className="program-notes"><div><h3>Who can apply?</h3><p>Students, fresh law graduates, practising lawyers and other eligible researchers may apply against published topics and programme requirements. Online participation is available, subject to project terms.</p><Link className="text-link light" to="/apply">Register Your Interest <ArrowUpRight size={15}/></Link></div><div><h3>Research support</h3><p>Selected researchers receive monthly stipends as specified in their project offers. Completion certificates are issued upon satisfactory completion and submission of the required work within the approved period.</p></div></div></div></section>
 
-            <div className="hero-proof" aria-label="SK ALTAIR focus areas">
-              <div className="hero-proof-item">
-                <strong>LAW</strong>
-                <span>Research</span>
-              </div>
+    <section className="section section-method"><div className="container method-layout"><div><span className="eyebrow">THE SKALTAIR APPROACH</span><h2>From a sharp question<br/>to a <em>useful contribution.</em></h2><p className="lead">Research that is rigorous enough for scholarship and clear enough to inform action.</p><Link to="/about#mission" className="text-link">How we work <ArrowRight size={16}/></Link></div><div className="method-steps"><div className="method-step"><span>01</span><div><h3>Ask with care</h3><p>Define a researchable question and understand the context behind it.</p></div><ArrowUpRight size={17}/></div><div className="method-step"><span>02</span><div><h3>Investigate rigorously</h3><p>Use sound methods, reliable sources and ethical research practices.</p></div><ArrowUpRight size={17}/></div><div className="method-step"><span>03</span><div><h3>Share with purpose</h3><p>Communicate findings and practical recommendations with clarity.</p></div><ArrowUpRight size={17}/></div></div></div></section>
 
-              <i />
+    <section className="section section-pub"><div className="container"><SectionHeading eyebrow="RESEARCH AND PUBLICATIONS" title={<>Original research for<br/><em>informed debate.</em></>} copy="Our publication programme will include research papers, articles, policy briefs and reports examining contemporary legal, technological and public-policy questions. Approved outputs will be published following completion and editorial review." link="Explore Publications" to="/publications"/><div className="pub-feature"><div className="pub-art has-photo"><Photo image={photos.researchTypewriter} alt="" className="pub-art-photo" widths={[400, 700, 1000]} sizes="(max-width: 500px) 100vw, 270px"/><BookOpen size={36}/><span>SK ALTAIR<br/>RESEARCH</span><i className="pub-art-rule"/></div><div className="pub-feature-copy"><span className="eyebrow">{livePublications[0]?.type || 'PUBLICATIONS'} · {livePublications[0]?.year || 'COMING SOON'}</span><h3>{livePublications[0]?.title || 'Research papers, articles, policy briefs and reports'}</h3><p>{livePublications[0]?.description || 'Approved research outputs will be published following completion and editorial review.'}</p><Link className="text-link" to="/publications">Explore Publications <ArrowRight size={16}/></Link></div><div className="pub-feature-index">01 <span>/</span> 01</div></div></div></section>
 
-              <div className="hero-proof-item">
-                <strong>TECHNOLOGY</strong>
-                <span>Innovation</span>
-              </div>
+    <section className="section section-home-news"><div className="container"><SectionHeading eyebrow="LATEST FROM SKALTAIR" title={<>Updates from<br/><em>the research desk.</em></>} copy="Announcements, programme calls, events and institutional news." link="All news & updates" to="/news"/><div className="home-news-grid">{liveNews.slice(0,3).map((item,index)=><article className="home-news-card" key={item.slug||item.title}><div className="home-news-media"><Photo image={newsPhotos[index%newsPhotos.length]} alt="" widths={[480, 800, 1200]} sizes="(max-width: 760px) 100vw, 400px"/></div><span className="eyebrow">{item.type||item.data?.type||'UPDATE'} · {item.date||item.data?.date||'SKALTAIR'}</span><h3>{item.title||item.name}</h3><p>{item.description}</p><Link to="/news" className="text-link">Read updates <ArrowRight size={15}/></Link><span className="home-news-index">0{index+1}</span></article>)}</div></div></section>
 
-              <i />
-
-              <div className="hero-proof-item">
-                <strong>PUBLIC POLICY</strong>
-                <span>Public benefit</span>
-              </div>
-            </div>
-          </div>
-
-          <div className="hero-visual">
-            <div className="hero-image-frame">
-              <img
-                src="https://images.unsplash.com/photo-1698332137428-3c4296198e8f?auto=format&fit=crop&w=1400&q=85"
-                alt="Bengaluru High Court building in Karnataka"
-                fetchPriority="high"
-              />
-
-              <div className="hero-image-overlay" />
-
-              <a
-                className="hero-image-label"
-                href="https://unsplash.com/photos/a-large-building-with-a-statue-in-front-of-it-Y7UIBtbVywA"
-                target="_blank"
-                rel="noreferrer"
-              >
-                Bengaluru High Court · photo via Unsplash
-              </a>
-
-              <div className="hero-art-label">
-                <span>SK ALTAIR</span>
-                <b>Law · Technology · Public Policy</b>
-              </div>
-            </div>
-
-            <div className="hero-seal" aria-hidden="true">
-              <img src="/skaltair-emblem.png" alt="" />
-            </div>
-          </div>
-        </div>
-
-        <div className="container hero-bottom">
-          <span>RESEARCH WITH PUBLIC PURPOSE</span>
-          <a href="#purpose">
-            SCROLL TO EXPLORE
-            <ArrowDownRight size={14} />
-          </a>
-        </div>
-      </section>
-
-      {/* =========================================================
-          OUR PURPOSE
-      ========================================================= */}
-      <section className="section section-about home-purpose" id="purpose">
-        <div className="container two-col">
-          <div className="section-art">
-            <img
-              src="https://images.unsplash.com/photo-1669348849154-25e23e2ccf05?auto=format&fit=crop&w=1200&q=82"
-              alt="Law library with books"
-              loading="lazy"
-            />
-
-            <a
-              className="image-credit image-credit-dark"
-              href="https://unsplash.com/photos/a-library-with-books-on-shelves-3K6Qcxm6Jig"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Law library · Unsplash
-            </a>
-
-            <div className="art-stamp">
-              <Landmark size={22} />
-              <span>
-                Research
-                <br />
-                for public good
-              </span>
-            </div>
-          </div>
-
-          <div className="about-copy">
-            <span className="eyebrow">OUR PURPOSE</span>
-
-            <h2>
-              Law, policy and research
-              <br />
-              <em>in service of the public.</em>
-            </h2>
-
-            <p className="lead">
-              We connect legal and policy scholarship with the practical needs
-              of legislation, policymaking, governance, adjudication and dispute
-              resolution.
-            </p>
-
-            <p>
-              Through original research, informed debate and collaboration, we
-              seek to identify gaps, evaluate possible solutions and support the
-              development and effective implementation of laws and public policies.
-            </p>
-
-            <p>
-              Our work is guided by intellectual independence, rigorous analysis
-              and a commitment to the rule of law, accountable governance and
-              responsible innovation.
-            </p>
-
-            <div className="purpose-principles">
-              <div>
-                <span>01</span>
-                <div>
-                  <strong>Intellectual independence</strong>
-                  <small>Research guided by evidence and reason.</small>
-                </div>
-              </div>
-
-              <div>
-                <span>02</span>
-                <div>
-                  <strong>Rigorous analysis</strong>
-                  <small>Questions examined with care and discipline.</small>
-                </div>
-              </div>
-
-              <div>
-                <span>03</span>
-                <div>
-                  <strong>Responsible scholarship</strong>
-                  <small>Research connected to public benefit.</small>
-                </div>
-              </div>
-            </div>
-
-            <Link className="text-link" to="/about">
-              About SK ALTAIR
-              <ArrowRight size={16} />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================
-          INSTITUTIONAL FRAMEWORK
-      ========================================================= */}
-      <section className="section home-pillars">
-        <div className="container">
-          <SectionHeading
-            eyebrow="THE INSTITUTION"
-            title={
-              <>
-                Research grounded in
-                <br />
-                <em>purpose and principles.</em>
-              </>
-            }
-            copy="Explore the institutional framework that guides SK ALTAIR's research and public-facing work."
-          />
-
-          <div className="pillar-grid">
-            <Link to="/about" className="pillar-card">
-              <span className="pillar-number">01</span>
-              <span className="pillar-icon">
-                <Landmark size={21} />
-              </span>
-
-              <h3>About SK ALTAIR</h3>
-
-              <p>
-                Understand our purpose, research orientation and institutional
-                identity.
-              </p>
-
-              <span className="card-arrow">
-                <ArrowUpRight size={17} />
-              </span>
-            </Link>
-
-            <Link to="/about#vision" className="pillar-card">
-              <span className="pillar-number">02</span>
-              <span className="pillar-icon">
-                <Sparkles size={21} />
-              </span>
-
-              <h3>Vision, Mission and Objectives</h3>
-
-              <p>
-                Explore the principles and goals that guide our work.
-              </p>
-
-              <span className="card-arrow">
-                <ArrowUpRight size={17} />
-              </span>
-            </Link>
-
-            <Link to="/governance" className="pillar-card">
-              <span className="pillar-number">03</span>
-              <span className="pillar-icon">
-                <ShieldCheck size={21} />
-              </span>
-
-              <h3>Governance and Institutional Policies</h3>
-
-              <p>
-                Learn about our governance structure, academic independence
-                and standards for responsible research.
-              </p>
-
-              <span className="card-arrow">
-                <ArrowUpRight size={17} />
-              </span>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================
-          RESEARCH FOCUS
-      ========================================================= */}
-      <section className="section section-themes home-research" id="research">
-        <div className="container">
-          <SectionHeading
-            eyebrow="OUR RESEARCH FOCUS"
-            title={
-              <>
-                Six areas.
-                <br />
-                <em>Many questions.</em>
-              </>
-            }
-            copy="Our research spans contemporary challenges at the intersection of law, technology, governance and public policy."
-            link="Explore all research themes"
-            to="/programs"
-          />
-
-          <div className="focus-grid">
-            {researchFocus.map(item => (
-              <Link className="focus-card" to="/programs" key={item.number}>
-                <div className="focus-card-top">
-                  <span className="theme-number">{item.number}</span>
-                  <span className="focus-symbol">{item.icon}</span>
-                </div>
-
-                <h3>{item.title}</h3>
-                <p>{item.description}</p>
-
-                <span className="focus-card-footer">
-                  Explore theme
-                  <ArrowUpRight size={16} />
-                </span>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================
-          RESEARCH WITH US
-      ========================================================= */}
-      <section className="section section-programs">
-        <div className="container">
-          <div className="program-top">
-            <div>
-              <span className="eyebrow light">RESEARCH WITH US</span>
-
-              <h2>
-                Structured programmes
-                <br />
-                for <em>sustained inquiry.</em>
-              </h2>
-            </div>
-
-            <p>
-              Our structured research programmes support sustained inquiry
-              through mentorship, defined milestones and independent review.
-            </p>
-          </div>
-
-          <div className="program-slider" aria-label="Research programmes">
-            {livePrograms.map((program, index) => (
-              <Link
-                key={program.slug}
-                to={`/apply?program=${program.slug}`}
-                className={`program-slide ${active === index ? 'selected' : ''}`}
-                onMouseEnter={() => setActive(index)}
-              >
-                <span className="program-count">{program.number}</span>
-
-                <div>
-                  <span className="program-duration">
-                    <Clock3 size={14} />
-                    {program.duration}
-                  </span>
-
-                  <h3>{program.name}</h3>
-
-                  <p>{program.description}</p>
-                </div>
-
-                <span className="program-slide-arrow">
-                  <ArrowUpRight size={18} />
-                </span>
-              </Link>
-            ))}
-          </div>
-
-          <div className="program-details-row">
-            <div className="program-facts">
-              <div>
-                <strong>Short-term</strong>
-                <span>4–6 months</span>
-              </div>
-              <div>
-                <strong>Mid-term</strong>
-                <span>6–8 months</span>
-              </div>
-              <div>
-                <strong>Long-term</strong>
-                <span>12–18 months</span>
-              </div>
-            </div>
-
-            <div className="program-controls">
-              <div className="program-dots">
-                {livePrograms.map((program, index) => (
-                  <button
-                    key={program.slug}
-                    className={active === index ? 'active' : ''}
-                    aria-label={`Highlight ${program.name}`}
-                    aria-pressed={active === index}
-                    onClick={() => setActive(index)}
-                  />
-                ))}
-              </div>
-
-              <Link className="text-link light" to="/programs">
-                Explore Research Programmes
-                <ArrowRight size={16} />
-              </Link>
-            </div>
-          </div>
-
-          <div className="programme-home-note">
-            <div>
-              <strong>Who can apply?</strong>
-              <p>
-                Students, fresh law graduates, practising lawyers and other
-                eligible researchers may apply against published topics and
-                programme requirements. Online participation is available,
-                subject to project terms.
-              </p>
-            </div>
-
-            <div>
-              <strong>Research support</strong>
-              <p>
-                Selected researchers receive monthly stipends as specified in
-                their project offers. Completion certificates are issued upon
-                satisfactory completion and submission of the required work
-                within the approved period.
-              </p>
-            </div>
-          </div>
-
-          <div className="program-home-actions">
-            <Link className="button button-white" to="/programs">
-              Explore Research Programmes
-              <ArrowRight size={15} />
-            </Link>
-
-            <Link className="text-link light" to="/apply">
-              Register Your Interest
-              <ArrowUpRight size={15} />
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================
-          RESEARCH AND PUBLICATIONS
-      ========================================================= */}
-      <section className="section section-pub">
-        <div className="container">
-          <SectionHeading
-            eyebrow="RESEARCH AND PUBLICATIONS"
-            title={
-              <>
-                Original research for
-                <br />
-                <em>informed debate.</em>
-              </>
-            }
-            copy="Our publication programme will include research papers, articles, policy briefs and reports examining contemporary legal, technological and public-policy questions. Approved outputs will be published following completion and editorial review."
-            link="Explore Publications"
-            to="/publications"
-          />
-
-          <div className="pub-feature">
-            <div className="pub-art">
-              <BookOpen size={36} />
-
-              <span>
-                SK ALTAIR
-                <br />
-                RESEARCH
-              </span>
-
-              <i className="pub-art-rule" />
-            </div>
-
-            <div className="pub-feature-copy">
-              <span className="eyebrow">
-                {livePublications[0]?.type || 'PUBLICATIONS'}
-                {' · '}
-                {livePublications[0]?.year || 'COMING SOON'}
-              </span>
-
-              <h3>
-                {livePublications[0]?.title ||
-                  'Research papers, articles, policy briefs and reports'}
-              </h3>
-
-              <p>
-                {livePublications[0]?.description ||
-                  'Approved research outputs will be published following completion and editorial review.'}
-              </p>
-
-              <Link className="text-link" to="/publications">
-                Explore Publications
-                <ArrowRight size={16} />
-              </Link>
-            </div>
-
-            <div className="pub-feature-index">
-              01 <span>/</span> 01
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =========================================================
-          COLLABORATE
-      ========================================================= */}
-      <section className="section section-join">
-        <div className="container join-inner">
-          <div className="join-icon">
-            <Sparkles size={22} />
-          </div>
-
-          <div>
-            <span className="eyebrow">COLLABORATE WITH SK ALTAIR</span>
-
-            <h2>
-              Contribute to research,
-              <br />
-              <em>policy and innovation.</em>
-            </h2>
-
-            <p>
-              We welcome expressions of interest from researchers, academic
-              institutions, professional bodies and public institutions seeking
-              to contribute through research, mentorship, policy consultation
-              and scholarly exchange.
-            </p>
-          </div>
-
-          <div className="join-actions">
-            <Link to="/collaborate" className="button button-red">
-              Collaborate With Us
-              <ArrowUpRight size={16} />
-            </Link>
-
-            <Link to="/contact" className="text-link">
-              Contact Us
-              <ArrowRight size={16} />
-            </Link>
-          </div>
-        </div>
-      </section>
-    </>
-  );
+    <section className="section section-join"><div className="container join-inner"><div className="join-icon"><Sparkles size={22}/></div><div><span className="eyebrow">COLLABORATE WITH SK ALTAIR</span><h2>Contribute to research,<br/><em>policy and innovation.</em></h2><p>We welcome expressions of interest from researchers, academic institutions, professional bodies and public institutions seeking to contribute through research, mentorship, policy consultation and scholarly exchange.</p></div><div className="join-actions"><Link to="/collaborate" className="button button-red">Collaborate With Us <ArrowUpRight size={16}/></Link><Link to="/contact" className="text-link">Contact Us <ArrowRight size={16}/></Link></div></div></section>
+  </>;
 }
 
 function About() {
@@ -759,7 +145,7 @@ function Committee() {
             <ShieldCheck size={20} />
             <p>SK ALTAIR is a non-profit unit of Sri Chennakeshava Memorial Education and Welfare Society. Council responsibilities operate within the Centre’s approved governance framework.</p>
           </div>
-          <div className="people-grid">
+          <div className="people-grid" id="founding-committee">
             <article className="person-card">
               <span className="council-no">01</span>
               <span className="eyebrow">SK ALTAIR BOARD MEMBER</span>
@@ -787,7 +173,7 @@ function Committee() {
               <p>The Research Council will support development of the Centre’s research agenda, assess proposed themes and encourage rigorous, relevant and feasible projects. Its remit includes recommendations on methodology, supervision, interdisciplinary collaboration and the potential legal or policy contribution of research outputs.</p>
               <span className="pending-label">Member profiles to be published after appointments are confirmed</span>
             </article>
-            <article id="academic-council">
+            <article id="academic-councils">
               <div className="council-media reveal-media"><Photo image={councilPhotos['academic-councils']} alt="" widths={[480, 800, 1200]} sizes="(max-width: 760px) 100vw, 400px" /></div>
               <span className="council-no">04</span>
               <h3>Academic Council</h3>
@@ -859,5 +245,5 @@ export default function App() {
   useEffect(()=>{let observer,mutations;const selector='.hero-copy,.hero-art-wrap,.gita-inner,.section-heading,.theme-card,.program-top,.program-slide,.method-layout > *,.research-row,.method-step,.objective-list > div,.section-art,.about-copy,.pub-feature,.person-card,.policy-item,.collab-grid article,.page-intro .container,.prose > section,.term-tabs,.term-panel,.themes-heading,.research-list,.committee-note,.publication-intro,.publication-cover,.people-grid > *,.council-grid > *,.news-grid > *,.publication-grid > *,.home-news-card,.collab-principles > *,.collab-cta > *,.contact-layout > *,.application-layout > *,.form-card,.form-card-head,.form-grid .form-field,.join-inner > *,.footer-main > *,.reveal-media';const reveal=nodes=>{nodes.forEach(node=>{node.classList.add('motion-ready');if(node.matches('.section-art,.hero-art-wrap,.publication-cover'))node.classList.add('motion-image');if(node.matches('.method-layout > :first-child,.contact-layout > :first-child,.application-layout > :first-child'))node.classList.add('motion-left');if(node.matches('.method-layout > :last-child,.contact-layout > :last-child,.application-layout > :last-child'))node.classList.add('motion-right');});if(!('IntersectionObserver'in window)){nodes.forEach(node=>node.classList.add('is-visible'));return;}if(!observer)observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target);}}),{threshold:.12,rootMargin:'0px 0px -24px 0px'});nodes.forEach(node=>observer.observe(node));};const timer=window.setTimeout(()=>{reveal(document.querySelectorAll(selector));const root=document.getElementById('root');if(!root||!('MutationObserver'in window))return;mutations=new MutationObserver(records=>{const added=new Set();records.forEach(record=>record.addedNodes.forEach(node=>{if(node.nodeType!==1)return;if(node.matches(selector))added.add(node);node.querySelectorAll(selector).forEach(child=>added.add(child));}));const fresh=[...added].filter(node=>!node.classList.contains('motion-ready'));if(fresh.length)reveal(fresh);});mutations.observe(root,{childList:true,subtree:true});},80);return()=>{window.clearTimeout(timer);observer?.disconnect();mutations?.disconnect();};},[displayLoc.pathname]);
   useEffect(()=>{let frame=0;const update=()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(()=>{if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.querySelectorAll('.hero-art,.section-art img').forEach(image=>image.style.setProperty('--parallax-y','0px'));return;}const y=window.scrollY;document.querySelectorAll('.hero-art').forEach(image=>image.style.setProperty('--parallax-y',`${-Math.min(y*.055,28)}px`));const library=document.querySelector('.section-art img');if(library){const offset=library.getBoundingClientRect().top;library.style.setProperty('--parallax-y',`${Math.max(-8,Math.min(8,-offset*.025))}px`);}});};const loaded=event=>{const image=event.target;if(image instanceof HTMLImageElement&&!image.matches('.brand-seal,.route-curtain img')){image.classList.add('image-loaded');image.addEventListener('animationend',()=>{image.classList.remove('image-loaded');image.classList.add('image-settled');},{once:true});}};document.addEventListener('load',loaded,true);document.querySelectorAll('img:not(.brand-seal):not(.route-curtain img)').forEach(image=>{if(image.complete&&image.naturalWidth)loaded({target:image});});const pointer=event=>{if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;const card=event.target.closest('.theme-card,.program-slide');if(card){const rect=card.getBoundingClientRect();card.style.setProperty('--pointer-x',`${event.clientX-rect.left}px`);card.style.setProperty('--pointer-y',`${event.clientY-rect.top}px`);}};document.addEventListener('pointermove',pointer,{passive:true});window.addEventListener('scroll',update,{passive:true});window.addEventListener('resize',update);update();return()=>{cancelAnimationFrame(frame);document.removeEventListener('load',loaded,true);document.removeEventListener('pointermove',pointer);window.removeEventListener('scroll',update);window.removeEventListener('resize',update);};},[displayLoc.pathname]);
   useEffect(()=>{if(displayLoc.pathname!=='/about')return;const sections=[...document.querySelectorAll('.prose section[id]')];const links=[...document.querySelectorAll('.contents-rail a[href^="#"]')];if(!sections.length||!links.length)return;const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){links.forEach(link=>{const active=link.hash===`#${entry.target.id}`;link.classList.toggle('active',active);if(active)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current');});}}),{rootMargin:'-18% 0px -68% 0px'});sections.forEach(section=>observer.observe(section));return()=>observer.disconnect();},[displayLoc.pathname]);
-  return <><Header/><div className={`route-view ${routePhase}`} key={`${displayLoc.pathname}${displayLoc.search}`}><Routes location={displayLoc}><Route path="/" element={<Home/>}/><Route path="/about" element={<About/>}/><Route path="/programs" element={<ProgramsPage/>}/><Route path="/committee" element={<Committee/>}/><Route path="/governance" element={<Governance/>}/><Route path="/collaborate" element={<Collaborate/>}/><Route path="/publications" element={<Publications/>}/><Route path="/news" element={<News/>}/><Route path="/apply" element={<Apply/>}/><Route path="/contact" element={<Contact/>}/><Route path="/privacy" element={<Privacy/>}/><Route path="*" element={<NotFound/>}/></Routes></div><Footer/><div className={`route-curtain ${curtainActive?'is-active':''}`} aria-hidden="true"><img src="/skaltair-emblem.png" alt=""/></div></>;
+  return <><Header/><div className={`route-view ${routePhase} page-${displayLoc.pathname.split('/')[1] || 'home'}`} key={`${displayLoc.pathname}${displayLoc.search}`}><Routes location={displayLoc}><Route path="/" element={<Home/>}/><Route path="/about" element={<About/>}/><Route path="/programs" element={<ProgramsPage/>}/><Route path="/committee" element={<Committee/>}/><Route path="/governance" element={<Governance/>}/><Route path="/collaborate" element={<Collaborate/>}/><Route path="/publications" element={<Publications/>}/><Route path="/news" element={<News/>}/><Route path="/apply" element={<Apply/>}/><Route path="/contact" element={<Contact/>}/><Route path="/privacy" element={<Privacy/>}/><Route path="*" element={<NotFound/>}/></Routes></div><Footer/><div className={`route-curtain ${curtainActive?'is-active':''}`} aria-hidden="true"><img src="/skaltair-emblem.png" alt=""/></div></>;
 }
