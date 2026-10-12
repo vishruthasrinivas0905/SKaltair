@@ -4,9 +4,9 @@
 const photo = (id, alt, credit, page, extra = {}) => ({ id, alt, credit, href: `https://unsplash.com/photos/${page}`, ...extra });
 
 export const photos = {
-  vidhanaSoudha: photo('1698332137428-3c4296198e8f', 'Vidhana Soudha, the seat of the Karnataka state legislature in Bengaluru', 'zablanca_clicks', 'a-large-building-with-a-statue-in-front-of-it-Y7UIBtbVywA'),
-  lawReadingRoom: photo('1531429745839-827a6a45e040', 'The reading room of a university law library, with long desks beneath chandeliers', 'Mathew Schwartz', 'building-interior-with-chandeliers-and-desks-onOdABjwC0M'),
-  madrasHighCourt: photo('1721934174934-b33ec73d655e', 'The Indo-Saracenic towers and domes of the Madras High Court in Chennai', 'Abdullah Azeez', 'a-tall-building-with-a-clock-on-the-top-of-it-svNihJQbf4o', { position: 'center 35%' }),
+  ladyJusticeBronze: photo('1589578527966-fdac0f44566c', 'A bronze statue of Lady Justice holding the scales and a sword', 'Tingey Injury Law Firm', 'woman-in-gold-dress-holding-sword-figurine-L4YGuSg0fxs'),
+  admontLibrary: photo('1562932831-afcfe48b5786', 'The white and gold Admont Abbey Library beneath its painted ceiling', 'Valdemaras D.', 'admont-abbey-library-with-painted-ceiling-7VPFyhB_j8Y'),
+  quantumComputer: photo('1681908571122-97f349e1ace0', 'A gold-plated quantum computer with intricate silver wiring', 'Planet Volumes', 'quantum-computer-with-gold-plates-7dRmpT3vxV8'),
   stateCentralLibrary: photo('1702218126435-27ca87e24ee2', 'The red façade of the State Central Library in Cubbon Park, Bengaluru', 'A M', 'a-red-building-with-a-green-fence-around-it-5791iBUb8xg'),
   raisinaHill: photo('1760872646618-13594fc00567', 'The sandstone Secretariat building on Raisina Hill, New Delhi', 'Zoshua Colah', 'grand-sandstone-building-with-columns-and-dome-bpgIRNgNahI'),
   legislativeChamber: photo('1755756383870-4e440efd5c36', 'Rows of seats in an empty legislative chamber', 'Hongwei FAN', 'empty-parliamentary-chamber-with-rows-of-seating-wGdXZE8jTp8'),
@@ -20,18 +20,18 @@ export const photos = {
   tableDiscussion: photo('1517048676732-d65bc937f952', 'People taking notes around a meeting table', 'Dylan Gillis', 'people-sitting-on-chair-in-front-of-table-while-holding-pens-during-daytime-KdeqA3aTnBY'),
   forensicExamination: photo('1554178585-4947df428bea', 'Gloved hands marking a document on a dark table', 'Yohan Cho', 'man-marking-on-paper-RCWR1TkDHHg'),
   forestRoad: photo('1476231682828-37e571bc172f', 'An aerial view of a road through dense green forest', 'Geranimo', 'aerial-shot-of-road-surrounded-by-green-trees-qzgN45hseN0'),
-  notebookPen: photo('1517842645767-c639042777db', 'A fountain pen resting on an open notebook', 'David Travis', 'brown-fountain-pen-on-notebook-5bYxXawHOQg'),
-  deskResearch: photo('1585661417298-8236a5f449aa', 'A researcher writing notes at a desk covered with open books', 'Jacob Bentzinger', 'man-in-black-long-sleeve-shirt-writing-on-white-paper-QiLPQeQSXD0'),
+  magnifierBook: photo('1697301439916-169bd6844842', 'A magnifying glass resting on an open book on a wooden desk', 'Harshit Suryawanshi', 'a-magnifying-glass-sitting-on-top-of-an-open-book--LgSTma8GJs'),
+  readingRoomLamp: photo('1769092992766-9504cdd93696', 'A green banker’s lamp on a desk in a library reading room', 'Ilya Semenov', 'a-green-desk-lamp-in-a-library-B8HRcng8Ibg'),
   archiveShelves: photo('1549964336-67d7d7d74ac2', 'A curved corridor of white archive shelving', 'Ula Kuźma', 'brown-pathway-between-white-organizers-9i4DHlC80AQ'),
   researchTypewriter: photo('1653038417404-1ae1f38c373e', 'A typewriter with a sheet of paper reading “Research”', 'Markus Winkler', 'a-close-up-of-a-typewriter-with-a-paper-on-it-c_ksDvwnu8o'),
   newspapers: photo('1504711434969-e33886168f5c', 'A stack of folded newspapers', 'AbsolutVision', 'business-newspaper-article-WYd_PkCa1BY'),
   auditorium: photo('1519452575417-564c1401ecc0', 'Rows of empty seats in an auditorium', 'Nathan Dumlao', 'empty-chairs-in-theater-ewGMqs2tmJI'),
   lawReports: photo('1575282343536-469af953c6e7', 'Bound volumes of law reports on a shelf', 'Aleix Ventayol', 'black-book-on-shelf-yPoM-wmzKMM'),
-  asiaticSociety: photo('1748267892573-85df131fa083', 'People on the steps of the Asiatic Society library in Mumbai', 'Zoshua Colah', 'people-walk-and-sit-on-the-steps-of-a-building-dzNlxtNeQuQ'),
+  statuteVolumes: photo('1659869764315-dc3d188141fe', 'Bound volumes of Acts of Parliament in warm light', 'Brenton Pearce', 'a-row-of-books-on-a-table-Sc85cQWwiP8'),
   corinthianColumns: photo('1658664209996-c52a32784ecb', 'Corinthian columns of a classical building', 'refargotohp', 'a-building-with-columns-pqQCo0jUi5M'),
   vaultedLibrary: photo('1637455587265-2a3c2cbbcc84', 'A vaulted library reading hall lined with tall windows', 'Celine Lityo', 'a-large-room-filled-with-lots-of-wooden-tables-if0UHp_c2Mw'),
   seminarRoom: photo('1724315069759-3bac28f679f6', 'An empty seminar room with curved rows of desks', 'Aditya Sethia', 'a-room-filled-with-lots-of-wooden-desks-viY-ACkx2iE'),
-  ionicCapital: photo('1758820736219-8b4932f67918', 'Close-up of a white Ionic column capital', 'Maik Winnecke', 'close-up-of-a-white-ionic-column-capital-KL6y557DX8w'),
+  councilRoom: photo('1713692354132-03b7090c44a5', 'A wood-panelled council room with a long table beneath a chandelier', 'Peter Herrmann', 'a-dining-room-with-a-large-wooden-table-and-chairs-vre6yJGjnZE'),
   historicLibrary: photo('1505664194779-8beaceb93744', 'Marble busts beside tall shelves of old books in a historic library', 'Giammarco Boscaro', 'book-lot-on-black-wooden-shelf-zeH-ljawHtg'),
   lectureHall: photo('1703680968885-22659eb00165', 'Rows of wooden seats in an empty lecture hall', 'Rashid Tajuar', 'a-row-of-wooden-chairs-sitting-in-front-of-a-window-g0nVEyiDBAI'),
   printedPages: photo('1532153975070-2e9ab71f1b14', 'Overlapping pages of printed text', 'Annie Spratt', 'white-printer-paper-lot-5cFwQ-WMcJU'),
@@ -51,10 +51,10 @@ export const photos = {
 export function photoUrl(image, width) { return `https://images.unsplash.com/photo-${image.id}?auto=format&fit=crop&w=${width}&q=80`; }
 export function photoSrcSet(image, widths) { return widths.map(width => `${photoUrl(image, width)} ${width}w`).join(', '); }
 
-export const heroSlides = [photos.vidhanaSoudha, photos.lawReadingRoom, photos.madrasHighCourt];
+export const heroSlides = [photos.ladyJusticeBronze, photos.admontLibrary, photos.quantumComputer];
 
 export const pagePhotos = {
-  about: photos.asiaticSociety,
+  about: photos.statuteVolumes,
   programs: photos.vaultedLibrary,
   committee: photos.seminarRoom,
   publications: photos.printedPages,
@@ -80,7 +80,7 @@ export const themePhotos = {
   'Environment, Public Health and Social Welfare': photos.forestRoad,
 };
 
-export const programPhotos = { 'short-term': photos.notebookPen, 'mid-term': photos.deskResearch, 'long-term': photos.archiveShelves };
-export const councilPhotos = { 'founding-committee': photos.ionicCapital, 'research-council': photos.historicLibrary, 'academic-councils': photos.lectureHall };
+export const programPhotos = { 'short-term': photos.magnifierBook, 'mid-term': photos.readingRoomLamp, 'long-term': photos.archiveShelves };
+export const councilPhotos = { 'founding-committee': photos.councilRoom, 'research-council': photos.historicLibrary, 'academic-councils': photos.lectureHall };
 export const newsPhotos = [photos.newspapers, photos.auditorium, photos.lawReports];
 export const publicationPhotos = [photos.oldBooks, photos.leatherBooks, photos.bookcase];
