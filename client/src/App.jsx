@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { flushSync } from 'react-dom';
 import { Link, NavLink, Route, Routes, useLocation } from 'react-router-dom';
-import { ArrowDownRight, ArrowRight, ArrowUpRight, BookOpen, Check, ChevronDown, ChevronLeft, ChevronRight, CircleHelp, Clock3, FileText, Globe2, Landmark, Mail, Menu, MoveUpRight, Phone, Scale, Send, ShieldCheck, Sparkles, X } from 'lucide-react';
+import { ArrowDownRight, ArrowRight, ArrowUpRight, Award, BookOpen, Check, ChevronDown, ChevronLeft, ChevronRight, CircleHelp, ClipboardCheck, Clock3, FileText, Globe2, GraduationCap, Landmark, Mail, Menu, MoveUpRight, Phone, Plus, Scale, Search, Send, ShieldCheck, Sparkles, Users, X } from 'lucide-react';
 import { api } from './api.js';
 import { newsItems, programs, publications, themes } from './data.js';
-import { councilPhotos, heroSlides, newsPhotos, pagePhotos, photoSrcSet, photoUrl, photos, programPhotos, publicationPhotos, themePhotos } from './images.js';
+import { councilPhotos, heroSlides, newsPhotos, pagePhotos, photoSrcSet, photoUrl, photos, programPhotos, programTermPhotos, publicationPhotos, themePhotos } from './images.js';
 
 function transitionUpdate(update) {
   if (typeof document.startViewTransition === 'function' && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
@@ -13,9 +13,12 @@ function transitionUpdate(update) {
   } else update();
 }
 
+// The API lists newest first; numbered items (the programmes) are shown in their numbered order.
+const byNumber = (a, b) => String(a.number ?? '').localeCompare(String(b.number ?? ''), undefined, { numeric: true });
+
 function useContent(kind, fallback) {
   const [items, setItems] = useState(fallback);
-  useEffect(() => { let active = true; api.publicContent(kind).then(rows => { if (active && Array.isArray(rows)) setItems(rows.map(row => ({ ...row, ...row.data, name: row.title, title: row.title, description: row.description || '' }))); }).catch(() => {}); return () => { active = false; }; }, [kind]);
+  useEffect(() => { let active = true; api.publicContent(kind).then(rows => { if (active && Array.isArray(rows)) setItems(rows.map(row => ({ ...row, ...row.data, name: row.title, title: row.title, description: row.description || '' })).sort(byNumber)); }).catch(() => {}); return () => { active = false; }; }, [kind]);
   return items;
 }
 
@@ -39,7 +42,7 @@ function Header() {
       {researchOpen && <div className="dropdown-panel research-menu" id="research-menu"><p>Choose a program and explore its available research themes. The same themes are open across program durations; the proposed scope guides term selection.</p><div className="research-menu-grid">{programs.map(program=><details className="research-menu-term" key={program.slug}><summary>{program.name}<ChevronDown size={13}/></summary><Link className="program-overview-link" to={`/programs?term=${program.slug}`}>Program overview · {program.duration}</Link><div className="research-menu-topics">{themes.map((theme,index)=><Link key={theme.title} to={`/programs?term=${program.slug}&theme=${index}`}>{theme.title}</Link>)}</div></details>)}</div></div>}
     </div>
     <div className="nav-dropdown committee-nav"><button className={`nav-link nav-trigger ${loc.pathname.startsWith('/research-focus')?'active':''}`} aria-haspopup="true" aria-expanded={focusOpen} aria-controls="research-focus-menu" onClick={()=>{setFocusOpen(value=>!value);setAboutOpen(false);setResearchOpen(false);setCommitteeOpen(false);}}>Research Focus <ChevronDown size={13}/></button>{focusOpen&&<div className="dropdown-panel committee-menu" id="research-focus-menu"><Link to="/research-focus/law-governance">Law &amp; Governance</Link><Link to="/research-focus/ai">AI</Link><Link to="/research-focus/data-protection-cyber">Data Protection &amp; Cyber</Link><Link to="/research-focus/intellectual-property">Intellectual Property</Link><Link to="/research-focus/corporate-commercial">Corporate &amp; Commercial</Link><Link to="/research-focus/litigation">Litigation</Link></div>}</div>
-    <div className="nav-dropdown committee-nav"><button className={`nav-link nav-trigger ${loc.pathname.startsWith('/committee')?'active':''}`} aria-haspopup="true" aria-expanded={committeeOpen} aria-controls="committee-menu" onClick={()=>{setCommitteeOpen(value=>!value);setAboutOpen(false);setResearchOpen(false);setFocusOpen(false);}}>Committee <ChevronDown size={13}/></button>{committeeOpen&&<div className="dropdown-panel committee-menu" id="committee-menu"><Link to="/committee">Committee overview</Link><Link to="/committee#founding-committee">Founding Committee</Link><Link to="/committee#research-council">Research Council</Link><Link to="/committee#academic-councils">Academic Councils</Link></div>}</div>
+    <div className="nav-dropdown committee-nav"><button className={`nav-link nav-trigger ${loc.pathname.startsWith('/committee')?'active':''}`} aria-haspopup="true" aria-expanded={committeeOpen} aria-controls="committee-menu" onClick={()=>{setCommitteeOpen(value=>!value);setAboutOpen(false);setResearchOpen(false);setFocusOpen(false);}}>Committee <ChevronDown size={13}/></button>{committeeOpen&&<div className="dropdown-panel committee-menu" id="committee-menu"><Link to="/committee">Committee Overview</Link><Link to="/committee/board-members">Board Members</Link><Link to="/committee/research-council">Research Council</Link><Link to="/committee/academic-council">Academic Council</Link></div>}</div>
     <NavLink to="/publications" className="nav-link">Publications</NavLink>
     <NavLink to="/apply" className="nav-link">Apply Now</NavLink>
     <NavLink to="/news" className="nav-link">News</NavLink>
@@ -56,14 +59,17 @@ function Footer() {
 
 function Photo({ image, widths = [640, 960, 1280, 1920], sizes = '100vw', alt = image.alt, eager = false, ...rest }) { return <img src={photoUrl(image, widths[Math.min(1, widths.length - 1)])} srcSet={photoSrcSet(image, widths)} sizes={sizes} alt={alt} loading={eager ? 'eager' : 'lazy'} decoding="async" style={image.position ? { objectPosition: image.position } : undefined} {...rest}/>; }
 function SectionHeading({ eyebrow, title, copy, link, to }) { return <div className="section-heading"><div><span className="eyebrow">{eyebrow}</span><h2>{title}</h2>{copy && <p>{copy}</p>}</div>{link && <Link className="text-link" to={to}>{link}<ArrowRight size={16}/></Link>}</div>; }
-function PageIntro({ eyebrow, title, copy, image, imageBehind = false, className = '' }) {
+// Image sizes for the wide intro photograph used on the Research Programmes and Core Committee pages.
+const wideIntroImageSizes = '(max-width: 760px) 100vw, (max-width: 1140px) 60vw, (max-width: 1451px) 62vw, 900px';
+
+function PageIntro({ eyebrow, title, copy, image, imageSizes = '(max-width: 1140px) 100vw, 40vw', imageBehind = false, className = '' }) {
   const lines = [[]];
   const titleContent = React.isValidElement(title) && title.type === React.Fragment ? title.props.children : title;
   React.Children.forEach(titleContent, child => {
     if (React.isValidElement(child) && child.type === 'br') lines.push([]);
     else lines[lines.length - 1].push(child);
   });
-  const introImage = image && <figure className={`intro-media${imageBehind ? ' intro-media-behind' : ''}`} aria-hidden="true"><Photo image={image} alt="" widths={[480, 800, 1200, 1600]} sizes={imageBehind ? '100vw' : '(max-width: 1140px) 100vw, 40vw'} eager/></figure>;
+  const introImage = image && <figure className={`intro-media${imageBehind ? ' intro-media-behind' : ''}`} aria-hidden="true"><Photo image={image} alt="" widths={[480, 800, 1200, 1600]} sizes={imageBehind ? '100vw' : imageSizes} eager/></figure>;
   return <section className={`page-intro ${className}${imageBehind ? ' page-intro-image-behind' : ''}`}>{imageBehind && introImage}<div className="container"><span className="eyebrow">{eyebrow}</span><h1>{lines.map((line, index)=><span className="page-title-mask" key={index}><span>{line}</span></span>)}</h1><p>{copy}</p>{!imageBehind && introImage}</div></section>;
 }
 
@@ -157,10 +163,144 @@ function ProgramsPage() {
   const [search, setSearch] = useState('');
   const filtered = useMemo(() => themes.filter(t => t.title.toLowerCase().includes(query.toLowerCase()) || t.desc.toLowerCase().includes(query.toLowerCase())), [query]);
   useEffect(()=>{const params=new URLSearchParams(location.search);const term=params.get('term');if(livePrograms.some(program=>program.slug===term))setSelected(term);const themeParam=params.get('theme');const themeIndex=themeParam?Number(themeParam):NaN;const nextQuery=Number.isInteger(themeIndex)&&themes[themeIndex]?themes[themeIndex].title:'';setSearch(nextQuery);setQuery(nextQuery);},[location.search,livePrograms]);
-  return <><PageIntro eyebrow="RESEARCH PROGRAMMES" title={<>Choose a theme.<br/><em>Define your question.</em></>} copy="A structured, mentored research path for legal professionals, students and interdisciplinary researchers." image={pagePhotos.programs}/><section className="section program-page"><div className="container"><div className="term-tabs" role="tablist">{livePrograms.map(p=><button key={p.slug} role="tab" aria-selected={selected===p.slug} className={selected===p.slug?'selected':''} onClick={()=>transitionUpdate(()=>setSelected(p.slug))}><span>{p.number}</span>{p.name}<small>{p.duration}</small></button>)}</div><div className="term-panel"><div><span className="eyebrow">{current.name.toUpperCase()} · {current.duration}</span><h2>A research term<br/><em>shaped around the question.</em></h2>{programPhotos[current.slug] && <div className="term-media" key={current.slug}><Photo image={programPhotos[current.slug]} widths={[480, 800, 1200]} sizes="(max-width: 760px) 100vw, 540px"/></div>}</div><div><p>{current.description} The preferred term should reflect the research question, methodology, available sources and proposed deliverables. Final duration and milestones are agreed in the written offer.</p><Link to={`/apply?program=${current.slug}`} className="button button-red">Start an application <ArrowUpRight size={15}/></Link></div></div><div className="themes-heading"><div><span className="eyebrow">RESEARCH THEMES</span><h2>Questions we’re exploring.</h2></div><label className="search-box"><input value={search} onChange={e=>{const value=e.target.value;setSearch(value);transitionUpdate(()=>setQuery(value));}} placeholder="Search themes" aria-label="Search research themes"/><span>⌕</span></label></div><div className="research-list">{filtered.map((t,i)=><article className="research-row" key={t.title}><span className="research-num">{String(i+1).padStart(2,'0')}</span>{themePhotos[t.title] && <span className="research-thumb"><Photo image={themePhotos[t.title]} alt="" widths={[240, 480]} sizes="150px"/></span>}<div><h3>{t.title}</h3><p>{t.desc}</p><details className="theme-details"><summary>View illustrative subtopics</summary><ul>{t.topics?.map(x=><li key={x}>{x}</li>)}</ul></details></div><span className="research-symbol">{t.icon}</span></article>)}</div><div className="research-note"><CircleHelp size={18}/><p>These themes provide a framework for proposals. Applicants may propose other relevant questions and should explain how their work connects with a primary theme.</p></div><div className="programme-guidance"><span className="eyebrow">PROPOSAL GUIDANCE</span><h2>From interest to a researchable proposal.</h2><p>Unless a specific call says otherwise, a proposal should identify its primary theme, working title, research problem, principal questions, significance and existing research gap. Outline a feasible methodology, scope, indicative sources, expected contribution and monthly work plan. Disclose relevant ethical, confidentiality, data-access or conflict-of-interest considerations.</p><div className="guidance-grid"><article><h3>Who may apply</h3><p>Law students, fresh graduates, early-career professionals, practising lawyers and researchers in relevant disciplines may apply, subject to each call’s eligibility requirements.</p></article><article><h3>How proposals are reviewed</h3><p>Assessment considers relevance, originality, analytical quality, methodology, feasibility, availability of supervision and approved funding. Shortlisted applicants may be invited to discuss and refine their proposal.</p></article><article><h3>Mentorship and participation</h3><p>Selected researchers receive guidance, feedback and agreed milestones. Projects may include scheduled reviews, progress reports and documented sources. Online participation depends on project requirements.</p></article><article><h3>Stipends and completion</h3><p>Any monthly stipend, funded period, schedule and completion conditions are stated in the written offer. Selection does not guarantee publication; certificates require satisfactory completion of agreed deliverables.</p></article></div><div className="guidance-caution"><ShieldCheck size={17}/><span>Application windows and detailed terms are pending confirmation. The written offer and project agreement will govern any engagement.</span></div></div></div></section></>;
+  return <><PageIntro eyebrow="RESEARCH PROGRAMMES" title={<>Choose a theme.<br/><em>Define your question.</em></>} copy="A structured, mentored research path for legal professionals, students and interdisciplinary researchers." image={pagePhotos.programs} imageSizes={wideIntroImageSizes}/><section className="section program-page program-terms"><div className="container"><div className="term-tabs" role="tablist">{livePrograms.map(p=><button key={p.slug} role="tab" aria-selected={selected===p.slug} className={selected===p.slug?'selected':''} onClick={()=>transitionUpdate(()=>setSelected(p.slug))}><span>{p.number}</span>{p.name}<small>{p.duration}</small></button>)}</div><div className="term-panel"><div className="term-visual">{programTermPhotos[current.slug] && <figure className="term-media" key={current.slug}><Photo image={programTermPhotos[current.slug]} widths={[480, 800, 1200]} sizes="(max-width: 760px) 100vw, 640px"/></figure>}<span className="term-badge" aria-hidden="true">{current.number}</span></div><div className="term-copy"><span className="eyebrow">{current.name.toUpperCase()} · {current.duration}</span><h2>A research term<br/><em>shaped around the question.</em></h2><p>{current.description} The preferred term should reflect the research question, methodology, available sources and proposed deliverables. Final duration and milestones are agreed in the written offer.</p><Link to={`/apply?program=${current.slug}`} className="button button-red term-apply">Apply <ArrowRight size={17}/></Link></div></div></div></section><section className="section program-page program-themes"><div className="container"><div className="themes-heading"><div><span className="eyebrow">RESEARCH THEMES</span><h2>Questions we’re <em>exploring.</em></h2></div><label className="search-box"><input value={search} onChange={e=>{const value=e.target.value;setSearch(value);transitionUpdate(()=>setQuery(value));}} placeholder="Search themes" aria-label="Search research themes"/><span><Search size={17}/></span></label></div><div className="theme-tiles">{filtered.map(t=><article className="theme-tile" key={t.title}><div className="theme-tile-media">{themePhotos[t.title] && <Photo image={themePhotos[t.title]} alt="" widths={[480, 800]} sizes="(max-width: 760px) 100vw, (max-width: 1140px) 50vw, 400px"/>}</div><div className="theme-tile-body"><div className="theme-tile-meta"><span>{String(themes.indexOf(t)+1).padStart(2,'0')}</span><span aria-hidden="true">{t.icon}</span></div><h3>{t.title}</h3><p>{t.desc}</p><details className="theme-details"><summary><span className="when-closed">View illustrative subtopics</span><span className="when-open">Hide subtopics</span><Plus size={17} aria-hidden="true"/></summary><ul>{t.topics?.map(x=><li key={x}>{x}</li>)}</ul></details></div></article>)}</div>{!filtered.length && <p className="theme-empty">No research themes match “{search}”.</p>}<div className="research-note"><CircleHelp size={18}/><p>These themes provide a framework for proposals. Applicants may propose other relevant questions and should explain how their work connects with a primary theme.</p></div></div></section><section className="section program-page proposal-band"><div className="container proposal-layout"><div className="proposal-intro"><div className="proposal-heading"><span className="eyebrow">PROPOSAL GUIDANCE</span><h2>From interest to <em>a researchable proposal.</em></h2></div><p>Unless a specific call says otherwise, a proposal should identify its primary theme, working title, research problem, principal questions, significance and existing research gap. Outline a feasible methodology, scope, indicative sources, expected contribution and monthly work plan. Disclose relevant ethical, confidentiality, data-access or conflict-of-interest considerations.</p><div className="guidance-caution"><ShieldCheck size={18}/><span>Application windows and detailed terms are pending confirmation. The written offer and project agreement will govern any engagement.</span></div></div><div className="guidance-grid"><article><div className="guidance-top"><span className="guidance-icon"><Users size={20}/></span><span className="guidance-no">01</span></div><h3>Who may apply</h3><p>Law students, fresh graduates, early-career professionals, practising lawyers and researchers in relevant disciplines may apply, subject to each call’s eligibility requirements.</p></article><article><div className="guidance-top"><span className="guidance-icon"><ClipboardCheck size={20}/></span><span className="guidance-no">02</span></div><h3>How proposals are reviewed</h3><p>Assessment considers relevance, originality, analytical quality, methodology, feasibility, availability of supervision and approved funding. Shortlisted applicants may be invited to discuss and refine their proposal.</p></article><article><div className="guidance-top"><span className="guidance-icon"><GraduationCap size={20}/></span><span className="guidance-no">03</span></div><h3>Mentorship and participation</h3><p>Selected researchers receive guidance, feedback and agreed milestones. Projects may include scheduled reviews, progress reports and documented sources. Online participation depends on project requirements.</p></article><article><div className="guidance-top"><span className="guidance-icon"><Award size={20}/></span><span className="guidance-no">04</span></div><h3>Stipends and completion</h3><p>Any monthly stipend, funded period, schedule and completion conditions are stated in the written offer. Selection does not guarantee publication; certificates require satisfactory completion of agreed deliverables.</p></article></div></div></section></>;
 }
 
+// Core Committee: an overview of the three bodies, then a page for each, all within the Committee section.
+const committeePages = [
+  { to: '/committee', label: 'Committee Overview' },
+  { to: '/committee/board-members', label: 'Board Members' },
+  { to: '/committee/research-council', label: 'Research Council' },
+  { to: '/committee/academic-council', label: 'Academic Council' },
+];
+
+const committeeBodies = [
+  {
+    to: '/committee/board-members', tab: '01 · BOARD', name: 'Board Members', Icon: Landmark, line: 'Institutional stewardship', link: 'Meet the Board',
+    copy: 'Board Members bring experience in legal practice, research, innovation and education to guide SK ALTAIR’s institutional development and academic work, within the responsibilities assigned under the Centre’s approved governance framework.',
+    remit: ['Institutional development', 'Academic guidance', 'Practice and innovation', 'Governance framework'],
+  },
+  {
+    to: '/committee/research-council', tab: '02 · RESEARCH', name: 'Research Council', Icon: BookOpen, line: 'The research agenda', link: 'View the Research Council',
+    copy: 'The Research Council will support the development of the Centre’s research agenda, assess proposed research themes and encourage rigorous, relevant and feasible projects.',
+    remit: ['Research agenda', 'Theme assessment', 'Methodology and supervision', 'Interdisciplinary collaboration', 'Legal and policy contribution'],
+  },
+  {
+    to: '/committee/academic-council', tab: '03 · ACADEMIC', name: 'Academic Council', Icon: GraduationCap, line: 'Academic standards', link: 'View the Academic Council',
+    copy: 'The Academic Council will support academic standards across the Centre’s research programmes, with guidance on programme design, researcher development, mentorship, assessment criteria and academic quality.',
+    remit: ['Programme design', 'Researcher development', 'Mentorship', 'Assessment criteria', 'Lectures and workshops'],
+  },
+];
+
+// Set photo to an image path (for example '/committee/s-k-murthy.jpg' in client/public) once the portraits are supplied.
+const boardMembers = [
+  {
+    name: 'Dr. S. K. Murthy', initials: 'SKM', title: 'SK ALTAIR Board Member', photo: null,
+    summary: 'His work spans teaching, research and development, and intellectual property, including 24 years building and sustaining innovation and IP cultures within multinational organisations.',
+    highlights: [['32', 'years of experience'], ['6,000+', 'patent assets managed'], ['250+', 'patent applications']],
+    expertise: ['US, European and Indian patent practice', 'Data protection', 'Corporate governance', 'IP and standards policy'],
+    bio: ['Dr. S. K. Murthy brings 32 years of experience spanning teaching, research and development, and intellectual property, including 24 years dedicated to building and sustaining innovation and IP cultures within multinational organisations.',
+      'His expertise covers United States, European and Indian patent practice, data protection and corporate governance. He has chaired a global IP committee, managed more than 6,000 patent assets, developed over 500 claim charts, prepared more than 250 patent applications and handled over 500 responses to patent office actions.',
+      'He has contributed to IP and standards policy in India and co-founded the In-House IP Professionals (IHIPP) Forum, an Indian IP think tank. He has authored books and articles, including a commissioned paper published by the National Academy of Sciences, USA. He is a member of the Government of Karnataka’s ESDM Vision Group and serves on advisory boards and boards of studies at engineering institutions.',
+      'His qualifications include a BE, an ME with a gold medal, an LLB, a Postgraduate Diploma in Intellectual Property Rights, a Doctor of Science in Computer Science and a PhD from the National Law School of India University. He is enrolled with the Karnataka State Bar Council, is a registered Indian Patent Agent and holds certification as an Independent Director.'],
+  },
+  {
+    name: 'Mr. Ananth Sripadarao', initials: 'AS', title: 'SK ALTAIR Board Member', photo: null,
+    summary: 'His practice spans patents, trademarks, brand protection, technology licensing, corporate governance, and mergers and acquisitions across the Asia-Pacific, Middle East and Africa.',
+    highlights: [['23+', 'years of experience'], ['200+', 'patent filings led'], ['400+', 'technologies licensed or commercialised']],
+    expertise: ['Patents and trademarks', 'Technology licensing', 'IP litigation', 'Mergers and acquisitions'],
+    bio: ['Mr. Ananth Sripadarao brings over 23 years of experience in intellectual property law and legal affairs across the Asia-Pacific, Middle East and Africa regions. His practice encompasses patents, trademarks, brand protection, industrial designs, technology licensing, corporate governance, and mergers and acquisitions.',
+      'He has led significant IP litigation and complex licensing negotiations, with a reported 100% success rate in the internal infringement matters he handled. His experience includes leading the filing of more than 200 patent applications and supporting the commercialisation or licensing of over 400 technologies, alongside developing brand-protection and technology-licensing strategies.',
+      'He has held key legal and IP roles at Philips India Ltd. and 3M India Ltd. His qualifications include a BSc in Chemistry, an LLM in Intellectual Property and Information Technology from the National University of Singapore, a Postgraduate Diploma in Patent Law from NALSAR University of Law, and an Executive Programme in Advanced Corporate Law covering mergers and acquisitions from the Indian Institute of Management Calcutta.',
+      'He is enrolled with the Karnataka State Bar Council, is a registered Indian Patent Agent and Trademark Agent, a Registered Independent Director and a Certified Arbitrator. He is also a member of the Licensing Executives Society and the Chartered Institute of Arbitrators, London.'],
+  },
+];
+
+// Placeholder seats until appointments are confirmed; replace each with the member's name, title, photo and profile.
+const councils = {
+  research: {
+    name: 'Research Council', eyebrow: 'RESEARCH COUNCIL', image: councilPhotos['research-council'],
+    title: <>Shaping a rigorous<br/><em>research agenda.</em></>,
+    heading: <>Research <em>Council</em></>,
+    copy: 'The Research Council will support the development of the Centre’s research agenda, assess proposed research themes and encourage rigorous, relevant and feasible projects.',
+    remit: 'Its remit will include recommendations on research methodology, supervision, interdisciplinary collaboration and the potential legal or policy contribution of research outputs.',
+    focus: ['Research methodology', 'Supervision', 'Interdisciplinary collaboration', 'Legal and policy contribution'],
+    seats: [['Chair', 'Law, Governance and Public Policy'], ['Member', 'Technology, AI and Law'], ['Member', 'Data Protection and Cybersecurity'], ['Member', 'Intellectual Property and Innovation']],
+  },
+  academic: {
+    name: 'Academic Council', eyebrow: 'ACADEMIC COUNCIL', image: councilPhotos['academic-councils'],
+    title: <>Upholding<br/><em>academic standards.</em></>,
+    heading: <>Academic <em>Council</em></>,
+    copy: 'The Academic Council will support academic standards across the Centre’s research programmes.',
+    remit: 'Its remit will include guidance on programme design, researcher development, mentorship, assessment criteria and academic quality, together with recommendations for lectures, workshops and scholarly exchanges.',
+    focus: ['Programme design', 'Researcher development', 'Mentorship', 'Assessment criteria', 'Academic quality'],
+    seats: [['Chair', 'Programme Design'], ['Member', 'Researcher Development and Mentorship'], ['Member', 'Assessment and Academic Quality'], ['Member', 'Lectures, Workshops and Scholarly Exchange']],
+  },
+};
+
 function Committee() {
+  return (
+    <Routes>
+      <Route index element={<CommitteeOverview/>}/>
+      <Route path="board-members" element={<BoardMembers/>}/>
+      <Route path="research-council" element={<CouncilPage council={councils.research}/>}/>
+      <Route path="academic-council" element={<CouncilPage council={councils.academic}/>}/>
+      <Route path="*" element={<NotFound/>}/>
+    </Routes>
+  );
+}
+
+function CommitteeTabs() {
+  return <nav className="committee-tabs" aria-label="Core Committee pages"><div className="container">{committeePages.map(page => <NavLink key={page.to} to={page.to} end>{page.label}</NavLink>)}</div></nav>;
+}
+
+function ShowcaseHeading({ eyebrow, title, copy }) {
+  return <div className="showcase-heading"><span className="eyebrow">{eyebrow}</span><h2><span className="ornament" aria-hidden="true"/><span>{title}</span><span className="ornament" aria-hidden="true"/></h2>{copy && <p>{copy}</p>}</div>;
+}
+
+function MemberPortrait({ member }) {
+  return <div className="member-portrait">{member.photo ? <img src={member.photo} alt={member.name} loading="lazy" decoding="async"/> : <span aria-hidden="true">{member.initials}</span>}</div>;
+}
+
+function MemberHighlights({ items }) {
+  return <ul className="member-highlights">{items.map(([value, label]) => <li key={label}><b>{value}</b><span>{label}</span></li>)}</ul>;
+}
+
+function MemberCard({ member, onOpen }) {
+  return (
+    <article className="member-card">
+      <MemberPortrait member={member}/>
+      <h3>{member.name}</h3>
+      <span className="member-title">{member.title}</span>
+      {member.highlights && <MemberHighlights items={member.highlights}/>}
+      {member.focus && <span className="member-focus">{member.focus}</span>}
+      <p>{member.summary}</p>
+      {onOpen ? <button type="button" className="member-more" onClick={() => onOpen(member)}>Read full profile <ArrowUpRight size={16}/></button> : <span className="member-pending">Appointment pending</span>}
+    </article>
+  );
+}
+
+function ProfileDialog({ member, onClose }) {
+  const dialog = React.useRef(null);
+  // A close event can arrive after the dialog has been reopened; only clear the profile when it is really closed.
+  useEffect(() => { if (member && !dialog.current.open) dialog.current.showModal(); }, [member]);
+  return (
+    <dialog ref={dialog} className="profile-dialog" aria-labelledby="profile-dialog-name" onClose={event => { if (!event.currentTarget.open) onClose(); }} onClick={event => { if (event.target === event.currentTarget) event.currentTarget.close(); }}>
+      {member && <div className="profile-dialog-body">
+        <button type="button" className="profile-dialog-close" onClick={() => dialog.current.close()} aria-label="Close profile"><X size={20}/></button>
+        <aside><MemberPortrait member={member}/><MemberHighlights items={member.highlights}/></aside>
+        <div className="profile-dialog-copy">
+          <span className="eyebrow">{member.title}</span>
+          <h2 id="profile-dialog-name">{member.name}</h2>
+          {member.bio.map(paragraph => <p key={paragraph.slice(0, 32)}>{paragraph}</p>)}
+          <ul className="member-tags">{member.expertise.map(item => <li key={item}>{item}</li>)}</ul>
+        </div>
+      </div>}
+    </dialog>
+  );
+}
+
+function CommitteeOverview() {
   return (
     <>
       <PageIntro
@@ -168,55 +308,81 @@ function Committee() {
         title={<>Experience in practice.<br /><em>Purpose in research.</em></>}
         copy="SKALTAIR brings together experience in legal practice, research, innovation and education to guide its institutional development and academic work."
         image={pagePhotos.committee}
+        imageSizes={wideIntroImageSizes}
       />
-      <section className="section content-section">
+      <CommitteeTabs/>
+      <section className="section committee-overview">
         <div className="container">
-          <SectionHeading
-            eyebrow="BOARD & COUNCILS"
-            title="Guidance for independent research."
-            copy="The Board and Councils contribute to SKALTAIR’s institutional development and academic work within the responsibilities assigned under the approved governance framework."
-          />
-          <div className="committee-note">
-            <ShieldCheck size={20} />
-            <p>SK ALTAIR is a non-profit unit of Sri Chennakeshava Memorial Education and Welfare Society. Council responsibilities operate within the Centre’s approved governance framework.</p>
+          <div className="committee-lead">
+            <div><span className="eyebrow">BOARD & COUNCILS</span><h2>Guidance for<br/><em>independent research.</em></h2></div>
+            <div>
+              <p>The Board and Councils contribute to SKALTAIR’s institutional development and academic work within the responsibilities assigned under the approved governance framework. Each body has a distinct role.</p>
+              <div className="committee-note"><ShieldCheck size={20}/><p>SK ALTAIR is a non-profit unit of Sri Chennakeshava Memorial Education and Welfare Society. Council responsibilities operate within the Centre’s approved governance framework.</p></div>
+            </div>
           </div>
-          <div className="people-grid" id="founding-committee">
-            <article className="person-card">
-              <span className="council-no">01</span>
-              <span className="eyebrow">SK ALTAIR BOARD MEMBER</span>
-              <h3>Dr. S. K. Murthy</h3>
-              <p>Dr. S. K. Murthy brings 32 years of experience spanning teaching, research and development, and intellectual property, including 24 years dedicated to building and sustaining innovation and IP cultures within multinational organisations.</p>
-              <p>His expertise covers United States, European and Indian patent practice, data protection and corporate governance. He has chaired a global IP committee, managed more than 6,000 patent assets, developed over 500 claim charts, prepared more than 250 patent applications and handled over 500 responses to patent office actions.</p>
-              <p>He has contributed to IP and standards policy in India and co-founded the In-House IP Professionals (IHIPP) Forum, an Indian IP think tank. He has authored books and articles, including a commissioned paper published by the National Academy of Sciences, USA. He is a member of the Government of Karnataka’s ESDM Vision Group and serves on advisory boards and boards of studies at engineering institutions.</p>
-              <p>His qualifications include a BE, an ME with a gold medal, an LLB, a Postgraduate Diploma in Intellectual Property Rights, a Doctor of Science in Computer Science and a PhD from the National Law School of India University. He is enrolled with the Karnataka State Bar Council, is a registered Indian Patent Agent and holds certification as an Independent Director.</p>
-            </article>
-            <article className="person-card">
-              <span className="council-no">02</span>
-              <span className="eyebrow">SK ALTAIR BOARD MEMBER</span>
-              <h3>Mr. Ananth Sripadarao</h3>
-              <p>Mr. Ananth Sripadarao brings over 23 years of experience in intellectual property law and legal affairs across the Asia-Pacific, Middle East and Africa regions. His practice encompasses patents, trademarks, brand protection, industrial designs, technology licensing, corporate governance, and mergers and acquisitions.</p>
-              <p>He has led significant IP litigation and complex licensing negotiations, with a reported 100% success rate in the internal infringement matters he handled. His experience includes leading the filing of more than 200 patent applications and supporting the commercialisation or licensing of over 400 technologies, alongside developing brand-protection and technology-licensing strategies.</p>
-              <p>He has held key legal and IP roles at Philips India Ltd. and 3M India Ltd. His qualifications include a BSc in Chemistry, an LLM in Intellectual Property and Information Technology from the National University of Singapore, a Postgraduate Diploma in Patent Law from NALSAR University of Law, and an Executive Programme in Advanced Corporate Law covering mergers and acquisitions from the Indian Institute of Management Calcutta.</p>
-              <p>He is enrolled with the Karnataka State Bar Council, is a registered Indian Patent Agent and Trademark Agent, a Registered Independent Director and a Certified Arbitrator. He is also a member of the Licensing Executives Society and the Chartered Institute of Arbitrators, London.</p>
-            </article>
+          <div className="committee-roles">
+            {committeeBodies.map(({ Icon, ...body }) => (
+              <article className="committee-role" key={body.to}>
+                <span className="role-tab">{body.tab}</span>
+                <span className="role-icon"><Icon size={22}/></span>
+                <h3>{body.name}</h3>
+                <p className="role-line">{body.line}</p>
+                <p>{body.copy}</p>
+                <ul className="role-remit">{body.remit.map(item => <li key={item}>{item}</li>)}</ul>
+                <Link to={body.to} className="role-link">{body.link} <ArrowRight size={16}/></Link>
+              </article>
+            ))}
           </div>
-          <div className="council-grid">
-            <article id="research-council">
-              <div className="council-media reveal-media"><Photo image={councilPhotos['research-council']} alt="" widths={[480, 800, 1200]} sizes="(max-width: 760px) 100vw, 400px" /></div>
-              <span className="council-no">03</span>
-              <h3>Research Council</h3>
-              <p>The Research Council will support development of the Centre’s research agenda, assess proposed themes and encourage rigorous, relevant and feasible projects. Its remit includes recommendations on methodology, supervision, interdisciplinary collaboration and the potential legal or policy contribution of research outputs.</p>
-              <span className="pending-label">Member profiles to be published after appointments are confirmed</span>
-            </article>
-            <article id="academic-councils">
-              <div className="council-media reveal-media"><Photo image={councilPhotos['academic-councils']} alt="" widths={[480, 800, 1200]} sizes="(max-width: 760px) 100vw, 400px" /></div>
-              <span className="council-no">04</span>
-              <h3>Academic Council</h3>
-              <p>The Academic Council will support academic standards across research programmes, including programme design, researcher development, mentorship, assessment criteria and academic quality, together with recommendations for lectures, workshops and scholarly exchanges.</p>
-              <span className="pending-label">Member profiles to be published after appointments are confirmed</span>
-            </article>
+        </div>
+      </section>
+      <section className="committee-facts">
+        <div className="container">
+          <div><span className="eyebrow">AT A GLANCE</span><h2>The Board and Councils<br/><em>in brief.</em></h2></div>
+          <ul className="facts-row">
+            {[['02', 'Board Members'], ['55+', 'years of combined Board experience'], ['02', 'Councils for research and academic standards']].map(([value, label]) => <li key={label}><b>{value}</b><span>{label}</span></li>)}
+          </ul>
+        </div>
+      </section>
+    </>
+  );
+}
+
+function BoardMembers() {
+  const [profile, setProfile] = useState(null);
+  return (
+    <>
+      <PageIntro
+        eyebrow="BOARD MEMBERS"
+        title={<>Experience that<br/><em>guides the institution.</em></>}
+        copy="SK ALTAIR’s Board Members bring decades of experience in intellectual property, law, research and corporate governance to its institutional development and academic work."
+        image={councilPhotos['founding-committee']}
+        imageSizes={wideIntroImageSizes}
+      />
+      <CommitteeTabs/>
+      <section className="section member-showcase">
+        <div className="container">
+          <ShowcaseHeading eyebrow="SK ALTAIR BOARD" title={<>Board <em>Members</em></>} copy="The Board guides SK ALTAIR’s institutional development and academic work within the Centre’s approved governance framework."/>
+          <div className="member-grid is-board">{boardMembers.map(member => <MemberCard key={member.name} member={member} onOpen={setProfile}/>)}</div>
+        </div>
+      </section>
+      <ProfileDialog member={profile} onClose={() => setProfile(null)}/>
+    </>
+  );
+}
+
+function CouncilPage({ council }) {
+  return (
+    <>
+      <PageIntro eyebrow={council.eyebrow} title={council.title} copy={council.copy} image={council.image} imageSizes={wideIntroImageSizes}/>
+      <CommitteeTabs/>
+      <section className="section member-showcase">
+        <div className="container">
+          <ShowcaseHeading eyebrow="CORE COMMITTEE" title={council.heading} copy={council.remit}/>
+          <ul className="council-remit">{council.focus.map(item => <li key={item}>{item}</li>)}</ul>
+          <div className="member-grid is-council">
+            {council.seats.map(([seat, focus], index) => <MemberCard key={focus} member={{ name: 'Member name', initials: String(index + 1).padStart(2, '0'), title: `${seat} · ${council.name}`, focus, summary: 'A short profile will appear here once the appointment is confirmed.' }}/>)}
           </div>
-          <p className="micro-note">Council member profiles will be added following confirmation of appointments. The descriptions above reflect the supplied SK ALTAIR webpage content document.</p>
+          <p className="member-note"><ShieldCheck size={18}/>Member profiles will be published following confirmation of appointments.</p>
         </div>
       </section>
     </>
@@ -394,7 +560,7 @@ function Apply() {
   const [state,setState]=useState({busy:false,error:'',success:''});
   const change=(key,value)=>setForm(old=>({...old,[key]:value}));
   async function submit(e){e.preventDefault();setState({busy:true,error:'',success:''});try{const result=await api.submitApplication(form);setState({busy:false,error:'',success:`Your application reference is ${result.reference}. We have recorded your interest.`});setForm({name:'',email:'',phone:'',affiliation:'',program:'',theme:'',title:'',summary:'',duration:'',availability:'',consent:false});}catch(err){setState({busy:false,error:err.message,success:''});}}
-  return <><PageIntro eyebrow="RESEARCH WITH US" title={<>A question can be<br/><em>the beginning.</em></>} copy="Share an initial research proposal. Programme terms, availability and final application requirements will be confirmed before a research call opens." image={pagePhotos.apply} imageBehind className="page-intro-apply"/><section className="section application-section"><div className="container application-layout"><aside className="application-aside"><span className="eyebrow">BEFORE YOU APPLY</span><h2>Start with the<br/><em>question.</em></h2><p>Describe the issue you want to investigate and why it matters. A proposal should identify its scope, likely sources and expected contribution.</p><div className="apply-facts"><div><Clock3 size={17}/><span><b>Research terms</b><small>4–6, 6–8 or 12–18 months</small></span></div><div><Globe2 size={17}/><span><b>Online participation</b><small>Subject to project requirements</small></span></div><div><Check size={17}/><span><b>Reviewed by people</b><small>Relevance, quality and feasibility</small></span></div></div><div className="aside-note"><CircleHelp size={16}/><span>Application windows, fees and final fields are pending institutional confirmation. This form records an expression of interest.</span></div></aside><form className="form-card" onSubmit={submit}><div className="form-card-head"><span className="eyebrow">EXPRESSION OF INTEREST</span><h2>Tell us about your idea.</h2><p>Fields marked with an asterisk are required.</p></div>{state.success && <div className="form-success"><Check size={18}/>{state.success}</div>}{state.error && <div className="form-error">{state.error}</div>}<div className="form-grid"><FormField label="Full name *"><input required value={form.name} onChange={e=>change('name',e.target.value)} autoComplete="name"/></FormField><FormField label="Email address *"><input required type="email" value={form.email} onChange={e=>change('email',e.target.value)} autoComplete="email"/></FormField><FormField label="Telephone"><input type="tel" value={form.phone} onChange={e=>change('phone',e.target.value)} autoComplete="tel"/></FormField><FormField label="Institution / affiliation"><input value={form.affiliation} onChange={e=>change('affiliation',e.target.value)}/></FormField><FormField label="Preferred research term *"><select required value={form.program} onChange={e=>change('program',e.target.value)}><option value="">Choose a programme</option>{programs.map(p=><option key={p.slug} value={p.slug}>{p.name} · {p.duration}</option>)}</select></FormField><FormField label="Primary research theme *"><select required value={form.theme} onChange={e=>change('theme',e.target.value)}><option value="">Choose a theme</option>{themes.map(t=><option key={t.title}>{t.title}</option>)}<option>Other related topic</option></select></FormField><FormField label="Working title *"><input required value={form.title} onChange={e=>change('title',e.target.value)} placeholder="A concise description of your question"/></FormField><FormField label="Proposed duration"><input value={form.duration} onChange={e=>change('duration',e.target.value)} placeholder="For example, 6 months"/></FormField><FormField label="Research question and brief proposal *"><textarea required rows="6" value={form.summary} onChange={e=>change('summary',e.target.value)} placeholder="What do you want to investigate? Why does it matter? What methods or sources might you use?" hint="Please do not include confidential or sensitive personal information."/></FormField><FormField label="Availability and relevant experience"><textarea rows="4" value={form.availability} onChange={e=>change('availability',e.target.value)} placeholder="Tell us about your availability, background or relevant experience."/></FormField></div><label className="consent-check"><input type="checkbox" checked={form.consent} required onChange={e=>change('consent',e.target.checked)}/><span>I agree that SKALTAIR may use these details to review and respond to this expression of interest. <Link to="/privacy">Privacy notice</Link>.</span></label><button disabled={state.busy} className="button button-red submit-button">{state.busy?'Submitting…':'Submit expression of interest'} <Send size={15}/></button><p className="form-disclaimer">Submitting this form does not guarantee selection, a stipend or publication. Any formal engagement will be governed by written terms.</p></form></div></section></>;
+  return <><PageIntro eyebrow="RESEARCH WITH US" title={<>A question can be<br/><em>the beginning.</em></>} copy="Share an initial research proposal. Programme terms, availability and final application requirements will be confirmed before a research call opens." image={pagePhotos.apply} imageSizes={wideIntroImageSizes}/><section className="section application-section"><div className="container application-layout"><aside className="application-aside"><span className="eyebrow">BEFORE YOU APPLY</span><h2>Start with the<br/><em>question.</em></h2><p>Describe the issue you want to investigate and why it matters. A proposal should identify its scope, likely sources and expected contribution.</p><div className="apply-facts"><div><Clock3 size={17}/><span><b>Research terms</b><small>4–6, 6–8 or 12–18 months</small></span></div><div><Globe2 size={17}/><span><b>Online participation</b><small>Subject to project requirements</small></span></div><div><Check size={17}/><span><b>Reviewed by people</b><small>Relevance, quality and feasibility</small></span></div></div><div className="aside-note"><CircleHelp size={16}/><span>Application windows, fees and final fields are pending institutional confirmation. This form records an expression of interest.</span></div></aside><form className="form-card" onSubmit={submit}><div className="form-card-head"><span className="eyebrow">EXPRESSION OF INTEREST</span><h2>Tell us about your idea.</h2><p>Fields marked with an asterisk are required.</p></div>{state.success && <div className="form-success"><Check size={18}/>{state.success}</div>}{state.error && <div className="form-error">{state.error}</div>}<div className="form-grid"><FormField label="Full name *"><input required value={form.name} onChange={e=>change('name',e.target.value)} autoComplete="name"/></FormField><FormField label="Email address *"><input required type="email" value={form.email} onChange={e=>change('email',e.target.value)} autoComplete="email"/></FormField><FormField label="Telephone"><input type="tel" value={form.phone} onChange={e=>change('phone',e.target.value)} autoComplete="tel"/></FormField><FormField label="Institution / affiliation"><input value={form.affiliation} onChange={e=>change('affiliation',e.target.value)}/></FormField><FormField label="Preferred research term *"><select required value={form.program} onChange={e=>change('program',e.target.value)}><option value="">Choose a programme</option>{programs.map(p=><option key={p.slug} value={p.slug}>{p.name} · {p.duration}</option>)}</select></FormField><FormField label="Primary research theme *"><select required value={form.theme} onChange={e=>change('theme',e.target.value)}><option value="">Choose a theme</option>{themes.map(t=><option key={t.title}>{t.title}</option>)}<option>Other related topic</option></select></FormField><FormField label="Working title *"><input required value={form.title} onChange={e=>change('title',e.target.value)} placeholder="A concise description of your question"/></FormField><FormField label="Proposed duration"><input value={form.duration} onChange={e=>change('duration',e.target.value)} placeholder="For example, 6 months"/></FormField><FormField label="Research question and brief proposal *" hint="Please do not include confidential or sensitive personal information."><textarea required rows="6" value={form.summary} onChange={e=>change('summary',e.target.value)} placeholder="What do you want to investigate? Why does it matter? What methods or sources might you use?"/></FormField><FormField label="Availability and relevant experience"><textarea rows="4" value={form.availability} onChange={e=>change('availability',e.target.value)} placeholder="Tell us about your availability, background or relevant experience."/></FormField></div><label className="consent-check"><input type="checkbox" checked={form.consent} required onChange={e=>change('consent',e.target.checked)}/><span>I agree that SKALTAIR may use these details to review and respond to this expression of interest. <Link to="/privacy">Privacy notice</Link>.</span></label><button disabled={state.busy} className="button button-red submit-button">{state.busy?'Submitting…':'Submit expression of interest'} <Send size={15}/></button><p className="form-disclaimer">Submitting this form does not guarantee selection, a stipend or publication. Any formal engagement will be governed by written terms.</p></form></div></section></>;
 }
 
 function Collaborate() {
@@ -431,8 +597,8 @@ export default function App() {
   useEffect(()=>{if(routePhase!=='enter'||loc.pathname!==displayLoc.pathname||loc.search!==displayLoc.search)return;if(loc.hash){const frame=window.requestAnimationFrame(()=>{try{document.querySelector(loc.hash)?.scrollIntoView({behavior:'smooth',block:'start'});}catch(e){}});return()=>window.cancelAnimationFrame(frame);}window.scrollTo(0,0);},[displayLoc,routePhase,loc.pathname,loc.search,loc.hash]);
   useEffect(()=>{if(loc.pathname===displayLoc.pathname&&loc.search===displayLoc.search)return;setRoutePhase('exit');setCurtainActive(true);const swap=window.setTimeout(()=>{setDisplayLoc(loc);setRoutePhase('enter');},200);const reveal=window.setTimeout(()=>setCurtainActive(false),420);return()=>{window.clearTimeout(swap);window.clearTimeout(reveal);};},[loc.pathname,loc.search]);
   useEffect(()=>{document.title='SKALTAIR — Research for a changing world';},[loc.pathname]);
-  useEffect(()=>{let observer,mutations;const selector='.hero-copy,.hero-art-wrap,.gita-inner,.ink-reveal,.section-heading,.theme-card,.program-top,.program-slide,.method-layout > *,.research-row,.method-step,.objective-list > div,.section-art,.about-copy,.pub-feature,.person-card,.policy-item,.collab-grid article,.page-intro .container,.prose > section,.term-tabs,.term-panel,.themes-heading,.research-list,.committee-note,.publication-intro,.publication-cover,.people-grid > *,.council-grid > *,.news-grid > *,.publication-grid > *,.home-news-card,.collab-principles > *,.collab-cta > *,.contact-layout > *,.application-layout > *,.form-card,.form-card-head,.form-grid .form-field,.join-inner > *,.footer-main > *,.reveal-media';const reveal=nodes=>{nodes.forEach(node=>{node.classList.add('motion-ready');if(node.matches('.section-art,.hero-art-wrap,.publication-cover'))node.classList.add('motion-image');if(node.matches('.method-layout > :first-child,.contact-layout > :first-child,.application-layout > :first-child'))node.classList.add('motion-left');if(node.matches('.method-layout > :last-child,.contact-layout > :last-child,.application-layout > :last-child'))node.classList.add('motion-right');});if(!('IntersectionObserver'in window)){nodes.forEach(node=>node.classList.add('is-visible'));return;}if(!observer)observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target);}}),{threshold:.12,rootMargin:'0px 0px -24px 0px'});nodes.forEach(node=>observer.observe(node));};const timer=window.setTimeout(()=>{reveal(document.querySelectorAll(selector));const root=document.getElementById('root');if(!root||!('MutationObserver'in window))return;mutations=new MutationObserver(records=>{const added=new Set();records.forEach(record=>record.addedNodes.forEach(node=>{if(node.nodeType!==1)return;if(node.matches(selector))added.add(node);node.querySelectorAll(selector).forEach(child=>added.add(child));}));const fresh=[...added].filter(node=>!node.classList.contains('motion-ready'));if(fresh.length)reveal(fresh);});mutations.observe(root,{childList:true,subtree:true});},80);return()=>{window.clearTimeout(timer);observer?.disconnect();mutations?.disconnect();};},[displayLoc.pathname]);
+  useEffect(()=>{let observer,mutations;const selector='.hero-copy,.hero-art-wrap,.gita-inner,.ink-reveal,.section-heading,.theme-card,.program-top,.program-slide,.method-layout > *,.research-row,.method-step,.objective-list > div,.section-art,.about-copy,.pub-feature,.person-card,.policy-item,.collab-grid article,.page-intro .container,.prose > section,.term-tabs,.term-panel,.themes-heading,.research-list,.theme-tile,.proposal-intro,.guidance-grid > article,.committee-lead > *,.committee-role,.facts-row > li,.showcase-heading,.council-remit,.member-card,.committee-note,.publication-intro,.publication-cover,.people-grid > *,.council-grid > *,.news-grid > *,.publication-grid > *,.home-news-card,.collab-principles > *,.collab-cta > *,.contact-layout > *,.application-layout > *,.form-card,.form-card-head,.form-grid .form-field,.join-inner > *,.footer-main > *,.reveal-media';const reveal=nodes=>{nodes.forEach(node=>{node.classList.add('motion-ready');if(node.matches('.section-art,.hero-art-wrap,.publication-cover'))node.classList.add('motion-image');if(node.matches('.method-layout > :first-child,.contact-layout > :first-child,.application-layout > :first-child'))node.classList.add('motion-left');if(node.matches('.method-layout > :last-child,.contact-layout > :last-child,.application-layout > :last-child'))node.classList.add('motion-right');});if(!('IntersectionObserver'in window)){nodes.forEach(node=>node.classList.add('is-visible'));return;}if(!observer)observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');observer.unobserve(entry.target);}}),{threshold:.12,rootMargin:'0px 0px -24px 0px'});nodes.forEach(node=>observer.observe(node));};const timer=window.setTimeout(()=>{reveal(document.querySelectorAll(selector));const root=document.getElementById('root');if(!root||!('MutationObserver'in window))return;mutations=new MutationObserver(records=>{const added=new Set();records.forEach(record=>record.addedNodes.forEach(node=>{if(node.nodeType!==1)return;if(node.matches(selector))added.add(node);node.querySelectorAll(selector).forEach(child=>added.add(child));}));const fresh=[...added].filter(node=>!node.classList.contains('motion-ready'));if(fresh.length)reveal(fresh);});mutations.observe(root,{childList:true,subtree:true});},80);return()=>{window.clearTimeout(timer);observer?.disconnect();mutations?.disconnect();};},[displayLoc.pathname]);
   useEffect(()=>{let frame=0;const update=()=>{cancelAnimationFrame(frame);frame=requestAnimationFrame(()=>{if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){document.querySelectorAll('.hero-art,.section-art img').forEach(image=>image.style.setProperty('--parallax-y','0px'));return;}const y=window.scrollY;document.querySelectorAll('.hero-art').forEach(image=>image.style.setProperty('--parallax-y',`${-Math.min(y*.055,28)}px`));const library=document.querySelector('.section-art img');if(library){const offset=library.getBoundingClientRect().top;library.style.setProperty('--parallax-y',`${Math.max(-8,Math.min(8,-offset*.025))}px`);}});};const loaded=event=>{const image=event.target;if(image instanceof HTMLImageElement&&!image.matches('.brand-seal,.route-curtain img')){image.classList.add('image-loaded');image.addEventListener('animationend',()=>{image.classList.remove('image-loaded');image.classList.add('image-settled');},{once:true});}};document.addEventListener('load',loaded,true);document.querySelectorAll('img:not(.brand-seal):not(.route-curtain img)').forEach(image=>{if(image.complete&&image.naturalWidth)loaded({target:image});});const pointer=event=>{if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;const card=event.target.closest('.theme-card,.program-slide');if(card){const rect=card.getBoundingClientRect();card.style.setProperty('--pointer-x',`${event.clientX-rect.left}px`);card.style.setProperty('--pointer-y',`${event.clientY-rect.top}px`);}};document.addEventListener('pointermove',pointer,{passive:true});window.addEventListener('scroll',update,{passive:true});window.addEventListener('resize',update);update();return()=>{cancelAnimationFrame(frame);document.removeEventListener('load',loaded,true);document.removeEventListener('pointermove',pointer);window.removeEventListener('scroll',update);window.removeEventListener('resize',update);};},[displayLoc.pathname]);
   useEffect(()=>{if(displayLoc.pathname!=='/about')return;const sections=[...document.querySelectorAll('.prose section[id]')];const links=[...document.querySelectorAll('.contents-rail a[href^="#"]')];if(!sections.length||!links.length)return;const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){links.forEach(link=>{const active=link.hash===`#${entry.target.id}`;link.classList.toggle('active',active);if(active)link.setAttribute('aria-current','location');else link.removeAttribute('aria-current');});}}),{rootMargin:'-18% 0px -68% 0px'});sections.forEach(section=>observer.observe(section));return()=>observer.disconnect();},[displayLoc.pathname]);
-  return <><Header/><div className={`route-view ${routePhase} page-${displayLoc.pathname.split('/')[1] || 'home'}`} key={`${displayLoc.pathname}${displayLoc.search}`}><Routes location={displayLoc}><Route path="/" element={<Home/>}/><Route path="/about" element={<About/>}/><Route path="/programs" element={<ProgramsPage/>}/><Route path="/committee" element={<Committee/>}/><Route path="/governance" element={<Governance/>}/><Route path="/collaborate" element={<Collaborate/>}/><Route path="/publications" element={<Publications/>}/><Route path="/news" element={<News/>}/><Route path="/apply" element={<Apply/>}/><Route path="/contact" element={<Contact/>}/><Route path="/privacy" element={<Privacy/>}/><Route path="/research-focus/:topic" element={<EmptyResearchFocusPage/>}/><Route path="*" element={<NotFound/>}/></Routes></div><Footer/><div className={`route-curtain ${curtainActive?'is-active':''}`} aria-hidden="true"><img src="/skaltair-emblem.png" alt=""/></div></>;
+  return <><Header/><div className={`route-view ${routePhase} page-${displayLoc.pathname.split('/')[1] || 'home'}`} key={`${displayLoc.pathname}${displayLoc.search}`}><Routes location={displayLoc}><Route path="/" element={<Home/>}/><Route path="/about" element={<About/>}/><Route path="/programs" element={<ProgramsPage/>}/><Route path="/committee/*" element={<Committee/>}/><Route path="/governance" element={<Governance/>}/><Route path="/collaborate" element={<Collaborate/>}/><Route path="/publications" element={<Publications/>}/><Route path="/news" element={<News/>}/><Route path="/apply" element={<Apply/>}/><Route path="/contact" element={<Contact/>}/><Route path="/privacy" element={<Privacy/>}/><Route path="/research-focus/:topic" element={<EmptyResearchFocusPage/>}/><Route path="*" element={<NotFound/>}/></Routes></div><Footer/><div className={`route-curtain ${curtainActive?'is-active':''}`} aria-hidden="true"><img src="/skaltair-emblem.png" alt=""/></div></>;
 }
