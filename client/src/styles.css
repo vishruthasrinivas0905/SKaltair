@@ -925,17 +925,17 @@ body:has(.route-view:is(.page-programs,.page-apply)) .brand-tagline{font-family:
 /* Core Committee headings in the same regular-weight serif as the Home and About headings. */
 .page-committee :is(h2,h3){font-family:var(--serif);font-style:normal;font-weight:400}
 
-/* Research Programmes and Core Committee intros: the wide photograph, dark ground and gradient of the About Us and Governance intros.
+/* Research Programmes, Core Committee and Apply Now intros: the wide photograph, dark ground and gradient of the About Us and Governance intros.
    The gradient clears a little sooner so the reader in the photograph stays visible beside the text. */
-:is(.page-programs,.page-committee) .page-intro{background:#3b2522;color:#fff8ec;border-bottom-color:#5d3934}
-:is(.page-programs,.page-committee) .page-intro h1{color:#fff8ec}
-:is(.page-programs,.page-committee) .page-intro h1 em,:is(.page-programs,.page-committee) .page-intro .eyebrow{color:#e7c98b}
-:is(.page-programs,.page-committee) .page-intro p{color:#f0e4d7}
-:is(.page-programs,.page-committee) .page-intro .container> :not(.intro-media){max-width:58%}
-:is(.page-programs,.page-committee) .intro-media{width:min(62vw,900px)}
-:is(.page-programs,.page-committee) .intro-media:after{background:linear-gradient(90deg,#3b2522 0%,#3b2522e8 20%,#3b2522a8 32%,#3b25222e 48%,transparent 64%),linear-gradient(0deg,#1d17144d,transparent 45%)}
-@media(max-width:1140px){:is(.page-programs,.page-committee) .intro-media{width:60vw}}
-@media(max-width:760px){:is(.page-programs,.page-committee) .page-intro .container> :not(.intro-media){max-width:100%}:is(.page-programs,.page-committee) .intro-media{width:100%}:is(.page-programs,.page-committee) .intro-media:after{background:linear-gradient(0deg,#3b2522e8 0%,#3b252218 65%),linear-gradient(90deg,#3b252235,transparent)}}
+:is(.page-programs,.page-committee,.page-apply) .page-intro{background:#3b2522;color:#fff8ec;border-bottom-color:#5d3934}
+:is(.page-programs,.page-committee,.page-apply) .page-intro h1{color:#fff8ec}
+:is(.page-programs,.page-committee,.page-apply) .page-intro h1 em,:is(.page-programs,.page-committee,.page-apply) .page-intro .eyebrow{color:#e7c98b}
+:is(.page-programs,.page-committee,.page-apply) .page-intro p{color:#f0e4d7}
+:is(.page-programs,.page-committee,.page-apply) .page-intro .container> :not(.intro-media){max-width:58%}
+:is(.page-programs,.page-committee,.page-apply) .intro-media{width:min(62vw,900px)}
+:is(.page-programs,.page-committee,.page-apply) .intro-media:after{background:linear-gradient(90deg,#3b2522 0%,#3b2522e8 20%,#3b2522a8 32%,#3b25222e 48%,transparent 64%),linear-gradient(0deg,#1d17144d,transparent 45%)}
+@media(max-width:1140px){:is(.page-programs,.page-committee,.page-apply) .intro-media{width:60vw}}
+@media(max-width:760px){:is(.page-programs,.page-committee,.page-apply) .page-intro .container> :not(.intro-media){max-width:100%}:is(.page-programs,.page-committee,.page-apply) .intro-media{width:100%}:is(.page-programs,.page-committee,.page-apply) .intro-media:after{background:linear-gradient(0deg,#3b2522e8 0%,#3b252218 65%),linear-gradient(90deg,#3b252235,transparent)}}
 
 /* Core Committee: an overview and a page for each body, sharing a page switcher, the dark intro and the member cards. */
 @media(min-width:761px){.page-committee .page-intro h1{font-size:clamp(46px,5.3vw,76px)}}
@@ -1084,3 +1084,55 @@ html:has(.profile-dialog[open]){overflow:hidden}
   .profile-dialog-copy{padding:32px 22px 34px}
 }
 @media(prefers-reduced-motion:reduce){.profile-dialog[open],.profile-dialog::backdrop{animation:none}}
+
+/* Apply Now: a dark guidance panel in the Committee colours beside a calm, roomy expression-of-interest form. */
+.page-apply .page-intro .eyebrow{font-size:14px;letter-spacing:1.8px}
+.page-apply .application-section{padding:96px 0 112px;background:linear-gradient(180deg,#f7f1e5 0%,#fbf7ee 260px,#fffdf8 100%)}
+.page-apply .application-layout{grid-template-columns:minmax(0,.9fr) minmax(0,1.28fr);gap:clamp(40px,4.5vw,72px)}
+.page-apply .application-aside{position:relative;top:auto;padding:30px 34px 26px;background:radial-gradient(ellipse at 0% 0%,#5e322e 0%,transparent 62%),#3b2522;border-radius:6px;color:#fff8ec;box-shadow:0 28px 60px #3b252229}
+.page-apply .application-aside .eyebrow,.page-apply .form-card-head .eyebrow{font-size:13px;letter-spacing:2.4px}
+.page-apply .application-aside .eyebrow{color:#e7c98b}
+.page-apply .application-aside h2{margin:10px 0 12px;font-size:clamp(34px,2.9vw,42px);line-height:1.1;color:#fff8ec}
+.page-apply .application-aside h2 em{color:#e7c98b}
+.page-apply .application-aside>p{margin:0;font-size:16px;line-height:1.6;color:#ead9cc}
+.page-apply .apply-facts{margin-top:24px;border-top:1px solid #e7c98b33}
+.page-apply .apply-facts>div{align-items:center;gap:14px;padding:8px 0;border-bottom:1px solid #e7c98b26;color:#e7c98b}
+.page-apply .apply-facts svg{flex:none;width:38px;height:38px;padding:10px;border:1px solid #e7c98b66;border-radius:50%}
+.page-apply .apply-facts span{gap:1px}
+.page-apply .apply-facts b{font-size:15px;font-weight:600;color:#fff8ec}
+.page-apply .apply-facts small{font-size:14px;line-height:1.4;color:#d9c5b7}
+.page-apply .aside-note{align-items:flex-start;gap:12px;margin-top:18px;padding:12px 16px;background:#ffffff0d;border:1px solid #e7c98b38;border-radius:4px;color:#e7c98b;font-size:14px;line-height:1.55}
+.page-apply .aside-note svg{flex:none;margin-top:3px}
+.page-apply .aside-note span{color:#ead9cc}
+.page-apply .application-layout:has(.form-card:focus-within) .application-aside{opacity:.92}
+
+.page-apply .form-card{display:grid;grid-template-columns:auto minmax(0,1fr);column-gap:28px;align-items:center;padding:clamp(32px,3.6vw,52px);background:#fff;border:1px solid #e8dccb;border-radius:6px;box-shadow:0 24px 60px #3b25220f}
+.page-apply .form-card>*{grid-column:1/-1}
+.page-apply .form-card-head{margin-bottom:32px;padding-bottom:26px;border-bottom:1px solid #eee3d3}
+.page-apply .form-card-head .eyebrow{color:#8f2333}
+.page-apply .form-card-head h2{margin:12px 0 10px;font-size:clamp(32px,2.8vw,40px);line-height:1.12;color:#3b2522}
+.page-apply .form-card-head p{font-size:14px;line-height:1.6;color:#8a7d75}
+.page-apply .form-grid{gap:26px 22px}
+.page-apply .form-field{gap:10px;font-size:14px;font-weight:600;color:#4f4440}
+.page-apply .form-field :is(input,select,textarea){min-height:52px;padding:13px 15px;background:#fdfaf5;border:1px solid #e3d6c4;border-radius:4px;font-size:15px;color:#332522;transition:border-color .22s ease,box-shadow .22s ease,background-color .22s ease}
+.page-apply .form-field :is(input,textarea)::placeholder{color:#a3968c}
+.page-apply .form-field select{padding-right:44px;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%238f2333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center;cursor:pointer}
+.page-apply .form-field :is(input,select,textarea):hover{border-color:#d2bf9f}
+.page-apply .form-field:focus-within :is(input,select,textarea){background-color:#fff;border-color:#8f2333;box-shadow:0 0 0 4px #8f233314}
+.page-apply .form-field small{font-size:13px;font-weight:400;line-height:1.55;color:#8a7d75}
+.page-apply .consent-check{gap:12px;margin:30px 0 26px;padding:18px 20px;background:#fbf7ee;border:1px solid #eee3d3;border-radius:4px;font-size:14px;line-height:1.65;color:#5f5450}
+.page-apply .consent-check input{flex:none;width:18px;height:18px;margin:2px 0 0}
+.page-apply .consent-check a{color:#8f2333;text-underline-offset:3px}
+.page-apply .form-card>.submit-button{grid-column:1;min-width:0;min-height:56px;padding:0 30px;font-size:16px}
+.page-apply .form-card>.form-disclaimer{grid-column:2;margin:0;font-size:13px;line-height:1.6;color:#8a7d75}
+.page-apply :is(.form-success,.form-error){padding:15px 18px;border-radius:4px;font-size:15px}
+
+@media(min-width:1141px) and (min-height:720px){.page-apply .application-aside{position:sticky;top:108px}}
+@media(max-width:1140px){.page-apply .application-layout{grid-template-columns:minmax(0,1fr);max-width:820px;margin-inline:auto}}
+@media(max-width:760px){
+  .page-apply .application-section{padding:64px 0 76px}
+  .page-apply .application-aside{padding:34px 26px 30px}
+  .page-apply .form-card{grid-template-columns:1fr;padding:30px 22px}
+  .page-apply .form-card>.submit-button,.page-apply .form-card>.form-disclaimer{grid-column:1}
+  .page-apply .form-card>.form-disclaimer{margin-top:16px}
+}
