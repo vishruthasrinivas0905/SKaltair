@@ -1906,7 +1906,7 @@ body:has(.route-view:is(.page-programs,.page-apply)) .brand-tagline{font-family:
 .page-committee .member-more:hover,.page-committee .member-more:focus-visible{background:#e7c98b;color:#812230}
 .page-committee .member-focus{display:inline-block;margin:0 0 18px;padding:7px 15px;border:1px solid #e7c98b66;border-radius:999px;font-size:14px;line-height:1.35;color:#f3e2c4}
 .page-committee .member-pending{margin-top:auto;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#c9ad8e}
-.page-committee .member-contact{display:flex;justify-content:center;gap:12px;margin:-8px 0 26px;padding:0;list-style:none}
+.page-committee .member-contact{display:flex;justify-content:center;gap:16px;margin:-8px 0 26px;padding:0;list-style:none}
 .page-committee .member-contact :is(a,span){display:grid;place-items:center;width:40px;height:40px;border:1px solid #e7c98b66;border-radius:50%;color:#e7c98b;transition:background-color .25s ease,border-color .25s ease,color .25s ease}
 .page-committee .member-contact a:is(:hover,:focus-visible){background:#e7c98b;border-color:#e7c98b;color:#812230}
 .page-committee .member-contact svg{width:17px;height:17px;fill:currentColor}
@@ -1917,9 +1917,11 @@ body:has(.route-view:is(.page-programs,.page-apply)) .brand-tagline{font-family:
 .page-committee .member-grid.is-council .member-title{margin-bottom:16px;font-size:16px}
 .page-committee .member-grid.is-council .member-card p{margin-bottom:22px;font-size:15px}
 .page-committee .member-grid.is-council .member-focus{display:flex;align-items:center;justify-content:center;width:100%;min-height:56px;padding:6px 16px;border-radius:28px}
-.page-committee .member-grid.is-council .member-contact{gap:10px;margin:-4px 0 20px}
+.page-committee .member-grid.is-council .member-contact{gap:14px;margin:-4px 0 20px}
 .page-committee .member-grid.is-council .member-contact :is(a,span){width:36px;height:36px}
 .page-committee .member-grid.is-council .member-contact svg{width:15px;height:15px}
+/* Even line breaks for headings that carry the longer "legal and technology research" wording. */
+.hero-title-mask:first-child>span,.section-pub .section-heading h2,.focus-method-layout h2{text-wrap:balance}
 .page-committee .member-note{display:flex;align-items:center;justify-content:center;gap:10px;margin:56px 0 0;font-size:15px;color:#d9c5b7}
 .page-committee .member-note svg{flex:none;color:#e7c98b}
 
