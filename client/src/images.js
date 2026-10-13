@@ -51,6 +51,32 @@ export const photos = {
   bookAndNotes: photo('1456513080510-7bf3a84b82f8', 'An open book and a notebook of handwritten notes side by side', 'Aaron Burden', 'opened-book-QJDzYT_K8Xg'),
   openBooks: photo('1513185041617-8ab03f83d6c5', 'Many open books overlapping in warm light', 'Rey Seven', 'brown-books-closeup-photography-_nm_mZ4Cs2I'),
   councilChamber: photo('1780396269429-e20eaa1a1cd2', 'An ornate council chamber with wood panelling, chandeliers and curved rows of seats', 'Michael D Beckwith', 'ornate-council-chamber-with-wood-paneling-chandeliers-and-many-seats-t4I2VeWm8t8'),
+  // Research-focus-only photography. These images are deliberately separate from
+  // the home, programme, news, publication and institutional page image sets.
+  focusCourtHouse: photo('1683538796020-78b15306e864', 'The brick courthouse of Vaasa framed by broad steps and a clear sky', 'Harri P', 'a-large-brick-building-with-stairs-leading-up-to-it-2-d1vRLcXoc'),
+  focusCyberAccess: photo('1754494977432-425fb917df70', 'A hand uses a smartphone at a secure office access terminal', 'Jakub Żerdzicki', 'phone-being-used-at-a-security-door-UyWuiljE25w'),
+  focusBusinessTalk: photo('1763739530672-4aadafbd81ff', 'Two professionals discuss a strategy in a contemporary meeting room', 'Praise Judah', 'two-professionals-talking-in-a-meeting-room-KHQJf0Gq3RA'),
+  focusAiCode: photo('1774901128281-a884cd447af5', 'A modern computer screen displaying software code and project files', 'Bernd Dittrich', 'computer-screen-displaying-code-and-project-files-A9jp72Owzvs'),
+  focusLibraryParis: photo('1784359065403-93da31c36115', 'Researchers and readers in a contemporary national library reading room', 'Johan Mouchet', 'busy-library-reading-room-with-people-studying-PjpRF0LhBB8'),
+  focusPublicStudy: photo('1707757112182-5167a5e17444', 'People working at computers in a sunlit public research library', 'Linus Belanger', 'a-large-open-room-with-people-working-on-their-computers-nGlfw0HouBQ'),
+  focusLibraryHall: photo('1778735940457-772f588a0dd3', 'Students studying in a grand, dimly lit library hall', 'Ashutosh Gupta', 'students-studying-in-a-grand-dimly-lit-library-hall-dsQKzZEwSQY'),
+  focusDocumentReview: photo('1775163024488-e88e4a71179f', 'Two professionals review documents together at a conference table', 'Olena Kholina', 'two-people-reviewing-documents-at-a-table-MhqUBTxQ3Hw'),
+  focusContract: photo('1758518731462-d091b0b4ed0d', 'Business partners sign a contract with legal guidance in a modern office', 'Vitaly Gariev', 'business-people-signing-a-contract-at-a-table-iPheGw7_UaI'),
+  focusCourtInterior: photo('1660784670019-33a36fd82515', 'The judge’s bench inside a formal courtroom in Santiago', 'Rai Singh Uriarte', 'a-courtroom-with-a-large-wooden-bench-ZV0kXnONoHo'),
+  focusCircuitEngineer: photo('1769149068959-b11392164add', 'An engineer studies a circuit-board design on a computer screen', 'EnCata PD', 'man-looking-at-circuit-board-design-on-computer-screen-ZmDk8tXQRS0'),
+  focusResearchMeeting: photo('1681569685382-e75f0301584e', 'Two colleagues speak across a table in a thoughtful discussion', 'phyo min', 'two-men-sitting-at-a-table-talking-to-each-other-CLhULgqR-xg'),
+  focusTeamMeeting: photo('1760346546771-a81d986459ff', 'A small team reviews information together around laptops', 'Bluestonex', 'three-men-in-discussion-around-a-table-with-laptops-ceIEGTR7G18'),
+  focusPolicyConversation: photo('1764173038859-11b5bcf26d0f', 'Two people talk at a table beside tall, light-filled windows', 'Centre for Ageing Better', 'two-people-talking-at-a-table-by-large-windows-BWKb7aPdR14'),
+  focusResearchGroup: photo('1573497701240-345a300b8d36', 'A diverse group of colleagues work together around a table', 'Christina @ wocintechchat.com M', 'five-people-sitting-at-table-and-talking-jzonFmreWok'),
+  focusInnovationDesk: photo('1761122827167-159d1d272313', 'A designer works across a computer and tablet on an innovation project', 'Mahmudul Hasan', 'man-working-at-a-desk-with-computer-and-tablet-Mo08jadTWYc'),
+  // Replacement full-bleed research-focus hero photography, selected to give
+  // each field a distinct contemporary visual. These are not reused in theme cards.
+  focusGovernanceArchitecture: photo('1722946241841-9d6aabed060c', 'The Vidhana Soudha, seat of Karnataka’s state legislature in Bengaluru', 'Suki Yuga', 'a-large-building-with-a-lot-of-trees-in-front-of-it-g5O5kUvNmIw'),
+  focusAiSculpture: photo('1694903089438-bf28d4697d9a', 'A human hand and robotic hand reach toward a glowing AI interface', 'Igor Omilaev', 'robot-and-human-hands-reaching-toward-ai-text-FHgWFzDDAOs'),
+  focusCyberInfrastructure: photo('1759884247381-d7222dd72dec', 'A person studies source code on a laptop in a modern workspace', 'Compagnons', 'woman-working-on-a-laptop-with-code-on-screen-Zi0GmYPm88M'),
+  focusInnovationPrototype: photo('1756723902460-235b1f21ad05', 'A 3D printer builds red prototypes in a working design studio', 'Snapmaker 3D Printer', '3d-printer-with-tools-and-creations-in-workshop-X-Q7NAwnwE0'),
+  focusCorporateRoundtable: photo('1769740333462-9a63bfa914bc', 'A business team discusses strategy around a conference table', 'Beatriz Cattel', 'business-meeting-with-people-around-a-conference-table-3tCLyPBSQ5k'),
+  focusDisputeResolution: photo('1711003596872-aa68f08a4b8e', 'A courtroom with a public gallery and an attorney’s podium', 'Dragon White Munthe', 'an-empty-courtroom-with-wooden-paneling-and-columns-Bh6u25Qv9qA'),
 };
 
 export function photoUrl(image, width) { return `https://images.unsplash.com/photo-${image.id}?auto=format&fit=crop&w=${width}&q=80`; }
