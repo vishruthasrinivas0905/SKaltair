@@ -2828,3 +2828,771 @@ html:has(.profile-dialog[open]){overflow:hidden}
   .publication-work-link svg { transition: none !important; }
   .publication-work-link:hover { transform: none !important; }
 }
+
+/* Collaborate page refresh — editorial red and white treatment */
+.collaborate-page {
+  --collab-red: #a51f35;
+  --collab-red-dark: #78172a;
+  --collab-blush: #fbf2f1;
+  --collab-line: #ead4c8;
+}
+.collab-intro-copy {
+  max-width: 900px;
+  margin: 0 0 clamp(54px, 7vw, 92px);
+  padding: clamp(26px, 4vw, 44px);
+  border-left: 4px solid var(--collab-red);
+  background: linear-gradient(105deg, #fff7f5 0%, #fff 74%);
+  box-shadow: 0 18px 48px rgba(100, 24, 38, .055);
+}
+.collab-intro-copy .eyebrow,
+.collab-ways-section .eyebrow,
+.collab-proposal-heading .eyebrow { color: var(--collab-red); }
+.collab-intro-copy .lead {
+  max-width: 790px;
+  margin: 18px 0 0;
+  color: #635752;
+  font-size: clamp(17px, 1.45vw, 21px);
+  line-height: 1.8;
+}
+.collab-ways-section { margin-bottom: clamp(64px, 8vw, 104px); }
+.collab-grid-detailed {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border: 1px solid var(--collab-line);
+  background: #fff;
+  box-shadow: 0 18px 50px rgba(85, 25, 35, .045);
+}
+.collab-grid-detailed .collab-way-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: clamp(24px, 2.4vw, 35px);
+  border-right: 1px solid var(--collab-line);
+  border-bottom: 1px solid var(--collab-line);
+  background: #fff;
+  transition: background .25s ease, box-shadow .25s ease, transform .25s ease;
+}
+.collab-grid-detailed .collab-way-card:nth-child(3n) { border-right: 0; }
+.collab-grid-detailed .collab-way-card:nth-last-child(-n + 1) { border-bottom: 0; }
+.collab-grid-detailed .collab-way-card:hover {
+  z-index: 1;
+  background: linear-gradient(145deg, #fff8f6, #fff);
+  box-shadow: inset 0 4px 0 var(--collab-red), 0 16px 35px rgba(110, 23, 42, .08);
+  transform: translateY(-3px);
+}
+.collab-way-number { color: var(--collab-red) !important; font-size: 11px !important; font-weight: 800; letter-spacing: 1.6px !important; }
+.collab-way-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  margin-top: 22px;
+  border: 1px solid #e6b8b8;
+  border-radius: 50%;
+  background: var(--collab-blush);
+  color: var(--collab-red);
+  font-size: 20px;
+  transition: color .2s ease, background .2s ease, transform .2s ease;
+}
+.collab-way-card:hover .collab-way-icon { background: var(--collab-red); color: #fff; transform: rotate(8deg); }
+.collab-grid-detailed .collab-way-card h3 {
+  margin: 22px 0 12px;
+  color: #302421;
+  font: 500 clamp(21px, 1.75vw, 27px)/1.22 var(--serif);
+  letter-spacing: -.35px;
+}
+.collab-grid-detailed .collab-way-card p {
+  color: #6d625d;
+  font-size: 14px;
+  line-height: 1.8;
+  margin: 0 0 13px;
+}
+.collab-grid-detailed .collab-way-card .collab-way-detail {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid #f0dfd8;
+  color: #514641;
+  font-size: 13px;
+}
+.collab-principles-detailed {
+  grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr);
+  gap: clamp(34px, 6vw, 90px);
+  margin: 0 0 clamp(70px, 9vw, 116px);
+  padding: clamp(28px, 4vw, 48px);
+  border: 1px solid var(--collab-line);
+  background: #faf4ed;
+}
+.collab-principles-detailed .collab-principles-heading h2 {
+  font: 500 clamp(34px, 3.4vw, 49px)/1.13 var(--serif);
+  letter-spacing: -1.1px;
+}
+.collab-principles-detailed .collab-principles-heading h2 em { color: var(--collab-red); }
+.collab-principles-heading > p { max-width: 390px; color: #71635c; font-size: 15px; line-height: 1.8; }
+.collab-principles-detailed .collab-principles-content ul { border-top-color: #e6c9bb; }
+.collab-principles-detailed .collab-principles-content li {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  align-items: start;
+  gap: 12px;
+  padding: 17px 0;
+  color: #514640;
+  font-size: 14px;
+  line-height: 1.65;
+  border-bottom-color: #e6c9bb;
+}
+.collab-principles-detailed .collab-principles-content li::before { display: none; }
+.collab-principles-content li > span { color: var(--collab-red); font-size: 10px; font-weight: 800; letter-spacing: 1px; }
+.collab-authorisation-note {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin-top: 22px;
+  padding: 18px;
+  border: 1px solid #e8c6c4;
+  background: #fff;
+  color: var(--collab-red);
+}
+.collab-authorisation-note svg { flex: 0 0 auto; margin-top: 2px; }
+.collab-authorisation-note p { margin: 0; color: #5e514c; font-size: 13px; line-height: 1.75; }
+.collab-proposal-section {
+  display: grid;
+  grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr);
+  gap: clamp(32px, 6vw, 86px);
+  margin-bottom: 38px;
+  padding-bottom: clamp(50px, 7vw, 86px);
+  border-bottom: 1px solid var(--collab-line);
+}
+.collab-proposal-heading h2 {
+  margin: 16px 0 20px;
+  color: #302421;
+  font: 500 clamp(35px, 3.5vw, 50px)/1.12 var(--serif);
+  letter-spacing: -1.2px;
+}
+.collab-proposal-heading h2 em { color: var(--collab-red); }
+.collab-proposal-heading > p { max-width: 470px; color: #71635c; font-size: 15px; line-height: 1.85; }
+.collab-proposal-checklist { border-top: 1px solid var(--collab-line); }
+.collab-proposal-point {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 14px;
+  align-items: start;
+  padding: 19px 0;
+  border-bottom: 1px solid var(--collab-line);
+}
+.collab-proposal-point > span {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--collab-red);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 800;
+}
+.collab-proposal-point p { margin: 3px 0 0; color: #514640; font-size: 14px; line-height: 1.7; }
+.collab-review-note {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  margin: 0 0 36px;
+  padding: 21px 24px;
+  border: 1px solid #e7c2c1;
+  background: #fff7f6;
+  color: var(--collab-red);
+}
+.collab-review-note svg { flex: 0 0 auto; margin-top: 2px; }
+.collab-review-note p { margin: 0; color: #5f514b; font-size: 13px; line-height: 1.8; }
+.collab-cta-enhanced {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(240px, .75fr);
+  align-items: center;
+  gap: 28px;
+  min-height: 280px;
+  overflow: hidden;
+  padding: clamp(30px, 4vw, 52px);
+  border: 1px solid #8e1c31;
+  background: #8f1f34;
+  box-shadow: 0 20px 50px rgba(104, 19, 39, .14);
+}
+.collab-cta-enhanced .collab-cta-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .22;
+  mix-blend-mode: multiply;
+}
+.collab-cta-enhanced::after { content: ''; position: absolute; inset: 0; background: linear-gradient(100deg, rgba(117, 19, 39, .97), rgba(151, 31, 51, .83)); pointer-events: none; }
+.collab-cta-enhanced > *:not(.collab-cta-photo) { position: relative; z-index: 1; }
+.collab-cta-enhanced .collab-cta-copy { max-width: 690px; }
+.collab-cta-enhanced h2 { color: #fff; font: 500 clamp(30px, 3vw, 42px)/1.12 var(--serif); letter-spacing: -.7px; }
+.collab-cta-enhanced p { max-width: 660px; color: #f6e7e6; font-size: 14px; line-height: 1.8; }
+.collab-cta-actions { display: flex; flex-direction: column; align-items: stretch; gap: 13px; }
+.collab-cta-enhanced .button-white { justify-content: center; min-height: 52px; padding: 14px 19px; color: var(--collab-red-dark); background: #fff; border: 1px solid #fff; }
+.collab-cta-enhanced .button-white:hover { color: #fff; background: var(--collab-red-dark); border-color: #fff; }
+.collab-cta-secondary { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 11px 0; color: #fff; border-bottom: 1px solid rgba(255,255,255,.35); font-size: 12px; line-height: 1.5; text-decoration: none; transition: color .2s ease, border-color .2s ease; }
+.collab-cta-secondary:hover { color: #ffe0d9; border-color: #ffe0d9; }
+@media (max-width: 900px) {
+  .collab-grid-detailed { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .collab-grid-detailed .collab-way-card:nth-child(3n) { border-right: 1px solid var(--collab-line); }
+  .collab-grid-detailed .collab-way-card:nth-child(2n) { border-right: 0; }
+  .collab-principles-detailed, .collab-proposal-section { grid-template-columns: 1fr; }
+  .collab-cta-enhanced { grid-template-columns: 1fr; }
+  .collab-cta-actions { max-width: 460px; }
+}
+@media (max-width: 560px) {
+  .collab-intro-copy { padding: 23px 20px; }
+  .collab-grid-detailed { grid-template-columns: 1fr; }
+  .collab-grid-detailed .collab-way-card,
+  .collab-grid-detailed .collab-way-card:nth-child(2n),
+  .collab-grid-detailed .collab-way-card:nth-child(3n) { border-right: 0; }
+  .collab-grid-detailed .collab-way-card:last-child { border-bottom: 0; }
+  .collab-principles-detailed { padding: 25px 20px; }
+  .collab-cta-enhanced { padding: 27px 21px; }
+  .collab-cta-enhanced .button-white { width: 100%; }
+}
+
+/* Collaborate page: align typography, hero treatment and editorial spacing with Publications.
+   All rules are scoped to .page-collaborate so other routes remain unchanged. */
+.page-collaborate :not(.page-intro h1,.page-intro h1 *){font-family:'DM Sans',sans-serif;font-style:normal}
+.page-collaborate :is(h2,h3){font-weight:500;letter-spacing:-.5px}
+.page-collaborate .page-intro-collaborate .eyebrow{font-size:14px;letter-spacing:1.8px}
+.page-collaborate .collaborate-page{padding-top:66px}
+.page-collaborate .collab-intro-copy{max-width:none;margin:0 0 clamp(52px,6vw,78px);padding:22px 25px;border:1px solid var(--line);border-left:3px solid var(--red);background:#f4efe8;box-shadow:none}
+.page-collaborate .collab-intro-copy .eyebrow,
+.page-collaborate .collab-ways-section .eyebrow,
+.page-collaborate .collab-proposal-heading .eyebrow{font-size:12px;letter-spacing:1.4px;color:var(--red)}
+.page-collaborate .collab-intro-copy .lead{font-size:16px;line-height:1.75;color:var(--muted)}
+.page-collaborate .collab-ways-section .section-heading{margin-bottom:28px}
+.page-collaborate .collab-ways-section .section-heading h2,
+.page-collaborate .collab-principles-detailed .collab-principles-heading h2,
+.page-collaborate .collab-proposal-heading h2{font:500 clamp(32px,3.2vw,44px)/1.15 var(--serif);letter-spacing:-1px}
+.page-collaborate .collab-ways-section .section-heading p,
+.page-collaborate .collab-principles-heading > p,
+.page-collaborate .collab-proposal-heading > p{font-size:16px;line-height:1.75}
+.page-collaborate .collab-grid-detailed{box-shadow:none;border-color:var(--line)}
+.page-collaborate .collab-grid-detailed .collab-way-card{padding:27px;background:#fff;border-color:var(--line)}
+.page-collaborate .collab-grid-detailed .collab-way-card h3{font-size:clamp(21px,1.8vw,24px);line-height:1.3;letter-spacing:-.35px}
+.page-collaborate .collab-grid-detailed .collab-way-card p{font-size:16px;line-height:1.75}
+.page-collaborate .collab-grid-detailed .collab-way-card .collab-way-detail{font-size:14px;line-height:1.75}
+.page-collaborate .collab-principles-detailed{border-color:var(--line);background:#f4efe8}
+.page-collaborate .collab-principles-detailed .collab-principles-content li{font-size:15px;line-height:1.7;border-color:#e3d9cf}
+.page-collaborate .collab-authorisation-note p,
+.page-collaborate .collab-review-note p{font-size:15px;line-height:1.75}
+.page-collaborate .collab-proposal-point p{font-size:15px;line-height:1.75}
+.page-collaborate .collab-review-note{background:#f4efe8;border-color:var(--line)}
+.page-collaborate .collab-cta-enhanced{box-shadow:none}
+@media(max-width:760px){
+  .page-collaborate .collaborate-page{padding-top:36px}
+  .page-collaborate .collab-intro-copy{padding:20px 18px}
+  .page-collaborate .collab-ways-section .section-heading h2,
+  .page-collaborate .collab-principles-detailed .collab-principles-heading h2,
+  .page-collaborate .collab-proposal-heading h2{font-size:clamp(30px,8vw,38px)}
+  .page-collaborate .collab-grid-detailed .collab-way-card p{font-size:15px}
+}
+
+
+
+/* Collaborate page: burgundy mirrored-panel treatment inspired by the proposal-guidance section.
+   Scoped only to Collaborate so all other pages keep their existing appearance. */
+.page-collaborate .collab-ways-section {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-bottom: clamp(64px, 8vw, 104px);
+  padding: clamp(42px, 5vw, 72px) max(24px, calc((100vw - 1440px) / 2));
+  color: #fff;
+  background: linear-gradient(115deg, #761b2b 0%, #842332 55%, #701827 100%);
+  overflow: hidden;
+}
+.page-collaborate .collab-ways-section::after {
+  content: 'S';
+  position: absolute;
+  right: -24px;
+  bottom: -145px;
+  color: rgba(255,255,255,.035);
+  font: 600 330px/1 var(--serif);
+  pointer-events: none;
+}
+.page-collaborate .collab-ways-section > * { position: relative; z-index: 1; }
+.page-collaborate .collab-ways-section .section-heading h2,
+.page-collaborate .collab-ways-section .section-heading h2 em { color: #fff; }
+.page-collaborate .collab-ways-section .section-heading p { color: #f0dadd; }
+.page-collaborate .collab-ways-section .eyebrow { color: #e8b7a0; }
+.page-collaborate .collab-grid-detailed {
+  border-color: rgba(255,255,255,.18);
+  background: transparent;
+  box-shadow: none;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(3n) {
+  border-right: 1px solid rgba(255,255,255,.16);
+  border-bottom: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.045);
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(3n) { border-right: 0; }
+.page-collaborate .collab-grid-detailed .collab-way-card:hover {
+  background: rgba(255,255,255,.095);
+  box-shadow: inset 0 3px 0 #e5b79d;
+  transform: translateY(-2px);
+}
+.page-collaborate .collab-way-number { color: #e7b69d !important; }
+.page-collaborate .collab-way-icon {
+  color: #f0c6a7;
+  border-color: rgba(232,183,160,.5);
+  background: rgba(255,255,255,.035);
+}
+.page-collaborate .collab-way-card:hover .collab-way-icon { color: #741a2b; background: #f0c6a7; }
+.page-collaborate .collab-grid-detailed .collab-way-card h3 { color: #fff; }
+.page-collaborate .collab-grid-detailed .collab-way-card p,
+.page-collaborate .collab-grid-detailed .collab-way-card .collab-way-detail { color: #f0dfe0; }
+.page-collaborate .collab-grid-detailed .collab-way-card .collab-way-detail { border-top-color: rgba(255,255,255,.2); }
+@media (max-width: 900px) {
+  .page-collaborate .collab-grid-detailed .collab-way-card:nth-child(3n) { border-right: 1px solid rgba(255,255,255,.16); }
+  .page-collaborate .collab-grid-detailed .collab-way-card:nth-child(2n) { border-right: 0; }
+}
+@media (max-width: 560px) {
+  .page-collaborate .collab-ways-section { padding: 34px 18px; }
+  .page-collaborate .collab-grid-detailed .collab-way-card,
+  .page-collaborate .collab-grid-detailed .collab-way-card:nth-child(2n),
+  .page-collaborate .collab-grid-detailed .collab-way-card:nth-child(3n) { border-right: 0; }
+}
+
+/* Collaborate cards: turn white on hover for a clear interactive state. */
+.page-collaborate .collab-grid-detailed .collab-way-card {
+  transition: background-color .25s ease, color .25s ease, border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:hover,
+.page-collaborate .collab-grid-detailed .collab-way-card:focus-within {
+  background: #fff;
+  border-color: #fff;
+  box-shadow: 0 12px 28px rgba(30, 10, 14, .18);
+  transform: translateY(-2px);
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:hover h3,
+.page-collaborate .collab-grid-detailed .collab-way-card:focus-within h3 {
+  color: #24211f;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:hover p,
+.page-collaborate .collab-grid-detailed .collab-way-card:hover .collab-way-detail,
+.page-collaborate .collab-grid-detailed .collab-way-card:focus-within p,
+.page-collaborate .collab-grid-detailed .collab-way-card:focus-within .collab-way-detail {
+  color: #6f6964;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:hover .collab-way-detail,
+.page-collaborate .collab-grid-detailed .collab-way-card:focus-within .collab-way-detail {
+  border-top-color: #e7dfd7;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:hover .collab-way-number,
+.page-collaborate .collab-grid-detailed .collab-way-card:focus-within .collab-way-number {
+  color: var(--red) !important;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:hover .collab-way-icon,
+.page-collaborate .collab-grid-detailed .collab-way-card:focus-within .collab-way-icon {
+  color: var(--red);
+  background: #f8eeed;
+  border-color: #e7c8c7;
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-collaborate .collab-grid-detailed .collab-way-card { transition: none; }
+}
+
+/* Collaborate cards: white by default, burgundy red on hover. */
+.page-collaborate .collab-grid-detailed .collab-way-card {
+  background: #fff !important;
+  color: #24211f;
+  border-color: #e7dfd7;
+  transition: background-color .25s ease, color .25s ease, border-color .25s ease, box-shadow .25s ease, transform .25s ease;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card h3 {
+  color: #24211f !important;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card p,
+.page-collaborate .collab-grid-detailed .collab-way-card .collab-way-detail {
+  color: #6f6964 !important;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:hover,
+.page-collaborate .collab-grid-detailed .collab-way-card:focus-within {
+  background: #8f2333 !important;
+  border-color: #8f2333 !important;
+  box-shadow: 0 12px 28px rgba(30, 10, 14, .18);
+  transform: translateY(-2px);
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:hover h3,
+.page-collaborate .collab-grid-detailed .collab-way-card:focus-within h3 {
+  color: #fff !important;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:hover p,
+.page-collaborate .collab-grid-detailed .collab-way-card:hover .collab-way-detail,
+.page-collaborate .collab-grid-detailed .collab-way-card:focus-within p,
+.page-collaborate .collab-grid-detailed .collab-way-card:focus-within .collab-way-detail {
+  color: #f4e7e7 !important;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:hover .collab-way-detail,
+.page-collaborate .collab-grid-detailed .collab-way-card:focus-within .collab-way-detail {
+  border-top-color: rgba(255, 255, 255, .28) !important;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:hover .collab-way-number,
+.page-collaborate .collab-grid-detailed .collab-way-card:focus-within .collab-way-number {
+  color: #e8c18b !important;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:hover .collab-way-icon,
+.page-collaborate .collab-grid-detailed .collab-way-card:focus-within .collab-way-icon {
+  color: #e8c18b !important;
+  background: rgba(255, 255, 255, .08) !important;
+  border-color: rgba(232, 193, 139, .65) !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  .page-collaborate .collab-grid-detailed .collab-way-card { transition: none; }
+}
+
+/* Collaborate cards: alternate burgundy and white; hover switches to the opposite color. */
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd) {
+  background: #8f2333 !important;
+  border-color: #8f2333 !important;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd) h3 {
+  color: #fff !important;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd) p,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd) .collab-way-detail {
+  color: #f4e7e7 !important;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd) .collab-way-number,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd) .collab-way-icon {
+  color: #e8c18b !important;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd) .collab-way-detail {
+  border-top-color: rgba(255,255,255,.28) !important;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even) {
+  background: #fff !important;
+  border-color: #e7dfd7 !important;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even) h3 {
+  color: #24211f !important;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even) p,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even) .collab-way-detail {
+  color: #6f6964 !important;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even) .collab-way-number,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even) .collab-way-icon {
+  color: #8f2333 !important;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even) .collab-way-detail {
+  border-top-color: #e7dfd7 !important;
+}
+/* Hover reverses the card color while keeping text readable. */
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd):hover,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd):focus-within {
+  background: #fff !important;
+  border-color: #e7dfd7 !important;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd):hover h3,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd):focus-within h3 {
+  color: #24211f !important;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd):hover p,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd):hover .collab-way-detail,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd):focus-within p,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd):focus-within .collab-way-detail {
+  color: #6f6964 !important;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even):hover,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even):focus-within {
+  background: #8f2333 !important;
+  border-color: #8f2333 !important;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even):hover h3,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even):focus-within h3 {
+  color: #fff !important;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even):hover p,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even):hover .collab-way-detail,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even):focus-within p,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even):focus-within .collab-way-detail {
+  color: #f4e7e7 !important;
+}
+
+/* Collaborate cards: compact, polished alternating red/white tiles. */
+.page-collaborate .collab-grid-detailed {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(2n),
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(3n) {
+  min-height: 0;
+  padding: 21px 22px 19px;
+  border: 1px solid #e7dfd7;
+  border-radius: 3px;
+  box-shadow: 0 5px 16px rgba(40, 24, 20, .045);
+  transform: none;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd) {
+  background: #8f2333 !important;
+  border-color: #8f2333 !important;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd) h3 { color: #fff !important; }
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd) p,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd) .collab-way-detail { color: #f4e7e7 !important; }
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd) .collab-way-number,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd) .collab-way-icon { color: #e8c18b !important; }
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd) .collab-way-detail { border-top-color: rgba(255,255,255,.28) !important; }
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even) {
+  background: #fff !important;
+  border-color: #e7dfd7 !important;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even) h3 { color: #24211f !important; }
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even) p,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even) .collab-way-detail { color: #6f6964 !important; }
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even) .collab-way-number,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even) .collab-way-icon { color: #8f2333 !important; }
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even) .collab-way-detail { border-top-color: #e7dfd7 !important; }
+.page-collaborate .collab-grid-detailed .collab-way-card .collab-way-icon {
+  width: 33px;
+  height: 33px;
+  margin-top: 13px;
+  font-size: 17px;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card h3 {
+  margin: 15px 0 8px;
+  font-size: clamp(18px, 1.35vw, 21px);
+  line-height: 1.28;
+  letter-spacing: -.2px;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card p {
+  font-size: 13px;
+  line-height: 1.62;
+  margin-bottom: 10px;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card .collab-way-detail {
+  margin-top: 10px;
+  padding-top: 10px;
+  font-size: 11.5px;
+  line-height: 1.6;
+}
+/* Hover switches each tile to the opposite color. */
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd):hover,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd):focus-within {
+  background: #fff !important;
+  border-color: #e7dfd7 !important;
+  box-shadow: 0 10px 24px rgba(40, 24, 20, .12);
+  transform: translateY(-3px);
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd):hover h3,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd):focus-within h3 { color: #24211f !important; }
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd):hover p,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd):hover .collab-way-detail,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd):focus-within p,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd):focus-within .collab-way-detail { color: #6f6964 !important; }
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd):hover .collab-way-detail,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd):focus-within .collab-way-detail { border-top-color: #e7dfd7 !important; }
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even):hover,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even):focus-within {
+  background: #8f2333 !important;
+  border-color: #8f2333 !important;
+  box-shadow: 0 10px 24px rgba(40, 24, 20, .15);
+  transform: translateY(-3px);
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even):hover h3,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even):focus-within h3 { color: #fff !important; }
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even):hover p,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even):hover .collab-way-detail,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even):focus-within p,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even):focus-within .collab-way-detail { color: #f4e7e7 !important; }
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even):hover .collab-way-detail,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even):focus-within .collab-way-detail { border-top-color: rgba(255,255,255,.28) !important; }
+@media (max-width: 900px) {
+  .page-collaborate .collab-grid-detailed { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+}
+@media (max-width: 560px) {
+  .page-collaborate .collab-grid-detailed { grid-template-columns: 1fr; gap: 11px; }
+  .page-collaborate .collab-grid-detailed .collab-way-card,
+  .page-collaborate .collab-grid-detailed .collab-way-card:nth-child(2n),
+  .page-collaborate .collab-grid-detailed .collab-way-card:nth-child(3n) { padding: 19px; }
+  .page-collaborate .collab-grid-detailed .collab-way-card h3 { font-size: 19px; }
+}
+
+/* Collaborate cards: keep alternating colors stable on hover and strengthen headings. */
+.page-collaborate .collab-grid-detailed .collab-way-card,
+.page-collaborate .collab-grid-detailed .collab-way-card:hover,
+.page-collaborate .collab-grid-detailed .collab-way-card:focus-within {
+  transform: none !important;
+  transition: box-shadow .22s ease, border-color .22s ease !important;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd),
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd):hover,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd):focus-within {
+  background: #8f2333 !important;
+  border-color: #8f2333 !important;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd):hover h3,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd):focus-within h3 { color: #fff !important; }
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd):hover p,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd):hover .collab-way-detail,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd):focus-within p,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd):focus-within .collab-way-detail { color: #f4e7e7 !important; }
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even),
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even):hover,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even):focus-within {
+  background: #fff !important;
+  border-color: #e7dfd7 !important;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even):hover h3,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even):focus-within h3 { color: #24211f !important; }
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even):hover p,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even):hover .collab-way-detail,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even):focus-within p,
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even):focus-within .collab-way-detail { color: #6f6964 !important; }
+.page-collaborate .collab-grid-detailed .collab-way-card:hover,
+.page-collaborate .collab-grid-detailed .collab-way-card:focus-within { box-shadow: 0 7px 18px rgba(40, 24, 20, .08) !important; }
+.page-collaborate .collab-grid-detailed .collab-way-card h3 {
+  font-weight: 700 !important;
+  letter-spacing: -.25px !important;
+  text-wrap: pretty;
+  padding-bottom: 10px;
+  border-bottom: 2px solid currentColor;
+}
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd) h3 { border-bottom-color: rgba(255,255,255,.42) !important; }
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even) h3 { border-bottom-color: rgba(143,35,51,.25) !important; }
+
+/* Collaborate CTA: refined, compact, editorial call-to-action panel */
+.page-collaborate .collab-cta-enhanced {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(300px, .85fr);
+  align-items: center;
+  gap: clamp(30px, 4.5vw, 72px);
+  width: 100%;
+  margin: 38px auto 0;
+  padding: clamp(30px, 3.5vw, 54px) clamp(28px, 3.6vw, 62px);
+  min-height: 0;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.18);
+  background: linear-gradient(120deg, #701827 0%, #8f2333 58%, #9b2639 100%);
+  box-shadow: 0 18px 42px rgba(63, 22, 29, .12);
+}
+.page-collaborate .collab-cta-enhanced::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  width: 340px;
+  height: 340px;
+  right: -110px;
+  bottom: -210px;
+  border: 1px solid rgba(255,255,255,.13);
+  border-radius: 50%;
+  box-shadow: 0 0 0 28px rgba(255,255,255,.025), 0 0 0 58px rgba(255,255,255,.02);
+  pointer-events: none;
+}
+.page-collaborate .collab-cta-enhanced .collab-cta-photo {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: .10;
+  filter: grayscale(1) contrast(1.15);
+}
+.page-collaborate .collab-cta-enhanced .collab-cta-copy,
+.page-collaborate .collab-cta-enhanced .collab-cta-actions {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+.page-collaborate .collab-cta-enhanced .eyebrow.light {
+  color: #e8c6a0;
+  font-size: 11px;
+  letter-spacing: 1.7px;
+  margin-bottom: 15px;
+}
+.page-collaborate .collab-cta-enhanced .collab-cta-copy h2 {
+  max-width: 680px;
+  margin: 0 0 16px;
+  color: #fff;
+  font: 500 clamp(30px, 3vw, 46px)/1.12 var(--serif);
+  letter-spacing: -1px;
+  text-wrap: balance;
+}
+.page-collaborate .collab-cta-enhanced .collab-cta-copy p {
+  max-width: 660px;
+  margin: 0;
+  color: rgba(255,255,255,.86);
+  font-size: 14px;
+  line-height: 1.8;
+}
+.page-collaborate .collab-cta-enhanced .collab-cta-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+.page-collaborate .collab-cta-enhanced .button-white {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 56px;
+  padding: 0 20px;
+  background: #fffdfa;
+  color: #811d2d;
+  border: 1px solid #fffdfa;
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 7px 18px rgba(35,10,15,.12);
+  transition: background .2s ease, color .2s ease, box-shadow .2s ease;
+}
+.page-collaborate .collab-cta-enhanced .button-white:hover,
+.page-collaborate .collab-cta-enhanced .button-white:focus-visible {
+  background: #f0dfd7;
+  color: #681827;
+  box-shadow: 0 9px 22px rgba(35,10,15,.18);
+}
+.page-collaborate .collab-cta-enhanced .collab-cta-secondary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  min-height: 54px;
+  padding: 0 2px;
+  color: rgba(255,255,255,.94);
+  border-bottom: 1px solid rgba(255,255,255,.28);
+  font-size: 13px;
+  line-height: 1.5;
+  transition: color .2s ease, border-color .2s ease;
+}
+.page-collaborate .collab-cta-enhanced .collab-cta-secondary:last-child { border-bottom: 0; }
+.page-collaborate .collab-cta-enhanced .collab-cta-secondary svg { flex: 0 0 auto; transition: transform .2s ease; }
+.page-collaborate .collab-cta-enhanced .collab-cta-secondary:hover,
+.page-collaborate .collab-cta-enhanced .collab-cta-secondary:focus-visible {
+  color: #f0cba5;
+  border-bottom-color: rgba(240,203,165,.7);
+}
+.page-collaborate .collab-cta-enhanced .collab-cta-secondary:hover svg,
+.page-collaborate .collab-cta-enhanced .collab-cta-secondary:focus-visible svg { transform: translateX(4px); }
+@media (max-width: 760px) {
+  .page-collaborate .collab-cta-enhanced {
+    grid-template-columns: 1fr;
+    gap: 25px;
+    margin-top: 30px;
+    padding: 30px 24px;
+  }
+  .page-collaborate .collab-cta-enhanced .collab-cta-copy h2 { font-size: clamp(29px, 7vw, 38px); }
+  .page-collaborate .collab-cta-enhanced .collab-cta-copy p { font-size: 13px; }
+  .page-collaborate .collab-cta-enhanced .button-white { min-height: 52px; }
+  .page-collaborate .collab-cta-enhanced .collab-cta-secondary { min-height: 48px; font-size: 12px; }
+}
+@media (max-width: 420px) {
+  .page-collaborate .collab-cta-enhanced { padding: 26px 19px; }
+  .page-collaborate .collab-cta-enhanced .collab-cta-copy h2 { font-size: 29px; letter-spacing: -.6px; }
+}

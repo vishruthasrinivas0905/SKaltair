@@ -644,8 +644,99 @@ function Apply() {
 }
 
 function Collaborate() {
-  const ways=[['Joint research','Develop comparative, interdisciplinary or policy-focused work with clear scope, responsibilities, resources and intended outputs.'],['Academic partnerships','Support research opportunities, academic exchange, methodological training and knowledge-sharing with universities and professional institutions.'],['Mentorship and review','Contribute subject expertise through supervision, project advice, editorial review or academic assessment.'],['Policy consultation','Help identify legal and regulatory gaps, assess implementation challenges and develop evidence-based reform proposals.'],['Scholarly dialogue','Propose lectures, seminars, roundtables, workshops and consultations that encourage informed discussion.'],['Research support','Express interest in supporting approved research stipends, projects, publications, resources or educational activities.']];
-  return <><PageIntro eyebrow="COLLABORATE WITH SKALTAIR" title={<>Good questions grow<br/><em>through exchange.</em></>} copy="We welcome collaboration with researchers, academic institutions, legal professionals, public institutions and organisations whose work aligns with our public-benefit purpose." image={pagePhotos.collaborate}/><section className="section content-section"><div className="container"><SectionHeading eyebrow="WAYS TO WORK TOGETHER" title="Bring expertise to the conversation." copy="We seek collaborations that strengthen research quality, add relevant perspectives and help translate scholarship into practical insight."/><div className="collab-grid">{ways.map((x,i)=><article key={x[0]}><span>{String(i+1).padStart(2,'0')}</span><h3>{x[0]}</h3><p>{x[1]}</p></article>)}</div><div className="collab-principles"><div><span className="eyebrow">OUR PRINCIPLES</span><h2>Partnership with<br/><em>clear expectations.</em></h2></div><ul><li>Academic independence and evidence-based conclusions</li><li>Clearly defined responsibilities and transparent arrangements</li><li>Confidentiality, data protection and research ethics</li><li>Agreed treatment of intellectual property and authorship</li><li>Disclosure and management of conflicts of interest</li></ul></div><div className="collab-cta"><Photo image={photos.roundTable} alt="" className="collab-cta-photo" widths={[640, 1000, 1400]} sizes="(max-width: 760px) 100vw, 1240px"/><div><span className="eyebrow light">PROPOSE AN IDEA</span><h2>Tell us what you have in mind.</h2><p>Include your organisation, the proposed question or activity, intended public benefit, responsibilities, timeline, resources and any funding, confidentiality or intellectual-property considerations.</p></div><Link to="/contact" className="button button-white">Start a conversation <ArrowUpRight size={15}/></Link></div><p className="micro-note">Discussions do not create a partnership or binding commitment. Approved collaborations will be documented through an appropriate written arrangement.</p></div></section></>;
+  const ways = [
+    { title: 'Joint Research', copy: 'Develop research projects addressing shared legal, technological or public-policy questions. Collaborations may involve comparative studies, interdisciplinary inquiry, research reports or policy recommendations.', detail: 'Project scope, responsibilities, resources, timelines and intended outputs will be agreed before work begins.' },
+    { title: 'Academic and Institutional Partnerships', copy: 'Work with us on research opportunities, academic exchanges, methodological training and knowledge-sharing initiatives.', detail: 'We welcome proposals from universities, colleges, research centres and professional institutions interested in supporting sustained inquiry and researcher development.' },
+    { title: 'Research Supervision and Mentorship', copy: 'Experienced legal professionals, academics and subject specialists may express interest in supervising projects, advising researchers or supporting the development of research and writing skills.', detail: 'Appointments will depend on subject expertise, availability and the Centre’s requirements.' },
+    { title: 'Editorial and Academic Review', copy: 'Contribute as a reviewer or subject expert in assessing research methodology, legal analysis, source reliability and publication quality.', detail: 'Reviewers must maintain confidentiality and disclose interests that could affect their independence.' },
+    { title: 'Policy Consultation and Institutional Support', copy: 'Collaborate on identifying legal and regulatory gaps, evaluating implementation challenges and developing evidence-based reform proposals.', detail: 'We welcome opportunities to support public consultations, institutional research needs and policy capacity building within the Centre’s approved remit.' },
+    { title: 'Lectures, Workshops and Scholarly Dialogue', copy: 'Propose lectures, seminars, roundtables, workshops or consultations that encourage informed discussion of contested legal and policy questions.', detail: 'Activities should have a clear academic purpose and accommodate reasoned differences of opinion.' },
+    { title: 'Research Funding and Support', copy: 'Individuals and organisations may express interest in supporting research stipends, approved projects, publications, research resources or educational activities through lawful grants, donations or other permitted arrangements.', detail: 'Funding is received and administered through Sri Chennakeshava Memorial Education and Welfare Society, subject to applicable requirements and institutional approval. Proposals involving CSR support will be assessed separately for eligibility and project suitability. Financial support does not confer control over research findings, candidate selection or publication outcomes.' },
+  ];
+  const principles = [
+    'Academic independence and evidence-based conclusions.',
+    'Clearly defined responsibilities and transparent financial arrangements.',
+    'Confidentiality, data protection and research ethics.',
+    'Agreed treatment of intellectual property, authorship and publication rights.',
+    'Disclosure and management of conflicts of interest.',
+    'The Centre’s non-profit and public-benefit purpose.',
+  ];
+  const proposalPoints = [
+    'Your name, organisation and contact details.',
+    'The proposed area and form of collaboration.',
+    'The research question, activity or institutional need.',
+    'Intended outcomes and potential public benefit.',
+    'Proposed responsibilities, timeline and resources.',
+    'Any funding, confidentiality, data-access or intellectual property considerations.',
+  ];
+  const proposeUrl = '/contact?category=Collaboration%20and%20support&subject=Propose%20a%20collaboration';
+  const mentorUrl = '/contact?category=Collaboration%20and%20support&subject=Mentor%20or%20reviewer%20interest';
+  return <>
+    <PageIntro
+      eyebrow="COLLABORATE WITH SK ALTAIR"
+      title={<>Good questions grow<br/><em>through exchange.</em></>}
+      copy="SK ALTAIR welcomes collaboration with academic institutions, legal professionals, researchers, public institutions, professional bodies and other organisations whose work aligns with our public-benefit objectives."
+      image={pagePhotos.collaborate}
+      imageBehind
+      className="page-intro-publications page-intro-collaborate"
+    />
+    <section className="section content-section collaborate-page">
+      <div className="container">
+        <div className="collab-intro-copy">
+          <span className="eyebrow">CONTRIBUTE TO RESEARCH, POLICY AND RESPONSIBLE INNOVATION</span>
+          <p className="lead">We seek collaborations that strengthen research quality, bring relevant expertise into legal and policy discussions and help translate scholarship into practical recommendations.</p>
+        </div>
+
+        <section className="collab-ways-section" aria-labelledby="collab-ways-title">
+          <SectionHeading eyebrow="WAYS TO COLLABORATE" title={<>Bring expertise to<br/><em>the conversation.</em></>} copy="Explore ways to contribute knowledge, experience and resources to independent research and public-benefit work."/>
+          <div className="collab-grid collab-grid-detailed">
+            {ways.map((item, index) => <article key={item.title} className="collab-way-card">
+              <span className="collab-way-number">{String(index + 1).padStart(2, '0')}</span>
+              <span className="collab-way-icon" aria-hidden="true">↗</span>
+              <h3>{item.title}</h3>
+              <p>{item.copy}</p>
+              <p className="collab-way-detail">{item.detail}</p>
+            </article>)}
+          </div>
+        </section>
+
+        <section className="collab-principles collab-principles-detailed" aria-labelledby="collab-principles-title">
+          <div className="collab-principles-heading">
+            <span className="eyebrow">OUR COLLABORATION PRINCIPLES</span>
+            <h2 id="collab-principles-title">Partnership with<br/><em>clear expectations.</em></h2>
+            <p>Every collaboration must preserve the Centre’s independence, ethical standards and public-benefit purpose.</p>
+          </div>
+          <div className="collab-principles-content">
+            <ul>{principles.map((principle, index) => <li key={principle}><span>{String(index + 1).padStart(2, '0')}</span>{principle}</li>)}</ul>
+            <div className="collab-authorisation-note"><ShieldCheck size={21}/><p>Use of the Centre’s name or logo, public announcements and representations of institutional endorsement require prior written authorisation.</p></div>
+          </div>
+        </section>
+
+        <section className="collab-proposal-section" aria-labelledby="collab-proposal-title">
+          <div className="collab-proposal-heading">
+            <span className="eyebrow">HOW TO PROPOSE A COLLABORATION</span>
+            <h2 id="collab-proposal-title">Start with a clear<br/><em>proposal.</em></h2>
+            <p>Please provide a brief outline covering the following points so that the Centre can assess relevance, feasibility, available expertise and alignment with its objectives.</p>
+          </div>
+          <div className="collab-proposal-checklist">
+            {proposalPoints.map((point, index) => <div className="collab-proposal-point" key={point}><span>{String(index + 1).padStart(2, '0')}</span><p>{point}</p></div>)}
+          </div>
+        </section>
+
+        <div className="collab-review-note"><Check size={19}/><p>The Centre will review proposals for relevance, feasibility, available expertise and alignment with its objectives. Discussions do not create a partnership or binding commitment; approved collaborations will be documented through the appropriate written arrangement.</p></div>
+
+        <section className="collab-cta collab-cta-enhanced" aria-label="Propose a collaboration">
+          <Photo image={photos.roundTable} alt="" className="collab-cta-photo" widths={[640, 1000, 1400]} sizes="(max-width: 760px) 100vw, 1240px"/>
+          <div className="collab-cta-copy"><span className="eyebrow light">PROPOSE AN IDEA</span><h2>Tell us what you have in mind.</h2><p>Share your organisation, proposed activity, intended public benefit, responsibilities, timeline, resources and any funding, confidentiality or intellectual-property considerations.</p></div>
+          <div className="collab-cta-actions">
+            <Link to={proposeUrl} className="button button-white">Propose a Collaboration <ArrowUpRight size={16}/></Link>
+            <Link to={mentorUrl} className="collab-cta-secondary">Express Interest as a Mentor or Reviewer <ArrowRight size={16}/></Link>
+            <Link to="/contact" className="collab-cta-secondary">Contact Us <ArrowRight size={16}/></Link>
+          </div>
+        </section>
+      </div>
+    </section>
+  </>;
 }
 
 function Governance() {
