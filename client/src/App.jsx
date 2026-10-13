@@ -248,10 +248,12 @@ const committeeBodies = [
   },
 ];
 
-// Set photo to an image path (for example '/committee/s-k-murthy.jpg' in client/public) once the portraits are supplied.
+// Portraits are stored in client/public/committee. Fill in each contact detail as it is supplied: linkedin takes the full
+// profile URL, email the address and whatsapp the number with its country code (spaces and + are allowed).
 const boardMembers = [
   {
-    name: 'Dr. S. K. Murthy', initials: 'SKM', title: 'SK ALTAIR Board Member', photo: null,
+    name: 'Dr. S. K. Murthy', initials: 'SKM', title: 'SK ALTAIR Board Member', photo: '/committee/s-k-murthy.jpg',
+    contact: { linkedin: '', email: '', whatsapp: '' },
     summary: 'His work spans teaching, research and development, and intellectual property, including 24 years building and sustaining innovation and IP cultures within multinational organisations.',
     highlights: [['32', 'years of experience'], ['6,000+', 'patent assets managed'], ['250+', 'patent applications']],
     expertise: ['US, European and Indian patent practice', 'Data protection', 'Corporate governance', 'IP and standards policy'],
@@ -261,7 +263,8 @@ const boardMembers = [
       'His qualifications include a BE, an ME with a gold medal, an LLB, a Postgraduate Diploma in Intellectual Property Rights, a Doctor of Science in Computer Science and a PhD from the National Law School of India University. He is enrolled with the Karnataka State Bar Council, is a registered Indian Patent Agent and holds certification as an Independent Director.'],
   },
   {
-    name: 'Mr. Ananth Sripadarao', initials: 'AS', title: 'SK ALTAIR Board Member', photo: null,
+    name: 'Mr. Ananth Sripadarao', initials: 'AS', title: 'SK ALTAIR Board Member', photo: '/committee/ananth-sripadarao.jpg',
+    contact: { linkedin: '', email: '', whatsapp: '' },
     summary: 'His practice spans patents, trademarks, brand protection, technology licensing, corporate governance, and mergers and acquisitions across the Asia-Pacific, Middle East and Africa.',
     highlights: [['23+', 'years of experience'], ['200+', 'patent filings led'], ['400+', 'technologies licensed or commercialised']],
     expertise: ['Patents and trademarks', 'Technology licensing', 'IP litigation', 'Mergers and acquisitions'],
@@ -272,7 +275,7 @@ const boardMembers = [
   },
 ];
 
-// Placeholder seats until appointments are confirmed; replace each with the member's name, title, photo and profile.
+// Placeholder seats until appointments are confirmed; replace each with the member's name, title, photo, contact details and profile.
 const councils = {
   research: {
     name: 'Research Council', eyebrow: 'RESEARCH COUNCIL', image: councilPhotos['research-council'],
@@ -322,12 +325,33 @@ function MemberHighlights({ items }) {
   return <ul className="member-highlights">{items.map(([value, label]) => <li key={label}><b>{value}</b><span>{label}</span></li>)}</ul>;
 }
 
+// LinkedIn and WhatsApp marks from Simple Icons (CC0); envelope from Material Icons (Apache 2.0).
+const contactChannels = [
+  { key: 'linkedin', label: 'LinkedIn', href: value => value, describe: name => `${name} on LinkedIn`, icon: 'M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452z' },
+  { key: 'email', label: 'Email', href: value => `mailto:${value}`, describe: name => `Email ${name}`, icon: 'M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z' },
+  { key: 'whatsapp', label: 'WhatsApp', href: value => `https://wa.me/${value.replace(/\D/g, '')}`, describe: name => `Message ${name} on WhatsApp`, icon: 'M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z' },
+];
+
+// A button links once its detail is supplied; until then it is shown without a link.
+function MemberContact({ member }) {
+  const contact = member.contact ?? {};
+  return (
+    <ul className="member-contact" aria-label={`Contact ${member.name}`}>
+      {contactChannels.map(({ key, label, href, describe, icon }) => {
+        const mark = <svg viewBox="0 0 24 24" aria-hidden="true"><path d={icon}/></svg>;
+        return <li key={key}>{contact[key] ? <a href={href(contact[key])} aria-label={describe(member.name)} title={label} {...(key === 'email' ? {} : { target: '_blank', rel: 'noopener noreferrer' })}>{mark}</a> : <span role="img" aria-label={`${label} link to be added`} title={`${label} link to be added`}>{mark}</span>}</li>;
+      })}
+    </ul>
+  );
+}
+
 function MemberCard({ member, onOpen }) {
   return (
     <article className="member-card">
       <MemberPortrait member={member}/>
       <h3>{member.name}</h3>
       <span className="member-title">{member.title}</span>
+      <MemberContact member={member}/>
       {member.highlights && <MemberHighlights items={member.highlights}/>}
       {member.focus && <span className="member-focus">{member.focus}</span>}
       <p>{member.summary}</p>
