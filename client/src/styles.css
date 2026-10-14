@@ -749,8 +749,7 @@ details[open]::details-content{height:auto}
 /* Source Serif 4 display type with Manrope supporting text on Home/About routes. */
 body:has(.route-view:is(.page-home,.page-about,.page-governance,.page-committee)){font-family:'Manrope',sans-serif;--serif:'Source Serif 4',Georgia,serif}
 :is(.page-home,.page-about,.page-governance,.page-committee){font-family:'Manrope',sans-serif;--serif:'Source Serif 4',Georgia,serif}
-body:has(.route-view:is(.page-home,.page-about,.page-governance,.page-committee)) :is(.site-header,.footer){font-family:'Manrope',sans-serif;--serif:'Source Serif 4',Georgia,serif}
-body:has(.route-view:is(.page-home,.page-about,.page-governance,.page-committee)) .brand-tagline{font-family:'Manrope',sans-serif}
+body:has(.route-view:is(.page-home,.page-about,.page-governance,.page-committee)) .footer{font-family:'Manrope',sans-serif;--serif:'Source Serif 4',Georgia,serif}
 .page-home :is(.hero h1,.section h2,.section-heading h2,.theme-card h3,.program-slide h3,.method-step h3,.pub-feature-copy h3,.home-news-card h3,.join-inner h2,.gita-title,.gita-quote p,.footer-cta h3),.page-about :is(.page-intro h1,.prose h2,.prose blockquote,.quote-panel blockquote){font-family:'Source Serif 4',Georgia,serif}
 .page-about .prose>section#vision{background:#f7f1e5;border-color:#dfd1bd;color:#332522}
 .page-about .prose>section#vision .eyebrow{color:#8f2333}
@@ -1804,8 +1803,7 @@ body:has(.route-view:is(.page-home,.page-about,.page-governance,.page-committee)
    and Core Committee pages, including the header and footer. */
 body:has(.route-view:is(.page-programs,.page-apply)){font-family:'Manrope',sans-serif;--serif:'Source Serif 4',Georgia,serif}
 :is(.page-programs,.page-apply){font-family:'Manrope',sans-serif;--serif:'Source Serif 4',Georgia,serif}
-body:has(.route-view:is(.page-programs,.page-apply)) :is(.site-header,.footer){font-family:'Manrope',sans-serif;--serif:'Source Serif 4',Georgia,serif}
-body:has(.route-view:is(.page-programs,.page-apply)) .brand-tagline{font-family:'Manrope',sans-serif}
+body:has(.route-view:is(.page-programs,.page-apply)) .footer{font-family:'Manrope',sans-serif;--serif:'Source Serif 4',Georgia,serif}
 /* Core Committee headings in the same regular-weight serif as the Home and About headings. */
 .page-committee :is(h2,h3){font-family:var(--serif);font-style:normal;font-weight:400}
 
@@ -4698,3 +4696,62 @@ html:has(.profile-dialog[open]){overflow:hidden}
   color: #f4d7b8 !important;
   -webkit-text-fill-color: #f4d7b8 !important;
 }
+/* Reinstate the requested shared header, Apply Now menu and scroller details. */
+.site-header .brand{gap:12px;min-width:0}
+.site-header .brand-seal{width:74px;height:74px}
+.site-header .brand-type b{font-size:21px;letter-spacing:2.2px;transform:translateY(-2px)}
+.site-header .brand-type .brand-tagline{font-family:'DM Sans',sans-serif;font-size:11px;line-height:1.25;letter-spacing:.05px;white-space:nowrap}
+.site-header .brand-type .brand-society{font:400 9px/1.25 'Manrope',sans-serif;letter-spacing:0;white-space:nowrap;color:#8d817a}
+.footer .brand-type .brand-tagline{font-size:11px;line-height:1.25;letter-spacing:0;white-space:nowrap}
+.footer .brand-type .brand-society{font:400 9px/1.3 'Manrope',sans-serif;letter-spacing:0;white-space:nowrap;color:#d7babb}
+.apply-menu{width:280px;min-width:0;max-width:calc(100vw - 24px);grid-template-columns:minmax(0,1fr);display:grid;gap:2px;box-sizing:border-box}
+.apply-menu>*{min-width:0}
+.apply-menu>details{border-top:1px solid #eee7e0}
+.apply-menu>details>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 12px;cursor:pointer;list-style:none;font-size:14px;color:#504944}
+.apply-menu>details>summary::-webkit-details-marker{display:none}
+.apply-menu>details[open]>summary{color:var(--red)}
+.apply-submenu{display:grid;gap:1px;padding:0 0 7px 11px;margin-left:12px;border-left:1px solid #e7d9d3}
+.apply-menu .apply-submenu a{padding:8px 10px;font-size:10px;line-height:1.4;white-space:normal;overflow-wrap:anywhere}
+.program-marquee-group a{font-size:19px;position:relative;flex:1 1 0;justify-content:center}
+.program-marquee-group a:not(:last-child):after{content:'';position:absolute;right:0;top:50%;height:24px;border-right:1px solid #b99a8e;transform:translateY(-50%);pointer-events:none}
+@media(min-width:1141px){
+  .header-inner{width:calc(100% - 32px);gap:40px}
+  .site-header .brand{flex:0 0 auto}
+  .nav{flex:1 1 0;min-width:0;flex-wrap:nowrap;justify-content:space-between;gap:clamp(5px,.6vw,11px);white-space:nowrap}
+  .nav>*{flex:0 0 auto}
+  .nav-link{font-family:'DM Sans',sans-serif;font-size:clamp(12px,.9vw,16px)}
+  .apply-menu{left:auto;right:0;transform-origin:top right}
+}
+@media(max-width:1140px){
+  .footer .brand-type .brand-tagline,.footer .brand-type .brand-society{font-size:9px}
+  .apply-nav>.nav-trigger{height:auto;min-height:45px;width:100%;justify-content:space-between;padding:0 3px;border-bottom:1px solid var(--line)}
+  .apply-menu{width:100%;min-width:0}
+  .apply-menu>details>summary{padding:10px 9px;font-size:14px}
+  .apply-menu .apply-submenu a{font-size:11px}
+}
+@media(max-width:760px){
+  .site-header .brand-type .brand-tagline{font-size:8px;letter-spacing:0}
+  .site-header .brand-type .brand-society{font-size:7px;line-height:1.2}
+  .footer .brand-type .brand-tagline{font-size:8px}
+  .footer .brand-type .brand-society{font-size:7px}
+  .program-marquee-group a{font-size:16px}
+  .program-marquee-group a:not(:last-child):after{height:20px}
+  .program-marquee-group{flex-basis:680px;width:680px}
+}
+@media(max-width:500px){
+  .site-header .brand-seal{width:48px;height:48px}
+  .site-header .brand-type b{font-size:15px}
+  .site-header .brand-type .brand-tagline{font-size:7.3px}
+  .site-header .brand-type .brand-society{font-size:6.3px}
+  .footer .brand-type .brand-tagline{font-size:7.3px}
+  .footer .brand-type .brand-society{font-size:6.3px}
+}
+.page-home .gita-quote{border-left:0;padding-left:0;text-align:center}
+.page-home .gita-quote .gita-sanskrit{margin:0 0 5px;font:500 clamp(24px,2.35vw,34px)/1.4 'Noto Serif Devanagari','Nirmala UI',serif;letter-spacing:.025em;color:#b58b4e}
+.page-home .gita-quote .gita-transliteration{display:block;margin:0 0 5px;font:700 13px/1.5 'Manrope',sans-serif;letter-spacing:.01em;color:var(--gita-ink,#473e38)}
+.page-home .gita-quote .gita-translation{margin:0;font:400 12px/1.5 'Manrope',sans-serif;color:var(--gita-ink,#473e38)}
+.page-home .gita-quote .gita-translation b{font-weight:750}
+.page-home .gita-quote .gita-translation em{font-style:italic}
+.page-home .gita-quote .gita-translation small{font-size:10px;white-space:nowrap}
+@media(max-width:760px){.page-home .gita-quote{padding-left:0}.page-home .gita-quote .gita-sanskrit{font-size:25px}.page-home .gita-quote .gita-transliteration{font-size:12px}.page-home .gita-quote .gita-translation{font-size:11px}}
+@media(max-width:500px){.page-home .gita-quote .gita-sanskrit{font-size:22px}}
