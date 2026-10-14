@@ -2043,6 +2043,14 @@ html:has(.profile-dialog[open]){overflow:hidden}
 
 /* Apply Now: a maroon guidance panel beside a calm, roomy expression-of-interest form. */
 .page-apply .page-intro .eyebrow{font-size:14px;letter-spacing:1.8px}
+/* Apply Now intro photograph: the same effect as the About Us intro. It sits at the right, full height, and fades in
+   from the brown on its left. On phones it lies faintly behind the text. */
+.page-apply .page-intro-image-behind.page-intro-apply .intro-media-behind{inset:0 0 0 auto;width:max(calc(30vw - 92px),calc(50vw - 340px));max-width:620px;height:100%}
+.page-apply .page-intro-image-behind.page-intro-apply .intro-media-behind:after{background:linear-gradient(90deg,#3b2522 0%,#3b2522ee 22%,#3b252200 82%),linear-gradient(0deg,#1d171455,transparent 45%)}
+@media(max-width:760px){
+.page-apply .page-intro-image-behind.page-intro-apply .intro-media-behind{width:100%;max-width:none;opacity:.35}
+.page-apply .page-intro-image-behind.page-intro-apply .intro-media-behind:after{background:linear-gradient(0deg,#3b2522ed,#3b2522a8)}
+}
 .page-apply .application-section{padding:96px 0 112px;background:linear-gradient(180deg,#f7f1e5 0%,#fbf7ee 260px,#fffdf8 100%)}
 .page-apply .application-layout{grid-template-columns:minmax(0,.9fr) minmax(0,1.28fr);gap:clamp(40px,4.5vw,72px)}
 .page-apply .application-aside{position:relative;top:auto;padding:30px 34px 26px;background:radial-gradient(ellipse at 0% 0%,#a542413d 0%,transparent 62%),#812230;border-radius:6px;color:#fff8ec;box-shadow:0 28px 60px #57151e29}
