@@ -5515,3 +5515,255 @@ body { min-width: 0; }
     font-size: clamp(36px, 10vw, 48px);
   }
 }
+/* Requested SK ALTAIR identity, navigation, home and About Us refinements. */
+.brand{gap:16px}.brand-seal{width:84px;height:84px}.brand-type{display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-width:0}.brand-type b{font-size:20px;letter-spacing:1.6px;white-space:nowrap}.brand-type .brand-k{color:#a51f31}.brand-type .brand-company{display:block;max-width:590px;color:inherit;font:600 11px/1.2 'Manrope',sans-serif;white-space:nowrap}.brand-type .brand-company span{color:#a51f31}.brand-type .brand-society{display:block;color:#694879;font:500 9px/1.25 'Manrope',sans-serif;white-space:nowrap}.brand-inverse .brand-type .brand-society{color:#d6b7e8}
+.publication-nav{position:relative}.publication-nav>.nav-link{display:flex;align-items:center;gap:5px}.publication-nav .dropdown-panel{display:none}.publication-nav:hover .dropdown-panel,.publication-nav:focus-within .dropdown-panel{display:grid}
+.nav-dropdown:hover>.dropdown-panel,.nav-dropdown:focus-within>.dropdown-panel{display:grid}.research-menu{grid-template-columns:1fr!important;max-height:min(75vh,620px);overflow:auto}.research-menu-grid{grid-template-columns:1fr!important}.research-menu-term[open] .research-menu-topics{display:grid;grid-template-columns:1fr!important}
+.news-marquee{height:58px;display:flex;align-items:center;gap:22px;overflow:hidden;border-block:1px solid #dfd0b8;background:#f3ecdc;color:#641722}.news-marquee>span{position:relative;z-index:1;align-self:stretch;display:flex;align-items:center;padding:0 22px;background:#f3ecdc;box-shadow:9px 0 18px #f3ecdc99;font:700 10px/1 'Manrope',sans-serif;letter-spacing:.12em;white-space:nowrap}.news-marquee>div{display:flex;align-items:center;gap:36px;min-width:max-content;animation:news-scroll 34s linear infinite}.news-marquee:hover>div{animation-play-state:paused}.news-marquee a{display:flex;align-items:center;gap:8px;color:#641722;font-size:13px;white-space:nowrap}.news-marquee a svg{color:#a51f31}@keyframes news-scroll{to{transform:translateX(-50%)}}
+.gita-inner{grid-template-columns:minmax(0,1fr)!important}.gita-quote{max-width:none}.gita-label,.gita-action{display:none!important}.gita-translation{font-size:clamp(18px,2vw,25px)!important}.hero-minimal{font-size:clamp(29px,3.2vw,45px)!important;line-height:1.2!important}.hero-minimal .hero-title-mask{margin-bottom:5px}.hero-minimal em{font-style:normal}.hero-copy>p,.hero-copy>.eyebrow{display:none!important}.hero-content{min-height:clamp(390px,57vh,650px)!important}.hero-bottom{display:none}
+.page-home .section-institution .section-heading h2,.page-home .section-themes .section-heading h2,.page-home .section-about .about-copy>.eyebrow,.page-home .section-method .eyebrow{font-size:clamp(24px,3vw,36px)}.page-home .section-institution .section-heading h2:after{content:none}.page-home .section-programs .program-top h2{display:none}.page-home .section-method> .container>div:first-child>h2{font-size:clamp(25px,3vw,38px)}
+.page-intro-about{text-align:center}.page-intro-about>.container{display:flex;flex-direction:column;align-items:center}.page-intro-about .eyebrow{margin-inline:auto}.about-summary{max-width:1050px;padding:30px 24px 34px;text-align:center}.about-summary>p{margin:0 auto 14px;font-size:16px;line-height:1.75;color:#443a36}.about-summary>.text-link{margin-inline:auto}.about-purpose-expanded{margin:22px auto 0;text-align:left;white-space:pre-line;font-size:14px;line-height:1.85;color:#443a36}.page-about .contents-rail{position:static!important;top:auto!important;align-self:start!important;grid-row:auto!important;grid-column:1!important}.page-about .about-page-grid{grid-template-columns:180px minmax(0,1fr)!important;gap:28px!important}.page-about .prose{grid-column:2!important;grid-row:auto!important;width:100%!important;margin:0!important}
+.page-about .prose>section#vision,.page-about .prose>section#mission,.page-about .prose>section#constitution{min-height:310px;display:flex;flex-direction:column;justify-content:center;overflow:hidden;transition:min-height .25s ease}.page-about .prose>section#mission,.page-about .prose>section#constitution{max-height:380px;position:relative}.page-about .prose>section#mission:focus-within,.page-about .prose>section#constitution:focus-within{max-height:none}.page-about .objective-description{padding:0 18px 18px;margin:0;line-height:1.75;color:var(--muted)}.governance-content{padding-top:38px}.governance-content>.container{max-width:1040px}.governance-content h2{font:500 clamp(34px,4vw,52px)/1.1 var(--serif);margin:0 0 26px}.governance-content h3{font:600 23px/1.25 var(--serif);margin:30px 0 10px;color:#7d2030}.governance-content p{font-size:14px;line-height:1.8;white-space:pre-line;color:#4f4540;margin:0 0 13px}.about-download{float:right;margin:30px 0 0}
+.page-intro-apply>.container{text-align:center;display:flex;flex-direction:column;align-items:center}.page-intro-apply .eyebrow{order:2;margin:14px 0 0;font-size:13px}.page-intro-apply h1{order:1;margin-bottom:12px!important}.page-intro-apply p{order:3;margin:10px auto 0!important;font-size:14px!important;max-width:650px!important}.page-intro-apply h1:before{content:'RESEARCH WITH US';display:block;margin:0 0 12px;font:700 13px/1.3 'Manrope',sans-serif;letter-spacing:.13em;color:#e7c98b}.page-intro-apply .eyebrow{display:none}
+@media(max-width:1100px){.brand-seal{width:68px;height:68px}.brand-type .brand-company{font-size:9px}.brand-type .brand-society{font-size:8px}}
+@media(max-width:760px){.brand{gap:9px}.brand-seal{width:58px;height:58px}.brand-type b{font-size:16px}.brand-type .brand-company{font-size:7px;white-space:normal;max-width:250px}.brand-type .brand-society{font-size:6.5px;white-space:normal;max-width:250px}.news-marquee{height:54px}.news-marquee>span{padding-inline:12px;font-size:8px}.news-marquee>div{gap:20px}.news-marquee a{font-size:11px}.page-about .about-page-grid{grid-template-columns:1fr!important}.page-about .contents-rail{display:flex!important;flex-wrap:wrap;gap:12px;padding:14px!important}.page-about .prose{grid-column:1!important}.page-about .prose>section#vision,.page-about .prose>section#mission,.page-about .prose>section#constitution{min-height:0}.page-about .about-purpose-expanded{font-size:13px}.about-download{float:none;display:inline-flex}.page-intro-apply h1:before{font-size:11px}}
+.page-home .gita-strip{padding-block:18px}.page-home .gita-inner{min-height:0!important}.page-home .hero-content{min-height:42vh!important;padding-block:25px 30px}.page-home .hero-art-frame{height:38vh;min-height:260px;max-height:430px}.page-home .hero-title-mask{overflow:visible}
+.page-about .prose{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch;gap:16px}.page-about .prose>section#vision,.page-about .prose>section#mission,.page-about .prose>section#constitution{min-height:100%;height:100%;padding:28px 24px}.page-about .prose>section#objectives{grid-column:1/-1}.page-about .objective-list>div{border:1px solid #e5dbd1;background:#fffdfa}.page-about .objective-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.page-about .objective-description{border-top:1px solid #eee3d9}
+@media(max-width:760px){.page-about .prose{grid-template-columns:1fr}.page-about .prose>section#objectives{grid-column:1}.page-about .objective-list{grid-template-columns:1fr}.page-home .hero-art-frame{height:32vh;min-height:220px}}
+.page-home .section-about .about-copy>.eyebrow,.page-home .section-institution .section-heading .eyebrow,.page-home .section-themes .section-heading .eyebrow,.page-home .section-programs .program-top>.eyebrow,.page-home .section-method> .container>div:first-child>.eyebrow{display:block;font-size:clamp(22px,2.5vw,30px);line-height:1.2;letter-spacing:0;color:#342824;margin-bottom:18px}.page-home .section-method h2{font-size:clamp(30px,3.5vw,46px)!important}.page-intro-apply h1:before{content:none}
+@media(max-width:760px){.brand-type .brand-company{font-size:6px;white-space:nowrap;max-width:none}.brand-type .brand-society{font-size:6px;white-space:nowrap;max-width:none}}
+/* Keep the Gita audio control and complete ornamental geometry in the quote strip. */
+.page-home .gita-strip{position:relative}.page-home .gita-inner{position:relative;display:block!important;padding-right:220px}.page-home .gita-quote{max-width:100%;position:relative;z-index:1}.page-home .gita-action{display:block!important;position:absolute;right:0;top:50%;transform:translateY(-50%);z-index:2}.page-home .gita-quote .gita-translation{font-size:clamp(16px,1.5vw,20px)!important;line-height:1.55}.page-home .gita-quote .gita-translation b{font-size:.72em;font-weight:700}.page-home .gita-quote .gita-translation em{font-size:1em}.page-home .gita-quote .gita-translation small{font-size:.68em}
+@media(max-width:760px){.page-home .gita-inner{padding-right:0}.page-home .gita-action{position:static;transform:none;margin-top:10px}.page-home .gita-quote .gita-translation{font-size:16px!important}}
+/* Compact the homepage opening so the quote, updates ticker, and red hero fit together. */
+.page-home .gita-strip{height:auto!important;min-height:0!important;padding:10px 0!important}.page-home .gita-quote .gita-sanskrit{font-size:clamp(17px,1.75vw,24px)!important;line-height:1.35!important;margin:0 0 5px!important}.page-home .gita-quote .gita-transliteration{font-size:10px!important;line-height:1.35!important;display:block;margin:0 0 5px!important}.page-home .gita-quote .gita-translation{font-size:16px!important;line-height:1.35!important}.page-home .gita-inner{padding-block:0!important}.page-home .news-marquee{height:44px!important}.page-home .news-marquee>span{font-size:9px}.page-home .hero{height:clamp(465px,58vh,520px)!important}.page-home .hero-content{min-height:0!important;height:100%;padding-block:18px 26px!important}.page-home .hero-art-frame{height:40vh;min-height:250px;max-height:360px}
+header.site-header .brand-type .brand-company{font-size:13px;letter-spacing:.15px;line-height:1.3}header.site-header .brand-type .brand-society{font-size:11px;line-height:1.3;color:#694879!important;letter-spacing:0}
+@media(max-width:1140px){header.site-header .brand-type .brand-company{font-size:11px}header.site-header .brand-type .brand-society{font-size:9px}}
+@media(max-width:760px){.page-home .gita-strip{padding:8px 0!important}.page-home .gita-quote .gita-sanskrit{font-size:18px!important}.page-home .gita-quote .gita-transliteration{font-size:9px!important}.page-home .gita-quote .gita-translation{font-size:14px!important}.page-home .gita-action{margin-top:4px}.page-home .news-marquee{height:40px!important}.page-home .hero{height:clamp(430px,62vh,510px)!important}header.site-header .brand-type .brand-company{font-size:7px}header.site-header .brand-type .brand-society{font-size:7px}}
+/* Keep the full desktop navbar within the viewport and strengthen the unit line. */
+html,body,#root{max-width:100%;overflow-x:clip}header.site-header .header-inner{width:min(100% - 40px,1856px);gap:16px}header.site-header .nav{gap:clamp(10px,1vw,16px);flex:0 1 auto;min-width:0}header.site-header .nav-link{font-size:clamp(10px,.72vw,11px);white-space:nowrap}header.site-header .nav-link svg{width:11px;height:11px;flex:none}header.site-header .brand{flex:0 1 auto;min-width:0;gap:12px}header.site-header .brand-type .brand-company{font-size:12px}header.site-header .brand-type .brand-society{font-size:11px;font-weight:650;color:#694879!important}
+@media(max-width:1140px) and (min-width:761px){header.site-header .nav{gap:8px}header.site-header .nav-link{font-size:9px}header.site-header .brand-type .brand-company{font-size:10px}header.site-header .brand-type .brand-society{font-size:9px;font-weight:650}}
+@media(min-width:1141px){header.site-header .header-inner{justify-content:flex-start}header.site-header .nav{margin-left:20px;flex:1;justify-content:space-between;gap:clamp(7px,.55vw,11px)}}
+header.site-header .nav-link{font-size:clamp(10.5px,.76vw,11.5px)}.page-home .news-marquee>span{font-size:11px!important;letter-spacing:.13em}.page-home .hero-about-link{color:#fff5ed;margin-left:10px}.page-home .hero-about-link:hover{color:#f0c7a5}
+/* Homepage section headings and supporting copy share one restrained editorial style. */
+.page-home .section h2,.page-home .section-heading h2{color:#a51f31!important;font-style:normal}.page-home .section-heading h2 em,.page-home .section h2 em{color:#a51f31!important}.page-home .section-heading .eyebrow{color:#a51f31}.page-home .section p{font:400 14px/1.8 'Manrope',sans-serif;color:#716760}.page-home .section .lead{font-size:14px;line-height:1.8}.page-home .section-programs h2,.page-home .section-programs .eyebrow,.page-home .section-join h2{color:#fff1e8!important}.page-home .section-programs p,.page-home .section-join p{color:#f4e8dc!important}
+header.site-header{height:98px}header.site-header .brand-seal{width:92px;height:92px}header.site-header .nav-link{font-size:clamp(11.5px,.82vw,12px)}header.site-header .header-inner{gap:12px}header.site-header .nav{margin-left:clamp(12px,.8vw,18px);gap:clamp(5px,.4vw,9px)}
+@media(max-width:1140px){header.site-header{height:88px}header.site-header .brand-seal{width:78px;height:78px}header.site-header .nav-link{font-size:10px}}
+@media(max-width:760px){header.site-header{height:82px}header.site-header .brand-seal{width:58px;height:58px}}
+/* Match the home section labels to the serif editorial heading used by THE INSTITUTION. */
+.page-home .section-about .about-copy>.eyebrow,.page-home .section-themes .section-heading .eyebrow,.page-home .section-method .method-layout>div:first-child>.eyebrow,.page-home .section-programs .program-top .eyebrow{font:500 clamp(30px,3.5vw,44px)/1.14 var(--serif);letter-spacing:-.8px;text-transform:none;margin:0 0 16px;color:#a51f31!important}
+.page-home .section-programs .program-top .eyebrow{color:#fff1e8!important}.page-home .section-themes .research-heading-black{color:#201b19!important}.page-home .section-method .method-layout>div:first-child>.eyebrow{color:#a51f31!important}
+header.site-header .header-inner{height:100%;align-items:center}header.site-header .brand{height:100%;align-items:center}header.site-header .brand-seal{width:84px;height:84px;max-height:calc(100% - 10px);object-fit:contain;align-self:center}
+.footer .brand-type .brand-company{font:600 12px/1.3 'Manrope',sans-serif;letter-spacing:.15px;white-space:nowrap}.footer .brand-type .brand-company span{color:#e06a77}.footer .brand-type .brand-society{font:650 11px/1.3 'Manrope',sans-serif;letter-spacing:0;white-space:nowrap;color:#c5a1dc}
+@media(max-width:1140px){header.site-header .brand-seal{width:76px;height:76px}.footer .brand-type .brand-company{font-size:10px}.footer .brand-type .brand-society{font-size:9px}}
+@media(max-width:760px){.footer .brand-type .brand-company{font-size:7px;white-space:normal}.footer .brand-type .brand-society{font-size:7px;white-space:normal}}
+/* Render all SK ALTAIR mentions within the home page with a red K and spaced wordmark. */
+.page-home .home-brand-mention{white-space:inherit}.page-home .home-brand-initial,.page-home .home-brand-rest{color:#201b19!important}.page-home .home-brand-k{color:#a51f31!important}.page-home .section-programs .home-brand-initial,.page-home .section-programs .home-brand-rest,.page-home .section-join .home-brand-initial,.page-home .section-join .home-brand-rest,.page-home .hero .home-brand-initial,.page-home .hero .home-brand-rest{color:#fffaf6!important}
+/* Apply the supplied two-tone editorial treatments to their matching home sentences. */
+.page-home .section-method .method-layout>div:first-child h2{color:#201b19!important;font-family:var(--serif);font-weight:400}.page-home .section-method .method-layout>div:first-child h2 em{color:#9f1d2d!important;font-style:italic}
+.page-home .section-join .join-inner h2{color:#fffaf6!important;font-family:var(--serif);font-weight:400}.page-home .section-join .join-inner h2 em{color:#e8b4ae!important;font-style:italic}
+/* Refine home-page wordmark mentions and add a small editorial rule to section headings. */
+.page-home .home-brand-k,.page-home .brand-k{color:#cf5664!important}
+.page-home .hero-about-link,.page-home .section-about .about-copy>.text-link{color:#201b19!important}.page-home .hero-about-link svg,.page-home .section-about .about-copy>.text-link svg{color:#201b19!important}.page-home .hero-about-link .brand-name-text,.page-home .section-about .about-copy>.text-link .brand-name-text{color:#201b19!important}
+.page-home .section-method .method-layout>div:first-child>.eyebrow{color:#201b19!important}
+.page-home .section-about .about-copy>.eyebrow:after,.page-home .section-institution .section-heading h2:after,.page-home .section-themes .section-heading .eyebrow:after,.page-home .section-programs .program-top .eyebrow:after,.page-home .section-method .method-layout>div:first-child>.eyebrow:after{content:'';display:block;width:72px;height:3px;margin-top:13px;border-radius:3px;background:linear-gradient(90deg,#a51f31 0 62%,#d8b783 62% 78%,transparent 78%);box-shadow:0 2px 0 #a51f3110}
+.page-home .section-programs .program-top .eyebrow:after{background:linear-gradient(90deg,#f0b2ad 0 62%,#e7c98b 62% 78%,transparent 78%)}
+/* Keep the lighter blush red only on the About wordmark, matching the collaboration emphasis. */
+.page-home .home-brand-k,.page-home .brand-k{color:#a51f31!important}.page-home .hero-about-link .brand-k{color:#e8b4ae!important}
+.page-home .section-institution .theme-card h3 .brand-k{color:#e8b4ae!important}
+.page-home .section-join .eyebrow .brand-name-text{color:#201b19!important}.page-home .section-join .eyebrow .brand-name-text .brand-k{color:#e8b4ae!important}
+.page-home .hero-about-link,.page-home .hero-about-link .brand-name-text,.page-home .hero-about-link svg{color:#c6a15b!important}.page-home .hero-about-link .brand-k{color:#e8b4ae!important}
+.page-home .section-join .eyebrow,.page-home .section-join .eyebrow .brand-name-text{color:#fffaf6!important}.page-home .section-join .eyebrow .brand-name-text .brand-k{color:#e8b4ae!important}
+.brand-name-text{color:inherit}.brand-name-text .brand-k{color:#a51f31!important}.page-home .about-copy .brand-name-text{color:#201b19}
+/* About page corrections: keep the contents rail in the hero and apply the site palette consistently. */
+.page-intro-about{padding-bottom:34px!important;text-align:center}
+.page-intro-about>.container{position:relative;display:flex;flex-direction:column;align-items:center}
+.page-intro-about .about-summary{position:relative;z-index:2;max-width:920px;margin:8px auto 20px;padding:12px 22px 18px;text-align:center;background:rgba(255,253,250,.94);border:1px solid #e8dccb}
+.page-intro-about .about-summary>p{margin:0 auto 10px;color:#443a36;font-size:14px;line-height:1.7}
+.page-intro-about .about-summary .text-link{margin:auto}
+.page-intro-about .about-purpose-expanded{margin:16px auto 0;text-align:left}
+.page-intro-about .about-purpose-expanded p{margin:0 0 13px}
+.page-intro-about .about-hero-rail{position:static!important;z-index:2;display:flex;align-self:stretch;justify-content:center;flex-wrap:wrap;gap:18px;margin:6px 0 0;padding:12px 18px;border-top:1px solid #d8c4aa;background:rgba(255,253,250,.94)}
+.page-intro-about .about-hero-rail .eyebrow{margin:0;color:#9f1d2d}
+.page-intro-about .about-hero-rail a{font-size:13px;font-weight:650;color:#443a36}
+.page-about .about-page-grid{display:block!important}
+.page-about .prose{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch;gap:18px}
+.page-about .prose>section#vision,.page-about .prose>section#mission,.page-about .prose>section#constitution{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-start;height:auto;min-height:340px;max-height:none;overflow:visible;padding:28px 24px;border:1px solid #e5dbd1;background:#fffdfa}
+.page-about .prose>section#objectives{grid-column:1/-1}
+.page-about .about-card-toggle{margin-top:auto}
+.page-about .objective-description{padding:0 18px 18px;margin:0;line-height:1.75;color:var(--muted)}
+.governance-content{padding:44px 0 60px;background:#f4efe8;border-block:1px solid #e5dbd1}
+.governance-content>.container{max-width:1180px}
+.governance-content h2{color:#9f1d2d;font:500 clamp(34px,4vw,52px)/1.1 var(--serif);margin:0 0 28px}
+.governance-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
+.governance-policy-card{padding:22px 24px;background:#fffdfa;border:1px solid #e2d5c7;border-top:3px solid #9f1d2d}
+.governance-policy-card h3{font:600 21px/1.3 var(--serif);margin:0 0 12px;color:#9f1d2d}
+.governance-policy-card p{font:400 14px/1.8 'Manrope',sans-serif;white-space:pre-line;color:#504742;margin:0 0 10px}
+.governance-policy-card .text-link{font-size:13px;color:#7d2030}
+.about-download{float:right;margin:24px 0 0}
+@media(max-width:760px){.page-about .prose{grid-template-columns:1fr}.page-about .prose>section#objectives{grid-column:1}.page-about .prose>section#vision,.page-about .prose>section#mission,.page-about .prose>section#constitution{min-height:0}.page-intro-about .about-hero-rail{gap:10px;padding:12px;justify-content:flex-start}.page-intro-about .about-hero-rail .eyebrow{width:100%}.governance-grid{grid-template-columns:1fr}.about-download{float:none;display:inline-flex}}
+/* About page layout and contrast fixes. */
+.page-intro-about>.container{display:grid!important;grid-template-columns:minmax(0,1fr) 245px;grid-template-rows:auto auto auto;column-gap:32px;align-items:start;position:relative}
+.page-intro-about>.container>.eyebrow{grid-column:1;grid-row:1;margin:0 0 14px!important;max-width:none!important;text-align:left}
+.page-intro-about>.container>h1{grid-column:1;grid-row:2;max-width:none!important;margin:0 0 20px!important;text-align:left!important}
+.page-intro-about>.container>p{display:none}
+.page-intro-about>.container>.intro-media{max-width:none!important}
+.page-intro-about .about-summary{grid-column:1;grid-row:3;width:100%;max-width:none!important;margin:0 0 4px;padding:20px 22px;text-align:left;background:#fffdfa;border:1px solid #e5dbd1}
+.page-intro-about .about-summary>p{color:#443a36!important;text-align:left}
+.page-intro-about .about-purpose-expanded{color:#443a36!important}
+.page-intro-about .about-purpose-expanded p{color:#443a36!important;font:400 14px/1.8 'Manrope',sans-serif!important}
+.page-intro-about .about-hero-rail{grid-column:2!important;grid-row:1/4!important;display:flex!important;flex-direction:column;align-self:start;justify-content:flex-start;align-items:stretch;gap:0;margin:68px 0 0;padding:16px 18px;background:rgba(255,253,250,.96);border:1px solid #e5dbd1;border-top:3px solid #a51f31}
+.page-intro-about .about-hero-rail .eyebrow{width:100%;margin:0 0 10px;color:#a51f31;text-align:left}
+.page-intro-about .about-hero-rail a{padding:9px 0;border-top:1px solid #eee5db;text-align:left;color:#443a36}
+.page-intro-about .about-hero-rail a:hover{color:#a51f31}
+.page-about .prose>section#vision,.page-about .prose>section#mission,.page-about .prose>section#constitution{min-height:330px!important;max-height:none!important;height:auto!important;justify-content:flex-start!important;overflow:visible!important;background:#fffdfa!important;color:#443a36!important}
+.page-about .prose>section#vision h2,.page-about .prose>section#mission h2,.page-about .prose>section#constitution h2{color:#201b19!important}
+.page-about .prose>section#vision .eyebrow,.page-about .prose>section#mission .eyebrow,.page-about .prose>section#constitution .eyebrow{color:#9f1d2d!important}
+.page-about .prose>section#vision p,.page-about .prose>section#mission p,.page-about .prose>section#constitution p{color:#504742!important}
+.page-about .prose>section#mission:before{display:none!important}
+.page-about .prose>section#mission .text-link,.page-about .prose>section#constitution .text-link{margin-top:auto}
+.governance-intro{max-width:920px;margin:0 0 34px;padding:20px 24px;background:#fffdfa;border-left:3px solid #a51f31}
+.governance-intro p{font-size:15px;line-height:1.8;color:#504742;margin:0 0 10px}
+.governance-intro p:last-child{margin-bottom:0}
+.governance-category{margin:38px 0 0}
+.governance-category>h3{font:500 clamp(26px,3vw,36px)/1.2 var(--serif);color:#9f1d2d;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid #d8c4aa}
+.governance-category .governance-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:stretch}
+.governance-policy-card{height:100%;display:flex;flex-direction:column;min-width:0}
+.governance-policy-card h4{font:600 20px/1.3 var(--serif);color:#9f1d2d;margin:0 0 12px}
+.governance-policy-card p{overflow-wrap:anywhere}
+.governance-policy-card p.governance-bullet{padding-left:18px;position:relative}
+.governance-policy-card p.governance-bullet:before{content:none}
+.governance-policy-card .text-link{align-self:flex-start;margin-top:auto;padding-top:10px}
+/* Keep the full desktop navigation visible at medium widths using a compact two-row header. */
+@media(min-width:1001px) and (max-width:1320px){header.site-header{height:116px}header.site-header .header-inner{height:100%;width:calc(100% - 36px);display:flex;flex-direction:column;align-items:stretch;justify-content:center;gap:2px;padding:5px 0}header.site-header .brand{height:68px;min-height:68px;align-self:flex-start}header.site-header .brand-seal{width:62px;height:62px;max-height:62px}header.site-header .nav{height:34px;width:100%;margin:0;justify-content:space-between;gap:8px}header.site-header .nav-link{font-size:clamp(10px,.88vw,12px)}}
+@media(max-width:1000px){.page-intro-about>.container{grid-template-columns:1fr;grid-template-rows:auto;gap:12px}.page-intro-about>.container>.eyebrow,.page-intro-about>.container>h1,.page-intro-about .about-summary,.page-intro-about .about-hero-rail{grid-column:1;grid-row:auto}.page-intro-about>.container>.eyebrow,.page-intro-about>.container>h1{text-align:center!important}.page-intro-about .about-summary{margin:0}.page-intro-about .about-hero-rail{margin:0;display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:14px}.page-intro-about .about-hero-rail .eyebrow{grid-column:1/-1}}
+@media(max-width:760px){.governance-category .governance-grid{grid-template-columns:1fr}.governance-policy-card{padding:20px}.page-intro-about .about-summary{padding:16px}.page-intro-about .about-purpose-expanded p{font-size:13px!important}}
+.page-intro-about>.container>.about-hero-rail{max-width:none!important;width:auto!important;min-width:0}
+.page-intro-about .about-hero-rail a{white-space:normal!important;overflow-wrap:anywhere;line-height:1.4}
+/* Current About and Apply refinements. */
+.page-intro-about>.container{grid-template-columns:minmax(0,1fr)!important;grid-template-rows:auto auto auto!important;width:calc(100% - 280px)!important;max-width:none!important;margin-left:250px!important;margin-right:30px!important;row-gap:4px}
+.page-intro-about>.container>.eyebrow{display:none!important}
+.page-intro-about>.container>h1{grid-column:1!important;grid-row:1!important;text-align:center!important;margin:0 auto 18px!important;font-family:'Source Serif 4',Georgia,serif!important}
+.page-intro-about .about-summary{grid-column:1!important;grid-row:2!important;width:100%;margin:0 auto!important;padding:18px 24px 22px!important;text-align:center!important;background:transparent!important;border:0!important;box-shadow:none!important}
+.page-intro-about .about-summary>p{max-width:880px;margin:0 auto 14px!important;text-align:center!important;color:#fff8ef!important;font:400 16px/1.75 'Manrope',sans-serif!important;text-shadow:0 1px 2px #2b151a80}
+.page-intro-about .about-summary b{color:#fffaf4}
+.page-intro-about .about-summary .text-link{display:flex;justify-content:center;align-items:center;margin:12px auto 0!important}
+.page-intro-about .about-purpose-expanded p{color:#fff8ef!important}
+.page-intro-about .about-hero-rail{position:fixed!important;left:0!important;right:auto!important;top:98px!important;bottom:0!important;z-index:51!important;display:flex!important;flex-direction:column!important;justify-content:flex-start!important;align-items:stretch!important;gap:0!important;width:220px!important;max-width:220px!important;height:calc(100vh - 98px)!important;margin:0!important;padding:24px 18px!important;overflow-y:auto;background:#792333!important;border:0!important;border-right:2px solid #a54a54!important;box-shadow:8px 0 24px #27161920}
+.page-intro-about .about-hero-rail .eyebrow{display:block!important;margin:8px 8px 16px!important;color:#e7c98b!important;font:700 14px/1.35 'Manrope',sans-serif!important;letter-spacing:.1em;text-align:left!important}
+.page-intro-about .about-hero-rail a{position:relative;display:block;padding:12px 9px!important;border:0!important;color:#fff8ef!important;font:500 17px/1.35 'Manrope',sans-serif!important;text-align:left!important}
+.page-intro-about .about-hero-rail a:hover,.page-intro-about .about-hero-rail a.active{color:#e7c98b!important}
+.page-intro-about .about-hero-rail a.active:before{position:absolute;content:'';left:-18px;top:10px;bottom:10px;width:3px;background:#e7c98b}
+.page-about .page-intro-about .intro-media{width:min(68vw,1000px);max-width:none!important}
+.page-about .content-section>.container,.page-about #governance>.container{width:calc(100% - 300px)!important;max-width:1180px!important;margin-left:260px!important;margin-right:40px!important}
+.page-about .prose>section#mission .text-link,.page-about .prose>section#constitution .text-link,.governance-policy-card .text-link{display:flex!important;align-self:center!important;justify-content:center!important;margin:18px auto 0!important}
+.page-about .objective-list{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.page-about .objective-card{min-width:0;padding:22px 24px;background:#fffdfa;border:1px solid #e5dbd1;border-top:3px solid #9f1d2d}
+.page-about .objective-number{display:block;margin-bottom:10px;color:#9f1d2d;font:700 12px/1 'Manrope',sans-serif;letter-spacing:.1em}
+.page-about .objective-card h3{margin:0 0 10px;color:#9f1d2d;font:600 21px/1.3 var(--serif)}
+.page-about .objective-card .objective-description{padding:0!important;margin:0!important;border:0!important;color:#504742!important;font-size:14px;line-height:1.75}
+.page-about .governance-section-heading{margin-bottom:22px}
+.page-about .governance-section-heading .eyebrow{display:block;color:#9f1d2d;font:700 12px/1.4 'Manrope',sans-serif;letter-spacing:.12em}
+.page-about .governance-section-heading h2{margin:8px 0 0;color:#201b19;font:500 clamp(30px,3.5vw,44px)/1.14 var(--serif)}
+.page-about .governance-category{margin-top:32px}
+.page-about .governance-category>h3{font:500 clamp(24px,2.7vw,32px)/1.2 var(--serif);color:#9f1d2d}
+.page-about .governance-policy-card{border-top-width:2px}
+.page-about .governance-policy-card h4{font:600 20px/1.3 var(--serif)}
+.page-about .governance-policy-card p a{color:#9f1d2d;text-decoration:underline;text-underline-offset:3px}
+.page-about .about-download-row{display:flex;justify-content:flex-end;clear:both;width:100%;margin-top:34px;padding-bottom:12px}
+.page-about .about-download-row .about-download{float:none!important;display:inline-flex;margin:0!important;max-width:100%;white-space:normal;text-align:center}
+.page-about #governance{padding-bottom:48px!important;margin-bottom:0}
+.page-intro-apply{min-height:min(76vh,740px)!important;display:flex;align-items:center;justify-content:center;text-align:center}
+.page-intro-apply>.container{width:min(1040px,calc(100% - 64px))!important;max-width:1040px!important;margin-inline:auto!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center;gap:0;text-align:center!important}
+.page-intro-apply>.container>.eyebrow{display:block!important;order:2!important;margin:0 auto 14px!important;color:#e7c98b!important;font:400 clamp(21px,2.4vw,29px)/1.25 'Source Serif 4',Georgia,serif!important;letter-spacing:0!important;text-transform:none!important}
+.page-intro-apply>.container>h1{order:1!important;max-width:100%!important;margin:0 auto 14px!important;color:#fff8ef!important;font:400 clamp(52px,7.2vw,86px)/1.04 'Source Serif 4',Georgia,serif!important;letter-spacing:-.035em!important;text-align:center!important;text-wrap:balance}
+.page-intro-apply>.container>p{display:block!important;order:3!important;max-width:700px!important;margin:0 auto!important;color:#f3e8dc!important;font:400 clamp(15px,1.35vw,18px)/1.75 'Manrope',sans-serif!important;text-align:center!important}
+@media(min-width:1001px) and (max-width:1320px){.page-intro-about .about-hero-rail{top:116px!important;height:calc(100vh - 116px)!important}}
+@media(max-width:1000px){.page-intro-about .about-hero-rail{top:88px!important;width:185px!important;max-width:185px!important;height:calc(100vh - 88px)!important;padding:18px 14px!important}.page-intro-about .about-hero-rail a{font-size:15px!important}.page-intro-about>.container{width:calc(100% - 225px)!important;margin-left:205px!important;margin-right:20px!important}.page-about .content-section>.container,.page-about #governance>.container{width:calc(100% - 240px)!important;margin-left:215px!important;margin-right:25px!important}.page-about .prose{grid-template-columns:1fr!important}.page-about .prose>section#objectives{grid-column:1}.page-about .objective-list{grid-template-columns:1fr}.page-intro-apply{min-height:62vh!important}}
+@media(max-width:760px){.page-intro-about .about-hero-rail{top:82px!important;width:145px!important;max-width:145px!important;height:calc(100vh - 82px)!important;padding:14px 10px!important}.page-intro-about .about-hero-rail .eyebrow{font-size:10px!important;letter-spacing:.06em}.page-intro-about .about-hero-rail a{padding:10px 6px!important;font-size:13px!important}.page-intro-about .about-hero-rail a.active:before{left:-10px}.page-intro-about>.container{width:calc(100% - 165px)!important;margin-left:155px!important;margin-right:10px!important}.page-intro-about>.container>h1{font-size:clamp(34px,9vw,48px)!important}.page-intro-about .about-summary{padding:10px 4px 18px!important}.page-intro-about .about-summary>p{font-size:13px!important;line-height:1.6!important}.page-about .content-section>.container,.page-about #governance>.container{width:calc(100% - 175px)!important;margin-left:165px!important;margin-right:10px!important}.page-about .prose>section#vision,.page-about .prose>section#mission,.page-about .prose>section#constitution{min-height:0!important}.page-about .objective-card{padding:18px}.page-about .governance-section-heading h2{font-size:28px}.page-about .governance-policy-card{padding:16px}.page-about .about-download-row{justify-content:center}.page-intro-apply{min-height:54vh!important;padding:48px 0!important}.page-intro-apply>.container{width:calc(100% - 32px)!important}.page-intro-apply>.container>h1{font-size:clamp(42px,11vw,60px)!important}.page-intro-apply>.container>.eyebrow{font-size:20px!important}.page-intro-apply>.container>p{font-size:14px!important}}
+
+/* Keep the About contents rail fixed while allowing enough room for page content. */
+.page-intro-about .about-hero-rail{width:190px!important;max-width:190px!important;padding:20px 14px!important}
+.page-intro-about .about-hero-rail a{padding:10px 8px!important;font-size:15px!important;line-height:1.3!important}
+.page-intro-about .about-hero-rail a[href="#governance"] span{display:block}
+.page-intro-about>.container{width:calc(100% - 245px)!important;margin-left:215px!important}
+.page-about .content-section>.container,.page-about #governance>.container{width:calc(100% - 265px)!important;margin-left:230px!important}
+@media(max-width:1000px){.page-intro-about .about-hero-rail{width:165px!important;max-width:165px!important;padding:16px 12px!important}.page-intro-about .about-hero-rail a{font-size:14px!important}.page-intro-about>.container{width:calc(100% - 195px)!important;margin-left:180px!important}.page-about .content-section>.container,.page-about #governance>.container{width:calc(100% - 210px)!important;margin-left:190px!important}}
+@media(max-width:760px){.page-intro-about .about-hero-rail{width:130px!important;max-width:130px!important;padding:12px 8px!important}.page-intro-about .about-hero-rail a{padding:9px 5px!important;font-size:12px!important}.page-intro-about .about-hero-rail a[href="#governance"]{font-size:11px!important}.page-intro-about .about-hero-rail a.active:before{left:-8px}.page-intro-about>.container{width:calc(100% - 150px)!important;margin-left:140px!important;margin-right:10px!important}.page-about .content-section>.container,.page-about #governance>.container{width:calc(100% - 160px)!important;margin-left:150px!important;margin-right:10px!important}}
+
+/* About page scroll reveals and card interactions. */
+.page-about .prose>section#vision,.page-about .prose>section#mission,.page-about .prose>section#constitution{transform:translateY(18px);transition-duration:400ms;transition-timing-function:ease-out}
+.page-about .prose>section#mission.motion-ready{transition-delay:50ms}
+.page-about .prose>section#constitution.motion-ready{transition-delay:100ms}
+.page-about .objective-card.motion-ready,.page-about .governance-category.motion-ready,.page-about .governance-policy-card.motion-ready{opacity:0;transform:translateY(18px);transition:opacity 400ms ease-out,transform 400ms ease-out,box-shadow 220ms ease,border-color 220ms ease}
+.page-about .objective-card.motion-ready.is-visible,.page-about .governance-category.motion-ready.is-visible,.page-about .governance-policy-card.motion-ready.is-visible{opacity:1;transform:translateY(0)}
+.page-about .objective-card.motion-ready:nth-child(2),.page-about .governance-grid>.governance-policy-card.motion-ready:nth-child(2){transition-delay:50ms}
+.page-about .objective-card.motion-ready:nth-child(3),.page-about .governance-grid>.governance-policy-card.motion-ready:nth-child(3){transition-delay:100ms}
+.page-about .objective-card.motion-ready:nth-child(4),.page-about .governance-grid>.governance-policy-card.motion-ready:nth-child(4){transition-delay:150ms}
+.page-about .objective-card.motion-ready:nth-child(5),.page-about .governance-grid>.governance-policy-card.motion-ready:nth-child(5){transition-delay:200ms}
+.page-about .objective-card.motion-ready:nth-child(6),.page-about .governance-grid>.governance-policy-card.motion-ready:nth-child(6){transition-delay:250ms}
+.page-about .objective-card.motion-ready:nth-child(7),.page-about .governance-grid>.governance-policy-card.motion-ready:nth-child(7){transition-delay:300ms}
+.page-about .objective-card.motion-ready:nth-child(8),.page-about .governance-grid>.governance-policy-card.motion-ready:nth-child(8){transition-delay:350ms}
+.page-about .objective-card.motion-ready:nth-child(9),.page-about .governance-grid>.governance-policy-card.motion-ready:nth-child(9){transition-delay:400ms}
+.page-about .objective-card.motion-ready:nth-child(10),.page-about .governance-grid>.governance-policy-card.motion-ready:nth-child(10){transition-delay:450ms}
+.page-about .objective-card.motion-ready.is-visible:hover,.page-about .governance-policy-card.motion-ready.is-visible:hover{transform:translateY(-2px);box-shadow:0 8px 22px #3d261b14}
+.page-about .text-link svg,.page-about .governance-policy-card .text-link svg{transition:transform 180ms ease-out}
+.page-about .text-link:hover svg,.page-about .text-link:focus-visible svg,.page-about .governance-policy-card .text-link:hover svg{transform:translateX(3px)}
+@media(prefers-reduced-motion:reduce){.page-about .prose>section#vision,.page-about .prose>section#mission,.page-about .prose>section#constitution,.page-about .objective-card.motion-ready,.page-about .governance-category.motion-ready,.page-about .governance-policy-card.motion-ready{opacity:1;transform:none;transition:none}.page-about .text-link svg{transition:none}}
+
+/* Keep the About contents rail in the page layout so it sticks alongside all five sections. */
+.page-about .about-page-layout{display:grid;grid-template-columns:176px minmax(0,1fr);column-gap:12px;align-items:stretch;width:100%;max-width:100%;overflow-x:clip}
+.page-about .about-page-layout>.about-hero-rail{position:sticky!important;grid-column:1!important;grid-row:1 / span 3!important;align-self:start!important;top:100px!important;left:auto!important;right:auto!important;bottom:auto!important;width:100%!important;max-width:100%!important;height:fit-content!important;max-height:calc(100vh - 120px)!important;margin:0!important;padding:14px 10px!important;overflow-y:auto!important;overflow-x:hidden!important;box-sizing:border-box}
+.page-about .about-page-layout>.about-hero-rail .eyebrow{margin:4px 4px 10px!important;font-size:11px!important;letter-spacing:.07em!important}
+.page-about .about-page-layout>.about-hero-rail a{padding:9px 5px!important;font-size:13px!important;line-height:1.25!important;overflow-wrap:normal!important;word-break:normal!important}
+.page-about .about-page-layout>.page-intro-about,.page-about .about-page-layout>.content-section,.page-about .about-page-layout>#governance{grid-column:2!important;grid-row:auto!important;min-width:0!important;width:100%!important;max-width:100%!important;margin-left:0!important;margin-right:0!important}
+.page-about .about-page-layout>.page-intro-about>.container,.page-about .about-page-layout>.content-section>.container,.page-about .about-page-layout>#governance>.container{width:100%!important;max-width:100%!important;margin-left:auto!important;margin-right:auto!important;min-width:0!important}
+.page-about .about-page-layout .prose{align-items:start!important;min-width:0!important}
+.page-about .about-page-layout .prose>section#vision,.page-about .about-page-layout .prose>section#mission,.page-about .about-page-layout .prose>section#constitution{align-self:start!important;min-height:0!important;height:fit-content!important}
+.page-about .about-page-layout .governance-grid{align-items:start!important}
+.page-about .about-page-layout .governance-policy-card{align-self:start!important;height:fit-content!important}
+.page-about .about-page-layout .about-hero-rail a[href="#governance"] span{display:block;white-space:nowrap}
+.page-about .about-page-layout>.page-intro-about{position:relative!important;isolation:isolate;background:#792333!important;color:#fff8ef!important;border-bottom-color:#a54a54!important}
+.page-about .about-page-layout>.page-intro-about>.container{position:static!important;display:block!important;padding-top:44px!important;padding-bottom:42px!important}
+.page-about .about-page-layout>.page-intro-about>.container>h1,.page-about .about-page-layout>.page-intro-about .about-summary{position:relative;z-index:1;width:min(58%,660px)!important;max-width:660px!important;margin-left:0!important;margin-right:auto!important;text-align:center!important}
+.page-about .about-page-layout>.page-intro-about>.container>h1{margin-top:0!important;margin-bottom:14px!important}
+.page-about .about-page-layout>.page-intro-about .about-summary{padding:10px 18px 16px!important}
+.page-about .about-page-layout>.page-intro-about .about-summary>p,.page-about .about-page-layout>.page-intro-about .about-purpose-expanded,.page-about .about-page-layout>.page-intro-about .about-purpose-expanded p{text-align:center!important}
+.page-about .about-page-layout>.page-intro-about .intro-media{position:absolute!important;inset:0 0 0 auto!important;width:max(calc(30vw - 92px),calc(50vw - 340px))!important;max-width:620px!important;height:100%!important;z-index:0!important}
+.page-about .about-page-layout>.page-intro-about .intro-media:after{background:linear-gradient(90deg,#792333 0%,#792333ee 22%,#79233300 82%),linear-gradient(0deg,#1d171455,transparent 45%)!important}
+.page-about .about-page-layout .prose{grid-template-columns:minmax(0,1fr)!important;gap:16px!important}
+.page-about .about-page-layout .prose>section#vision,.page-about .about-page-layout .prose>section#mission,.page-about .about-page-layout .prose>section#constitution{grid-column:1!important;width:100%!important}
+.page-about .about-page-layout>.page-intro-about{background:#3b2522!important;border-bottom-color:#57423b!important}
+.page-about .about-page-layout>.page-intro-about>.container>h1 em{color:#e7c98b!important;font-style:normal!important}
+.page-about .about-page-layout>.page-intro-about .about-summary b{color:#e7c98b!important}
+.page-about .about-page-layout>.page-intro-about .intro-media:after{background:linear-gradient(90deg,#3b2522 0%,#3b2522ee 22%,#3b252200 82%),linear-gradient(0deg,#1d171455,transparent 45%)!important}
+.page-about .about-page-layout>.content-section{background:#f4eee5!important}
+.page-about .about-page-layout>.content-section .prose{background:transparent!important;background-image:none!important}
+.page-about .about-page-layout .prose>section#vision{background:#812230!important;border-color:#a4595d!important;color:#fff8ef!important}
+.page-about .about-page-layout .prose>section#vision h2,.page-about .about-page-layout .prose>section#vision p{color:#fff8ef!important}
+.page-about .about-page-layout .prose>section#vision .eyebrow{color:#e7c98b!important}
+.page-about .about-page-layout .prose>section#mission{background:#f7f1e5!important;border-color:#dfd1bd!important}
+.page-about .about-page-layout .prose>section#constitution{background:#fffdfa!important;border-color:#e5dbd1!important}
+.page-about .about-page-layout .prose>section#objectives{margin-top:8px!important;padding:26px!important;background:#fffdfa!important;border:1px solid #e5dbd1!important}
+.page-about .about-page-layout .objective-card{background:#fffdfa!important}
+.page-about .about-page-layout .objective-card:nth-child(4n+2),.page-about .about-page-layout .objective-card:nth-child(4n+3){background:#f7f1e5!important}
+.page-about .about-page-layout .objective-card:nth-child(4n+1){background:#812230!important;border-color:#a4595d!important}
+.page-about .about-page-layout .objective-card:nth-child(4n+1) .objective-number,.page-about .about-page-layout .objective-card:nth-child(4n+1) h3,.page-about .about-page-layout .objective-card:nth-child(4n+1) .objective-description{color:#fff8ef!important}
+.page-about .about-page-layout .objective-card:nth-child(4n+1) h3{color:#e7c98b!important}
+.page-about .about-page-layout>#governance{background:#fffdfa!important}
+.page-about .about-page-layout .governance-intro{padding:20px 22px;background:#f7f1e5;border-left:3px solid #9f1d2d}
+.page-about .about-page-layout .governance-category{padding:24px;background:#fffdfa;border:1px solid #e5dbd1}
+.page-about .about-page-layout .governance-category:nth-of-type(even){background:#f7f1e5}
+.page-about .about-page-layout .governance-policy-card{background:#fffdfa}
+.page-about .about-page-layout .about-bracket-link{color:#9f1d2d;text-decoration:underline;text-underline-offset:3px;font-weight:650}
+/* About page wordmark: preserve readable foreground colors while separating the K. */
+.page-about .about-brand-mention{white-space:nowrap;color:inherit}
+.page-about .about-brand-initial,.page-about .about-brand-rest{color:inherit!important}
+.page-about .about-brand-k{color:#a51f31!important}
+.page-about .page-intro-about .about-brand-initial,.page-about .page-intro-about .about-brand-rest{color:#fff8ef!important}
+.page-about .page-intro-about .about-brand-k{color:#cf5664!important}
+.page-about .about-hero-rail .about-brand-initial,.page-about .about-hero-rail .about-brand-rest{color:inherit!important}
+.page-about .about-hero-rail .about-brand-k{color:#cf5664!important}
+.page-about #vision .about-brand-initial,.page-about #vision .about-brand-rest,.page-about .objective-card:nth-child(4n+1) .about-brand-initial,.page-about .objective-card:nth-child(4n+1) .about-brand-rest{color:#fff8ef!important}
+.page-about #vision .about-brand-k,.page-about .objective-card:nth-child(4n+1) .about-brand-k{color:#cf5664!important}
+@media(max-width:760px){.page-about .about-page-layout{grid-template-columns:126px minmax(0,1fr);column-gap:9px}.page-about .about-page-layout>.about-hero-rail{padding:11px 7px!important;top:86px!important;max-height:calc(100vh - 100px)!important}.page-about .about-page-layout>.about-hero-rail a{padding:8px 4px!important;font-size:11px!important}.page-about .about-page-layout>.about-hero-rail a[href="#governance"]{font-size:10px!important}.page-about .about-page-layout>.about-hero-rail a.active:before{left:-7px}.page-about .about-page-layout>.content-section>.container,.page-about .about-page-layout>#governance>.container{padding-inline:10px!important}.page-about .about-page-layout>.page-intro-about>.container{padding-top:32px!important;padding-bottom:32px!important}.page-about .about-page-layout>.page-intro-about>.container>h1,.page-about .about-page-layout>.page-intro-about .about-summary{width:100%!important;max-width:100%!important}.page-about .about-page-layout>.page-intro-about .intro-media{width:100%!important;max-width:none!important;opacity:.35}.page-about .about-page-layout>.page-intro-about .intro-media:after{background:linear-gradient(0deg,#3b2522ed,#3b2522a8)!important}.page-about .about-page-layout .prose>section#objectives{padding:18px!important}.page-about .about-page-layout .governance-category{padding:16px}}
