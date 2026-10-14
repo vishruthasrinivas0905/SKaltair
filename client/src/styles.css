@@ -1656,7 +1656,6 @@ body:has(.route-view:is(.page-home,.page-about,.page-governance,.page-committee)
 .page-programs .program-page h2 em{font-style:italic;font-weight:400;color:var(--red)}
 .page-programs .program-page h3{font-weight:500;letter-spacing:-.2px}
 .page-programs .program-page .eyebrow{font-size:14px;font-weight:600;letter-spacing:2.4px}
-.page-programs .page-intro p{font-size:clamp(17px,1.4vw,19px)}
 
 .page-programs .program-terms{padding:76px 0 96px}
 .page-programs .program-page .term-tabs button{font:400 25px/1.2 var(--serif);letter-spacing:-.3px;color:#857a72;padding:20px 18px 20px 0}
@@ -1669,15 +1668,18 @@ body:has(.route-view:is(.page-home,.page-about,.page-governance,.page-committee)
 .page-programs .term-media{position:relative;z-index:1;height:auto;aspect-ratio:4/3;margin:0;border-radius:2px;box-shadow:0 26px 54px #3a221a24}
 .page-programs .term-badge{position:absolute;z-index:2;left:28px;bottom:0;padding:13px 20px 12px;background:#fff;box-shadow:0 14px 30px #3a221a1f;font:italic 400 44px/1 var(--serif);color:var(--red)}
 .page-programs .term-badge:before{content:'Term';display:block;margin-bottom:8px;font:600 12px/1 'Manrope',sans-serif;font-style:normal;letter-spacing:2px;text-transform:uppercase;color:#9a8f86}
-.page-programs .term-copy h2{margin:18px 0 24px}
+.page-programs .program-page .term-copy .term-heading{position:relative;margin:0 0 26px;padding-bottom:22px;font:700 clamp(17px,1.45vw,22px)/1.4 'Manrope',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--red)}
+.page-programs .term-copy .term-heading:after{content:'';position:absolute;left:0;bottom:0;width:56px;height:2px;background:#c9a66d}
+.page-programs .term-heading span{white-space:nowrap}
 .page-programs .term-copy p{max-width:560px;margin:0 0 34px;font-size:18px;line-height:1.75;color:var(--muted)}
 .page-programs .term-apply{min-height:56px;padding:0 32px;gap:14px;font-size:17px;font-weight:600;letter-spacing:.4px;border-radius:2px}
 .page-programs .term-apply svg{transition:transform .35s var(--motion-ease)}
 .page-programs .term-apply:is(:hover,:focus-visible) svg{transform:translateX(5px)}
 
 .page-programs .program-themes{padding:96px 0 104px;background:#f8f5f0;border-top:1px solid #ede5db}
-.page-programs .themes-heading{margin:0 0 44px;align-items:flex-end;gap:32px}
-.page-programs .themes-heading h2{margin:16px 0 0}
+.page-programs .themes-heading{margin:0 0 44px;align-items:center;gap:32px;scroll-margin-top:112px}
+.page-programs .program-page .themes-heading .themes-title{margin:0;font-size:clamp(30px,3.4vw,50px);line-height:1.1;letter-spacing:0}
+.page-programs .program-page .themes-title em{font-style:normal;color:var(--red)}
 .page-programs .search-box{width:min(340px,100%);height:52px;flex-shrink:0;gap:10px;padding:0 6px 0 22px;background:#fff;border:1px solid #e2d7ca;border-radius:999px;box-shadow:0 6px 18px #3a221a0a;transition:border-color .25s ease,box-shadow .25s ease}
 .page-programs .search-box:focus-within{border-color:#c9a66d;box-shadow:0 0 0 4px #c9a66d29}
 .page-programs .search-box input{flex:1;width:auto;min-width:0;height:100%;font-size:17px;color:var(--ink)}
@@ -1715,6 +1717,17 @@ body:has(.route-view:is(.page-home,.page-about,.page-governance,.page-committee)
 .page-programs .theme-tile .theme-details li:before{content:'';position:absolute;left:0;top:20px;width:11px;height:1px;background:#e8c393}
 @keyframes subtopics-in{from{opacity:0;transform:translate3d(0,16px,0)}to{opacity:1;transform:none}}
 .page-programs .theme-empty{margin:0;padding:44px 24px;text-align:center;background:#fff;border:1px dashed #d9cbbb;border-radius:4px;color:var(--muted);font-size:18px}
+/* Theme pages: what is showing on the left, a numbered box for each page on the right. */
+.page-programs .theme-pager{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px 24px;margin-top:34px;padding-top:24px;border-top:1px solid #e6dccf}
+.page-programs .program-page .theme-pager-status{margin:0;font-size:16px;font-weight:500;color:#6f655e}
+.page-programs .theme-pager-pages{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px}
+.page-programs .theme-pager button{min-width:48px;height:40px;padding:0 14px;background:#fff;border:1px solid #dccdbb;border-radius:2px;font:600 16px/1 'Manrope',sans-serif;color:#4d3a33;cursor:pointer;transition:background-color .25s ease,border-color .25s ease,color .25s ease,box-shadow .25s ease}
+.page-programs .theme-pager button:hover{border-color:var(--red);color:var(--red)}
+.page-programs .theme-pager button:focus-visible{outline:3px solid #c9a66d;outline-offset:2px}
+.page-programs .theme-pager button.is-current{background:var(--red);border-color:var(--red);color:#fff;box-shadow:0 8px 18px #9f1d2d2e}
+.page-programs .theme-pager .theme-pager-step{display:grid;place-items:center;padding:0;color:var(--red)}
+.page-programs .theme-pager .theme-pager-step[aria-disabled="true"]{border-color:#e6dccf;color:#b9ada2;cursor:default}
+.page-programs .theme-pager-gap{min-width:22px;text-align:center;font-size:18px;line-height:40px;color:#8f847b}
 .page-programs .program-themes .research-note{align-items:center;gap:16px;margin-top:40px;padding:20px 24px;background:#fff;border:1px solid #ebe2d8;border-left:3px solid #c9a66d;border-radius:4px}
 .page-programs .program-themes .research-note svg{flex-shrink:0}
 .page-programs .program-themes .research-note p{font-size:17px;line-height:1.7;color:#5f5853}
@@ -1726,6 +1739,8 @@ body:has(.route-view:is(.page-home,.page-about,.page-governance,.page-committee)
 .page-programs .proposal-band .eyebrow{color:#e8c393}
 .page-programs .program-page.proposal-band h2{color:#fff;margin:18px 0 26px}
 .page-programs .program-page.proposal-band h2 em{color:#e8b6b5}
+.page-programs .program-page.proposal-band .proposal-title{margin-top:0;font-size:clamp(30px,3.4vw,50px);line-height:1.1;letter-spacing:0}
+.page-programs .program-page.proposal-band .proposal-title em{font-style:normal;color:#e8c393}
 .page-programs .proposal-intro>p{margin:0;font-size:18px;line-height:1.75;color:#f1dcdb}
 .page-programs .proposal-band .guidance-caution{align-items:flex-start;gap:14px;margin-top:30px;padding:18px 22px;background:#ffffff0d;border:1px solid #ffffff21;border-radius:4px;color:#e8c393;font-size:16px;line-height:1.65}
 .page-programs .proposal-band .guidance-caution svg{flex-shrink:0;margin-top:3px}
@@ -1760,15 +1775,35 @@ body:has(.route-view:is(.page-home,.page-about,.page-governance,.page-committee)
 }
 
 /* Cards in a row arrive one after another; hovering never waits for that delay. */
-@media(min-width:1141px){.page-programs .theme-tile.is-visible:nth-child(3n+2){transition-delay:80ms}.page-programs .theme-tile.is-visible:nth-child(3n){transition-delay:160ms}}
-@media(min-width:761px) and (max-width:1140px){.page-programs .theme-tile.is-visible:nth-child(2n){transition-delay:90ms}}
+@media(min-width:961px){.page-programs .theme-tile.is-visible:nth-child(3n+2){transition-delay:80ms}.page-programs .theme-tile.is-visible:nth-child(3n){transition-delay:160ms}}
+@media(min-width:561px) and (max-width:960px){.page-programs .theme-tile.is-visible:nth-child(2n){transition-delay:90ms}}
 .page-programs .proposal-band .guidance-grid article.is-visible:nth-child(2){transition-delay:80ms}
 .page-programs .proposal-band .guidance-grid article.is-visible:nth-child(3){transition-delay:160ms}
 .page-programs .proposal-band .guidance-grid article.is-visible:nth-child(4){transition-delay:240ms}
 .page-programs .theme-tiles .theme-tile.is-visible:is(:hover,:focus-within),.page-programs .proposal-band .guidance-grid article.is-visible:hover{transition-delay:0s}
 
+/* A page of three themes fills one row of three cards. Narrower screens show two cards a row, with a
+   page's odd last card centred beneath them, and phones stack the cards. */
+@media(max-width:960px){
+.page-programs .program-themes .theme-tiles{grid-template-columns:repeat(4,minmax(0,1fr))}
+.page-programs .program-themes .theme-tile{grid-column:span 2}
+.page-programs .program-themes .theme-tile:last-child:nth-child(odd){grid-column:2/span 2}
+.page-programs .term-heading .term-heading-separator{display:none}
+.page-programs .term-heading span{display:block}
+.page-programs .theme-pager{flex-direction:column;justify-content:center;text-align:center}
+}
+@media(max-width:560px){
+.page-programs .program-themes .theme-tiles{grid-template-columns:minmax(0,1fr)}
+.page-programs .program-themes .theme-tile,.page-programs .program-themes .theme-tile:last-child:nth-child(odd){grid-column:auto}
+.page-programs .theme-pager-pages{gap:6px}
+.page-programs .theme-pager button{min-width:40px;padding:0 10px}
+}
+@media(max-width:360px){
+.page-programs .theme-pager-pages{gap:4px}
+.page-programs .theme-pager button{min-width:36px;height:38px;padding:0 8px}
+.page-programs .theme-pager-gap{min-width:16px}
+}
 @media(max-width:1140px){
-.page-programs .theme-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}
 .page-programs .proposal-intro{display:block;max-width:780px;margin-bottom:44px}
 .page-programs .program-page.proposal-band h2{margin-bottom:24px}
 .page-programs .proposal-band .guidance-grid article{grid-template-columns:1fr}
@@ -1819,8 +1854,39 @@ body:has(.route-view:is(.page-programs,.page-apply)) .footer{font-family:'Manrop
 @media(max-width:1140px){:is(.page-programs,.page-committee,.page-apply) .intro-media{width:60vw}}
 @media(max-width:760px){:is(.page-programs,.page-committee,.page-apply) .page-intro .container> :not(.intro-media){max-width:100%}:is(.page-programs,.page-committee,.page-apply) .intro-media{width:100%}:is(.page-programs,.page-committee,.page-apply) .intro-media:after{background:linear-gradient(0deg,#3b2522e8 0%,#3b252218 65%),linear-gradient(90deg,#3b252235,transparent)}}
 
+/* Research Programmes and Core Committee intros: the section or page name is the title, sized like the About Us
+   title, in a shorter band on a slightly lighter brown. The eyebrow would repeat the title, so it is hidden as on About Us. */
+:is(.page-programs,.page-committee) .page-intro{padding-block:76px 78px;background:#4a2f2a;border-bottom-color:#6a443d}
+:is(.page-programs,.page-committee) .page-intro .eyebrow{display:none}
+.route-view:is(.page-programs,.page-committee) .page-intro .container>h1{max-width:none;margin:0;font-size:clamp(38px,4.7vw,72px);font-weight:400;line-height:1.04;letter-spacing:-1.5px}
+:is(.page-programs,.page-committee) .page-intro h1 em{font-style:normal}
+.route-view:is(.page-programs,.page-committee) .page-intro .container>p{margin:22px 0 0;font-size:clamp(19px,1.5vw,23px);line-height:1.6}
+/* The photograph is narrower than on the other intros and cropped from higher up, so the whole of the reader,
+   from her hair to her hand, sits clear of the title and outside the fade. */
+.page-programs .intro-media{width:min(52vw,800px)}
+.page-programs .intro-media img{object-position:center 22%}
+.page-programs .intro-media:after{background:linear-gradient(90deg,#4a2f2a 0%,#4a2f2ad6 10%,#4a2f2a7a 20%,#4a2f2a1f 30%,transparent 38%),linear-gradient(0deg,#1d17142e,transparent 40%)}
+/* Core Committee photographs: the fade on the lighter brown, and each photograph cropped to its subject in the shorter band. */
+.page-committee .intro-media:after{background:linear-gradient(90deg,#4a2f2a 0%,#4a2f2ae0 20%,#4a2f2a99 32%,#4a2f2a26 48%,transparent 64%),linear-gradient(0deg,#1d17143d,transparent 45%)}
+.committee-intro-overview .intro-media img{object-position:center 46%}
+.committee-intro-board .intro-media img{object-position:center 40%}
+.committee-intro-research .intro-media img{object-position:center 66%}
+.committee-intro-academic .intro-media img{object-position:center 58%}
+/* Tablets keep the photograph on the right, as desktops and About Us do, so the band stays short. */
+@media(min-width:761px){
+:is(.page-programs,.page-committee) .page-intro .container:has(>.intro-media){transform:none}
+:is(.page-programs,.page-committee) .intro-media{position:absolute;top:0;right:0;bottom:0;height:auto;margin:0;border-radius:0;animation-name:media-reveal}
+}
+/* Phones: the photograph sits under the text, fading up into the brown. Written as "not 761px and up" so that no
+   fractional window width (on a zoomed display) falls between this rule and the one above. */
+@media not all and (min-width:761px){
+:is(.page-programs,.page-committee) .page-intro{padding-block:52px 44px}
+.route-view:is(.page-programs,.page-committee) .page-intro .container>h1{font-size:clamp(38px,11.3vw,44px)}
+:is(.page-programs,.page-committee) .intro-media{width:100%}
+:is(.page-programs,.page-committee) .intro-media:after{background:linear-gradient(0deg,#4a2f2ae8 0%,#4a2f2a18 65%),linear-gradient(90deg,#4a2f2a35,transparent)}
+}
+
 /* Core Committee: an overview and a page for each body, sharing a page switcher, the dark intro and the member cards. */
-@media(min-width:761px){.page-committee .page-intro h1{font-size:clamp(46px,5.3vw,76px)}}
 .committee-tabs{position:relative;z-index:2;background:#fbf7ee;border-bottom:1px solid #e6d9c4}
 .committee-tabs .container{display:flex;justify-content:center;gap:10px;padding-block:18px}
 .committee-tabs a{display:inline-flex;align-items:center;min-height:46px;padding:0 24px;border:1px solid #d9c6a6;border-radius:999px;color:#5a3a33;font-size:15px;font-weight:600;white-space:nowrap;transition:background-color .25s ease,border-color .25s ease,color .25s ease}
@@ -1828,13 +1894,10 @@ body:has(.route-view:is(.page-programs,.page-apply)) .footer{font-family:'Manrop
 .committee-tabs a.active{background:#812230;border-color:#812230;color:#fff7e9}
 
 .page-committee .committee-overview{background:#fffdf8}
-.page-committee .committee-lead{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:clamp(40px,6vw,96px);align-items:end;margin-bottom:84px}
-.page-committee :is(.committee-lead,.committee-facts,.showcase-heading) .eyebrow{font-size:13px;letter-spacing:2.4px;color:#8f2333}
-.page-committee .committee-lead h2{margin:16px 0 0;font-size:clamp(38px,3.6vw,52px);line-height:1.1;letter-spacing:-.5px;color:#3b2522}
-.page-committee .committee-lead h2 em{color:#8f2333}
-.page-committee .committee-lead p{margin:0 0 24px;font-size:18px;line-height:1.75;color:#5f5450}
-.page-committee .committee-lead .committee-note{margin:0;padding:18px 22px;background:#f7f1e5;border-left:3px solid #c7a86b;border-radius:0 4px 4px 0;color:#8f2333}
-.page-committee .committee-lead .committee-note p{margin:0;font-size:15px;line-height:1.7;color:#6e5f58}
+.page-committee .committee-lead{margin-bottom:60px}
+.page-committee :is(.committee-facts,.showcase-heading) .eyebrow{font-size:13px;letter-spacing:2.4px;color:#8f2333}
+.page-committee .committee-lead h2{margin:0;font-size:clamp(30px,3.4vw,50px);line-height:1.1;letter-spacing:0;color:#3b2522}
+.page-committee .committee-lead h2 em{font-style:normal;color:#8f2333}
 
 .page-committee .committee-roles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;align-items:stretch}
 .page-committee .committee-role{position:relative;display:flex;flex-direction:column;min-width:0;padding:46px 34px 32px;background:#fbf7ee;border:1px solid #e3d3bb;border-radius:6px;transition:opacity .72s var(--motion-ease),transform .72s var(--motion-ease),box-shadow .4s ease,border-color .4s ease}
@@ -1881,8 +1944,6 @@ body:has(.route-view:is(.page-programs,.page-apply)) .footer{font-family:'Manrop
 .page-committee .ornament:after{content:'';position:absolute;top:50%;right:-5px;width:9px;height:9px;border:1px solid #e7c98b;transform:translateY(-50%) rotate(45deg)}
 .page-committee .ornament:last-child:after{right:auto;left:-5px}
 .page-committee .showcase-heading p{margin:0;font-size:18px;line-height:1.75;color:#ead9cc}
-.page-committee .council-remit{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;max-width:920px;margin:-28px auto 34px;padding:0;list-style:none}
-.page-committee .council-remit li{padding:8px 17px;border:1px solid #e7c98b59;border-radius:999px;font-size:14px;color:#f3e2c4}
 
 .page-committee .member-grid{display:grid;gap:32px;align-items:stretch}
 .page-committee .member-grid.is-board{grid-template-columns:repeat(2,minmax(0,1fr));max-width:1100px;margin:0 auto}
@@ -1902,7 +1963,6 @@ body:has(.route-view:is(.page-programs,.page-apply)) .footer{font-family:'Manrop
 .page-committee .member-card p{margin:0 0 28px;font-size:16px;line-height:1.75;color:#ead9cc}
 .page-committee .member-more{display:inline-flex;align-items:center;gap:10px;min-height:50px;margin-top:auto;padding:0 24px;background:transparent;border:1px solid #e7c98b;border-radius:2px;color:#e7c98b;font-size:15px;font-weight:600;transition:background-color .25s ease,color .25s ease}
 .page-committee .member-more:hover,.page-committee .member-more:focus-visible{background:#e7c98b;color:#812230}
-.page-committee .member-focus{display:inline-block;margin:0 0 18px;padding:7px 15px;border:1px solid #e7c98b66;border-radius:999px;font-size:14px;line-height:1.35;color:#f3e2c4}
 .page-committee .member-pending{margin-top:auto;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#c9ad8e}
 .page-committee .member-contact{display:flex;justify-content:center;gap:16px;margin:-8px 0 26px;padding:0;list-style:none}
 .page-committee .member-contact :is(a,span){display:grid;place-items:center;width:40px;height:40px;border:1px solid #e7c98b66;border-radius:50%;color:#e7c98b;transition:background-color .25s ease,border-color .25s ease,color .25s ease}
@@ -1914,7 +1974,6 @@ body:has(.route-view:is(.page-programs,.page-apply)) .footer{font-family:'Manrop
 .page-committee .member-grid.is-council .member-card h3{font-size:24px}
 .page-committee .member-grid.is-council .member-title{margin-bottom:16px;font-size:16px}
 .page-committee .member-grid.is-council .member-card p{margin-bottom:22px;font-size:15px}
-.page-committee .member-grid.is-council .member-focus{display:flex;align-items:center;justify-content:center;width:100%;min-height:56px;padding:6px 16px;border-radius:28px}
 .page-committee .member-grid.is-council .member-contact{gap:14px;margin:-4px 0 20px}
 .page-committee .member-grid.is-council .member-contact :is(a,span){width:36px;height:36px}
 .page-committee .member-grid.is-council .member-contact svg{width:15px;height:15px}
@@ -1922,6 +1981,13 @@ body:has(.route-view:is(.page-programs,.page-apply)) .footer{font-family:'Manrop
 .hero-title-mask:first-child>span,.section-pub .section-heading h2,.focus-method-layout h2{text-wrap:balance}
 .page-committee .member-note{display:flex;align-items:center;justify-content:center;gap:10px;margin:56px 0 0;font-size:15px;color:#d9c5b7}
 .page-committee .member-note svg{flex:none;color:#e7c98b}
+/* "SK ALTAIR" written like the logo, with its red K. On the dark brown and maroon grounds the logo red would disappear,
+   so the K there takes a lighter tint of it. The profile eyebrow is itself maroon, so there the rest of the name takes
+   the dark ink and the red K still stands out. */
+.page-committee .committee-brand{white-space:nowrap}
+.page-committee .committee-brand-k{color:#a51f31}
+.page-committee :is(.page-intro,.member-showcase) .committee-brand-k{color:#ff4d5e}
+.page-committee .profile-dialog-copy .eyebrow .committee-brand{color:#3b2522}
 
 .profile-dialog{width:min(1000px,calc(100vw - 32px));max-width:none;max-height:min(88vh,880px);padding:0;overflow:hidden;background:#fbf7ee;border:1px solid #c7a86b;border-radius:6px;color:#332522;box-shadow:0 30px 90px #100b0a73}
 .profile-dialog[open]{animation:profile-rise .45s cubic-bezier(.2,.75,.25,1) both}
@@ -1957,8 +2023,7 @@ html:has(.profile-dialog[open]){overflow:hidden}
   .committee-tabs .container{justify-content:flex-start;gap:8px;padding-block:14px;overflow-x:auto;scrollbar-width:none}
   .committee-tabs .container::-webkit-scrollbar{display:none}
   .committee-tabs a{flex:none;min-height:42px;padding:0 18px;font-size:14px}
-  .page-committee .committee-lead{grid-template-columns:1fr;gap:26px;margin-bottom:64px}
-  .page-committee .committee-lead p{font-size:17px}
+  .page-committee .committee-lead{margin-bottom:48px}
   .page-committee .committee-role{padding:42px 24px 28px}
   .page-committee .committee-facts{padding:68px 0}
   .page-committee .facts-row{grid-template-columns:1fr;gap:30px}

@@ -246,6 +246,21 @@ function About() {
   return <div className="about-page-layout"><aside className="contents-rail about-hero-rail"><span className="eyebrow">ABOUT <AboutBrandText text="SK ALTAIR"/></span><a href="#vision">Vision</a><a href="#mission">Mission</a><a href="#constitution">Constitution</a><a href="#objectives">Objectives</a><a href="#governance"><span>Governance and</span><span>Institutional Policies</span></a></aside><PageIntro eyebrow="ABOUT US" title={<>About <em>Us</em></>} copy="" image={pagePhotos.about} className="page-intro-about"><div className="about-summary"><p><b>Satatham Kritam Advanced Legal Technology and Imperative Research (<AboutBrandText text="SK ALTAIR"/>)</b> is a non-profit research initiative dedicated to examining contemporary legal, technological and public-policy challenges. A unit of <b>Sri Chennakeshava Memorial Education and Welfare Society</b>, we provide a platform for legal professionals, students and interdisciplinary researchers to undertake original research, engage in informed debate and contribute to the development of laws, institutions and public policies.</p><button className="text-link" onClick={()=>setExpanded(v=>!v)}>{expanded?'Read less':'Read me'} <ArrowRight size={16}/></button>{expanded&&<div className="about-purpose-expanded">{full.map(p=><p key={p}><AboutBrandText text={p}/></p>)}</div>}</div></PageIntro><section className="section content-section"><div className="container about-page-grid"><div className="prose"><section id="vision"><span className="eyebrow">01 · VISION</span><h2>A clear direction for the future.</h2><p>To be a respected centre of independent legal, technological and public-policy research that strengthens the rule of law, informs public institutions and enables society to respond fairly and effectively to emerging challenges.</p></section><section id="mission"><span className="eyebrow">02 · MISSION</span><h2>Create room for rigorous inquiry.</h2><p>We provide legal professionals, students and interdisciplinary researchers with an inclusive platform for sustained legal and technology research and informed debate on challenges confronting the legislature, executive and judiciary.</p>{more.mission&&<><p>Through structured, mentored programmes, credible publications, stakeholder consultation and institutional collaboration, we seek to support the development and reform of laws and policies, effective implementation and evidence-based evaluation.</p><p>Our work connects legal scholarship with legislation, policymaking, governance, adjudication and dispute resolution. It examines how rules work in practice and how they can better serve the public, including as technology reshapes rights, institutions and social life.</p></>}<button className="text-link" onClick={()=>toggle('mission')}>{more.mission?'Read less':'Read more'}</button></section><section id="constitution"><span className="eyebrow">03 · CONSTITUTION</span><h2>The framework for the institution.</h2><p>The Centre’s Constitution establishes its institutional purpose, governance structure, delegated authority and research framework.</p>{more.constitution&&<><p>Its accompanying policies provide detailed standards for data protection, intellectual property, confidentiality, research integrity, records and implementation.</p><p>The adopted Constitution and approved policies will be made available here, with their effective dates and subsequent revisions.</p><p>This page provides an overview. The adopted governing documents, applicable law and executed project agreements determine the detailed rights and obligations of the Centre and its participants.</p></>}<button className="text-link" onClick={()=>toggle('constitution')}>{more.constitution?'Read less':'Read more'}</button></section><section id="objectives"><span className="eyebrow">04 · OBJECTIVES</span><h2>What guides the work.</h2><div className="objective-list">{objectives.map(([title,description],i)=><article className="objective-card" key={title}><span className="objective-number">{String(i+1).padStart(2,'0')}</span><h3>{title}</h3><p className="objective-description">{description}</p></article>)}</div></section></div></div></section><section id="governance" className="section governance-content"><div className="container"><div className="governance-section-heading"><span className="eyebrow">05 · GOVERNANCE</span><h2>Governance and Institutional Policies</h2></div><div className="governance-intro">{govIntro.map((line,i)=><p key={i}><AboutBrandText text={line}/></p>)}</div>{categories.map(cat=><section className="governance-category" key={cat.title}><h3>{cat.title}</h3><div className="governance-grid">{cat.items.map(item=><article className="governance-policy-card" key={item.id}><h4>{item.title}</h4>{(more[item.id]?item.lines:item.lines.slice(0,2)).map((line,i)=><p className={line.trim().startsWith('•')?'governance-bullet':''} key={i}>{renderPolicyLine(line)}</p>)}{item.lines.length>2&&<button className="text-link" onClick={()=>toggle(item.id)}>{more[item.id]?'Read less':'Read more'}</button>}</article>)}</div></section>)}<div className="about-download-row"><a className="button button-red about-download" href="/governance-constitution-objectives.pdf" download>Download Constitution, Objectives and Governance Policies</a></div></div></section></div>;
 }
 
+// Research themes are shown a page at a time, so the section stays short as more themes are added.
+const themesPerPage = 3;
+
+// The page boxes for the themes: every page while there are only a few. After that, the first and last pages,
+// the current page and its neighbours, with a gap between them. The row always has the same number of boxes,
+// so it does not shift as the reader moves through the pages. Pages are counted from 0.
+function themePagerItems(current, count, neighbours) {
+  const slots = neighbours * 2 + 5;
+  if (count <= slots) return Array.from({ length: count }, (_, index) => index);
+  const start = Math.min(Math.max(current - neighbours, 2), count - 3 - neighbours * 2);
+  const end = start + neighbours * 2;
+  const middle = Array.from({ length: end - start + 1 }, (_, index) => start + index);
+  return [0, start === 2 ? 1 : 'gap-start', ...middle, end === count - 3 ? count - 2 : 'gap-end', count - 1];
+}
+
 function ProgramsPage() {
   const livePrograms = useContent('program', programs);
   const location=useLocation();
@@ -253,12 +268,34 @@ function ProgramsPage() {
   const current = livePrograms.find(p => p.slug === selected) || livePrograms[0] || programs[0];
   const [query, setQuery] = useState('');
   const [search, setSearch] = useState('');
+  const [themePage, setThemePage] = useState(0);
+  const [narrowPager, setNarrowPager] = useState(() => window.matchMedia('(max-width: 560px)').matches);
+  const themesTop = React.useRef(null);
+  useEffect(() => { const query = window.matchMedia('(max-width: 560px)'); const update = () => setNarrowPager(query.matches); query.addEventListener('change', update); update(); return () => query.removeEventListener('change', update); }, []);
   const filtered = useMemo(() => themes.filter(t => t.title.toLowerCase().includes(query.toLowerCase()) || t.desc.toLowerCase().includes(query.toLowerCase())), [query]);
-  useEffect(()=>{const params=new URLSearchParams(location.search);const term=params.get('term');if(livePrograms.some(program=>program.slug===term))setSelected(term);const themeParam=params.get('theme');const themeIndex=themeParam?Number(themeParam):NaN;const nextQuery=Number.isInteger(themeIndex)&&themes[themeIndex]?themes[themeIndex].title:'';setSearch(nextQuery);setQuery(nextQuery);},[location.search,livePrograms]);
-  return <><PageIntro eyebrow="RESEARCH PROGRAMMES" title={<>Choose a theme.<br/><em>Define your question.</em></>} copy="A structured, mentored legal and technology research path for legal professionals, students and interdisciplinary researchers." image={pagePhotos.programs} imageSizes={wideIntroImageSizes}/><section className="section program-page program-terms"><div className="container"><div className="term-tabs" role="tablist">{livePrograms.map(p=><button key={p.slug} role="tab" aria-selected={selected===p.slug} className={selected===p.slug?'selected':''} onClick={()=>transitionUpdate(()=>setSelected(p.slug))}><span>{p.number}</span>{p.name}<small>{p.duration}</small></button>)}</div><div className="term-panel"><div className="term-visual">{programTermPhotos[current.slug] && <figure className="term-media" key={current.slug}><Photo image={programTermPhotos[current.slug]} widths={[480, 800, 1200]} sizes="(max-width: 760px) 100vw, 640px"/></figure>}<span className="term-badge" aria-hidden="true">{current.number}</span></div><div className="term-copy"><span className="eyebrow">{current.name.toUpperCase()} · {current.duration}</span><h2>A research term<br/><em>shaped around the question.</em></h2><p>{current.description} The preferred term should reflect the research question, methodology, available sources and proposed deliverables. Final duration and milestones are agreed in the written offer.</p><Link to={`/apply?program=${current.slug}`} className="button button-red term-apply">Apply <ArrowRight size={17}/></Link></div></div></div></section><section className="section program-page program-themes"><div className="container"><div className="themes-heading"><div><span className="eyebrow">RESEARCH THEMES</span><h2>Questions we’re <em>exploring.</em></h2></div><label className="search-box"><input value={search} onChange={e=>{const value=e.target.value;setSearch(value);transitionUpdate(()=>setQuery(value));}} placeholder="Search themes" aria-label="Search research themes"/><span><Search size={17}/></span></label></div><div className="theme-tiles">{filtered.map(t=><article className="theme-tile" key={t.title}><div className="theme-tile-media">{themePhotos[t.title] && <Photo image={themePhotos[t.title]} alt="" widths={[480, 800]} sizes="(max-width: 760px) 100vw, (max-width: 1140px) 50vw, 400px"/>}</div><div className="theme-tile-body"><div className="theme-tile-meta"><span>{String(themes.indexOf(t)+1).padStart(2,'0')}</span><span aria-hidden="true">{t.icon}</span></div><h3>{t.title}</h3><p>{t.desc}</p><details className="theme-details"><summary><span className="when-closed">View illustrative subtopics</span><span className="when-open">Hide subtopics</span><Plus size={17} aria-hidden="true"/></summary><ul>{t.topics?.map(x=><li key={x}>{x}</li>)}</ul></details></div></article>)}</div>{!filtered.length && <p className="theme-empty">No research themes match “{search}”.</p>}<div className="research-note"><CircleHelp size={18}/><p>These themes provide a framework for proposals. Applicants may propose other relevant questions and should explain how their work connects with a primary theme.</p></div></div></section><section className="section program-page proposal-band"><div className="container proposal-layout"><div className="proposal-intro"><div className="proposal-heading"><span className="eyebrow">PROPOSAL GUIDANCE</span><h2>From interest to <em>a researchable proposal.</em></h2></div><p>Unless a specific call says otherwise, a proposal should identify its primary theme, working title, research problem, principal questions, significance and existing research gap. Outline a feasible methodology, scope, indicative sources, expected contribution and monthly work plan. Disclose relevant ethical, confidentiality, data-access or conflict-of-interest considerations.</p><div className="guidance-caution"><ShieldCheck size={18}/><span>Application windows and detailed terms are pending confirmation. The written offer and project agreement will govern any engagement.</span></div></div><div className="guidance-grid"><article><div className="guidance-top"><span className="guidance-icon"><Users size={20}/></span><span className="guidance-no">01</span></div><h3>Who may apply</h3><p>Law students, fresh graduates, early-career professionals, practising lawyers and researchers in relevant disciplines may apply, subject to each call’s eligibility requirements.</p></article><article><div className="guidance-top"><span className="guidance-icon"><ClipboardCheck size={20}/></span><span className="guidance-no">02</span></div><h3>How proposals are reviewed</h3><p>Assessment considers relevance, originality, analytical quality, methodology, feasibility, availability of supervision and approved funding. Shortlisted applicants may be invited to discuss and refine their proposal.</p></article><article><div className="guidance-top"><span className="guidance-icon"><GraduationCap size={20}/></span><span className="guidance-no">03</span></div><h3>Mentorship and participation</h3><p>Selected researchers receive guidance, feedback and agreed milestones. Projects may include scheduled reviews, progress reports and documented sources. Online participation depends on project requirements.</p></article><article><div className="guidance-top"><span className="guidance-icon"><Award size={20}/></span><span className="guidance-no">04</span></div><h3>Stipends and completion</h3><p>Any monthly stipend, funded period, schedule and completion conditions are stated in the written offer. Selection does not guarantee publication; certificates require satisfactory completion of agreed deliverables.</p></article></div></div></section></>;
+  const themePageCount = Math.ceil(filtered.length / themesPerPage);
+  const page = Math.min(themePage, Math.max(themePageCount - 1, 0));
+  const pageThemes = filtered.slice(page * themesPerPage, (page + 1) * themesPerPage);
+  const firstShown = page * themesPerPage + 1, lastShown = page * themesPerPage + pageThemes.length;
+  const showThemePage = index => {
+    setThemePage(index);
+    // Bring the section heading back into view when the reader has scrolled past it to reach the page buttons
+    // (smoothly, unless the reader prefers reduced motion; see the html scroll-behavior rules).
+    const heading = themesTop.current;
+    const headerBottom = document.querySelector('.site-header')?.getBoundingClientRect().bottom ?? 0;
+    if (heading && heading.getBoundingClientRect().top < headerBottom) heading.scrollIntoView({ block: 'start' });
+  };
+  useEffect(()=>{const params=new URLSearchParams(location.search);const term=params.get('term');if(livePrograms.some(program=>program.slug===term))setSelected(term);const themeParam=params.get('theme');const themeIndex=themeParam?Number(themeParam):NaN;const nextQuery=Number.isInteger(themeIndex)&&themes[themeIndex]?themes[themeIndex].title:'';setSearch(nextQuery);setQuery(nextQuery);setThemePage(0);},[location.search,livePrograms]);
+  return <><PageIntro eyebrow="RESEARCH PROGRAMMES" title={<>RESEARCH <em>PROGRAMMES</em></>} copy="A structured, mentored legal and technology research path for legal professionals, students and interdisciplinary researchers." image={pagePhotos.programs} imageSizes={wideIntroImageSizes}/><section className="section program-page program-terms"><div className="container"><div className="term-tabs" role="tablist">{livePrograms.map(p=><button key={p.slug} role="tab" aria-selected={selected===p.slug} className={selected===p.slug?'selected':''} onClick={()=>transitionUpdate(()=>setSelected(p.slug))}><span>{p.number}</span>{p.name}<small>{p.duration}</small></button>)}</div><div className="term-panel"><div className="term-visual">{programTermPhotos[current.slug] && <figure className="term-media" key={current.slug}><Photo image={programTermPhotos[current.slug]} widths={[480, 800, 1200]} sizes="(max-width: 760px) 100vw, 640px"/></figure>}<span className="term-badge" aria-hidden="true">{current.number}</span></div><div className="term-copy"><h2 className="term-heading"><span>{current.name.toUpperCase()}</span><span className="term-heading-separator"> · </span><span>{current.duration}</span></h2><p>{current.description} The preferred term should reflect the research question, methodology, available sources and proposed deliverables. Final duration and milestones are agreed in the written offer.</p><Link to={`/apply?program=${current.slug}`} className="button button-red term-apply">Apply <ArrowRight size={17}/></Link></div></div></div></section><section className="section program-page program-themes"><div className="container"><div className="themes-heading" ref={themesTop}><h2 className="themes-title">RESEARCH <em>THEMES</em></h2><label className="search-box"><input value={search} onChange={e=>{const value=e.target.value;setSearch(value);transitionUpdate(()=>{setQuery(value);setThemePage(0);});}} placeholder="Search themes" aria-label="Search research themes"/><span><Search size={17}/></span></label></div><div className="theme-tiles">{pageThemes.map(t=><article className="theme-tile" key={t.title}><div className="theme-tile-media">{themePhotos[t.title] && <Photo image={themePhotos[t.title]} alt="" widths={[480, 800]} sizes="(max-width: 760px) 100vw, (max-width: 1140px) 50vw, 400px"/>}</div><div className="theme-tile-body"><div className="theme-tile-meta"><span>{String(themes.indexOf(t)+1).padStart(2,'0')}</span><span aria-hidden="true">{t.icon}</span></div><h3>{t.title}</h3><p>{t.desc}</p><details className="theme-details"><summary><span className="when-closed">View illustrative subtopics</span><span className="when-open">Hide subtopics</span><Plus size={17} aria-hidden="true"/></summary><ul>{t.topics?.map(x=><li key={x}>{x}</li>)}</ul></details></div></article>)}</div>{!filtered.length && <p className="theme-empty">No research themes match “{search}”.</p>}{themePageCount > 1 && <nav className="theme-pager" aria-label="Research theme pages"><p className="theme-pager-status" aria-live="polite">Showing {firstShown === lastShown ? firstShown : `${firstShown}–${lastShown}`} of {filtered.length} themes</p><div className="theme-pager-pages"><button type="button" className="theme-pager-step" aria-label="Previous page" aria-disabled={page === 0} onClick={() => page > 0 && showThemePage(page - 1)}><ChevronLeft size={18} aria-hidden="true"/></button>{themePagerItems(page, themePageCount, narrowPager ? 0 : 1).map(item => typeof item === 'number' ? <button type="button" key={item} className={item === page ? 'is-current' : ''} aria-current={item === page ? 'page' : undefined} aria-label={`Page ${item + 1} of ${themePageCount}`} onClick={() => showThemePage(item)}>{item + 1}</button> : <span className="theme-pager-gap" key={item} aria-hidden="true">…</span>)}<button type="button" className="theme-pager-step" aria-label="Next page" aria-disabled={page === themePageCount - 1} onClick={() => page < themePageCount - 1 && showThemePage(page + 1)}><ChevronRight size={18} aria-hidden="true"/></button></div></nav>}<div className="research-note"><CircleHelp size={18}/><p>These themes provide a framework for proposals. Applicants may propose other relevant questions and should explain how their work connects with a primary theme.</p></div></div></section><section className="section program-page proposal-band"><div className="container proposal-layout"><div className="proposal-intro"><div className="proposal-heading"><h2 className="proposal-title">PROPOSAL <em>GUIDANCE</em></h2></div><p>Unless a specific call says otherwise, a proposal should identify its primary theme, working title, research problem, principal questions, significance and existing research gap. Outline a feasible methodology, scope, indicative sources, expected contribution and monthly work plan. Disclose relevant ethical, confidentiality, data-access or conflict-of-interest considerations.</p><div className="guidance-caution"><ShieldCheck size={18}/><span>Application windows and detailed terms are pending confirmation. The written offer and project agreement will govern any engagement.</span></div></div><div className="guidance-grid"><article><div className="guidance-top"><span className="guidance-icon"><Users size={20}/></span><span className="guidance-no">01</span></div><h3>Who may apply</h3><p>Law students, fresh graduates, early-career professionals, practising lawyers and researchers in relevant disciplines may apply, subject to each call’s eligibility requirements.</p></article><article><div className="guidance-top"><span className="guidance-icon"><ClipboardCheck size={20}/></span><span className="guidance-no">02</span></div><h3>How proposals are reviewed</h3><p>Assessment considers relevance, originality, analytical quality, methodology, feasibility, availability of supervision and approved funding. Shortlisted applicants may be invited to discuss and refine their proposal.</p></article><article><div className="guidance-top"><span className="guidance-icon"><GraduationCap size={20}/></span><span className="guidance-no">03</span></div><h3>Mentorship and participation</h3><p>Selected researchers receive guidance, feedback and agreed milestones. Projects may include scheduled reviews, progress reports and documented sources. Online participation depends on project requirements.</p></article><article><div className="guidance-top"><span className="guidance-icon"><Award size={20}/></span><span className="guidance-no">04</span></div><h3>Stipends and completion</h3><p>Any monthly stipend, funded period, schedule and completion conditions are stated in the written offer. Selection does not guarantee publication; certificates require satisfactory completion of agreed deliverables.</p></article></div></div></section></>;
 }
 
 // Core Committee: an overview of the three bodies, then a page for each, all within the Committee section.
+
+// Writes each "SK ALTAIR" in a Core Committee text with the space and the logo's red K (see .committee-brand).
+function withBrandName(text) {
+  return text.split(/(SK\s?ALTAIR)/).map((part, index) => /^SK\s?ALTAIR$/.test(part) ? <span className="committee-brand" key={index}>S<span className="committee-brand-k">K</span> ALTAIR</span> : part);
+}
+
 const committeePages = [
   { to: '/committee', label: 'Committee Overview' },
   { to: '/committee/board-members', label: 'Board Members' },
@@ -314,22 +351,20 @@ const boardMembers = [
 // Placeholder seats until appointments are confirmed; replace each with the member's name, title, photo, contact details and profile.
 const councils = {
   research: {
-    name: 'Research Council', eyebrow: 'RESEARCH COUNCIL', image: councilPhotos['research-council'],
-    title: <>Shaping a rigorous<br/><em>legal and technology research agenda.</em></>,
+    name: 'Research Council', eyebrow: 'RESEARCH COUNCIL', image: councilPhotos['research-council'], introClass: 'committee-intro-research',
+    title: <>RESEARCH <em>COUNCIL</em></>,
     heading: <>Research <em>Council</em></>,
     copy: 'The Research Council will support the development of the Centre’s legal and technology research agenda, assess proposed research themes and encourage rigorous, relevant and feasible projects.',
     remit: 'Its remit will include recommendations on research methodology, supervision, interdisciplinary collaboration and the potential legal or policy contribution of research outputs.',
-    focus: ['Research methodology', 'Supervision', 'Interdisciplinary collaboration', 'Legal and policy contribution'],
-    seats: [['Chair', 'Law, Governance and Public Policy'], ['Member', 'Technology, AI and Law'], ['Member', 'Data Protection and Cybersecurity'], ['Member', 'Intellectual Property and Innovation']],
+    seats: ['Chair', 'Member', 'Member', 'Member'],
   },
   academic: {
-    name: 'Academic Council', eyebrow: 'ACADEMIC COUNCIL', image: councilPhotos['academic-councils'],
-    title: <>Upholding<br/><em>academic standards.</em></>,
+    name: 'Academic Council', eyebrow: 'ACADEMIC COUNCIL', image: councilPhotos['academic-councils'], introClass: 'committee-intro-academic',
+    title: <>ACADEMIC <em>COUNCIL</em></>,
     heading: <>Academic <em>Council</em></>,
     copy: 'The Academic Council will support academic standards across the Centre’s legal and technology research programmes.',
     remit: 'Its remit will include guidance on programme design, researcher development, mentorship, assessment criteria and academic quality, together with recommendations for lectures, workshops and scholarly exchanges.',
-    focus: ['Programme design', 'Researcher development', 'Mentorship', 'Assessment criteria', 'Academic quality'],
-    seats: [['Chair', 'Programme Design'], ['Member', 'Researcher Development and Mentorship'], ['Member', 'Assessment and Academic Quality'], ['Member', 'Lectures, Workshops and Scholarly Exchange']],
+    seats: ['Chair', 'Member', 'Member', 'Member'],
   },
 };
 
@@ -385,10 +420,9 @@ function MemberCard({ member, onOpen }) {
     <article className="member-card">
       <MemberPortrait member={member}/>
       <h3>{member.name}</h3>
-      <span className="member-title">{member.title}</span>
+      <span className="member-title">{withBrandName(member.title)}</span>
       <MemberContact member={member}/>
       {member.highlights && <MemberHighlights items={member.highlights}/>}
-      {member.focus && <span className="member-focus">{member.focus}</span>}
       <p>{member.summary}</p>
       {onOpen ? <button type="button" className="member-more" onClick={() => onOpen(member)}>Read full profile <ArrowUpRight size={16}/></button> : <span className="member-pending">Appointment pending</span>}
     </article>
@@ -405,7 +439,7 @@ function ProfileDialog({ member, onClose }) {
         <button type="button" className="profile-dialog-close" onClick={() => dialog.current.close()} aria-label="Close profile"><X size={20}/></button>
         <aside><MemberPortrait member={member}/><MemberHighlights items={member.highlights}/></aside>
         <div className="profile-dialog-copy">
-          <span className="eyebrow">{member.title}</span>
+          <span className="eyebrow">{withBrandName(member.title)}</span>
           <h2 id="profile-dialog-name">{member.name}</h2>
           {member.bio.map(paragraph => <p key={paragraph.slice(0, 32)}>{paragraph}</p>)}
           <ul className="member-tags">{member.expertise.map(item => <li key={item}>{item}</li>)}</ul>
@@ -420,21 +454,16 @@ function CommitteeOverview() {
     <>
       <PageIntro
         eyebrow="PEOPLE & GOVERNANCE"
-        title={<>Experience in practice.<br /><em>Purpose in legal and technology research.</em></>}
-        copy="SKALTAIR brings together experience in legal practice, research, innovation and education to guide its institutional development and academic work."
+        title={<>PEOPLE &amp; <em>GOVERNANCE</em></>}
+        copy={withBrandName('SK ALTAIR brings together experience in legal practice, research, innovation and education to guide its institutional development and academic work.')}
         image={pagePhotos.committee}
         imageSizes={wideIntroImageSizes}
+        className="committee-intro-overview"
       />
       <CommitteeTabs/>
       <section className="section committee-overview">
         <div className="container">
-          <div className="committee-lead">
-            <div><span className="eyebrow">BOARD & COUNCILS</span><h2>Guidance for<br/><em>independent legal and technology research.</em></h2></div>
-            <div>
-              <p>The Board and Councils contribute to SKALTAIR’s institutional development and academic work within the responsibilities assigned under the approved governance framework. Each body has a distinct role.</p>
-              <div className="committee-note"><ShieldCheck size={20}/><p>SK ALTAIR is a non-profit unit of Sri Chennakeshava Memorial Education and Welfare Society. Council responsibilities operate within the Centre’s approved governance framework.</p></div>
-            </div>
-          </div>
+          <div className="committee-lead"><h2>BOARD &amp; <em>COUNCILS</em></h2></div>
           <div className="committee-roles">
             {committeeBodies.map(({ Icon, ...body }) => (
               <article className="committee-role" key={body.to}>
@@ -442,7 +471,7 @@ function CommitteeOverview() {
                 <span className="role-icon"><Icon size={22}/></span>
                 <h3>{body.name}</h3>
                 <p className="role-line">{body.line}</p>
-                <p>{body.copy}</p>
+                <p>{withBrandName(body.copy)}</p>
                 <ul className="role-remit">{body.remit.map(item => <li key={item}>{item}</li>)}</ul>
                 <Link to={body.to} className="role-link">{body.link} <ArrowRight size={16}/></Link>
               </article>
@@ -468,15 +497,16 @@ function BoardMembers() {
     <>
       <PageIntro
         eyebrow="BOARD MEMBERS"
-        title={<>Experience that<br/><em>guides the institution.</em></>}
-        copy="SK ALTAIR’s Board Members bring decades of experience in intellectual property, law, research and corporate governance to its institutional development and academic work."
+        title={<>BOARD <em>MEMBERS</em></>}
+        copy={withBrandName('SK ALTAIR’s Board Members bring decades of experience in intellectual property, law, research and corporate governance to its institutional development and academic work.')}
         image={councilPhotos['founding-committee']}
         imageSizes={wideIntroImageSizes}
+        className="committee-intro-board"
       />
       <CommitteeTabs/>
       <section className="section member-showcase">
         <div className="container">
-          <ShowcaseHeading eyebrow="SK ALTAIR BOARD" title={<>Board <em>Members</em></>} copy="The Board guides SK ALTAIR’s institutional development and academic work within the Centre’s approved governance framework."/>
+          <ShowcaseHeading eyebrow={withBrandName('SK ALTAIR BOARD')} title={<>Board <em>Members</em></>} copy={withBrandName('The Board guides SK ALTAIR’s institutional development and academic work within the Centre’s approved governance framework.')}/>
           <div className="member-grid is-board">{boardMembers.map(member => <MemberCard key={member.name} member={member} onOpen={setProfile}/>)}</div>
         </div>
       </section>
@@ -488,14 +518,13 @@ function BoardMembers() {
 function CouncilPage({ council }) {
   return (
     <>
-      <PageIntro eyebrow={council.eyebrow} title={council.title} copy={council.copy} image={council.image} imageSizes={wideIntroImageSizes}/>
+      <PageIntro eyebrow={council.eyebrow} title={council.title} copy={council.copy} image={council.image} imageSizes={wideIntroImageSizes} className={council.introClass}/>
       <CommitteeTabs/>
       <section className="section member-showcase">
         <div className="container">
           <ShowcaseHeading eyebrow="CORE COMMITTEE" title={council.heading} copy={council.remit}/>
-          <ul className="council-remit">{council.focus.map(item => <li key={item}>{item}</li>)}</ul>
           <div className="member-grid is-council">
-            {council.seats.map(([seat, focus], index) => <MemberCard key={focus} member={{ name: 'Member name', initials: String(index + 1).padStart(2, '0'), title: `${seat} · ${council.name}`, focus, summary: 'A short profile will appear here once the appointment is confirmed.' }}/>)}
+            {council.seats.map((seat, index) => <MemberCard key={index} member={{ name: 'Member name', initials: String(index + 1).padStart(2, '0'), title: `${seat} · ${council.name}`, summary: 'A short profile will appear here once the appointment is confirmed.' }}/>)}
           </div>
           <p className="member-note"><ShieldCheck size={18}/>Member profiles will be published following confirmation of appointments.</p>
         </div>
