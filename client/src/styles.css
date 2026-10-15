@@ -8167,3 +8167,416 @@ body:has(.route-view.page-about) .footer .brand-kritam {
   background: #a51f31;
   content: '';
 }
+
+/* Research Programmes menu: a compact panel that looks and works like the Apply Now menu. Each programme opens in
+   place to its overview and themes in the navbar's Manrope type. The selectors are long and marked important so they
+   outrank the earlier wide-panel rules for this menu. */
+.site-header .nav .nav-dropdown.research-nav > .dropdown-panel.research-menu {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 2px !important;
+  box-sizing: border-box !important;
+  width: min(320px, calc(100vw - 32px)) !important;
+  min-width: 0 !important;
+  max-width: calc(100vw - 32px) !important;
+  max-height: min(75vh, 620px) !important;
+  overflow-y: auto !important;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: #d9cbbb transparent;
+  padding: 9px !important;
+  background: #fff !important;
+  border: 1px solid #e6dac7 !important;
+  border-radius: 0 !important;
+  box-shadow: 0 14px 40px #24140e20 !important;
+}
+.site-header .nav .research-nav .research-menu .research-menu-grid {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 2px !important;
+}
+.site-header .nav .research-nav .research-menu .research-menu-term {
+  width: 100% !important;
+  min-width: 0;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-top: 1px solid #eee7e0 !important;
+}
+.site-header .nav .research-nav .research-menu .research-menu-term > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 11px 12px !important;
+  list-style: none;
+  cursor: pointer;
+  color: #504944;
+  font: 400 14px/1.7 'Manrope', sans-serif !important;
+  letter-spacing: normal !important;
+}
+.site-header .nav .research-nav .research-menu .research-menu-term > summary::-webkit-details-marker { display: none; }
+.site-header .nav .research-nav .research-menu .research-menu-term[open] > summary { color: var(--red); }
+.site-header .nav .research-nav .research-menu .research-menu-topics {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) !important;
+  gap: 1px !important;
+  margin: 0 0 0 12px !important;
+  padding: 0 0 7px 11px !important;
+  border-left: 1px solid #e7d9d3;
+}
+.site-header .nav .research-nav .research-menu .research-menu-topics a {
+  margin: 0 !important;
+  padding: 8px 10px !important;
+  background: transparent;
+  border: 0 !important;
+  color: #201b19;
+  font: 400 14px/1.4 'Manrope', sans-serif !important;
+  letter-spacing: normal !important;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.site-header .nav .research-nav .research-menu .research-menu-topics a.program-overview-link { color: var(--red) !important; font-weight: 600 !important; }
+.site-header .nav .research-nav .research-menu .research-menu-topics a:is(:hover, :focus-visible) { background: #f7f3ef; color: var(--red); }
+/* Desktops: the panel hangs from the menu item, its text in line with the item's, and drops in as the others do.
+   The two queries meet at 1140px, where the navigation folds into its menu button, with no gap at fractional widths. */
+@media not all and (max-width: 1140px) {
+  .site-header .nav .nav-dropdown.research-nav > .dropdown-panel.research-menu {
+    position: absolute !important;
+    top: calc(100% - 1px) !important;
+    left: -22px !important;
+    right: auto !important;
+    transform: translateY(-8px);
+    transform-origin: top left;
+    animation-name: dropdown-enter;
+  }
+}
+/* Tablets and phones: inside the opened navigation the panel becomes an indented list, as the Apply Now menu does.
+   An opened programme lists all the themes, so the list scrolls within a part of the screen. */
+@media (max-width: 1140px) {
+  .site-header .nav .nav-dropdown.research-nav > .dropdown-panel.research-menu {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: min(52vh, 460px) !important;
+    padding: 5px 0 6px 12px !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    transform: none;
+  }
+  .site-header .nav .research-nav .research-menu .research-menu-term > summary { padding: 10px 9px !important; }
+}
+
+/* Research Programmes and Core Committee type, matched to About Us: font, size and weight only. The site-wide type
+   scale above marks its sizes important, so these do too, with selectors that are at least as specific. */
+/* Intros: the title and copy of the About Us intro, including the gold word of the title. */
+.route-view:is(.page-programs, .page-committee) .page-intro .container > h1 {
+  font-family: 'Source Serif 4', Georgia, serif !important;
+  font-size: clamp(38px, 4.7vw, 72px) !important;
+  font-weight: 400 !important;
+  line-height: 1.04 !important;
+  letter-spacing: -1.5px !important;
+}
+.route-view:is(.page-programs, .page-committee) .page-intro .container > h1 em {
+  font-family: 'Newsreader', Georgia, serif !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+}
+.route-view:is(.page-programs, .page-committee) .page-intro .container > p {
+  font: 400 clamp(19px, 1.5vw, 23px)/1.6 'Manrope', sans-serif !important;
+  letter-spacing: normal !important;
+}
+@media not all and (min-width: 761px) {
+  .route-view:is(.page-programs, .page-committee) .page-intro .container > h1 { font-size: clamp(38px, 11.3vw, 44px) !important; }
+}
+/* Section headings: the About Us section-title size, in the regular-weight serif. */
+.route-view.page-programs .program-page :is(.themes-title, .proposal-title),
+.route-view.page-committee :is(.committee-lead, .committee-facts, .showcase-heading) h2 {
+  font-family: 'Source Serif 4', Georgia, serif !important;
+  font-size: clamp(28px, 3.6vw, 50px) !important;
+  font-weight: 400 !important;
+  line-height: 1.12 !important;
+  letter-spacing: -.015em !important;
+}
+.route-view.page-committee :is(.committee-lead, .committee-facts, .showcase-heading) h2 em { font-weight: 400 !important; }
+@media not all and (min-width: 761px) {
+  .route-view.page-programs .program-page :is(.themes-title, .proposal-title),
+  .route-view.page-committee :is(.committee-lead, .committee-facts, .showcase-heading) h2 { font-size: clamp(28px, 8vw, 36px) !important; }
+}
+/* Each programme's name and duration: the About Us sub-heading (card title) size, the name above the duration
+   at every width, as tablets and phones already showed them. */
+.route-view.page-programs .program-page .term-copy .term-heading {
+  font-family: 'Source Serif 4', Georgia, serif !important;
+  font-size: clamp(22px, 2.2vw, 32px) !important;
+  font-weight: 400 !important;
+  line-height: 1.3 !important;
+  letter-spacing: normal !important;
+}
+.route-view.page-programs .term-heading .term-heading-separator { display: none; }
+.route-view.page-programs .term-heading span { display: block; }
+@media not all and (min-width: 761px) {
+  .route-view.page-programs .program-page .term-copy .term-heading { font-size: clamp(22px, 6vw, 27px) !important; }
+}
+/* Core Committee labels above the headings, such as "SK ALTAIR BOARD" and "CORE COMMITTEE", enlarged to suit them. */
+.route-view.page-committee :is(.showcase-heading, .committee-facts) .eyebrow {
+  font-size: clamp(15px, 1.3vw, 19px) !important;
+  line-height: 1.4 !important;
+  letter-spacing: .16em !important;
+}
+
+/* The rest of both sections, matched to About Us by role: 16px Manrope body text, 15px Manrope links, and 12px
+   Manrope labels and card numbers. The Overview's three cards and the member profile cards keep their type. */
+.route-view.page-programs .program-page .term-tabs button small { font-size: 12px; }
+.route-view.page-programs .search-box input { font-size: 16px; }
+.route-view.page-programs .theme-tile .theme-details summary { font-size: 15px; }
+.route-view.page-programs .theme-tile .theme-details ul:before { font-size: 12px; }
+.route-view.page-programs :is(.theme-tile-meta span:first-child, .guidance-no) {
+  font: 700 12px/1 'Manrope', sans-serif;
+  letter-spacing: 1.2px;
+}
+.route-view.page-committee .showcase-heading p,
+.route-view.page-committee .member-note { font-size: 16px; }
+/* The red K of "SK ALTAIR" in bold, with the hairline stroke About Us gives it, so it stays crisp in the lighter text. */
+.route-view.page-committee .committee-brand-k {
+  font-weight: 800;
+  -webkit-text-stroke: .3px currentColor;
+}
+
+/* Collaborate (a one-time change requested by Sahana): the About Us type throughout the page, the red K of
+   "SK ALTAIR", and the Ways to Collaborate boxes laid out as the About Us objectives. The earlier Collaborate
+   rules mark their values important with selectors of up to six classes, so these use seven or more. */
+/* Type: Manrope for text and Source Serif 4 for headings, as on About Us. Text set in DM Sans, which the site
+   does not load and so showed as Arial, takes Manrope. */
+.route-view.page-collaborate .collaborate-page :is(span, li, a, small, b, strong, label) { font-family: 'Manrope', sans-serif; }
+.route-view.page-collaborate .page-intro.page-intro-collaborate .container > h1 {
+  font-family: 'Source Serif 4', Georgia, serif !important;
+  font-size: clamp(38px, 4.7vw, 72px) !important;
+  font-weight: 400 !important;
+  line-height: 1.04 !important;
+  letter-spacing: -1.5px !important;
+}
+.route-view.page-collaborate .page-intro.page-intro-collaborate .container > p,
+.route-view.page-collaborate .page-intro.page-intro-collaborate .container > p span:not(.brand-k) {
+  font: 400 clamp(19px, 1.5vw, 23px)/1.6 'Manrope', sans-serif !important;
+  letter-spacing: normal !important;
+}
+.route-view.page-collaborate .collaborate-page :is(.collab-ways-heading, .collab-principles-heading, .collab-proposal-heading) > .eyebrow {
+  display: block;
+  font: 400 clamp(28px, 3.6vw, 50px)/1.12 'Source Serif 4', Georgia, serif !important;
+  letter-spacing: -.015em !important;
+}
+.route-view.page-collaborate .collaborate-page .collab-cta .collab-cta-copy > .eyebrow {
+  font: 700 12px/1.5 'Manrope', sans-serif !important;
+  letter-spacing: .12em !important;
+}
+.route-view.page-collaborate .collaborate-page .collab-cta .collab-cta-copy > h2 {
+  font-size: clamp(28px, 3.6vw, 50px) !important;
+  line-height: 1.12 !important;
+  letter-spacing: -.015em !important;
+}
+.route-view.page-collaborate .collaborate-page .collab-principles .collab-principles-content li,
+.route-view.page-collaborate .collaborate-page .collab-proposal-section .collab-proposal-point p {
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 16px !important;
+}
+.route-view.page-collaborate .collaborate-page :is(.collab-principles-content li > span, .collab-proposal-point > span) {
+  font: 700 12px/1.6 'Manrope', sans-serif !important;
+  letter-spacing: 1.2px !important;
+}
+.route-view.page-collaborate .collaborate-page .collab-cta .collab-cta-actions :is(.button, .collab-cta-secondary) {
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 15px !important;
+}
+@media not all and (min-width: 761px) {
+  .route-view.page-collaborate .page-intro.page-intro-collaborate .container > h1 { font-size: clamp(38px, 11.3vw, 44px) !important; }
+  .route-view.page-collaborate .collaborate-page :is(.collab-ways-heading, .collab-principles-heading, .collab-proposal-heading) > .eyebrow,
+  .route-view.page-collaborate .collaborate-page .collab-cta .collab-cta-copy > h2 { font-size: clamp(28px, 8vw, 36px) !important; }
+}
+/* Collaboration principles stack below 900px, as the Collaborate rules intend. A later site-wide phone grid put them
+   back in two narrow columns, which split the About Us size heading and the list mid-word. */
+@media (max-width: 900px) {
+  .route-view.page-collaborate .collaborate-page .collab-principles.collab-principles-detailed { grid-template-columns: minmax(0, 1fr) !important; }
+}
+/* The K of "SK ALTAIR" in red, bold and crisp. On the dark intro the logo red would disappear, so it takes the
+   lighter red used on the dark Core Committee intros. */
+.route-view.page-collaborate .page-intro.page-intro-collaborate .container .brand-k {
+  font-family: inherit !important;
+  color: #ff4d5e !important;
+  -webkit-text-fill-color: #ff4d5e !important;
+  font-weight: 800 !important;
+  -webkit-text-stroke: .02em currentColor;
+}
+
+/* Ways to Collaborate: the boxes of the About Us objectives, two to a row, each with its number, title and text.
+   Every fourth box from the first is maroon and the rest are light, on the page's own ground, so the maroon boxes
+   stand out as they do on About Us. An odd last box spans the row. */
+.route-view.page-collaborate .collaborate-page .collab-ways-section.collab-ways-section {
+  width: auto !important;
+  margin: 0 0 clamp(64px, 8vw, 104px) !important;
+  padding: 0 !important;
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  overflow: visible !important;
+}
+.route-view.page-collaborate .collaborate-page .collab-ways-section.collab-ways-section::before,
+.route-view.page-collaborate .collaborate-page .collab-ways-section.collab-ways-section::after { content: none !important; display: none !important; }
+.route-view.page-collaborate .collaborate-page .collab-ways-section .collab-ways-heading { margin: 0 0 28px !important; padding: 0 !important; text-align: left !important; }
+.route-view.page-collaborate .collaborate-page .collab-ways-section .collab-ways-heading > .eyebrow { color: #8f2333 !important; }
+.route-view.page-collaborate .collaborate-page .collab-ways-section .collab-grid.collab-grid-detailed {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+  width: auto !important;
+  max-width: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+.route-view.page-collaborate .collaborate-page .collab-ways-section .collab-grid.collab-grid-detailed > .collab-way-card {
+  display: block !important;
+  grid-row: auto !important;
+  grid-column: auto !important;
+  width: auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  aspect-ratio: auto !important;
+  overflow: visible !important;
+  margin: 0 !important;
+  padding: 22px 24px !important;
+  background: #fffdfa !important;
+  border: 1px solid #e5dbd1 !important;
+  border-top: 3px solid #9f1d2d !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-align: left !important;
+}
+.route-view.page-collaborate .collaborate-page .collab-ways-section .collab-grid.collab-grid-detailed > .collab-way-card:is(:nth-child(4n+2), :nth-child(4n+3)) { background: #f7f1e5 !important; }
+.route-view.page-collaborate .collaborate-page .collab-ways-section .collab-grid.collab-grid-detailed > .collab-way-card:nth-child(4n+1) { background: #812230 !important; border-color: #a4595d !important; }
+.route-view.page-collaborate .collaborate-page .collab-ways-section .collab-grid.collab-grid-detailed > .collab-way-card:last-child:nth-child(odd) { grid-column: 1 / -1 !important; }
+.route-view.page-collaborate .collaborate-page .collab-ways-section .collab-grid.collab-grid-detailed > .collab-way-card.is-visible:is(:hover, :focus-within) {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 22px #3d261b14 !important;
+}
+.route-view.page-collaborate .collaborate-page .collab-ways-section .collab-grid.collab-grid-detailed > .collab-way-card .collab-way-icon { display: none !important; }
+.route-view.page-collaborate .collaborate-page .collab-ways-section .collab-grid.collab-grid-detailed > .collab-way-card .collab-way-number {
+  display: block !important;
+  margin: 0 0 10px !important;
+  color: #9f1d2d !important;
+  font: 700 12px/1 'Manrope', sans-serif !important;
+  letter-spacing: 1.2px !important;
+}
+.route-view.page-collaborate .collaborate-page .collab-ways-section .collab-grid.collab-grid-detailed > .collab-way-card h3 {
+  margin: 0 0 10px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  color: #9f1d2d !important;
+  font: 600 clamp(22px, 2.2vw, 32px)/1.25 'Source Serif 4', Georgia, serif !important;
+  letter-spacing: normal !important;
+}
+.route-view.page-collaborate .collaborate-page .collab-ways-section .collab-grid.collab-grid-detailed > .collab-way-card p {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  color: #504742 !important;
+  font: 400 16px/1.7 'Manrope', sans-serif !important;
+}
+.route-view.page-collaborate .collaborate-page .collab-ways-section .collab-grid.collab-grid-detailed > .collab-way-card p.collab-way-detail {
+  margin-top: 12px !important;
+  padding-top: 12px !important;
+  border-top: 1px solid #e5dbd1 !important;
+}
+.route-view.page-collaborate .collaborate-page .collab-ways-section .collab-grid.collab-grid-detailed > .collab-way-card:nth-child(4n+1) :is(.collab-way-number, p) { color: #fff8ef !important; }
+.route-view.page-collaborate .collaborate-page .collab-ways-section .collab-grid.collab-grid-detailed > .collab-way-card:nth-child(4n+1) h3 { color: #e7c98b !important; }
+.route-view.page-collaborate .collaborate-page .collab-ways-section .collab-grid.collab-grid-detailed > .collab-way-card:nth-child(4n+1) p.collab-way-detail { border-top-color: #ffffff2e !important; }
+/* The earlier rules also paint the text white through its fill colour, so the fill follows the colours above. */
+.route-view.page-collaborate .collaborate-page .collab-ways-section .collab-grid.collab-grid-detailed > .collab-way-card :is(.collab-way-number, h3, p) { -webkit-text-fill-color: currentColor !important; }
+@media not all and (min-width: 761px) {
+  .route-view.page-collaborate .collaborate-page .collab-ways-section .collab-grid.collab-grid-detailed { grid-template-columns: minmax(0, 1fr) !important; }
+  .route-view.page-collaborate .collaborate-page .collab-ways-section .collab-grid.collab-grid-detailed > .collab-way-card { padding: 18px !important; }
+  .route-view.page-collaborate .collaborate-page .collab-ways-section .collab-grid.collab-grid-detailed > .collab-way-card h3 { font-size: clamp(22px, 6vw, 27px) !important; }
+}
+
+/* How to Propose a Collaboration: the heading runs across the panel and the six points sit beneath it as numbered
+   cards, three to a row on desktops, two on tablets and one on phones, so the panel no longer repeats the
+   heading-beside-list layout of the principles above it. The content and the About Us type are unchanged. */
+.route-view.page-collaborate .collaborate-page .collab-proposal-section.collab-proposal-section { display: block !important; }
+.route-view.page-collaborate .collaborate-page .collab-proposal-section .collab-proposal-heading { margin: 0 0 28px !important; }
+.route-view.page-collaborate .collaborate-page .collab-proposal-section .collab-proposal-checklist {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 14px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+.route-view.page-collaborate .collaborate-page .collab-proposal-section .collab-proposal-checklist > .collab-proposal-point {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 16px !important;
+  min-width: 0;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 24px !important;
+  background: #fffdfa !important;
+  border: 1px solid #e5dbd1 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  transition: transform 220ms ease, box-shadow 220ms ease, border-color 220ms ease;
+}
+.route-view.page-collaborate .collaborate-page .collab-proposal-section .collab-proposal-checklist > .collab-proposal-point:is(:hover, :focus-within) {
+  transform: translateY(-2px);
+  border-color: #d8c4b4 !important;
+  box-shadow: 0 8px 22px #3d261b14 !important;
+}
+.route-view.page-collaborate .collaborate-page .collab-proposal-section .collab-proposal-checklist > .collab-proposal-point > span {
+  display: inline-grid !important;
+  place-items: center;
+  flex: none;
+  width: 38px !important;
+  height: 38px !important;
+  margin: 0 !important;
+  padding: 0 0 0 1.2px !important;
+  background: transparent !important;
+  border: 1px solid #9f1d2d !important;
+  border-radius: 50% !important;
+  color: #9f1d2d !important;
+  -webkit-text-fill-color: currentColor !important;
+  line-height: 1 !important;
+  transition: background-color 220ms ease, color 220ms ease;
+}
+.route-view.page-collaborate .collaborate-page .collab-proposal-section .collab-proposal-checklist > .collab-proposal-point:is(:hover, :focus-within) > span {
+  background: #9f1d2d !important;
+  color: #fff8ef !important;
+}
+.route-view.page-collaborate .collaborate-page .collab-proposal-section .collab-proposal-checklist > .collab-proposal-point > p {
+  margin: 0 !important;
+  padding: 0 !important;
+  color: #514640 !important;
+  -webkit-text-fill-color: currentColor !important;
+  line-height: 1.7 !important;
+}
+@media (max-width: 1000px) {
+  .route-view.page-collaborate .collaborate-page .collab-proposal-section .collab-proposal-checklist { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+}
+/* Phones: one card a row, the number beside its text. */
+@media not all and (min-width: 761px) {
+  .route-view.page-collaborate .collaborate-page .collab-proposal-section .collab-proposal-heading { margin-bottom: 22px !important; }
+  .route-view.page-collaborate .collaborate-page .collab-proposal-section .collab-proposal-checklist { grid-template-columns: minmax(0, 1fr) !important; gap: 10px !important; }
+  .route-view.page-collaborate .collaborate-page .collab-proposal-section .collab-proposal-checklist > .collab-proposal-point {
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 14px !important;
+    padding: 16px 18px !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .route-view.page-collaborate .collaborate-page .collab-proposal-section .collab-proposal-checklist > .collab-proposal-point,
+  .route-view.page-collaborate .collaborate-page .collab-proposal-section .collab-proposal-checklist > .collab-proposal-point > span { transition: none; }
+  .route-view.page-collaborate .collaborate-page .collab-proposal-section .collab-proposal-checklist > .collab-proposal-point:is(:hover, :focus-within) { transform: none; }
+}
