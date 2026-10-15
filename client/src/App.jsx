@@ -557,24 +557,17 @@ function Publications() {
   return <>
     <PageIntro
       eyebrow="PUBLICATIONS"
-      title={<>Original legal and technology research for<br/><em>informed debate.</em></>}
-      copy="SK ALTAIR publishes legal and technology research examining contemporary questions in law, technology, governance and public policy. We aim to make rigorous scholarship useful to legal professionals, researchers, students, policymakers and public institutions."
+      title={<>Our Publications</>}
+      copy=""
       image={pagePhotos.publications}
-      imageBehind
       className="page-intro-publications"
     />
     <section className="section content-section publications-section">
       <div className="container">
-        <div className="publication-intro">
-          <BookOpen size={24}/>
-          <p>We encourage work that identifies significant problems, evaluates competing approaches and develops reasoned recommendations. The first publications will appear here following completion and editorial review of the Centre’s legal and technology research projects.</p>
-        </div>
-
         <section className="publication-editorial-section" aria-labelledby="what-we-publish-title">
           <div className="publication-section-heading">
             <span className="eyebrow">WHAT WE PUBLISH</span>
-            <h2 id="what-we-publish-title">Different formats.<br/><em>One commitment to rigour.</em></h2>
-            <p>Our publication formats are designed to communicate careful analysis to readers working across law, technology, governance and public policy.</p>
+
           </div>
           <div className="publish-types-grid">
             {publishTypes.map(([title, description], index) => <article className="publish-type-card" key={title}>
@@ -587,14 +580,9 @@ function Publications() {
         </section>
 
         <section className="publication-editorial-section publication-work-section" aria-labelledby="explore-work-title">
-          <div className="publication-section-heading">
-            <span className="eyebrow">EXPLORE OUR WORK</span>
-            <h2 id="explore-work-title">Legal and technology research made easier<br/><em>to navigate.</em></h2>
-            <p>Publications are intended to be organised by research theme, publication type, author and year. Each item will identify its authors, publication date and research context, together with relevant disclosures and access information.</p>
-          </div>
           <div className="publication-work-links">
-            <Link to="/programs" className="publication-work-link"><span><b>Explore research themes</b><small>Browse the themes that frame SK ALTAIR’s legal and technology research.</small></span><ArrowUpRight size={18}/></Link>
-            <Link to="/programs" className="publication-work-link"><span><b>View research programmes</b><small>Learn about research terms and proposal guidance.</small></span><ArrowUpRight size={18}/></Link>
+            <Link to="/programs" className="publication-work-link"><span><b>Explore research themes</b></span><ArrowUpRight size={18}/></Link>
+            <Link to="/programs" className="publication-work-link"><span><b>View research programmes</b></span><ArrowUpRight size={18}/></Link>
           </div>
           <div className="filter-row" role="tablist" aria-label="Filter publications by type">
             {filters.map(category => <button type="button" role="tab" aria-selected={filter === category} className={filter === category ? 'active' : ''} key={category} onClick={() => transitionUpdate(() => setFilter(category))}>{category}</button>)}
@@ -621,7 +609,7 @@ function Publications() {
                   {(publication.author || publication.authors || publication.data?.author || publication.data?.authors) && <p className="publication-metadata"><b>Author(s):</b> {(() => { const value = publication.author || publication.authors || publication.data?.author || publication.data?.authors; return (Array.isArray(value) ? value : [value]).map(item => typeof item === 'string' ? item : item.name).filter(Boolean).join(', '); })()}</p>}
                   {(publication.theme || publication.researchTheme || publication.data?.theme || publication.data?.researchTheme) && <p className="publication-metadata"><b>Research theme:</b> {(() => { const value = publication.theme || publication.researchTheme || publication.data?.theme || publication.data?.researchTheme; return (Array.isArray(value) ? value : [value]).map(item => typeof item === 'string' ? item : item.title).filter(Boolean).join(', '); })()}</p>}
                   {(publication.disclosures || publication.data?.disclosures) && <p className="publication-metadata"><b>Disclosures:</b> {publication.disclosures || publication.data?.disclosures}</p>}
-                  {publication.url || publication.data?.url || publication.doi || publication.data?.doi ? <a className="text-link" href={publication.url || publication.data?.url || `https://doi.org/${publication.doi || publication.data?.doi}`} target="_blank" rel="noreferrer">Read publication <ArrowUpRight size={15}/></a> : <span className="coming-label">{publication.status === 'published' ? 'ACCESS DETAILS ON REQUEST' : 'IN PREPARATION'}</span>}
+                  {publication.url || publication.data?.url || publication.doi || publication.data?.doi ? <a className="text-link" href={publication.url || publication.data?.url || `https://doi.org/${publication.doi || publication.data?.doi}`} target="_blank" rel="noreferrer">Read publication <ArrowUpRight size={15}/></a> : null}
                 </div>
               </article>;
             })}
@@ -632,21 +620,18 @@ function Publications() {
         <section className="publication-policy-grid" aria-label="Publication policies">
           <article className="publication-policy-card">
             <span className="eyebrow">EDITORIAL STANDARDS</span>
-            <h2>Careful review.<br/><em>Independent conclusions.</em></h2>
             <p>Legal and technology research is assessed for originality, analytical quality, methodological soundness, accuracy and relevance. Review also considers source reliability, appropriate attribution, research ethics, confidentiality, data protection and intellectual property.</p>
             <p>Authors may be asked to clarify their analysis, verify sources or revise submissions before a decision is made. Participation in a legal and technology research programme does not guarantee publication.</p>
             <p>Research conclusions must remain independent of donor or collaborator preferences. Views expressed belong to their authors unless expressly identified as an adopted institutional position.</p>
           </article>
           <article className="publication-policy-card">
             <span className="eyebrow">AUTHORSHIP AND RIGHTS</span>
-            <h2>Credit contributions.<br/><em>Respect permissions.</em></h2>
             <p>Researchers’ authorship and substantive contributions will receive appropriate acknowledgement. Ownership, publication rights and permitted reuse are governed by applicable agreements and the notice accompanying each publication.</p>
             <p>Public availability does not by itself authorise unrestricted reproduction, adaptation or commercial use. Requests concerning permissions, licensing or republication should be directed to the Centre.</p>
             <Link to="/contact?category=Publications%20and%20permissions&subject=Publication%20permission%20request" className="button button-outline">Request publication permission <ArrowUpRight size={15}/></Link>
           </article>
           <article className="publication-policy-card">
             <span className="eyebrow">CORRECTIONS AND RESEARCH CONCERNS</span>
-            <h2>Help maintain<br/><em>research integrity.</em></h2>
             <p>We welcome reports of factual errors, attribution concerns or potential breaches of research integrity. Please identify the publication, relevant passage and supporting information so that the concern can be reviewed.</p>
             <p>Where appropriate, the Centre may publish a correction, clarification or retraction following a fair editorial process.</p>
             <Link to="/contact?category=Grievance%20or%20research%20integrity%20concern&subject=Publication%20concern" className="button button-outline">Report a publication concern <ArrowUpRight size={15}/></Link>
@@ -709,10 +694,9 @@ function Collaborate() {
   return <>
     <PageIntro
       eyebrow="COLLABORATE WITH SK ALTAIR"
-      title={<>Good questions grow<br/><em>through exchange.</em></>}
-      copy="SK ALTAIR welcomes collaboration with academic institutions, legal professionals, researchers, public institutions, professional bodies and other organisations whose work aligns with our public-benefit objectives."
+      title={<>COLLABORATE WITH S<span className="brand-k">K</span> ALTAIR</>}
+      copy=""
       image={pagePhotos.collaborate}
-      imageBehind
       className="page-intro-publications page-intro-collaborate"
     />
     <section className="section content-section collaborate-page">
@@ -723,7 +707,7 @@ function Collaborate() {
         </div>
 
         <section className="collab-ways-section" aria-labelledby="collab-ways-title">
-          <SectionHeading eyebrow="WAYS TO COLLABORATE" title={<>Bring expertise to<br/><em>the conversation.</em></>} copy="Explore ways to contribute knowledge, experience and resources to independent legal and technology research and public-benefit work."/>
+          <div className="collab-ways-heading"><span className="eyebrow">WAYS TO COLLABORATE</span></div>
           <div className="collab-grid collab-grid-detailed">
             {ways.map((item, index) => <article key={item.title} className="collab-way-card">
               <span className="collab-way-number">{String(index + 1).padStart(2, '0')}</span>
@@ -738,8 +722,7 @@ function Collaborate() {
         <section className="collab-principles collab-principles-detailed" aria-labelledby="collab-principles-title">
           <div className="collab-principles-heading">
             <span className="eyebrow">OUR COLLABORATION PRINCIPLES</span>
-            <h2 id="collab-principles-title">Partnership with<br/><em>clear expectations.</em></h2>
-            <p>Every collaboration must preserve the Centre’s independence, ethical standards and public-benefit purpose.</p>
+
           </div>
           <div className="collab-principles-content">
             <ul>{principles.map((principle, index) => <li key={principle}><span>{String(index + 1).padStart(2, '0')}</span>{principle}</li>)}</ul>
@@ -750,8 +733,7 @@ function Collaborate() {
         <section className="collab-proposal-section" aria-labelledby="collab-proposal-title">
           <div className="collab-proposal-heading">
             <span className="eyebrow">HOW TO PROPOSE A COLLABORATION</span>
-            <h2 id="collab-proposal-title">Start with a clear<br/><em>proposal.</em></h2>
-            <p>Please provide a brief outline covering the following points so that the Centre can assess relevance, feasibility, available expertise and alignment with its objectives.</p>
+
           </div>
           <div className="collab-proposal-checklist">
             {proposalPoints.map((point, index) => <div className="collab-proposal-point" key={point}><span>{String(index + 1).padStart(2, '0')}</span><p>{point}</p></div>)}

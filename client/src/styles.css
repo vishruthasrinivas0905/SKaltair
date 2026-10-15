@@ -5767,3 +5767,179 @@ header.site-header .header-inner{height:100%;align-items:center}header.site-head
 .page-about #vision .about-brand-initial,.page-about #vision .about-brand-rest,.page-about .objective-card:nth-child(4n+1) .about-brand-initial,.page-about .objective-card:nth-child(4n+1) .about-brand-rest{color:#fff8ef!important}
 .page-about #vision .about-brand-k,.page-about .objective-card:nth-child(4n+1) .about-brand-k{color:#cf5664!important}
 @media(max-width:760px){.page-about .about-page-layout{grid-template-columns:126px minmax(0,1fr);column-gap:9px}.page-about .about-page-layout>.about-hero-rail{padding:11px 7px!important;top:86px!important;max-height:calc(100vh - 100px)!important}.page-about .about-page-layout>.about-hero-rail a{padding:8px 4px!important;font-size:11px!important}.page-about .about-page-layout>.about-hero-rail a[href="#governance"]{font-size:10px!important}.page-about .about-page-layout>.about-hero-rail a.active:before{left:-7px}.page-about .about-page-layout>.content-section>.container,.page-about .about-page-layout>#governance>.container{padding-inline:10px!important}.page-about .about-page-layout>.page-intro-about>.container{padding-top:32px!important;padding-bottom:32px!important}.page-about .about-page-layout>.page-intro-about>.container>h1,.page-about .about-page-layout>.page-intro-about .about-summary{width:100%!important;max-width:100%!important}.page-about .about-page-layout>.page-intro-about .intro-media{width:100%!important;max-width:none!important;opacity:.35}.page-about .about-page-layout>.page-intro-about .intro-media:after{background:linear-gradient(0deg,#3b2522ed,#3b2522a8)!important}.page-about .about-page-layout .prose>section#objectives{padding:18px!important}.page-about .about-page-layout .governance-category{padding:16px}}
+
+/* Focused final refinements: Publications, Collaborate and SK ALTAIR wordmark.
+   These rules are intentionally scoped to the requested areas. */
+.brand .brand-k,
+.brand-inverse .brand-k,
+.brand-type .brand-k { color: #a51f31 !important; }
+
+/* Publications: match the site's Newsreader editorial typography and red/white palette. */
+.page-publications .publication-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:22px; align-items:stretch; }
+.page-publications .publication-card { min-width:0; overflow:hidden; border:1px solid #e7dfd7; border-radius:3px; background:#fff; box-shadow:0 7px 22px rgba(45,28,23,.045); font-family:'Newsreader',Georgia,serif; }
+.page-publications .publication-card:hover { transform:translateY(-3px); box-shadow:0 12px 28px rgba(45,28,23,.085); }
+.page-publications .publication-cover { min-height:174px; height:174px; background:#8f2333; color:#fffaf6; }
+.page-publications .publication-body { display:flex; flex:1; flex-direction:column; padding:22px; background:#fff; }
+.page-publications .publication-body h3 { color:#292321; font-family:'Newsreader',Georgia,serif; font-size:23px; line-height:1.3; margin:10px 0; }
+.page-publications .publication-body p { color:#6f6964; font-size:14px; line-height:1.7; }
+.page-publications .publication-body .eyebrow,.page-publications .publication-body .coming-label { color:#8f2333; }
+.page-publications .publication-body .text-link,.page-publications .publication-body .coming-label { margin-top:auto; padding-top:12px; }
+.page-publications .publication-card,.page-publications .publication-card h3,.page-publications .publication-card p { font-family:'Newsreader',Georgia,serif; }
+
+/* Collaborate: seven compact cards arranged 2 + 2 + 3 on wide screens.
+   Hover changes elevation only; card colors remain stable. */
+.page-collaborate .collab-grid-detailed { display:grid!important; grid-template-columns:repeat(6,minmax(0,1fr))!important; gap:14px!important; align-items:stretch; }
+.page-collaborate .collab-grid-detailed .collab-way-card { grid-column:span 2; min-width:0; min-height:0; padding:22px 23px 24px; border:1px solid #a94b58!important; border-top:3px solid #a94b58!important; border-radius:3px; background:#8f2333!important; color:#fffaf6!important; box-shadow:0 6px 18px rgba(70,22,31,.07); transform:none!important; transition:box-shadow .2s ease!important; }
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(1) { grid-column:2 / span 2; grid-row:1; }
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(2) { grid-column:4 / span 2; grid-row:1; }
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(3) { grid-column:2 / span 2; grid-row:2; }
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(4) { grid-column:4 / span 2; grid-row:2; }
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(5) { grid-column:1 / span 2; grid-row:3; }
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(6) { grid-column:3 / span 2; grid-row:3; }
+.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(7) { grid-column:5 / span 2; grid-row:3; }
+.page-collaborate .collab-grid-detailed .collab-way-card:hover,.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(odd):hover,.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(even):hover { background:#8f2333!important; color:#fffaf6!important; box-shadow:0 10px 24px rgba(70,22,31,.13); transform:none!important; }
+.page-collaborate .collab-way-card .collab-way-number { color:#f0c6c8!important; }
+.page-collaborate .collab-way-card .collab-way-icon { color:#f4d7b8!important; }
+.page-collaborate .collab-way-card h3 { margin:17px 0 9px; color:#fffaf6!important; font-family:'Newsreader',Georgia,serif; font-size:22px; line-height:1.3; }
+.page-collaborate .collab-way-card p { color:#f6e8e6!important; font-size:13px; line-height:1.7; }
+.page-collaborate .collab-way-card .collab-way-detail { margin-top:12px; padding-top:12px; border-top:1px solid rgba(255,255,255,.22); color:#f0d9d8!important; }
+.page-collaborate .collab-proposal-section { display:grid; grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr); gap:clamp(26px,4vw,52px); align-items:start; padding:clamp(26px,3.5vw,42px); background:#f7f3ee; border:1px solid #e7dfd7; border-top:3px solid #8f2333; }
+.page-collaborate .collab-proposal-heading h2 { font-family:'Newsreader',Georgia,serif; font-size:clamp(30px,3vw,42px); line-height:1.2; }
+.page-collaborate .collab-proposal-heading>p { color:#6f6964; font-size:14px; line-height:1.8; }
+.page-collaborate .collab-proposal-point,.page-collaborate .collab-proposal-point:nth-child(even) { background:transparent; border-bottom:1px solid #e3d6ca; }
+@media(max-width:900px) {
+ .page-publications .publication-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+ .page-collaborate .collab-grid-detailed { grid-template-columns:repeat(2,minmax(0,1fr))!important; }
+ .page-collaborate .collab-grid-detailed .collab-way-card,.page-collaborate .collab-grid-detailed .collab-way-card:nth-child(n) { grid-column:auto; grid-row:auto; }
+ .page-collaborate .collab-proposal-section { grid-template-columns:minmax(0,1fr); }
+}
+@media(max-width:560px) {
+ .page-publications .publication-grid,.page-collaborate .collab-grid-detailed { grid-template-columns:minmax(0,1fr)!important; }
+ .page-publications .publication-body { padding:19px; }
+ .page-collaborate .collab-grid-detailed .collab-way-card { padding:20px; }
+ .page-collaborate .collab-proposal-section { padding:23px 18px; }
+}
+@media(prefers-reduced-motion:reduce) {
+ .page-publications .publication-card,.page-collaborate .collab-grid-detailed .collab-way-card { transition:none!important; }
+}
+
+
+/* ============================================================
+   SK ALTAIR requested Publications + Collaborate page refinements
+   Scoped to these pages; unrelated page styles remain unchanged.
+   ============================================================ */
+.brand-k { color: #a51f31 !important; }
+.page-intro-publications .page-intro-inner,
+.page-intro-publications .page-intro-content { text-align: center; }
+.page-intro-publications .page-intro-inner h1,
+.page-intro-publications h1 { text-align: center; font-size: clamp(44px, 5.1vw, 68px); line-height: 1.08; margin-inline: auto; max-width: 1000px; }
+.page-intro-publications .page-intro-inner > p,
+.page-intro-publications > .container > p,
+.page-intro-publications .page-intro-copy { display: none !important; }
+.page-intro-publications .page-intro-image,
+.page-intro-publications .page-intro-media,
+.page-intro-publications .page-intro-visual,
+.page-intro-publications .page-intro-image-wrap { max-width: 300px !important; width: min(100%, 300px) !important; margin: 24px auto 0 !important; }
+.page-intro-publications .page-intro-image img,
+.page-intro-publications .page-intro-media img,
+.page-intro-publications .page-intro-visual img,
+.page-intro-publications .page-intro-image-wrap img { max-height: 190px !important; height: 190px !important; object-fit: cover !important; }
+.publications-section .publication-section-heading { text-align: center; margin: 0 auto 32px; }
+.publications-section .publication-section-heading > .eyebrow { font-size: clamp(19px, 2.3vw, 27px) !important; letter-spacing: .06em; font-weight: 700; }
+.publications-section #what-we-publish-title { display: none !important; }
+.publications-section .publication-work-links { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 16px; width: 100%; margin: 28px 0 36px; }
+.publications-section .publication-work-link { width: 100%; min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 20px 24px; border: 1px solid #e4d6d1; background: #fff; color: #332b29; }
+.publications-section .publication-work-link b { font-size: 17px; line-height: 1.4; }
+.publications-section .publication-work-link svg { flex-shrink: 0; color: #8f2333; }
+.publications-section .publication-work-link:hover { border-color: #8f2333; box-shadow: 0 8px 22px #3b1e1a0c; }
+.publications-section .publication-cover { height: 105px !important; min-height: 105px !important; padding: 12px 14px !important; }
+.publications-section .publication-cover > svg { width: 18px; height: 18px; }
+.publications-section .publication-cover:after { font-size: 105px !important; bottom: -38px !important; }
+.publications-section .publication-cover .cover-lines { top: 49px !important; }
+.publications-section .publication-cover > img { width: 100%; height: 100%; object-fit: cover; }
+.publications-section .publication-body { padding: 22px !important; }
+.publications-section .publication-body h3 { font-size: 23px !important; line-height: 1.3; }
+.publications-section .publication-body p { font-size: 14px !important; line-height: 1.75; }
+.publications-section .publication-body .eyebrow { font-size: 11px !important; }
+.publications-section .publication-policy-grid { display: grid !important; grid-template-columns: repeat(3, minmax(0,1fr)) !important; gap: 18px !important; align-items: stretch; }
+.publications-section .publication-policy-card { height: 100%; padding: 28px !important; border: 1px solid #e6d9d4; background: #fff !important; border-top: 4px solid #8f2333; }
+.publications-section .publication-policy-card:nth-child(2) { border-top-color: #b66c70; }
+.publications-section .publication-policy-card:nth-child(3) { border-top-color: #6d5960; }
+.publications-section .publication-policy-card > .eyebrow { display: block; font-size: clamp(16px, 1.5vw, 20px) !important; line-height: 1.4; letter-spacing: .035em; font-weight: 700; color: #8f2333; }
+.publications-section .publication-policy-card p { font-size: 14px !important; line-height: 1.8; }
+.publications-section .publication-policy-card .button { font-size: 12px !important; white-space: normal; }
+.publications-section .coming-label { display: none !important; }
+.page-intro-collaborate .page-intro-inner,
+.page-intro-collaborate .page-intro-content { text-align: center; }
+.page-intro-collaborate .page-intro-inner h1,
+.page-intro-collaborate h1 { text-align: center; font-size: clamp(39px, 4.7vw, 64px); line-height: 1.12; max-width: 1100px; margin-inline: auto; }
+.page-intro-collaborate .page-intro-inner > p,
+.page-intro-collaborate .page-intro-copy { display: none !important; }
+.page-intro-collaborate .page-intro-image,
+.page-intro-collaborate .page-intro-media,
+.page-intro-collaborate .page-intro-visual,
+.page-intro-collaborate .page-intro-image-wrap { max-width: 300px !important; width: min(100%, 300px) !important; margin: 22px auto 0 !important; }
+.page-intro-collaborate .page-intro-image img,
+.page-intro-collaborate .page-intro-media img,
+.page-intro-collaborate .page-intro-visual img,
+.page-intro-collaborate .page-intro-image-wrap img { max-height: 185px !important; height: 185px !important; object-fit: cover !important; }
+.collaborate-page .collab-intro-copy { display: none !important; }
+.collaborate-page .collab-ways-heading { text-align: center; margin: 0 auto 34px; }
+.collaborate-page .collab-ways-heading .eyebrow { font-size: clamp(24px, 3vw, 34px) !important; line-height: 1.2; letter-spacing: .04em; font-weight: 700; }
+.collaborate-page .collab-grid-detailed { display: grid !important; grid-template-columns: repeat(6, minmax(0,1fr)) !important; gap: 16px !important; border: 0 !important; }
+.collaborate-page .collab-way-card { grid-column: span 2; min-height: 340px !important; height: 100%; padding: 25px !important; border: 1px solid #e7d9d5 !important; border-top: 4px solid #8f2333 !important; background: #fff !important; box-shadow: 0 5px 18px #39201a08; transition: box-shadow .2s ease !important; }
+.collaborate-page .collab-way-card:nth-child(1),
+.collaborate-page .collab-way-card:nth-child(2) { grid-column: span 3; }
+.collaborate-page .collab-way-card:hover { background: #fff !important; color: inherit !important; box-shadow: 0 10px 25px #39201a12 !important; transform: none !important; }
+.collaborate-page .collab-way-card h3 { font-size: 23px !important; line-height: 1.35; margin: 24px 0 12px !important; }
+.collaborate-page .collab-way-card p { font-size: 14px !important; line-height: 1.75 !important; }
+.collaborate-page .collab-way-card .collab-way-detail { font-size: 13px !important; }
+.collaborate-page .collab-principles-detailed { margin-top: 68px !important; }
+.collaborate-page .collab-principles-heading .eyebrow,
+.collaborate-page .collab-proposal-heading .eyebrow { font-size: clamp(21px, 2.5vw, 29px) !important; line-height: 1.3; letter-spacing: .035em; font-weight: 700; color: #8f2333; }
+.collaborate-page .collab-principles-heading h2,
+.collaborate-page .collab-proposal-heading h2 { display: none !important; }
+.collaborate-page .collab-principles-heading > p,
+.collaborate-page .collab-proposal-heading > p { display: none !important; }
+.collaborate-page .collab-proposal-section { margin-top: 58px; }
+.collaborate-page .collab-proposal-checklist { margin-top: 22px; }
+.collaborate-page .collab-proposal-point p { font-size: 14px !important; line-height: 1.7; }
+@media (max-width: 900px) {
+  .publications-section .publication-policy-grid { grid-template-columns: 1fr !important; }
+  .collaborate-page .collab-grid-detailed { grid-template-columns: repeat(2,minmax(0,1fr)) !important; }
+  .collaborate-page .collab-way-card, .collaborate-page .collab-way-card:nth-child(1), .collaborate-page .collab-way-card:nth-child(2) { grid-column: span 1; min-height: 320px !important; }
+}
+@media (max-width: 600px) {
+  .publications-section .publication-work-links { grid-template-columns: 1fr; }
+  .publications-section .publication-policy-card { padding: 22px !important; }
+  .page-intro-publications .page-intro-inner h1, .page-intro-publications h1 { font-size: 40px; }
+  .collaborate-page .collab-grid-detailed { grid-template-columns: 1fr !important; }
+  .collaborate-page .collab-way-card, .collaborate-page .collab-way-card:nth-child(1), .collaborate-page .collab-way-card:nth-child(2) { grid-column: 1; min-height: 0 !important; }
+  .page-intro-collaborate .page-intro-inner h1, .page-intro-collaborate h1 { font-size: 36px; }
+}
+
+/* Correct intro media selectors for PageIntro's actual markup. */
+.page-intro-publications .intro-media,
+.page-intro-collaborate .intro-media { position: relative !important; inset: auto !important; width: min(100%, 300px) !important; max-width: 300px !important; height: 180px !important; margin: 22px auto 0 !important; overflow: hidden !important; opacity: 1 !important; }
+.page-intro-publications .intro-media img,
+.page-intro-collaborate .intro-media img { width: 100% !important; height: 180px !important; max-height: 180px !important; object-fit: cover !important; }
+.page-intro-publications > .container,
+.page-intro-collaborate > .container { text-align: center; }
+.page-intro-publications > .container > p,
+.page-intro-collaborate > .container > p { display: none !important; }
+.page-intro-publications .page-title-mask,
+.page-intro-collaborate .page-title-mask { display: block; }
+.page-intro-publications .page-title-mask > span,
+.page-intro-collaborate .page-title-mask > span { display: inline; }
+/* Exact 2 / 3 / 2 collaborator-card arrangement; all seven cards share dimensions. */
+@media (min-width: 901px) {
+  .collaborate-page .collab-grid-detailed .collab-way-card,
+  .collaborate-page .collab-grid-detailed .collab-way-card:nth-child(n) { grid-column: span 2 !important; grid-row: auto; }
+  .collaborate-page .collab-grid-detailed .collab-way-card:nth-child(1) { grid-column: 2 / span 2 !important; grid-row: 1; }
+  .collaborate-page .collab-grid-detailed .collab-way-card:nth-child(2) { grid-column: 4 / span 2 !important; grid-row: 1; }
+  .collaborate-page .collab-grid-detailed .collab-way-card:nth-child(3) { grid-column: 1 / span 2 !important; grid-row: 2; }
+  .collaborate-page .collab-grid-detailed .collab-way-card:nth-child(4) { grid-column: 3 / span 2 !important; grid-row: 2; }
+  .collaborate-page .collab-grid-detailed .collab-way-card:nth-child(5) { grid-column: 5 / span 2 !important; grid-row: 2; }
+  .collaborate-page .collab-grid-detailed .collab-way-card:nth-child(6) { grid-column: 2 / span 2 !important; grid-row: 3; }
+  .collaborate-page .collab-grid-detailed .collab-way-card:nth-child(7) { grid-column: 4 / span 2 !important; grid-row: 3; }
+}
