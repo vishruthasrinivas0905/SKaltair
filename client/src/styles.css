@@ -6016,3 +6016,568 @@ header.site-header .header-inner{height:100%;align-items:center}header.site-head
   .collaborate-page .collab-grid-detailed .collab-way-card:nth-child(6) { grid-column: 2 / span 2 !important; grid-row: 3; }
   .collaborate-page .collab-grid-detailed .collab-way-card:nth-child(7) { grid-column: 4 / span 2 !important; grid-row: 3; }
 }
+
+
+/* Shared Research Programmes-style intro layout for Publications, Collaborate and Apply. */
+.page-intro-publications > .container,
+.page-intro-collaborate > .container,
+.page-intro-apply > .container {
+  text-align: left !important;
+}
+.page-intro-publications > .container > p,
+.page-intro-collaborate > .container > p,
+.page-intro-apply > .container > p {
+  display: block !important;
+  max-width: 760px !important;
+  font: 17px/1.65 var(--serif) !important;
+  color: #746b65 !important;
+  margin: 0 !important;
+}
+.page-intro-publications .intro-media,
+.page-intro-collaborate .intro-media,
+.page-intro-apply .intro-media {
+  position: relative !important;
+  inset: auto !important;
+  display: block !important;
+  width: min(62%, 900px) !important;
+  max-width: 900px !important;
+  height: clamp(250px, 28vw, 370px) !important;
+  margin: 28px 0 0 !important;
+  overflow: hidden !important;
+  opacity: 1 !important;
+}
+.page-intro-publications .intro-media img,
+.page-intro-collaborate .intro-media img,
+.page-intro-apply .intro-media img {
+  width: 100% !important;
+  height: 100% !important;
+  max-height: none !important;
+  object-fit: cover !important;
+  object-position: center !important;
+}
+.page-intro-publications h1,
+.page-intro-collaborate h1,
+.page-intro-apply h1 {
+  text-align: left !important;
+  font-size: clamp(46px, 5.5vw, 70px) !important;
+  margin: 0 0 17px !important;
+}
+.page-intro-publications .page-title-mask,
+.page-intro-collaborate .page-title-mask,
+.page-intro-apply .page-title-mask { display: block; }
+.page-intro-publications .page-title-mask > span,
+.page-intro-collaborate .page-title-mask > span,
+.page-intro-apply .page-title-mask > span { display: inline; }
+.page-intro-publications .brand-k,
+.page-intro-collaborate .brand-k,
+.page-intro-apply .brand-k { color: var(--red) !important; }
+/* Compact, uniform collaboration cards while keeping their text readable. */
+.collaborate-page .collab-grid-detailed .collab-way-card {
+  min-height: 0 !important;
+  height: 100% !important;
+  aspect-ratio: 1 / 1 !important;
+  padding: clamp(17px, 1.7vw, 25px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: auto;
+}
+.collaborate-page .collab-grid-detailed .collab-way-card h3 { font-size: clamp(17px, 1.5vw, 22px) !important; line-height: 1.25 !important; }
+.collaborate-page .collab-grid-detailed .collab-way-card p { font-size: clamp(11px, .88vw, 13px) !important; line-height: 1.55 !important; }
+@media (max-width: 900px) {
+  .page-intro-publications .intro-media,
+  .page-intro-collaborate .intro-media,
+  .page-intro-apply .intro-media { width: 100% !important; height: clamp(220px, 42vw, 330px) !important; }
+  .collaborate-page .collab-grid-detailed .collab-way-card { aspect-ratio: auto !important; min-height: 290px !important; }
+}
+@media (max-width: 600px) {
+  .page-intro-publications h1,
+  .page-intro-collaborate h1,
+  .page-intro-apply h1 { font-size: clamp(35px, 9vw, 46px) !important; }
+  .page-intro-publications .intro-media,
+  .page-intro-collaborate .intro-media,
+  .page-intro-apply .intro-media { height: 220px !important; }
+  .collaborate-page .collab-grid-detailed .collab-way-card { min-height: 0 !important; }
+}
+
+/* Final heading and card alignment adjustments requested for Publications and Collaborate. */
+.page-intro-publications > .container > .eyebrow,
+.page-intro-collaborate > .container > .eyebrow {
+  display: none !important;
+}
+.page-intro-publications > .container,
+.page-intro-collaborate > .container {
+  text-align: left !important;
+}
+.page-intro-publications h1,
+.page-intro-collaborate h1 {
+  text-align: left !important;
+  font-family: var(--serif) !important;
+  font-size: clamp(46px, 5.5vw, 70px) !important;
+  font-weight: 500 !important;
+  line-height: 1.11 !important;
+  letter-spacing: -2.6px !important;
+  margin: 0 0 17px !important;
+}
+.page-intro-publications .brand-k,
+.page-intro-collaborate .brand-k { color: var(--red) !important; }
+
+/* Editorial section headings align with the Research Programmes content column. */
+.publications-section .publication-section-heading,
+.collaborate-page .collab-ways-heading {
+  text-align: left !important;
+  margin: 0 0 32px !important;
+}
+.publications-section .publication-section-heading > .eyebrow,
+.collaborate-page .collab-ways-heading > .eyebrow {
+  display: block !important;
+  text-align: left !important;
+  font-size: clamp(22px, 2.5vw, 30px) !important;
+  line-height: 1.25 !important;
+  letter-spacing: .045em !important;
+  font-weight: 700 !important;
+  color: var(--red) !important;
+}
+
+/* Make collaboration cards match the wider, compact proportions of WHAT WE PUBLISH cards. */
+.collaborate-page .collab-grid-detailed {
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 18px !important;
+  border: 0 !important;
+}
+.collaborate-page .collab-grid-detailed .collab-way-card,
+.collaborate-page .collab-grid-detailed .collab-way-card:nth-child(n) {
+  grid-column: auto !important;
+  grid-row: auto !important;
+  aspect-ratio: 1.65 / 1 !important;
+  min-height: 0 !important;
+  height: auto !important;
+  padding: 22px !important;
+  overflow: auto !important;
+  border: 1px solid #e7d9d5 !important;
+  border-top: 4px solid #8f2333 !important;
+  background: #8f2333 !important;
+  color: #fff !important;
+  box-shadow: 0 5px 18px #39201a08 !important;
+}
+.collaborate-page .collab-grid-detailed .collab-way-card:hover {
+  background: #8f2333 !important;
+  color: #fff !important;
+  transform: none !important;
+}
+.collaborate-page .collab-grid-detailed .collab-way-card h3 {
+  font-size: clamp(17px, 1.45vw, 21px) !important;
+  line-height: 1.28 !important;
+  margin: 18px 0 10px !important;
+}
+.collaborate-page .collab-grid-detailed .collab-way-card p {
+  font-size: clamp(11px, .88vw, 13px) !important;
+  line-height: 1.55 !important;
+}
+.collaborate-page .collab-grid-detailed .collab-way-card .collab-way-detail {
+  font-size: clamp(10px, .82vw, 12px) !important;
+}
+@media (max-width: 900px) {
+  .collaborate-page .collab-grid-detailed { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .collaborate-page .collab-grid-detailed .collab-way-card,
+  .collaborate-page .collab-grid-detailed .collab-way-card:nth-child(n) { aspect-ratio: 1.45 / 1 !important; }
+}
+@media (max-width: 600px) {
+  .page-intro-publications h1,
+  .page-intro-collaborate h1 { font-size: clamp(35px, 9vw, 46px) !important; letter-spacing: -1.2px !important; }
+  .publications-section .publication-section-heading > .eyebrow,
+  .collaborate-page .collab-ways-heading > .eyebrow { font-size: 22px !important; }
+  .collaborate-page .collab-grid-detailed { grid-template-columns: 1fr !important; }
+  .collaborate-page .collab-grid-detailed .collab-way-card,
+  .collaborate-page .collab-grid-detailed .collab-way-card:nth-child(n) { aspect-ratio: auto !important; min-height: 0 !important; }
+}
+
+
+/* Final shared image-background hero treatment for Publications, Collaborate and Contact.
+   Uses the same full-bleed photo, burgundy overlay and cream/gold palette as Research Programmes. */
+.page-intro-image-behind:is(.page-intro-publications, .page-intro-collaborate, .page-intro-contact) {
+  min-height: clamp(390px, 29.2vw, 500px);
+  display: flex;
+  align-items: center;
+  background: #3b2522;
+  padding: clamp(58px, 4.2vw, 78px) 0 clamp(48px, 3.8vw, 68px);
+  border-bottom: 1px solid #5d3934;
+}
+.page-intro-image-behind:is(.page-intro-publications, .page-intro-collaborate, .page-intro-contact) .intro-media-behind {
+  position: absolute; inset: 0; width: 100%; height: 100%; margin: 0;
+}
+.page-intro-image-behind:is(.page-intro-publications, .page-intro-collaborate, .page-intro-contact) .intro-media-behind img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center 48%;
+}
+.page-intro-image-behind:is(.page-intro-publications, .page-intro-collaborate, .page-intro-contact) .intro-media-behind:after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(90deg, rgba(59,37,34,.98) 0%, rgba(59,37,34,.91) 32%, rgba(59,37,34,.68) 56%, rgba(59,37,34,.12) 100%),
+              linear-gradient(0deg, rgba(29,23,20,.30), transparent 65%);
+}
+.page-intro-image-behind:is(.page-intro-publications, .page-intro-collaborate) .eyebrow { display: none; }
+.page-intro-image-behind:is(.page-intro-publications, .page-intro-collaborate, .page-intro-contact) h1 {
+  max-width: 1000px; margin: 0 0 22px; color: #fff8ec;
+  font-family: 'Source Serif 4', 'Newsreader', Georgia, serif;
+  font-size: clamp(54px, 5.6vw, 96px); font-weight: 400; line-height: 1.04; letter-spacing: -.035em;
+  text-wrap: balance;
+}
+.page-intro-image-behind.page-intro-collaborate h1 .brand-k { color: #a51f31 !important; }
+.page-intro-image-behind:is(.page-intro-publications, .page-intro-collaborate, .page-intro-contact) p {
+  max-width: 880px; margin: 0; color: #f0e4d7;
+  font-family: 'Source Serif 4', 'Newsreader', Georgia, serif; font-size: clamp(17px, 1.25vw, 21px);
+  font-weight: 500; line-height: 1.8;
+}
+@media (max-width: 900px) {
+  .page-intro-image-behind:is(.page-intro-publications, .page-intro-collaborate, .page-intro-contact) h1 { max-width: 760px; font-size: clamp(48px, 7vw, 72px); }
+}
+@media (max-width: 600px) {
+  .page-intro-image-behind:is(.page-intro-publications, .page-intro-collaborate, .page-intro-contact) { min-height: 350px; padding: 48px 0 42px; }
+  .page-intro-image-behind:is(.page-intro-publications, .page-intro-collaborate, .page-intro-contact) h1 { font-size: clamp(38px, 10vw, 54px); }
+  .page-intro-image-behind:is(.page-intro-publications, .page-intro-collaborate, .page-intro-contact) .intro-media-behind:after {
+    background: linear-gradient(90deg, rgba(48,30,27,.94), rgba(48,30,27,.72)), linear-gradient(0deg, rgba(48,30,27,.3), rgba(48,30,27,.1));
+  }
+}
+
+
+/* FINAL CORRECTION: make all requested page intros true full-bleed image heroes,
+   consistent with Research Programmes; do not let older page-specific rules split the image. */
+.page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  min-height: clamp(390px, 29.2vw, 500px) !important;
+  padding: clamp(58px, 4.2vw, 78px) 0 clamp(48px, 3.8vw, 68px) !important;
+  background: #4b302a !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+}
+.page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) > .container {
+  position: relative !important;
+  z-index: 2 !important;
+  display: block !important;
+  width: min(1550px, calc(100% - 64px)) !important;
+  max-width: 1550px !important;
+  margin-inline: auto !important;
+  padding: 0 !important;
+  flex: 0 1 auto !important;
+}
+.page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) > .intro-media-behind {
+  display: block !important;
+  position: absolute !important;
+  z-index: 0 !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  max-width: none !important;
+  transform: none !important;
+}
+.page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) > .intro-media-behind img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  max-width: none !important;
+  object-fit: cover !important;
+  object-position: center 48% !important;
+}
+.page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) > .intro-media-behind::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(90deg, rgba(67,43,38,.97) 0%, rgba(67,43,38,.88) 34%, rgba(67,43,38,.58) 62%, rgba(67,43,38,.16) 100%), linear-gradient(0deg, rgba(38,26,23,.24), transparent 65%) !important;
+  pointer-events: none !important;
+}
+.page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) .eyebrow {
+  display: none !important;
+}
+.page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) h1 {
+  display: block !important;
+  width: 100% !important;
+  max-width: 1100px !important;
+  margin: 0 0 22px !important;
+  color: #fff8ec !important;
+  font-family: 'Source Serif 4', 'Newsreader', Georgia, serif !important;
+  font-size: clamp(54px, 5.6vw, 96px) !important;
+  font-weight: 400 !important;
+  line-height: 1.04 !important;
+  letter-spacing: -.035em !important;
+  text-align: left !important;
+  text-wrap: balance !important;
+}
+.page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) h1 .brand-k {
+  color: #a51f31 !important;
+}
+.page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) p {
+  display: block !important;
+  max-width: 880px !important;
+  margin: 0 !important;
+  color: #f3e6d9 !important;
+  font-family: 'Source Serif 4', 'Newsreader', Georgia, serif !important;
+  font-size: clamp(18px, 1.45vw, 25px) !important;
+  font-weight: 500 !important;
+  line-height: 1.7 !important;
+}
+/* The collaboration section uses cream/gold lettering that contrasts with its burgundy cards. */
+.collaborate-page .collab-ways-heading,
+.collaborate-page .collab-ways-heading > .eyebrow {
+  text-align: left !important;
+  color: #e7c98b !important;
+}
+.collaborate-page .collab-ways-heading > .eyebrow {
+  font-family: 'DM Sans', sans-serif !important;
+  font-size: clamp(24px, 2.6vw, 34px) !important;
+  font-weight: 700 !important;
+  letter-spacing: .04em !important;
+}
+@media (max-width: 900px) {
+  .page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) h1 { font-size: clamp(46px, 7vw, 72px) !important; }
+}
+@media (max-width: 600px) {
+  .page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) { min-height: 350px !important; padding: 48px 0 42px !important; }
+  .page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) > .container { width: calc(100% - 36px) !important; }
+  .page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) h1 { font-size: clamp(38px, 10vw, 54px) !important; }
+  .page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) p { font-size: 17px !important; }
+}
+
+/* FINAL MATCH TO RESEARCH PROGRAMMES HERO: Publications, Collaborate and Contact Us */
+.page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) {
+  min-height: 375px !important;
+  height: auto !important;
+  padding: 42px 0 !important;
+  background-color: #4b302a !important;
+  background-size: cover !important;
+  background-position: center !important;
+}
+.page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) > .container {
+  width: min(1400px, 80%) !important;
+  max-width: 1400px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding: 0 !important;
+  text-align: left !important;
+}
+.page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) h1 {
+  max-width: 1200px !important;
+  margin: 0 0 22px !important;
+  color: #fff5e8 !important;
+  font-family: 'Source Serif 4', 'Newsreader', Georgia, serif !important;
+  font-size: clamp(42px, 4.5vw, 80px) !important;
+  font-weight: 400 !important;
+  line-height: 1.08 !important;
+  letter-spacing: -0.025em !important;
+  text-align: left !important;
+}
+.page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) p {
+  max-width: 850px !important;
+  margin: 0 !important;
+  color: #f5e8d9 !important;
+  font-family: 'Source Serif 4', 'Newsreader', Georgia, serif !important;
+  font-size: clamp(18px, 1.6vw, 28px) !important;
+  font-weight: 500 !important;
+  line-height: 1.5 !important;
+  text-align: left !important;
+}
+.page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) > .intro-media-behind::after {
+  background: linear-gradient(90deg, rgba(67,43,38,.97) 0%, rgba(67,43,38,.88) 34%, rgba(67,43,38,.58) 62%, rgba(67,43,38,.16) 100%), linear-gradient(0deg, rgba(38,26,23,.24), transparent 65%) !important;
+}
+.page-intro.page-intro-image-behind.page-intro-collaborate h1 .brand-k {
+  color: #a51f31 !important;
+}
+@media (max-width: 900px) {
+  .page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) {
+    min-height: 375px !important;
+    padding: 42px 0 !important;
+  }
+  .page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) > .container {
+    width: 80% !important;
+  }
+  .page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) h1 {
+    font-size: clamp(42px, 6.5vw, 64px) !important;
+  }
+  .page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) p {
+    font-size: clamp(18px, 2.2vw, 24px) !important;
+  }
+}
+@media (max-width: 600px) {
+  .page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) {
+    min-height: 350px !important;
+    padding: 38px 0 !important;
+  }
+  .page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) > .container {
+    width: calc(100% - 36px) !important;
+  }
+  .page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) h1 {
+    font-size: clamp(38px, 9vw, 52px) !important;
+    line-height: 1.08 !important;
+  }
+  .page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) p {
+    font-size: 18px !important;
+    line-height: 1.5 !important;
+  }
+}
+
+/* Final requested color corrections: Collaborate section heading and brand K */
+.collaborate-page .collab-ways-heading,
+.collaborate-page .collab-ways-heading > .eyebrow {
+  color: #fff5e8 !important;
+}
+.collaborate-page .collab-ways-heading > .eyebrow {
+  text-align: left !important;
+}
+.page-intro.page-intro-image-behind.page-intro-collaborate h1 .brand-k,
+.collaborate-page .page-intro h1 .brand-k,
+.collaborate-page h1 .brand-k,
+.brand-k,
+.brand-type .brand-k,
+.brand-inverse .brand-k {
+  color: #a51f31 !important;
+}
+
+/* Shared final color treatment for Publications, Collaborate and Contact Us */
+.page-intro.page-intro-image-behind.page-intro-publications h1,
+.page-intro.page-intro-image-behind.page-intro-collaborate h1,
+.page-intro.page-intro-image-behind.page-intro-contact h1 {
+  color: #fff5e8 !important;
+}
+.page-intro.page-intro-image-behind.page-intro-publications h1 .brand-k,
+.page-intro.page-intro-image-behind.page-intro-collaborate h1 .brand-k,
+.page-intro.page-intro-image-behind.page-intro-contact h1 .brand-k,
+.publications-page h1 .brand-k,
+.collaborate-page h1 .brand-k,
+.contact-page h1 .brand-k,
+.brand-k,
+.brand-type .brand-k,
+.brand-inverse .brand-k {
+  color: #a51f31 !important;
+}
+.collaborate-page .collab-ways-heading,
+.collaborate-page .collab-ways-heading *,
+.collaborate-page h2.collab-ways-heading,
+.collaborate-page .collab-ways-section h2 {
+  color: #fff5e8 !important;
+}
+.collaborate-page .collab-ways-heading,
+.collaborate-page .collab-ways-section h2 {
+  text-align: left !important;
+}
+
+
+/* FINAL POLISH — shared Research Programmes hero styling */
+.page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) {
+  min-height: 375px !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 42px 0 !important;
+  overflow: hidden;
+}
+.page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) > .container {
+  width: min(80%, 1400px) !important;
+  max-width: 1400px !important;
+  margin-inline: auto !important;
+  text-align: left !important;
+}
+.page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) > .container > .eyebrow {
+  display: none !important;
+}
+.page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) h1 {
+  color: #FFF5E8 !important;
+  font-family: 'Source Serif 4', 'Newsreader', Georgia, serif !important;
+  font-size: clamp(42px, 4.5vw, 80px) !important;
+  font-weight: 400 !important;
+  line-height: 1.08 !important;
+  letter-spacing: -0.025em !important;
+  text-align: left !important;
+  margin: 0 0 22px !important;
+}
+.page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) p {
+  color: #F5E8D9 !important;
+  font-family: 'Source Serif 4', 'Newsreader', Georgia, serif !important;
+  font-size: clamp(18px, 1.6vw, 28px) !important;
+  font-weight: 500 !important;
+  line-height: 1.5 !important;
+  text-align: left !important;
+  max-width: 1000px !important;
+  margin: 0 !important;
+}
+/* Always render the K in SK ALTAIR in red, including hero titles and wordmarks. */
+.brand-k, .brand .brand-k, .brand-inverse .brand-k, .brand-type .brand-k,
+.page-intro h1 .brand-k, .page-intro .brand-k, .brand-name-text .brand-k,
+.collaborate-page .brand-k, .contact-page .brand-k, .publications-page .brand-k {
+  color: #A51F31 !important;
+}
+/* WAYS TO COLLABORATE: cream heading, left aligned, readable against burgundy. */
+.collaborate-page .collab-ways-heading,
+.collaborate-page .collab-ways-heading .eyebrow {
+  color: #FFF5E8 !important;
+  text-align: left !important;
+  font-size: clamp(28px, 2.2vw, 38px) !important;
+  line-height: 1.15 !important;
+  font-weight: 600 !important;
+}
+/* Make seven collaboration cards compact and consistent with WHAT WE PUBLISH cards.
+   Desktop layout: 2 cards, then 3, then 2. */
+.collaborate-page .collab-grid-detailed {
+  display: grid !important;
+  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  gap: 16px !important;
+  align-items: stretch !important;
+}
+.collaborate-page .collab-grid-detailed .collab-way-card,
+.collaborate-page .collab-grid-detailed .collab-way-card:nth-child(n) {
+  grid-column: span 2 !important;
+  grid-row: auto !important;
+  aspect-ratio: 1.45 / 1 !important;
+  min-height: 220px !important;
+  height: auto !important;
+  padding: 22px !important;
+  border-radius: 2px !important;
+  background: #8F2335 !important;
+  color: #FFF5E8 !important;
+  box-shadow: none !important;
+  transition: box-shadow .2s ease !important;
+}
+.collaborate-page .collab-grid-detailed .collab-way-card:nth-child(1) { grid-column: 2 / span 2 !important; grid-row: 1 !important; }
+.collaborate-page .collab-grid-detailed .collab-way-card:nth-child(2) { grid-column: 4 / span 2 !important; grid-row: 1 !important; }
+.collaborate-page .collab-grid-detailed .collab-way-card:nth-child(3) { grid-column: 1 / span 2 !important; grid-row: 2 !important; }
+.collaborate-page .collab-grid-detailed .collab-way-card:nth-child(4) { grid-column: 3 / span 2 !important; grid-row: 2 !important; }
+.collaborate-page .collab-grid-detailed .collab-way-card:nth-child(5) { grid-column: 5 / span 2 !important; grid-row: 2 !important; }
+.collaborate-page .collab-grid-detailed .collab-way-card:nth-child(6) { grid-column: 2 / span 2 !important; grid-row: 3 !important; }
+.collaborate-page .collab-grid-detailed .collab-way-card:nth-child(7) { grid-column: 4 / span 2 !important; grid-row: 3 !important; }
+.collaborate-page .collab-grid-detailed .collab-way-card:hover { background: #8F2335 !important; box-shadow: 0 8px 22px rgba(36,20,18,.12) !important; }
+.collaborate-page .collab-grid-detailed .collab-way-card h3 { color: #FFF5E8 !important; font-size: clamp(17px, 1.2vw, 21px) !important; line-height: 1.25 !important; }
+.collaborate-page .collab-grid-detailed .collab-way-card p { color: #FFF5E8 !important; font-size: clamp(12px, .9vw, 14px) !important; line-height: 1.5 !important; }
+.collaborate-page .collab-grid-detailed .collab-way-card .collab-way-detail { color: #F5E8D9 !important; }
+@media (max-width: 900px) {
+  .page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) h1 { font-size: clamp(42px, 6.5vw, 64px) !important; }
+  .page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) p { font-size: clamp(18px, 2.2vw, 24px) !important; }
+  .collaborate-page .collab-grid-detailed { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .collaborate-page .collab-grid-detailed .collab-way-card,
+  .collaborate-page .collab-grid-detailed .collab-way-card:nth-child(n) { grid-column: auto !important; grid-row: auto !important; aspect-ratio: 1.35 / 1 !important; min-height: 210px !important; }
+}
+@media (max-width: 600px) {
+  .page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) { min-height: 350px !important; padding: 38px 0 !important; }
+  .page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) > .container { width: calc(100% - 36px) !important; }
+  .page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) h1 { font-size: clamp(38px, 9vw, 52px) !important; }
+  .page-intro.page-intro-image-behind:is(.page-intro-publications,.page-intro-collaborate,.page-intro-contact) p { font-size: 18px !important; }
+  .collaborate-page .collab-grid-detailed { grid-template-columns: 1fr !important; }
+  .collaborate-page .collab-grid-detailed .collab-way-card,
+  .collaborate-page .collab-grid-detailed .collab-way-card:nth-child(n) { aspect-ratio: auto !important; min-height: 0 !important; grid-column: 1 !important; padding: 22px !important; }
+}
+
+/* FINAL BRAND OVERRIDE — keep the K in SK ALTAIR red on Publications,
+   Collaborate and Contact Us, including the shared navigation wordmark. */
+.brand-k,
+.brand-type .brand-k,
+.brand .brand-k,
+.brand-inverse .brand-k,
+.brand-name-text .brand-k,
+.page-intro-publications h1 .brand-k,
+.page-intro-collaborate h1 .brand-k,
+.page-intro-contact h1 .brand-k,
+.publications-page .brand-k,
+.collaborate-page .brand-k,
+.contact-page .brand-k,
+.page-intro h1 .brand-k {
+  color: #A51F31 !important;
+  -webkit-text-fill-color: #A51F31 !important;
+}
