@@ -24,9 +24,7 @@ export const committee = [
   { name: 'Mr. Ananth Sripadarao', role: 'Board member · profile supplied for confirmation', image: '', bio: 'Brings experience in intellectual property law and legal affairs across Asia-Pacific, the Middle East and Africa, including patents, technology licensing, corporate governance and M&A.' },
 ];
 
-export const publications = [
-  { title: 'Research programme publications are in preparation', type: 'Institutional update', description: 'Research outputs will be listed here after completion and editorial review, with author details and access information.', year: 'Coming soon' },
-];
+export const publications = [];
 
 export const newsItems = [
   { title: 'Research programme announcements will appear here', type: 'Announcement', date: 'Updates forthcoming', description: 'Application windows, eligibility requirements and submission instructions will be published when confirmed.' },

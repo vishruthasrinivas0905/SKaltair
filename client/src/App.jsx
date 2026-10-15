@@ -57,7 +57,7 @@ function Header() {
     </div>
     <div className="nav-dropdown committee-nav" onMouseEnter={()=>setFocusOpen(true)} onMouseLeave={()=>setFocusOpen(false)}><NavLink to="/research-focus/law-governance" className={`nav-link nav-trigger ${loc.pathname.startsWith('/research-focus')?'active':''}`} aria-haspopup="true" aria-expanded={focusOpen} aria-controls="research-focus-menu" onClick={()=>setFocusOpen(false)}>Research Focus <ChevronDown size={13}/></NavLink>{focusOpen&&<div className="dropdown-panel committee-menu" id="research-focus-menu"><Link to="/research-focus/law-governance">Law &amp; Governance</Link><Link to="/research-focus/ai">AI</Link><Link to="/research-focus/data-protection-cyber">Data Protection &amp; Cyber</Link><Link to="/research-focus/intellectual-property">Intellectual Property</Link><Link to="/research-focus/corporate-commercial">Corporate &amp; Commercial</Link><Link to="/research-focus/litigation">Litigation</Link></div>}</div>
     <div className="nav-dropdown committee-nav" onMouseEnter={()=>setCommitteeOpen(true)} onMouseLeave={()=>setCommitteeOpen(false)}><NavLink to="/committee" className={`nav-link nav-trigger ${loc.pathname.startsWith('/committee')?'active':''}`} aria-haspopup="true" aria-expanded={committeeOpen} aria-controls="committee-menu" onClick={()=>setCommitteeOpen(false)}>Committee <ChevronDown size={13}/></NavLink>{committeeOpen&&<div className="dropdown-panel committee-menu" id="committee-menu"><Link to="/committee">Committee Overview</Link><Link to="/committee/board-members">Board Members</Link></div>}</div>
-    <div className="nav-dropdown committee-nav publication-nav"><NavLink to="/publications" className="nav-link">Publications and News <ChevronDown size={13}/></NavLink><div className="dropdown-panel committee-menu"><Link to="/publications">Articles</Link><Link to="/publications?type=Research%20Paper">Research Papers</Link></div></div>
+    <div className="nav-dropdown committee-nav publication-nav"><NavLink to="/publications" className="nav-link">Publications and News <ChevronDown size={13}/></NavLink><div className="dropdown-panel committee-menu"><Link to="/publications?type=Articles">Articles</Link><Link to="/publications?type=Research%20Paper">Research Papers</Link></div></div>
     <NavLink to="/collaborate" className="nav-link">Collaborate</NavLink>
     <div className="nav-dropdown committee-nav apply-nav" onMouseEnter={()=>setApplyOpen(true)} onMouseLeave={()=>setApplyOpen(false)}><NavLink to="/apply" className={`nav-link nav-trigger ${loc.pathname.startsWith('/apply')?'active':''}`} aria-haspopup="true" aria-expanded={applyOpen} aria-controls="apply-menu" onClick={()=>setApplyOpen(false)}>Apply Now <ChevronDown size={13}/></NavLink>{applyOpen&&<div className="dropdown-panel committee-menu apply-menu" id="apply-menu"><details><summary>Programmes <ChevronDown size={12}/></summary><div className="apply-submenu">{programs.map(program=><Link key={program.slug} to={`/programs?term=${program.slug}`}>{program.name}</Link>)}</div></details><details><summary>Research Focus <ChevronDown size={12}/></summary><div className="apply-submenu">{[{title:'Law & Governance',slug:'law-governance'},{title:'AI',slug:'ai'},{title:'Data Protection & Cyber',slug:'data-protection-cyber'},{title:'Intellectual Property',slug:'intellectual-property'},{title:'Corporate & Commercial',slug:'corporate-commercial'},{title:'Litigation',slug:'litigation'}].map(item=><Link key={item.slug} to={`/research-focus/${item.slug}`}>{item.title}</Link>)}</div></details></div>}</div>
     <NavLink to="/contact" className="nav-link">Contact Us</NavLink>
@@ -536,7 +536,14 @@ function CouncilPage({ council }) {
 }
 
 function Publications() {
-  const livePublications = useContent('publication', publications);
+  const livePublications = useContent('publication', publications).filter(publication =>
+    !/coming\s+soon|publications\s+are\s+in\s+preparation/i.test([
+      publication.title,
+      publication.name,
+      publication.year,
+      publication.data?.year,
+    ].filter(Boolean).join(' '))
+  );
   const [filter, setFilter] = useState(() => { const requested = new URLSearchParams(window.location.search).get('type') || ''; return /research paper/i.test(requested) ? 'Research papers' : /^articles?$/i.test(requested) ? 'Articles' : 'All'; });
   const [authorFilter, setAuthorFilter] = useState('All authors');
   const [yearFilter, setYearFilter] = useState('All years');
@@ -584,6 +591,16 @@ function Publications() {
     ['Articles and Case Analyses', 'Critical examination of legal developments, judicial decisions, emerging technologies and questions of contemporary importance.'],
     ['Consultation Submissions', 'Research-based responses to public consultations and proposals for legislative or regulatory reform, where approved for publication.'],
   ];
+  const selectedPublishType = {
+    'Research papers': 'Research Papers',
+    'Policy briefs': 'Policy Briefs',
+    Reports: 'Research Reports',
+    Articles: 'Articles and Case Analyses',
+    'Consultation submissions': 'Consultation Submissions',
+  }[filter];
+  const visiblePublishTypes = selectedPublishType
+    ? publishTypes.filter(([title]) => title === selectedPublishType)
+    : publishTypes;
 
   return <>
     <PageIntro
@@ -603,7 +620,7 @@ function Publications() {
 
           </div>
           <div className="publish-types-grid">
-            {publishTypes.map(([title, description], index) => <article className="publish-type-card" key={title}>
+            {visiblePublishTypes.map(([title, description], index) => <article className="publish-type-card" key={title}>
               <span className="publish-type-number">{String(index + 1).padStart(2, '0')}</span>
               <BookOpen size={20}/>
               <h3>{title}</h3>
@@ -647,7 +664,6 @@ function Publications() {
               </article>;
             })}
           </div> : <div className="publication-empty-state" role="status"><FileText size={24}/><div><h3>No matching publications yet</h3><p>Try changing your search or filters. Approved outputs will appear here after completion and editorial review.</p></div></div>}
-          <div className="empty-editorial"><FileText size={20}/><p>Only approved research outputs will be listed with author details and access information.</p></div>
         </section>
 
         <section className="publication-policy-grid" aria-label="Publication policies">

@@ -7831,3 +7831,339 @@ body:has(.route-view.page-about) .footer .brand-kritam {
     max-width: calc(100vw - 32px) !important;
   }
 }
+
+/* Final requested overrides for the Publications and Research Focus pages. */
+.page-intro.page-intro-publications .brand-k,
+.page-intro.page-intro-publications p .brand-k {
+  color: #f2c778 !important;
+  -webkit-text-fill-color: #f2c778 !important;
+}
+.focus-page-simple {
+  --serif: 'Newsreader', Georgia, serif;
+  font-family: 'Manrope', 'DM Sans', sans-serif;
+}
+.focus-page-simple .focus-simple-hero h1 {
+  font-family: 'Newsreader', Georgia, serif;
+  font-weight: 400;
+}
+.focus-page-simple .focus-simple-label {
+  color: #a51f31;
+  font: 500 clamp(26px, 3vw, 36px)/1.2 'Newsreader', Georgia, serif;
+  letter-spacing: -.01em;
+  text-transform: none;
+}
+.focus-page-simple .focus-simple-questions h2,
+.focus-page-simple .focus-simple-themes h2 {
+  color: #a51f31;
+  font: 500 clamp(30px, 3.5vw, 46px)/1.14 'Newsreader', Georgia, serif;
+  letter-spacing: -.02em;
+}
+.focus-page-simple .focus-simple-description,
+.focus-page-simple .focus-flow-card p,
+.focus-page-simple .focus-theme-box > p,
+.focus-page-simple .focus-theme-box ul { font-family: 'Manrope', 'DM Sans', sans-serif; }
+.focus-page-simple .focus-flow-card,
+.focus-page-simple .focus-theme-box {
+  border-color: #e5dbd1;
+  border-radius: 2px;
+  background: #fffdfa;
+  box-shadow: 0 7px 22px rgba(45,28,23,.045);
+}
+.focus-page-simple .focus-theme-box h3 { font-family: 'Newsreader', Georgia, serif; font-weight: 500; }
+/* Publications typography and spacing follow the Home and About page system. */
+.page-publications {
+  --serif: 'Source Serif 4', 'Newsreader', Georgia, serif;
+  font-family: 'Manrope', 'DM Sans', sans-serif;
+}
+.page-publications .publications-section > .container {
+  width: min(1120px, calc(100% - 64px));
+}
+.page-publications .page-intro h1 {
+  font: 400 clamp(44px, 5.4vw, 72px)/1.08 'Source Serif 4', 'Newsreader', Georgia, serif !important;
+  letter-spacing: -.025em !important;
+}
+.page-publications .page-intro p {
+  max-width: 760px;
+  font: 400 clamp(16px, 1.45vw, 19px)/1.75 'Manrope', 'DM Sans', sans-serif !important;
+}
+.page-publications .publications-section {
+  padding-block: clamp(56px, 7vw, 88px);
+}
+.page-publications .publication-section-heading {
+  margin-bottom: 24px;
+}
+.page-publications .publication-section-heading .eyebrow,
+.page-publications .publication-body .eyebrow,
+.page-publications .publication-browse-controls .eyebrow {
+  font: 700 11px/1.4 'Manrope', 'DM Sans', sans-serif;
+  letter-spacing: 1.2px;
+}
+.page-publications .publish-types-grid {
+  gap: 14px;
+  align-items: stretch;
+}
+.page-publications .publish-type-card {
+  min-height: 0;
+  padding: 24px;
+}
+.page-publications .publish-type-card h3,
+.page-publications .publication-body h3,
+.page-publications .publication-empty-state h3 {
+  font: 500 clamp(20px, 1.8vw, 24px)/1.25 'Source Serif 4', 'Newsreader', Georgia, serif;
+  letter-spacing: -.01em;
+}
+.page-publications .publish-type-card p,
+.page-publications .publication-body > p,
+.page-publications .publication-empty-state p,
+.page-publications .publication-policy-card p,
+.page-publications .publication-contribute-cta p {
+  font: 400 14px/1.75 'Manrope', 'DM Sans', sans-serif;
+}
+.page-publications .publication-browse-controls {
+  margin: 0 0 24px;
+  padding: 18px;
+  gap: 14px;
+}
+.page-publications .publication-browse-controls label,
+.page-publications .publication-browse-controls input,
+.page-publications .publication-browse-controls select,
+.page-publications .filter-row button {
+  font-family: 'Manrope', 'DM Sans', sans-serif;
+  font-size: 13px;
+}
+.page-publications .publication-grid {
+  gap: 18px;
+  align-items: stretch;
+}
+.page-publications .publication-card {
+  display: flex;
+  flex-direction: column;
+}
+.page-publications .publication-cover { flex: 0 0 174px; }
+.page-publications .publication-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+  padding: 22px;
+}
+.page-publications .publication-body h3 { margin: 4px 0 6px; }
+.page-publications .publication-body .publication-metadata { font-size: 13px; }
+.page-publications .publication-policy-card h2,
+.page-publications .publication-contribute-cta h2 {
+  font-family: 'Source Serif 4', 'Newsreader', Georgia, serif;
+  font-weight: 400;
+}
+.page-publications .publication-policy-card:nth-child(2) > .eyebrow {
+  color: #8f2333 !important;
+}
+.page-publications .publication-policy-card:nth-child(2) p {
+  color: #5f5350 !important;
+}
+.page-publications .publication-policy-card:nth-child(2) .button-outline {
+  border-color: #8f2333 !important;
+  color: #8f2333 !important;
+  background: #fff !important;
+}
+.page-publications .page-intro.page-intro-image-behind.page-intro-publications > .container > p {
+  max-width: 760px !important;
+  font: 400 clamp(16px, 1.4vw, 18px)/1.7 'Manrope', 'DM Sans', sans-serif !important;
+}
+.page-publications .publication-section-heading .eyebrow {
+  color: #a51f31;
+  font: 500 clamp(26px, 3vw, 36px)/1.2 'Source Serif 4', 'Newsreader', Georgia, serif;
+  letter-spacing: -.01em;
+  text-transform: none;
+}
+@media (max-width: 760px) {
+  .page-intro.page-intro-image-behind.page-intro-publications > .container {
+    width: calc(100% - 64px) !important;
+  }
+}
+@media (max-width: 760px) {
+  .page-publications .publications-section > .container { width: calc(100% - 36px); }
+  .page-publications .publish-types-grid,
+  .page-publications .publication-policy-grid,
+  .page-publications .publication-grid { grid-template-columns: 1fr; }
+  .page-publications .publish-type-card { padding: 21px; }
+  .page-publications .publication-browse-controls { padding: 14px; }
+}
+
+/* Balanced, responsive typography for Publications and Research Focus.
+   Use the same Source Serif 4 / Manrope system and scale as Home. */
+.page-publications,
+.page-research-focus {
+  --type-display: 'Source Serif 4', Georgia, serif;
+  --type-body: 'Manrope', Arial, sans-serif;
+  --type-page-title: clamp(42px, 5.2vw, 72px);
+  --type-section-title: clamp(30px, 3.4vw, 46px);
+  --type-subtitle: clamp(21px, 2vw, 27px);
+  --type-body-size: 16px;
+  --type-lead-size: clamp(17px, 1.45vw, 19px);
+  --type-label-size: 12px;
+}
+.page-publications .page-intro h1,
+.focus-page-simple .focus-simple-hero h1 {
+  font-family: var(--type-display) !important;
+  font-size: var(--type-page-title) !important;
+  line-height: 1.08 !important;
+  letter-spacing: -.025em !important;
+  text-wrap: balance;
+}
+.page-publications .page-intro > .container > p,
+.focus-page-simple .focus-simple-description {
+  max-width: 44rem !important;
+  font-family: var(--type-body) !important;
+  font-size: var(--type-lead-size) !important;
+  font-weight: 400 !important;
+  line-height: 1.65 !important;
+}
+.page-publications .publications-section > .container,
+.focus-page-simple .container { width: min(1200px, calc(100% - 64px)); }
+.page-publications .publications-section { padding-block: clamp(48px, 6vw, 80px); }
+.page-publications .publication-editorial-section { margin-bottom: clamp(42px, 5vw, 64px); }
+.page-publications .publication-section-heading { margin-bottom: 22px; }
+.page-publications .publication-section-heading .eyebrow {
+  color: #302825;
+  font: 400 var(--type-section-title)/1.12 var(--type-display);
+  letter-spacing: -.015em;
+  text-transform: none;
+}
+.page-publications .publish-types-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr)); gap: 18px; }
+.page-publications .publish-type-card {
+  min-width: 0;
+  padding: clamp(22px, 2.5vw, 32px);
+  border: 1px solid #e8dfd5;
+  background: #fffdfa;
+}
+.page-publications .publish-type-card h3,
+.page-publications .publication-body h3,
+.page-publications .publication-empty-state h3 {
+  color: #302825;
+  font: 400 var(--type-subtitle)/1.25 var(--type-display) !important;
+  letter-spacing: -.01em;
+}
+.page-publications .publish-type-card p,
+.page-publications .publication-body > p,
+.page-publications .publication-empty-state p,
+.page-publications .publication-policy-card p,
+.page-publications .publication-contribute-cta p {
+  font: 400 var(--type-body-size)/1.7 var(--type-body) !important;
+}
+.page-publications .publication-work-links { gap: 14px; }
+.page-publications .publication-work-link { min-width: 0; }
+.page-publications .filter-row { display: flex; flex-wrap: wrap; gap: 9px; margin-block: 26px 18px; }
+.page-publications .filter-row button { min-height: 42px; padding: 9px 16px; font: 600 14px/1.3 var(--type-body); }
+.page-publications .publication-browse-controls {
+  display: grid;
+  grid-template-columns: minmax(220px, 2fr) repeat(3, minmax(140px, 1fr));
+  align-items: end;
+  gap: 14px;
+  padding: 20px;
+}
+.page-publications .publication-browse-controls > label { min-width: 0; }
+.page-publications .publication-browse-controls input,
+.page-publications .publication-browse-controls select {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  font: 400 14px/1.4 var(--type-body);
+}
+.page-publications .publication-grid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+.page-publications .publication-policy-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; margin-top: clamp(42px, 5vw, 64px); }
+.page-publications .publication-policy-card { min-width: 0; padding: clamp(22px, 2.2vw, 30px); }
+.page-publications .publication-policy-card h2,
+.page-publications .publication-contribute-cta h2 { font: 400 var(--type-subtitle)/1.25 var(--type-display) !important; }
+.page-publications .publication-policy-card > .eyebrow { font: 700 12px/1.45 var(--type-body); letter-spacing: .08em; }
+.page-publications .publication-policy-card .button-outline { max-width: 100%; white-space: normal; }
+.page-publications .publication-contribute-cta { gap: clamp(24px, 5vw, 64px); padding: clamp(26px, 4vw, 52px); }
+.page-publications .publication-contribute-cta > div:first-child { max-width: 48rem; }
+
+.focus-page-simple { font-family: var(--type-body); }
+.focus-page-simple .focus-simple-hero { padding-block: clamp(48px, 6vw, 84px); }
+.focus-page-simple .focus-simple-hero-layout { grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: clamp(28px, 5vw, 72px); }
+.focus-page-simple .focus-simple-hero-copy { min-width: 0; }
+.focus-page-simple .focus-simple-label {
+  margin-bottom: 18px;
+  color: #a51f31;
+  font: 700 var(--type-label-size)/1.5 var(--type-body);
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.focus-page-simple .focus-simple-hero h1 { max-width: 12ch; font-weight: 400 !important; }
+.focus-page-simple .focus-simple-description { margin-top: 22px; color: #514843; }
+.focus-page-simple .focus-simple-hero-image { aspect-ratio: 1.18 / 1; }
+.focus-page-simple .focus-simple-questions,
+.focus-page-simple .focus-simple-themes { padding-block: clamp(48px, 6vw, 80px); }
+.focus-page-simple .focus-simple-questions h2,
+.focus-page-simple .focus-simple-themes h2 {
+  margin-bottom: clamp(22px, 3vw, 34px);
+  color: #302825;
+  font: 400 var(--type-section-title)/1.12 var(--type-display) !important;
+  letter-spacing: -.015em;
+}
+.focus-page-simple .focus-question-flow { gap: 18px; }
+.focus-page-simple .focus-flow-card,
+.focus-page-simple .focus-theme-box {
+  min-width: 0;
+  padding: clamp(22px, 2.4vw, 30px);
+  border-color: #e8dfd5;
+  background: #fffdfa;
+  box-shadow: 0 8px 26px rgba(45, 28, 23, .045);
+}
+.focus-page-simple .focus-flow-card p { font: 500 16px/1.65 var(--type-body); }
+.focus-page-simple .focus-theme-box h3 { font: 400 var(--type-subtitle)/1.25 var(--type-display); }
+.focus-page-simple .focus-theme-box > p,
+.focus-page-simple .focus-theme-box ul { font: 400 15px/1.65 var(--type-body); }
+@media (max-width: 980px) {
+  .page-publications .publication-browse-controls { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .page-publications .publication-policy-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .focus-page-simple .focus-simple-hero-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+@media (max-width: 760px) {
+  .page-publications .publications-section > .container,
+  .focus-page-simple .container { width: calc(100% - 40px); }
+  .page-publications .publication-browse-controls,
+  .page-publications .publication-policy-grid { grid-template-columns: 1fr; }
+  .page-publications .publication-work-links { grid-template-columns: 1fr; }
+  .page-publications .publication-contribute-cta { grid-template-columns: 1fr; }
+  .page-publications .publication-contribute-cta h2 br { display: none; }
+  .focus-page-simple .focus-simple-hero-layout { grid-template-columns: 1fr; gap: 28px; }
+  .focus-page-simple .focus-simple-hero h1 { max-width: 15ch; }
+  .focus-page-simple .focus-simple-hero-image { aspect-ratio: 1.35 / 1; }
+  .focus-page-simple .focus-question-flow,
+  .focus-page-simple .focus-theme-flow { grid-template-columns: 1fr; }
+  .focus-page-simple .focus-question-flow::before,
+  .focus-page-simple .focus-theme-flow::before { display: none; }
+  .focus-page-simple .focus-flow-card,
+  .focus-page-simple .focus-theme-box { margin: 0; }
+}
+
+/* A little more SK ALTAIR burgundy on Research Focus, kept as an accent. */
+.focus-page-simple .focus-simple-label { color: #8f2335; }
+.focus-page-simple .focus-simple-hero h1 { position: relative; padding-bottom: 18px; }
+.focus-page-simple .focus-simple-hero h1::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 58px;
+  height: 3px;
+  background: #a51f31;
+  content: '';
+}
+.focus-page-simple .focus-flow-card {
+  border-top: 2px solid #a51f31;
+  background: linear-gradient(180deg, #fff9f7 0, #fffdfa 44px);
+}
+.focus-page-simple .focus-flow-card > span { border-color: #8f2335; background: #8f2335; }
+.focus-page-simple .focus-theme-box { border-top-color: #a51f31; }
+.focus-page-simple .focus-simple-questions h2::after,
+.focus-page-simple .focus-simple-themes h2::after {
+  display: block;
+  width: 42px;
+  height: 2px;
+  margin-top: 14px;
+  background: #a51f31;
+  content: '';
+}
