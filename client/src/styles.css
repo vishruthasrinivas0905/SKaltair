@@ -5841,6 +5841,32 @@ header.site-header .header-inner{height:100%;align-items:center}header.site-head
 .page-about #vision .about-brand-k,.page-about .objective-card:nth-child(4n+1) .about-brand-k{color:#cf5664!important}
 @media(max-width:760px){.page-about .about-page-layout{grid-template-columns:126px minmax(0,1fr);column-gap:9px}.page-about .about-page-layout>.about-hero-rail{padding:11px 7px!important;top:86px!important;max-height:calc(100vh - 100px)!important}.page-about .about-page-layout>.about-hero-rail a{padding:8px 4px!important;font-size:11px!important}.page-about .about-page-layout>.about-hero-rail a[href="#governance"]{font-size:10px!important}.page-about .about-page-layout>.about-hero-rail a.active:before{left:-7px}.page-about .about-page-layout>.content-section>.container,.page-about .about-page-layout>#governance>.container{padding-inline:10px!important}.page-about .about-page-layout>.page-intro-about>.container{padding-top:32px!important;padding-bottom:32px!important}.page-about .about-page-layout>.page-intro-about>.container>h1,.page-about .about-page-layout>.page-intro-about .about-summary{width:100%!important;max-width:100%!important}.page-about .about-page-layout>.page-intro-about .intro-media{width:100%!important;max-width:none!important;opacity:.35}.page-about .about-page-layout>.page-intro-about .intro-media:after{background:linear-gradient(0deg,#3b2522ed,#3b2522a8)!important}.page-about .about-page-layout .prose>section#objectives{padding:18px!important}.page-about .about-page-layout .governance-category{padding:16px}}
 
+/* About and Apply heroes follow the Research Programmes image and editorial text treatment. */
+.page-about .about-page-layout>.page-intro-about{min-height:375px!important;padding:42px 0!important;background:#4a2f2a!important;border-bottom-color:#6a443d!important}
+.page-about .about-page-layout>.page-intro-about>.container{display:block!important;padding:0 24px!important}
+.page-about .about-page-layout>.page-intro-about>.container>h1,.page-about .about-page-layout>.page-intro-about .about-summary{width:58%!important;max-width:700px!important;margin-left:0!important;margin-right:auto!important;text-align:left!important}
+.page-about .about-page-layout>.page-intro-about>.container>h1{color:#fff5e8!important;font:400 clamp(42px,4.5vw,80px)/1.08 'Source Serif 4','Newsreader',Georgia,serif!important;letter-spacing:-.025em!important;margin:0 0 18px!important}
+.page-about .about-page-layout>.page-intro-about .about-summary{padding:0!important;background:transparent!important;border:0!important;box-shadow:none!important}
+.page-about .about-page-layout>.page-intro-about .about-summary>p{max-width:700px!important;margin:0!important;color:#f5e8d9!important;font:500 clamp(18px,1.6vw,26px)/1.5 'Source Serif 4','Newsreader',Georgia,serif!important;text-align:left!important;text-shadow:none!important}
+.page-about .about-page-layout>.page-intro-about .about-summary>p{text-align:justify!important}
+.page-about .about-page-layout>.page-intro-about .about-summary b{color:#fff5e8!important}
+.page-about .about-page-layout>.page-intro-about .intro-media{inset:0 0 0 auto!important;width:min(62vw,900px)!important;max-width:none!important;height:100%!important;opacity:1!important}
+.page-about .about-page-layout>.page-intro-about .intro-media:after{background:linear-gradient(90deg,#4a2f2a 0%,#4a2f2ae8 20%,#4a2f2aa8 32%,#4a2f2a2e 48%,transparent 64%),linear-gradient(0deg,#1d17144d,transparent 45%)!important}
+.page-intro-apply{min-height:375px!important;padding:42px 0!important;text-align:left!important;background:#4a2f2a!important}
+.page-intro-apply>.container{width:min(80%,1400px)!important;max-width:1400px!important;align-items:flex-start!important;text-align:left!important}
+.page-intro-apply>.container>.eyebrow{display:none!important}
+.page-intro-apply>.container>h1{order:1!important;max-width:58%!important;margin:0 0 22px!important;color:#fff5e8!important;font:400 clamp(42px,4.5vw,80px)/1.08 'Source Serif 4','Newsreader',Georgia,serif!important;letter-spacing:-.025em!important;text-align:left!important}
+.page-intro-apply>.container>p{order:2!important;max-width:58%!important;margin:0!important;color:#f5e8d9!important;font:500 clamp(18px,1.6vw,28px)/1.5 'Source Serif 4','Newsreader',Georgia,serif!important;text-align:left!important}
+.page-intro-apply .intro-media{width:min(62vw,900px)!important}
+.page-intro-apply .intro-media:after{background:linear-gradient(90deg,#4a2f2a 0%,#4a2f2ae8 20%,#4a2f2aa8 32%,#4a2f2a2e 48%,transparent 64%),linear-gradient(0deg,#1d17144d,transparent 45%)!important}
+.research-menu{width:min(820px,calc(100vw - 48px))!important;padding:18px!important}
+.research-menu>p{font-size:12px!important;line-height:1.5!important;margin-bottom:12px!important;padding-bottom:10px!important}
+.research-menu-grid{gap:10px!important}
+.research-menu-term{padding:10px!important}
+.research-menu-term summary{font-size:15px!important}
+.research-menu-topics a{font-size:12px!important;padding:6px 4px!important}
+@media(max-width:760px){.page-about .about-page-layout>.page-intro-about{min-height:0!important;padding:42px 0 28px!important}.page-about .about-page-layout>.page-intro-about>.container{padding:0 14px!important}.page-about .about-page-layout>.page-intro-about>.container>h1,.page-about .about-page-layout>.page-intro-about .about-summary{width:100%!important;max-width:100%!important}.page-about .about-page-layout>.page-intro-about .about-summary>p{font-size:18px!important}.page-about .about-page-layout>.page-intro-about .intro-media{width:100%!important;opacity:.35!important}.page-about .about-page-layout>.page-intro-about .intro-media:after{background:linear-gradient(0deg,#4a2f2ae8 0%,#4a2f2a30 75%)!important}.page-intro-apply{min-height:0!important;padding:50px 0 36px!important}.page-intro-apply>.container{width:calc(100% - 40px)!important}.page-intro-apply>.container>h1,.page-intro-apply>.container>p{max-width:100%!important}.page-intro-apply .intro-media{width:100%!important}}
+
 /* Focused final refinements: Publications, Collaborate and SK ALTAIR wordmark.
    These rules are intentionally scoped to the requested areas. */
 .brand .brand-k,
@@ -6666,4 +6692,194 @@ header.site-header .header-inner{height:100%;align-items:center}header.site-head
 .page-intro.page-intro-contact h1 .intro-gold {
   color: #D7B56D !important;
   -webkit-text-fill-color: #D7B56D !important;
+}
+
+/* Apply hero: match the Research Programmes split text and right-hand image composition. */
+.page-intro.page-intro-apply {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  min-height: 375px !important;
+  padding: 42px 0 !important;
+  overflow: hidden !important;
+  isolation: isolate !important;
+  background: #4a2f2a !important;
+}
+.page-intro.page-intro-apply > .container {
+  position: relative !important;
+  z-index: 2 !important;
+  display: block !important;
+  width: min(80%, 1400px) !important;
+  max-width: 1400px !important;
+  margin-inline: auto !important;
+  padding: 0 !important;
+  text-align: left !important;
+}
+.page-intro.page-intro-apply > .container > .eyebrow { display: none !important; }
+.page-intro.page-intro-apply > .container > h1 {
+  max-width: 58% !important;
+  margin: 0 0 22px !important;
+  color: #fff5e8 !important;
+  -webkit-text-fill-color: #fff5e8 !important;
+  font: 400 clamp(42px, 4.5vw, 80px)/1.08 'Source Serif 4', 'Newsreader', Georgia, serif !important;
+  letter-spacing: -.025em !important;
+  text-align: left !important;
+}
+.page-intro.page-intro-apply > .container > p {
+  max-width: 58% !important;
+  margin: 0 !important;
+  color: #fff5e8 !important;
+  -webkit-text-fill-color: #fff5e8 !important;
+  font: 500 clamp(18px, 1.6vw, 28px)/1.5 'Source Serif 4', 'Newsreader', Georgia, serif !important;
+  text-align: left !important;
+}
+.page-intro.page-intro-apply > .container > .intro-media {
+  position: absolute !important;
+  inset: 0 -12.5vw 0 auto !important;
+  width: min(62vw, 900px) !important;
+  height: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  z-index: -1 !important;
+}
+.page-intro.page-intro-apply > .container > .intro-media img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center 48% !important;
+}
+.page-intro.page-intro-apply > .container > .intro-media::after {
+  background: linear-gradient(90deg, #4a2f2a 0%, #4a2f2ae8 20%, #4a2f2aa8 32%, #4a2f2a2e 48%, transparent 64%), linear-gradient(0deg, #1d17144d, transparent 45%) !important;
+}
+@media (max-width: 760px) {
+  .page-intro.page-intro-apply { min-height: 0 !important; padding: 48px 0 34px !important; }
+  .page-intro.page-intro-apply > .container { width: calc(100% - 40px) !important; }
+  .page-intro.page-intro-apply > .container > h1,
+  .page-intro.page-intro-apply > .container > p { max-width: 100% !important; }
+  .page-intro.page-intro-apply > .container > .intro-media { inset: 0 !important; width: 100% !important; opacity: .35 !important; }
+  .page-intro.page-intro-apply > .container > .intro-media::after { background: linear-gradient(0deg, #4a2f2aee, #4a2f2a70) !important; }
+}
+
+/* Apply hero image is a full-height background with a left-side reading gradient. */
+.page-intro.page-intro-apply {
+  min-height: 430px !important;
+  padding: 64px 0 !important;
+  background: #4a2f2a !important;
+}
+.page-intro.page-intro-apply > .intro-media-behind {
+  position: absolute !important;
+  inset: 0 !important;
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  z-index: 0 !important;
+  overflow: hidden !important;
+}
+.page-intro.page-intro-apply > .intro-media-behind img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center 48% !important;
+}
+.page-intro.page-intro-apply > .intro-media-behind::after {
+  content: "" !important;
+  position: absolute !important;
+  inset: 0 !important;
+  background: linear-gradient(90deg, rgba(67,43,38,.97) 0%, rgba(67,43,38,.9) 34%, rgba(67,43,38,.58) 62%, rgba(67,43,38,.16) 100%), linear-gradient(0deg, rgba(38,26,23,.24), transparent 65%) !important;
+  pointer-events: none !important;
+}
+.page-intro.page-intro-apply > .container {
+  position: relative !important;
+  z-index: 2 !important;
+  width: min(80%, 1400px) !important;
+  max-width: 1400px !important;
+  margin-inline: auto !important;
+}
+.page-intro.page-intro-apply > .container > h1 em {
+  color: #e7c98b !important;
+  -webkit-text-fill-color: #e7c98b !important;
+  font-style: normal !important;
+}
+@media (max-width: 760px) {
+  .page-intro.page-intro-apply { min-height: 360px !important; padding: 54px 0 !important; }
+  .page-intro.page-intro-apply > .container { width: calc(100% - 40px) !important; }
+  .page-intro.page-intro-apply > .intro-media-behind::after { background: linear-gradient(0deg, rgba(67,43,38,.94), rgba(67,43,38,.62)) !important; }
+}
+
+/* Match the About hero: image on the right, filling the hero height and fading into the brown ground. */
+.page-intro.page-intro-apply {
+  min-height: 375px !important;
+  padding: 42px 0 !important;
+  background: #4a2f2a !important;
+  border-bottom-color: #6a443d !important;
+}
+.page-intro.page-intro-apply > .container {
+  position: static !important;
+  display: block !important;
+  width: min(80%, 1400px) !important;
+  max-width: 1400px !important;
+  margin-inline: auto !important;
+  padding: 0 !important;
+}
+.page-intro.page-intro-apply > .container > .eyebrow { display: none !important; }
+.page-intro.page-intro-apply > .container > h1,
+.page-intro.page-intro-apply > .container > p {
+  position: relative !important;
+  z-index: 2 !important;
+  max-width: 58% !important;
+  text-align: left !important;
+}
+.page-intro.page-intro-apply > .container > h1 {
+  margin: 0 0 22px !important;
+  color: #fff5e8 !important;
+  -webkit-text-fill-color: #fff5e8 !important;
+  font: 400 clamp(42px, 4.5vw, 80px)/1.08 'Source Serif 4', 'Newsreader', Georgia, serif !important;
+  letter-spacing: -.025em !important;
+}
+.page-intro.page-intro-apply > .container > h1 em {
+  color: #e7c98b !important;
+  -webkit-text-fill-color: #e7c98b !important;
+  font-style: normal !important;
+}
+.page-intro.page-intro-apply > .container > p {
+  margin: 0 !important;
+  color: #fff5e8 !important;
+  -webkit-text-fill-color: #fff5e8 !important;
+  font: 500 clamp(18px, 1.6vw, 28px)/1.5 'Source Serif 4', 'Newsreader', Georgia, serif !important;
+}
+.page-intro.page-intro-apply > .container > .intro-media {
+  position: absolute !important;
+  inset: 0 0 0 auto !important;
+  width: min(62vw, 900px) !important;
+  height: 100% !important;
+  max-width: none !important;
+  margin: 0 !important;
+  z-index: 0 !important;
+  overflow: hidden !important;
+}
+.page-intro.page-intro-apply > .container > .intro-media img {
+  display: block !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center 48% !important;
+}
+.page-intro.page-intro-apply > .container > .intro-media::after {
+  background: linear-gradient(90deg, #4a2f2a 0%, #4a2f2ae8 20%, #4a2f2aa8 32%, #4a2f2a2e 48%, transparent 64%), linear-gradient(0deg, #1d17144d, transparent 45%) !important;
+}
+@media (max-width: 760px) {
+  .page-intro.page-intro-apply { min-height: 360px !important; padding: 50px 0 34px !important; }
+  .page-intro.page-intro-apply > .container { width: calc(100% - 40px) !important; }
+  .page-intro.page-intro-apply > .container > h1,
+  .page-intro.page-intro-apply > .container > p { max-width: 100% !important; }
+  .page-intro.page-intro-apply > .container > .intro-media { width: 100% !important; opacity: .35 !important; }
+  .page-intro.page-intro-apply > .container > .intro-media::after { background: linear-gradient(0deg, #4a2f2aee, #4a2f2a70) !important; }
+}
+
+/* Keep the About hero summary subordinate to its heading. */
+.page-about .about-page-layout > .page-intro-about .about-summary > p {
+  font-size: clamp(14px, 1.15vw, 17px) !important;
+  line-height: 1.7 !important;
 }
