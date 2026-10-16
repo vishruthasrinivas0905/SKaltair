@@ -8580,3 +8580,109 @@ body:has(.route-view.page-about) .footer .brand-kritam {
   .route-view.page-collaborate .collaborate-page .collab-proposal-section .collab-proposal-checklist > .collab-proposal-point > span { transition: none; }
   .route-view.page-collaborate .collaborate-page .collab-proposal-section .collab-proposal-checklist > .collab-proposal-point:is(:hover, :focus-within) { transform: none; }
 }
+
+/* Publications cards form deliberate, balanced rows at every screen width. */
+.route-view.page-publications .publish-types-grid {
+  display: grid !important;
+  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
+  gap: clamp(14px, 1.8vw, 22px) !important;
+  align-items: stretch !important;
+}
+.route-view.page-publications .publish-types-grid > .publish-type-card {
+  grid-column: span 2 !important;
+  width: auto !important;
+  min-width: 0 !important;
+  height: 100% !important;
+  margin: 0 !important;
+  align-self: stretch !important;
+}
+.route-view.page-publications .publish-types-grid > .publish-type-card:nth-child(4) { grid-column: 2 / span 2 !important; }
+.route-view.page-publications .publish-types-grid > .publish-type-card:nth-child(5) { grid-column: 4 / span 2 !important; }
+@media (max-width: 980px) {
+  .route-view.page-publications .publish-types-grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+  .route-view.page-publications .publish-types-grid > .publish-type-card,
+  .route-view.page-publications .publish-types-grid > .publish-type-card:nth-child(4) { grid-column: auto !important; }
+  .route-view.page-publications .publish-types-grid > .publish-type-card:nth-child(5):last-child {
+    grid-column: 1 / -1 !important;
+    width: min(100%, calc(50% - 7px)) !important;
+    justify-self: center !important;
+  }
+}
+@media (max-width: 760px) {
+  .route-view.page-publications .publish-types-grid { grid-template-columns: minmax(0, 1fr) !important; }
+  .route-view.page-publications .publish-types-grid > .publish-type-card,
+  .route-view.page-publications .publish-types-grid > .publish-type-card:nth-child(5):last-child {
+    grid-column: 1 / -1 !important;
+    width: 100% !important;
+  }
+}
+
+/* Keep the K in every marked SK ALTAIR wordmark red, including inherited text fills. */
+body .brand-k,
+body .brand-name-text .brand-k,
+body .brand-type .brand-k,
+body .brand-inverse .brand-k {
+  color: #a51f31 !important;
+  -webkit-text-fill-color: #a51f31 !important;
+}
+body .route-view.page-publications .page-intro.page-intro-publications .container > p .brand-k {
+  color: #ff5b68 !important;
+  -webkit-text-fill-color: #ff5b68 !important;
+  font-weight: 800 !important;
+}
+
+/* Use one calm, consistent treatment for every publication category card. */
+.route-view.page-publications .publish-types-grid > .publish-type-card:nth-child(n) {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  min-height: 240px !important;
+  padding: clamp(22px, 2.4vw, 30px) !important;
+  border: 1px solid #e8dfd5 !important;
+  border-top: 3px solid #a51f31 !important;
+  background: #fffdfa !important;
+  box-shadow: 0 8px 24px rgba(45, 28, 23, .045) !important;
+  color: #514843 !important;
+  text-align: left !important;
+}
+.route-view.page-publications .publish-types-grid > .publish-type-card:nth-child(n) h3 {
+  margin: 0 0 10px !important;
+  color: #302825 !important;
+  -webkit-text-fill-color: #302825 !important;
+  font: 400 clamp(21px, 2vw, 27px)/1.25 'Source Serif 4', Georgia, serif !important;
+}
+.route-view.page-publications .publish-types-grid > .publish-type-card:nth-child(n) p {
+  margin: 0 !important;
+  color: #514843 !important;
+  -webkit-text-fill-color: #514843 !important;
+  font: 400 16px/1.7 'Manrope', Arial, sans-serif !important;
+}
+.route-view.page-publications .publish-types-grid > .publish-type-card:nth-child(n) > svg {
+  margin: 8px 0 18px !important;
+  color: #a51f31 !important;
+  stroke: #a51f31 !important;
+}
+.route-view.page-publications .publish-types-grid > .publish-type-card:nth-child(n) .publish-type-number {
+  color: #8f2335 !important;
+  -webkit-text-fill-color: #8f2335 !important;
+  font: 700 12px/1.2 'Manrope', Arial, sans-serif !important;
+  letter-spacing: .1em !important;
+}
+.route-view.page-publications .publish-types-grid > .publish-type-card:nth-child(n):hover {
+  transform: translateY(-2px) !important;
+  border-color: #dfcfc3 !important;
+  border-top-color: #8f2335 !important;
+  box-shadow: 0 12px 28px rgba(45, 28, 23, .08) !important;
+}
+@media (max-width: 760px) {
+  .route-view.page-publications .publish-types-grid > .publish-type-card:nth-child(n) { min-height: 0 !important; }
+}
+.route-view.page-publications .publication-policy-grid > .publication-policy-card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+}
+.route-view.page-publications .publication-policy-grid > .publication-policy-card > .button-outline {
+  margin-top: auto !important;
+  padding: 11px 14px !important;
+}
