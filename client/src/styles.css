@@ -7165,6 +7165,16 @@ header.site-header .header-inner{height:100%;align-items:center}header.site-head
 .brand-type .brand-society .brand-tagline-line:last-child { font-size: 11px !important; }
 .brand-type .brand-tagline-line { white-space: nowrap !important; }
 
+/* Give the full institution name a more editorial voice and separate it from the society line. */
+header.site-header .brand-type .brand-company {
+  font-family: 'Source Serif 4', Georgia, serif !important;
+  font-weight: 600 !important;
+  line-height: 1.2 !important;
+}
+header.site-header .brand-type .brand-society {
+  margin-top: 5px !important;
+}
+
 @media (max-width: 1140px) {
   .brand-type .brand-company .brand-tagline-line:first-child { font-size: 11px !important; }
   .brand-type .brand-company .brand-tagline-line:last-child { font-size: 12px !important; }
@@ -8406,6 +8416,12 @@ body:has(.route-view.page-about) .footer .brand-kritam {
   -webkit-text-fill-color: #ff4d5e !important;
   font-weight: 800 !important;
   -webkit-text-stroke: .02em currentColor;
+}
+.route-view.page-collaborate .page-intro.page-intro-collaborate h1 .intro-gold .brand-k {
+  color: #ff4d5e !important;
+  -webkit-text-fill-color: #ff4d5e !important;
+  font-weight: 400 !important;
+  -webkit-text-stroke: 0 !important;
 }
 
 /* Ways to Collaborate: the boxes of the About Us objectives, two to a row, each with its number, title and text.
