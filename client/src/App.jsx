@@ -672,6 +672,7 @@ function Publications() {
             <p>Legal and technology research is assessed for originality, analytical quality, methodological soundness, accuracy and relevance. Review also considers source reliability, appropriate attribution, research ethics, confidentiality, data protection and intellectual property.</p>
             <p>Authors may be asked to clarify their analysis, verify sources or revise submissions before a decision is made. Participation in a legal and technology research programme does not guarantee publication.</p>
             <p>Research conclusions must remain independent of donor or collaborator preferences. Views expressed belong to their authors unless expressly identified as an adopted institutional position.</p>
+            <Link to="/contact?category=Publications%20and%20permissions&subject=Editorial%20standards%20enquiry" className="button button-outline">Contact the editorial team <ArrowUpRight size={15}/></Link>
           </article>
           <article className="publication-policy-card">
             <span className="eyebrow">AUTHORSHIP AND RIGHTS</span>
