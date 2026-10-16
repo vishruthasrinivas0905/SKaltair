@@ -744,7 +744,7 @@ function Collaborate() {
   return <>
     <PageIntro
       eyebrow=""
-      title={<>COLLABORATE WITH S<span className="brand-k">K</span> ALTAIR</>}
+      title={<>COLLABORATE WITH <span className="intro-gold">S<span className="brand-k">K</span> ALTAIR</span></>}
       copy={<><span className="intro-brand-red">S<span className="brand-k">K</span> ALTAIR</span> welcomes collaboration with academic institutions, legal professionals, researchers, public institutions, professional bodies and other organisations whose work aligns with our public-benefit objectives.</>}
       image={pagePhotos.collaborate}
       imageSizes={wideIntroImageSizes}
